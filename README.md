@@ -106,6 +106,7 @@
     </td>
   </tr>
   <tr>
+    <td></td> <!-- 빈칸으로 가운데 정렬 -->
     <td align="center">
       <a href="https://github.com/MuchanKim">
         <img src="https://github.com/MuchanKim.png" width="60"/><br/>
@@ -118,7 +119,6 @@
         <b>Wish</b>
       </a>
     </td>
-    <td align="center"></td> <!-- 빈 칸 유지하려면 -->
   </tr>
 </table>
 
