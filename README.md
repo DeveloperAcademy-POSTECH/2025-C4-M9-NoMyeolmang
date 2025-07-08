@@ -106,18 +106,23 @@
     </td>
   </tr>
   <tr>
-    <td></td> <!-- 빈칸으로 가운데 정렬 -->
-    <td align="center">
-      <a href="https://github.com/MuchanKim">
-        <img src="https://github.com/MuchanKim.png" width="60"/><br/>
-        <b>Moo</b>
-      </a>
-    </td>
-    <td align="center">
-      <a href="https://github.com/wish627">
-        <img src="https://github.com/wish627.png" width="60"/><br/>
-        <b>Wish</b>
-      </a>
+    <td colspan="3" align="center">
+      <table>
+        <tr>
+          <td align="center" style="padding: 0 20px;">
+            <a href="https://github.com/MuchanKim">
+              <img src="https://github.com/MuchanKim.png" width="60"/><br/>
+              <b>Moo</b>
+            </a>
+          </td>
+          <td align="center" style="padding: 0 20px;">
+            <a href="https://github.com/wish627">
+              <img src="https://github.com/wish627.png" width="60"/><br/>
+              <b>Wish</b>
+            </a>
+          </td>
+        </tr>
+      </table>
     </td>
   </tr>
 </table>
