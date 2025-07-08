@@ -84,6 +84,44 @@
 
 [🔗 팀 블로그 / 미디엄 링크](https://medium.com/example)
 
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/legnasy">
+        <img src="https://github.com/legnasy.png" width="60"/><br/>
+        <b>Angie</b>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/ohdodin">
+        <img src="https://github.com/ohdodin.png" width="60"/><br/>
+        <b>Dodin</b>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/romiwaves">
+        <img src="https://github.com/romiwaves.png" width="60"/><br/>
+        <b>Gabi</b>
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/MuchanKim">
+        <img src="https://github.com/MuchanKim.png" width="60"/><br/>
+        <b>Moo</b>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/wish627">
+        <img src="https://github.com/wish627.png" width="60"/><br/>
+        <b>Wish</b>
+      </a>
+    </td>
+    <td align="center"></td> <!-- 빈 칸 유지하려면 -->
+  </tr>
+</table>
+
 ## 🔖 브랜치 전략
 `(예시)`
 - `main`: 배포 가능한 안정 버전
