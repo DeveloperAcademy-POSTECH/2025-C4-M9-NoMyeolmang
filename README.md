@@ -2,7 +2,7 @@
 
 ![배너 이미지 또는 로고](링크)
 
-> 간단한 한 줄 소개 – 프로젝트의 핵심 가치 또는 기능
+> 멸망하지 않게 조심하세요
 
 [![Swift](https://img.shields.io/badge/Swift-5.9-orange.svg)]()
 [![Xcode](https://img.shields.io/badge/Xcode-15.0-blue.svg)]()
@@ -10,38 +10,34 @@
 
 ---
 
-## 🗂 목차
-- [소개](#소개)
-- [프로젝트 기간](#프로젝트-기간)
-- [기술 스택](#기술-스택)
-- [기능](#기능)
-- [시연](#시연)
-- [폴더 구조](#폴더-구조)
-- [팀 소개](#팀-소개)
-- [Git 컨벤션](#git-컨벤션)
-- [테스트 방법](#테스트-방법)
-- [프로젝트 문서](#프로젝트-문서)
-- [라이선스](#lock_with_ink_pen-license)
-
----
-
 ## 📱 소개
 
-> 프로젝트의 주요 목적과 사용자가 얻게 될 경험을 설명해주세요. 엔지다
+> tabularML
 
 [🔗 앱스토어/웹 링크](https://example.com)
 
 
 ## 📆 프로젝트 기간
-- 전체 기간: `YYYY.MM.DD - YYYY.MM.DD`
-- 개발 기간: `YYYY.MM.DD - YYYY.MM.DD`
+- 전체 기간: `2025.06.23 - 2025.08.01`
+- 개발 기간: `2025.07.10 - 2025.07.29`
 
 
 ## 🛠 기술 스택
 
-- Swift / SwiftUI / UIKit / Firebase 등
-- 아키텍처: MVVM / MVC / Clean Architecture 등
-- 기타 도구: Figma, Notion, GitHub Projects 등
+<!-- iOS -->
+[![Swift](https://img.shields.io/badge/Swift-F05138?style=for-the-badge&logo=swift&logoColor=white)]()
+[![Xcode](https://img.shields.io/badge/Xcode-147EFB?style=for-the-badge&logo=xcode&logoColor=white)]()
+[![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)]()
+
+<!-- Architecture -->
+[![MVVM](https://img.shields.io/badge/MVVM-Architecture-blue?style=for-the-badge)]()
+[![MVC](https://img.shields.io/badge/MVC-Architecture-green?style=for-the-badge)]()
+[![Clean Architecture](https://img.shields.io/badge/Clean_Architecture-🧹-lightblue?style=for-the-badge)]()
+
+<!-- Tools -->
+[![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)]()
+[![Notion](https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white)]()
+[![GitHub Projects](https://img.shields.io/badge/GitHub_Projects-181717?style=for-the-badge&logo=github&logoColor=white)]()
 
 
 ## 🌟 주요 기능
@@ -77,55 +73,45 @@
 
 ## 🧑‍💻 팀 소개
 
-| 이름 | 역할 | GitHub |
-|------|------|--------|
-| 홍길동 | iOS Developer | [@hong](https://github.com/hong) |
-| 김개발 | PM | [@devkim](https://github.com/devkim) |
+<h3 align="center"> 멸망하지 않게 조심해 </h3>
+<p align="center"> 이번에 멸망하면 아카데미 생활이 부정당하게 되는, 절대 멸망해선 안되는 팀입니다. </p>
 
-[🔗 팀 블로그 / 미디엄 링크](https://medium.com/example)
-
-<table>
-  <tr>
-    <td align="center">
-      <a href="https://github.com/legnasy">
-        <img src="https://github.com/legnasy.png" width="60"/><br/>
-        <b>Angie</b>
-      </a>
-    </td>
-    <td align="center">
-      <a href="https://github.com/ohdodin">
-        <img src="https://github.com/ohdodin.png" width="60"/><br/>
-        <b>Dodin</b>
-      </a>
-    </td>
-    <td align="center">
-      <a href="https://github.com/romiwaves">
-        <img src="https://github.com/romiwaves.png" width="60"/><br/>
-        <b>Gabi</b>
-      </a>
-    </td>
-  </tr>
-  <tr>
-    <td colspan="3" align="center">
-      <table>
-        <tr>
-          <td align="center" style="padding: 0 20px;">
-            <a href="https://github.com/MuchanKim">
-              <img src="https://github.com/MuchanKim.png" width="60"/><br/>
-              <b>Moo</b>
-            </a>
-          </td>
-          <td align="center" style="padding: 0 20px;">
-            <a href="https://github.com/wish627">
-              <img src="https://github.com/wish627.png" width="60"/><br/>
-              <b>Wish</b>
-            </a>
-          </td>
-        </tr>
-      </table>
-    </td>
-  </tr>
-</table>
+<div align="center">
+  <table>
+    <tr>
+      <td align="center" style="padding: 0 20px;">
+        <a href="https://github.com/legnasy">
+          <img src="https://github.com/legnasy.png" width="60"/><br/>
+          <b>Angie</b>
+        </a>
+      </td>
+      <td align="center" style="padding: 0 20px;">
+        <a href="https://github.com/ohdodin">
+          <img src="https://github.com/ohdodin.png" width="60"/><br/>
+          <b>Dodin</b>
+        </a>
+      </td>
+      <td align="center" style="padding: 0 20px;">
+        <a href="https://github.com/romiwaves">
+          <img src="https://github.com/romiwaves.png" width="60"/><br/>
+          <b>Gabi</b>
+        </a>
+      </td>
+      <td align="center" style="padding: 0 20px;">
+        <a href="https://github.com/MuchanKim">
+          <img src="https://github.com/MuchanKim.png" width="60"/><br/>
+          <b>Moo</b>
+        </a>
+      </td>
+      <td align="center" style="padding: 0 20px;">
+        <a href="https://github.com/wish627">
+          <img src="https://github.com/wish627.png" width="60"/><br/>
+          <b>Wish</b>
+        </a>
+      </td>
+    </tr>
+  </table>
+</div>
 
 ## 🔖 브랜치 전략
 `(예시)`
