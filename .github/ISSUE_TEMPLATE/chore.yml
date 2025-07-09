@@ -1,0 +1,38 @@
+name: 🔧 작업 유지보수 (Chore)
+description: 프로젝트 유지/정리에 필요한 작업을 기록합니다. (ex. 의존성 업데이트, 설정 변경 등)
+title: "🔧 Chore: "
+labels: ["Chore", "Maintenance"]
+body:
+  - type: textarea
+    id: purpose
+    attributes:
+      label: 🎯 작업 목적
+      placeholder: 예) 사용하지 않는 디렉터리 정리, 린트 규칙 업데이트
+    validations:
+      required: true
+
+  - type: textarea
+    id: task
+    attributes:
+      label: ✅ 작업 내용
+      placeholder: |
+        - `app/legacy/` 폴더 제거
+        - ESLint 설정에서 prettier 플러그인 추가
+    validations:
+      required: true
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: ⚠️ 영향 범위 및 주의사항
+      placeholder: 예) 린트 규칙 변경으로 모든 파일에 포맷 변경 가능성 있음
+    validations:
+      required: false
+
+  - type: input
+    id: reviewer
+    attributes:
+      label: 👀 리뷰어 (해당 시)
+      placeholder: 예) @dodin
+    validations:
+      required: false
