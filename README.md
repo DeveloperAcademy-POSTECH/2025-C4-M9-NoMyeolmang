@@ -1,6 +1,12 @@
 # 🚀 프로젝트 이름
 
-![배너 이미지 또는 로고](링크)
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/b362cec6-d0ff-4024-ac5e-7b7dd64b9e31" alt="orange" width="180" style="margin: 0 10px;"/>
+  <img src="https://github.com/user-attachments/assets/8d251d73-ce68-4496-a8ef-2ba51d85336d" alt="blue" width="180" style="margin: 0 10px;"/>
+  <img src="https://github.com/user-attachments/assets/f57319be-4a66-462a-a2f5-18598627ef52" alt="purple" width="180" style="margin: 0 10px;"/>
+</p>
+
+<!-- 이미지 추가 및 수정 예정 -->
 
 > 멸망하지 않게 조심하세요
 
@@ -74,7 +80,7 @@
 ## 🧑‍💻 팀 소개
 
 <h3 align="center"> 멸망하지 않게 조심해 </h3>
-<p align="center"> 이번에 멸망하면 아카데미 생활이 부정당하게 되는, 절대 멸망해선 안되는 팀입니다. </p>
+<p align="center"> 이번에 멸망하면 지난 아카데미 생활이 모두 부정당하게 되는, 절대 멸망해선 안되는 팀입니다. </p>
 
 <div align="center">
   <table>
@@ -114,12 +120,48 @@
 </div>
 
 ## 🔖 브랜치 전략
-`(예시)`
-- `main`: 배포 가능한 안정 버전
-- `develop`: 통합 개발 브랜치
-- `feature/*`: 기능 개발 브랜치
-- `bugfix/*`: 버그 수정 브랜치
-- `hotfix/*`: 긴급 수정 브랜치
+
+```mermaid
+%%{ init: { 'theme': 'neutral' } }%%
+gitGraph
+    commit id: "main 시작"
+    branch develop
+    checkout develop
+
+    commit id: "기능1 시작"
+    branch feat/feature1
+    checkout feat/feature1
+    commit
+    commit id: "기능1 완료"
+    checkout develop
+    merge feat/feature1
+
+    commit id: "기능2 시작"
+    branch feat/feature2
+    checkout feat/feature2
+    commit
+    commit id: "기능2 완료"
+    checkout develop
+    merge feat/feature2
+
+    commit id: "릴리스 준비"
+    branch release/v1.0.0
+    checkout release/v1.0.0
+    commit id: "QA 및 버그 수정"
+    commit id: "릴리스 완료"
+    checkout main
+    merge release/v1.0.0
+
+    commit tag: "v1.0.0"
+
+    branch hotfix/issue-1
+    checkout hotfix/issue-1
+    commit id: "핫픽스 수정"
+    checkout main
+    merge hotfix/issue-1
+    checkout develop
+    merge hotfix/issue-1
+```
 
 ## 🌀 커밋 메시지 컨벤션
 `(예시)`  
