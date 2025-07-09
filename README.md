@@ -41,9 +41,9 @@
 [![Clean Architecture](https://img.shields.io/badge/Clean_Architecture-🧹-lightblue?style=for-the-badge)]()
 
 <!-- Tools -->
-[![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)]()
 [![Notion](https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white)]()
 [![GitHub Projects](https://img.shields.io/badge/GitHub_Projects-181717?style=for-the-badge&logo=github&logoColor=white)]()
+[![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)]()
 
 
 ## 🌟 주요 기능
@@ -77,7 +77,7 @@
 
 ## 🧑‍💻 팀 소개
 
-<h3 align="center"> 멸망하지 않게 조심해 </h3>
+<h3 align="center"> 멸망하지 않게 조심해. </h3>
 <p align="center"> 이번에 멸망하면 지난 아카데미 생활이 모두 부정당하게 되는, 절대 멸망해선 안되는 팀입니다. </p>
 
 <div align="center">
