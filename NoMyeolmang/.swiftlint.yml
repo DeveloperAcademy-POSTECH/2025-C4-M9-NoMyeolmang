@@ -1,0 +1,66 @@
+# SwiftLint 설정 파일
+#
+# Created by Moo on 7/10/25.
+
+# 포함할 디렉토리
+included:
+  - NoMyeolmang-iOS/Sources
+  - NoMyeolmang-watch/Sources
+  - Shared
+
+# 제외할 디렉토리
+excluded:
+  - NoMyeolmang.xcodeproj
+  - NoMyeolmang-iOS/Resources
+  - NoMyeolmang-watch/Resources
+  - .git
+
+# 비활성화할 룰
+disabled_rules:
+  - trailing_whitespace        # 라인 끝 공백 허용
+  - todo                      # TODO 주석 허용
+
+# 활성화할 추가 룰
+opt_in_rules:
+  - empty_count               # .count == 0 대신 .isEmpty 사용
+  - force_unwrapping          # force unwrapping 경고
+  - implicitly_unwrapped_optional  # 암시적 옵셔널 경고
+  - redundant_nil_coalescing  # 불필요한 nil coalescing 경고
+  - sorted_imports            # import 정렬
+
+# 라인 길이 설정
+line_length:
+  warning: 120
+  error: 150
+  ignores_comments: true
+  ignores_urls: true
+
+# 함수 길이 설정
+function_body_length:
+  warning: 50
+  error: 100
+
+# 타입 길이 설정
+type_body_length:
+  warning: 300
+  error: 500
+
+# 파일 길이 설정
+file_length:
+  warning: 400
+  error: 600
+
+# 네이밍 규칙
+identifier_name:
+  min_length: 2
+  max_length: 60
+  excluded:
+    - id
+    - x
+    - y
+    - z
+
+# 타입 네이밍 규칙
+type_name:
+  min_length: 3
+  max_length: 40
