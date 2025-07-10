@@ -210,7 +210,7 @@ gitGraph
 
 1. 이 저장소를 클론합니다.
 ```bash
-git clone https://github.com/yourteam/project.git
+git clone https://github.com/DeveloperAcademy-POSTECH/2025-C4-M9-NoMyeolmang.git
 ```
 2. `Xcode`로 `.xcodeproj` 또는 `.xcworkspace` 열기
 3. 시뮬레이터 환경 설정: iPhone 15 / iOS 17
