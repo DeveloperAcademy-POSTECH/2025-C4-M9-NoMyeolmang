@@ -1,8 +1,17 @@
-name: ♻️ 리팩토링
+name: ♻️ Refactor
 description: 코드 정리 또는 구조 개선 시 사용합니다.
 title: "♻️ Refactor: "
-labels: ["Refactor"]
+labels: ["♻️ Refactor"]
 body:
+  - type: textarea
+    id: content
+    attributes:
+      label: 🧼 리팩토링 설명
+      description: 개선하려는 코드 구조와 리팩토링 목적을 설명해주세요.
+      placeholder: 예) 로그인 뷰모델의 의존성 분리를 위해 구조 개선
+    validations:
+      required: true
+
   - type: textarea
     id: refactor-reason
     attributes:
@@ -11,18 +20,11 @@ body:
     validations:
       required: true
 
-  - type: textarea
-    id: scope
+  - type: input
+    id: branch
     attributes:
-      label: 📦 리팩토링 범위
-      placeholder: ex) SearchViewModel, SearchUseCase
-    validations:
-      required: true
-
-  - type: textarea
-    id: effect
-    attributes:
-      label: 💥 기대 효과
-      placeholder: ex) 역할 분리로 테스트 용이성 증가
+      label: 🌿 작업 브랜치
+      description: 이 리팩토링을 진행할 브랜치명을 작성해주세요.
+      placeholder: "예) refactor/#45/auth-cleanup"
     validations:
       required: false

@@ -1,0 +1,31 @@
+name: 📄 General
+description: 논의, 회의 정리, 문서 공유 등 분류되지 않는 일반 작업에 사용하세요.
+title: "📄 General: "
+labels: []
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: 🏷️ 설명
+      placeholder: 예) 회의록 정리, 공통 정책 작성 등
+    validations:
+      required: true
+
+  - type: textarea
+    id: reason
+    attributes:
+      label: 🤔 배경 (선택)
+      placeholder: 왜 이 작업이 필요한가요? 관련 맥락이 있다면 적어주세요.
+    validations:
+      required: false
+
+  - type: textarea
+    id: tasks
+    attributes:
+      label: ✅ 작업 내용
+      value: "- [ ] "
+      placeholder: |
+        - [ ] 회의록 작성
+        - [ ] 팀원 공유
+    validations:
+      required: true
