@@ -63,26 +63,22 @@
 
 ```
 📁 NoMyeolmang Project
-├── 📁 AppName (iOS 그룹)
-│   ├── App/
-│   ├── Presentations/
-│   ├── Models/
-│   ├── Services/
-│   ├── ML/
-│   ├── Core/
-│   └── Resources/
+├── 📁 NoMyeolmang-iOS (iOS 그룹)
+│ ├── Sources/
+│ │ ├── App/
+│ │ └── Presentations/
+│ └── Resources/
 │
-├── 📁 Watch App (watchOS 그룹)
-│   ├── App/
-│   ├── Presentations/
-│   ├── Models/
-│   ├── Services/
-│   └── Resources/
+├── 📁 NoMyeolmang-watch (watchOS 그룹)
+│ ├── Sources/
+│ │ ├── App/
+│ │ └── Presentations/
+│ └── Resources/
 │
 └── 📁 Shared (공통 그룹)
-		├── Models/
-		├── Services/
-		└── Extensions/
+├── ML/
+├── Models/
+└── Services/
 ```
 
 
