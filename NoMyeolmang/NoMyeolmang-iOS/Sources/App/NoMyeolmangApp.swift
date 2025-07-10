@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct NoMyeolmangApp: App {
+    
     var body: some Scene {
         WindowGroup {
-            HomeView()
+            RootView()
         }
     }
 }
