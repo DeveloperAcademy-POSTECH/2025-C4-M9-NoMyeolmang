@@ -10,10 +10,6 @@ import Foundation
 import SwiftUI
 
 final class HomeViewModel: ObservableObject {
-    private let router: AppRouter
+    @EnvironmentObject private var router: AppRouter
     @Published var isTapped: Bool = false
-
-    init(router: AppRouter) {
-        self.router = router
-    }
 }

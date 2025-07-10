@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct RootView: View {
-    @StateObject var router = AppRouter()
+    @EnvironmentObject var router: AppRouter
 
     var body: some View {
         NavigationStack(path: $router.path) {
-            HomeView(viewModel: HomeViewModel(router: router))
+            HomeView()
                 .navigationDestination(for: AppRoute.self) { route in
                     switch route {
                     case .home:
-                        HomeView(viewModel: HomeViewModel(router: router))
+                        HomeView()
                     }
                 }
 
@@ -26,4 +26,5 @@ struct RootView: View {
 
 #Preview {
     RootView()
+        .environmentObject(AppRouter())
 }
