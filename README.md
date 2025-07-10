@@ -1,9 +1,7 @@
 # 🚀 프로젝트 이름
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/b362cec6-d0ff-4024-ac5e-7b7dd64b9e31" alt="orange" width="180" style="margin: 0 10px;"/>
-  <img src="https://github.com/user-attachments/assets/8d251d73-ce68-4496-a8ef-2ba51d85336d" alt="blue" width="180" style="margin: 0 10px;"/>
-  <img src="https://github.com/user-attachments/assets/f57319be-4a66-462a-a2f5-18598627ef52" alt="purple" width="180" style="margin: 0 10px;"/>
+  <img src="https://github.com/user-attachments/assets/b432e2cb-a92b-429f-b9eb-b210deb377e4" alt="orange" width="500" style="margin: 0 10px;"/>
 </p>
 
 <!-- 이미지 추가 및 수정 예정 -->
@@ -64,14 +62,27 @@
 ## 🧱 폴더 구조
 
 ```
-📦ProjectName
-┣ 📂Feature
-┃ ┣ 📂SceneA
-┃ ┗ 📂SceneB
-┣ 📂Core
-┣ 📂UI
-┣ 📂Test
-┗ 📂Resources
+📁 NoMyeolmang Project
+├── 📁 AppName (iOS 그룹)
+│   ├── App/
+│   ├── Presentations/
+│   ├── Models/
+│   ├── Services/
+│   ├── ML/
+│   ├── Core/
+│   └── Resources/
+│
+├── 📁 Watch App (watchOS 그룹)
+│   ├── App/
+│   ├── Presentations/
+│   ├── Models/
+│   ├── Services/
+│   └── Resources/
+│
+└── 📁 Shared (공통 그룹)
+		├── Models/
+		├── Services/
+		└── Extensions/
 ```
 
 
