@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
+    @EnvironmentObject private var router: AppRouter
     @StateObject private var viewModel = HomeViewModel()
     
     var body: some View {

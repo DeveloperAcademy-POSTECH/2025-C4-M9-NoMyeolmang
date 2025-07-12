@@ -8,6 +8,5 @@
 import SwiftUI
 
 final class HomeViewModel: ObservableObject {
-    @EnvironmentObject private var router: AppRouter
     @Published var isTapped: Bool = false
 }
