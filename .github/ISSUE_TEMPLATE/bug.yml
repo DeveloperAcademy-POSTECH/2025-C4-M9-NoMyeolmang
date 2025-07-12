@@ -1,7 +1,7 @@
-name: 🐛 버그 수정
+name: 🐞 Bug
 description: 테스트 중 발생한 문제를 추적하기 위해 사용합니다.
-title: "🐛 Bug: "
-labels: ["Bug", "QA"]
+title: "🐞 Bug: "
+labels: ["🐞 Bug"]
 body:
   - type: textarea
     id: symptom
@@ -27,13 +27,5 @@ body:
     attributes:
       label: 🛠 테스트 환경
       placeholder: 예) iPhone 15, iOS 17.4
-    validations:
-      required: false
-
-  - type: textarea
-    id: screenshot
-    attributes:
-      label: 🖼 스크린샷 또는 로그
-      placeholder: 예) Xcode 콘솔 로그 첨부 또는 에러 화면
     validations:
       required: false
