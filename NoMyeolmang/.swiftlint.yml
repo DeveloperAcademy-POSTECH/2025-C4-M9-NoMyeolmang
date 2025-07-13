@@ -4,15 +4,13 @@
 
 # 포함할 디렉토리
 included:
-  - NoMyeolmang-iOS/Sources
-  - NoMyeolmang-watch/Sources
-  - Shared
+  - NoMyeolmang-macOS/Sources
 
 # 제외할 디렉토리
 excluded:
   - NoMyeolmang.xcodeproj
-  - NoMyeolmang-iOS/Resources
-  - NoMyeolmang-watch/Resources
+  - NoMyeolmang-macOS/Resources
+  - "*.entitlements"
   - .git
 
 # 비활성화할 룰
