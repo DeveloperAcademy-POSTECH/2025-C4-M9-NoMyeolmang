@@ -6,57 +6,21 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		D1F1CC9D2E20272B00CB9E01 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = D1F1CC9C2E20272B00CB9E01 /* .swiftlint.yml */; };
-		D1F1CC9E2E20272B00CB9E01 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = D1F1CC9C2E20272B00CB9E01 /* .swiftlint.yml */; };
-/* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		F59087F02E1F8E3000A7754D /* Embed Watch Content */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
-			dstSubfolderSpec = 16;
-			files = (
-			);
-			name = "Embed Watch Content";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
 		D1F1CC9C2E20272B00CB9E01 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
-		F590879E2E1F8D8000A7754D /* NoMyeolmang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoMyeolmang.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		F590880B2E1F921F00A7754D /* NoMyeolmang-watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NoMyeolmang-watch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F504CB722E235AAE0060FB94 /* NoMyeolmang-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NoMyeolmang-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		F59087A02E1F8D8000A7754D /* NoMyeolmang-iOS */ = {
+		F504CB732E235AAE0060FB94 /* NoMyeolmang-macOS */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "NoMyeolmang-iOS";
-			sourceTree = "<group>";
-		};
-		F590880C2E1F921F00A7754D /* NoMyeolmang-watch */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "NoMyeolmang-watch";
-			sourceTree = "<group>";
-		};
-		F590882C2E1F99E500A7754D /* Shared */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Shared;
+			path = "NoMyeolmang-macOS";
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		F590879B2E1F8D8000A7754D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F59088082E1F921F00A7754D /* Frameworks */ = {
+		F504CB6F2E235AAE0060FB94 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -70,9 +34,7 @@
 			isa = PBXGroup;
 			children = (
 				D1F1CC9C2E20272B00CB9E01 /* .swiftlint.yml */,
-				F590882C2E1F99E500A7754D /* Shared */,
-				F59087A02E1F8D8000A7754D /* NoMyeolmang-iOS */,
-				F590880C2E1F921F00A7754D /* NoMyeolmang-watch */,
+				F504CB732E235AAE0060FB94 /* NoMyeolmang-macOS */,
 				F590879F2E1F8D8000A7754D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -80,8 +42,7 @@
 		F590879F2E1F8D8000A7754D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F590879E2E1F8D8000A7754D /* NoMyeolmang.app */,
-				F590880B2E1F921F00A7754D /* NoMyeolmang-watch.app */,
+				F504CB722E235AAE0060FB94 /* NoMyeolmang-macOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -89,53 +50,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F590879D2E1F8D8000A7754D /* NoMyeolmang */ = {
+		F504CB712E235AAE0060FB94 /* NoMyeolmang-macOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F59087BF2E1F8D8100A7754D /* Build configuration list for PBXNativeTarget "NoMyeolmang" */;
+			buildConfigurationList = F504CB7B2E235AAF0060FB94 /* Build configuration list for PBXNativeTarget "NoMyeolmang-macOS" */;
 			buildPhases = (
-				F590879A2E1F8D8000A7754D /* Sources */,
-				F590879B2E1F8D8000A7754D /* Frameworks */,
-				F590879C2E1F8D8000A7754D /* Resources */,
-				F59087F02E1F8E3000A7754D /* Embed Watch Content */,
-				D1F1CC9F2E20275F00CB9E01 /* ShellScript */,
+				F504CB6E2E235AAE0060FB94 /* Sources */,
+				F504CB6F2E235AAE0060FB94 /* Frameworks */,
+				F504CB702E235AAE0060FB94 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				F59087A02E1F8D8000A7754D /* NoMyeolmang-iOS */,
-				F590882C2E1F99E500A7754D /* Shared */,
+				F504CB732E235AAE0060FB94 /* NoMyeolmang-macOS */,
 			);
-			name = NoMyeolmang;
+			name = "NoMyeolmang-macOS";
 			packageProductDependencies = (
 			);
-			productName = NoMyeolmang;
-			productReference = F590879E2E1F8D8000A7754D /* NoMyeolmang.app */;
-			productType = "com.apple.product-type.application";
-		};
-		F590880A2E1F921F00A7754D /* NoMyeolmang-watch */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F59088132E1F922000A7754D /* Build configuration list for PBXNativeTarget "NoMyeolmang-watch" */;
-			buildPhases = (
-				F59088072E1F921F00A7754D /* Sources */,
-				F59088082E1F921F00A7754D /* Frameworks */,
-				F59088092E1F921F00A7754D /* Resources */,
-				D1F1CCA02E2027F400CB9E01 /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				F590880C2E1F921F00A7754D /* NoMyeolmang-watch */,
-				F590882C2E1F99E500A7754D /* Shared */,
-			);
-			name = "NoMyeolmang-watch";
-			packageProductDependencies = (
-			);
-			productName = "NoMyeolmang-watch Watch App";
-			productReference = F590880B2E1F921F00A7754D /* NoMyeolmang-watch.app */;
+			productName = "NoMyeolmang-macOS";
+			productReference = F504CB722E235AAE0060FB94 /* NoMyeolmang-macOS.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -148,10 +82,7 @@
 				LastSwiftUpdateCheck = 1640;
 				LastUpgradeCheck = 1640;
 				TargetAttributes = {
-					F590879D2E1F8D8000A7754D = {
-						CreatedOnToolsVersion = 16.4;
-					};
-					F590880A2E1F921F00A7754D = {
+					F504CB712E235AAE0060FB94 = {
 						CreatedOnToolsVersion = 16.4;
 					};
 				};
@@ -170,79 +101,23 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F590879D2E1F8D8000A7754D /* NoMyeolmang */,
-				F590880A2E1F921F00A7754D /* NoMyeolmang-watch */,
+				F504CB712E235AAE0060FB94 /* NoMyeolmang-macOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		F590879C2E1F8D8000A7754D /* Resources */ = {
+		F504CB702E235AAE0060FB94 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D1F1CC9D2E20272B00CB9E01 /* .swiftlint.yml in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F59088092E1F921F00A7754D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D1F1CC9E2E20272B00CB9E01 /* .swiftlint.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		D1F1CC9F2E20275F00CB9E01 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]\nthen\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif command -v swiftlint >/dev/null 2>&1\nthen\n    swiftlint\nelse\n    echo \"warning: `swiftlint` command not found - See https://github.com/realm/SwiftLint#installation for installation instructions.\"\nfi\n";
-		};
-		D1F1CCA02E2027F400CB9E01 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]\nthen\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif command -v swiftlint >/dev/null 2>&1\nthen\n    swiftlint\nelse\n    echo \"warning: `swiftlint` command not found - See https://github.com/realm/SwiftLint#installation for installation instructions.\"\nfi\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		F590879A2E1F8D8000A7754D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F59088072E1F921F00A7754D /* Sources */ = {
+		F504CB6E2E235AAE0060FB94 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -252,6 +127,64 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		F504CB7C2E235AAF0060FB94 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "NoMyeolmang-macOS/NoMyeolmang_macOS.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F7T7NU8578;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.nomyeolmang.NoMyeolmang-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		F504CB7D2E235AAF0060FB94 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "NoMyeolmang-macOS/NoMyeolmang_macOS.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F7T7NU8578;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.nomyeolmang.NoMyeolmang-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		F59087BD2E1F8D8100A7754D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -373,152 +306,23 @@
 			};
 			name = Release;
 		};
-		F59087C02E1F8D8100A7754D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = F7T7NU8578;
-				ENABLE_PREVIEWS = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.nomyeolmang.NoMyeolmang;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		F59087C12E1F8D8100A7754D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = F7T7NU8578;
-				ENABLE_PREVIEWS = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.nomyeolmang.NoMyeolmang;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		F59088142E1F922000A7754D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = F7T7NU8578;
-				ENABLE_PREVIEWS = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "NoMyeolmang-watch";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = .watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 11.0;
-			};
-			name = Debug;
-		};
-		F59088152E1F922000A7754D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = F7T7NU8578;
-				ENABLE_PREVIEWS = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "NoMyeolmang-watch";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = .watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 11.0;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		F504CB7B2E235AAF0060FB94 /* Build configuration list for PBXNativeTarget "NoMyeolmang-macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F504CB7C2E235AAF0060FB94 /* Debug */,
+				F504CB7D2E235AAF0060FB94 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		F59087992E1F8D8000A7754D /* Build configuration list for PBXProject "NoMyeolmang" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F59087BD2E1F8D8100A7754D /* Debug */,
 				F59087BE2E1F8D8100A7754D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		F59087BF2E1F8D8100A7754D /* Build configuration list for PBXNativeTarget "NoMyeolmang" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F59087C02E1F8D8100A7754D /* Debug */,
-				F59087C12E1F8D8100A7754D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		F59088132E1F922000A7754D /* Build configuration list for PBXNativeTarget "NoMyeolmang-watch" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F59088142E1F922000A7754D /* Debug */,
-				F59088152E1F922000A7754D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
