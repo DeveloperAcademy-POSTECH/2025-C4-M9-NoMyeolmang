@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  NoMyeolmang-macOS
+//  NoMyeolmang
 //
 //  Created by Moo on 7/13/25.
 //

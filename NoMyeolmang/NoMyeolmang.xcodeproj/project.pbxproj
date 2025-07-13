@@ -6,21 +6,25 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		F5C0062C2E237A5B003750FB /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = F5C0062B2E237A5B003750FB /* .swiftlint.yml */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
-		D1F1CC9C2E20272B00CB9E01 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
-		F504CB722E235AAE0060FB94 /* NoMyeolmang-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NoMyeolmang-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5C006142E2379E7003750FB /* NoMyeolmang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoMyeolmang.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5C0062B2E237A5B003750FB /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		F504CB732E235AAE0060FB94 /* NoMyeolmang-macOS */ = {
+		F5C006162E2379E7003750FB /* NoMyeolmang */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "NoMyeolmang-macOS";
+			path = NoMyeolmang;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		F504CB6F2E235AAE0060FB94 /* Frameworks */ = {
+		F5C006112E2379E7003750FB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -30,19 +34,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		F59087952E1F8D8000A7754D = {
+		F5C0060B2E2379E7003750FB = {
 			isa = PBXGroup;
 			children = (
-				D1F1CC9C2E20272B00CB9E01 /* .swiftlint.yml */,
-				F504CB732E235AAE0060FB94 /* NoMyeolmang-macOS */,
-				F590879F2E1F8D8000A7754D /* Products */,
+				F5C0062B2E237A5B003750FB /* .swiftlint.yml */,
+				F5C006162E2379E7003750FB /* NoMyeolmang */,
+				F5C006152E2379E7003750FB /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		F590879F2E1F8D8000A7754D /* Products */ = {
+		F5C006152E2379E7003750FB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F504CB722E235AAE0060FB94 /* NoMyeolmang-macOS.app */,
+				F5C006142E2379E7003750FB /* NoMyeolmang.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -50,74 +54,98 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F504CB712E235AAE0060FB94 /* NoMyeolmang-macOS */ = {
+		F5C006132E2379E7003750FB /* NoMyeolmang */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F504CB7B2E235AAF0060FB94 /* Build configuration list for PBXNativeTarget "NoMyeolmang-macOS" */;
+			buildConfigurationList = F5C006202E2379E8003750FB /* Build configuration list for PBXNativeTarget "NoMyeolmang" */;
 			buildPhases = (
-				F504CB6E2E235AAE0060FB94 /* Sources */,
-				F504CB6F2E235AAE0060FB94 /* Frameworks */,
-				F504CB702E235AAE0060FB94 /* Resources */,
+				F5C006102E2379E7003750FB /* Sources */,
+				F5C006112E2379E7003750FB /* Frameworks */,
+				F5C006122E2379E7003750FB /* Resources */,
+				F5C0062A2E237A35003750FB /* SwiftLint Script */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				F504CB732E235AAE0060FB94 /* NoMyeolmang-macOS */,
+				F5C006162E2379E7003750FB /* NoMyeolmang */,
 			);
-			name = "NoMyeolmang-macOS";
+			name = NoMyeolmang;
 			packageProductDependencies = (
 			);
-			productName = "NoMyeolmang-macOS";
-			productReference = F504CB722E235AAE0060FB94 /* NoMyeolmang-macOS.app */;
+			productName = NoMyeolmang;
+			productReference = F5C006142E2379E7003750FB /* NoMyeolmang.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		F59087962E1F8D8000A7754D /* Project object */ = {
+		F5C0060C2E2379E7003750FB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1640;
 				LastUpgradeCheck = 1640;
 				TargetAttributes = {
-					F504CB712E235AAE0060FB94 = {
+					F5C006132E2379E7003750FB = {
 						CreatedOnToolsVersion = 16.4;
 					};
 				};
 			};
-			buildConfigurationList = F59087992E1F8D8000A7754D /* Build configuration list for PBXProject "NoMyeolmang" */;
+			buildConfigurationList = F5C0060F2E2379E7003750FB /* Build configuration list for PBXProject "NoMyeolmang" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = F59087952E1F8D8000A7754D;
+			mainGroup = F5C0060B2E2379E7003750FB;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = F590879F2E1F8D8000A7754D /* Products */;
+			productRefGroup = F5C006152E2379E7003750FB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F504CB712E235AAE0060FB94 /* NoMyeolmang-macOS */,
+				F5C006132E2379E7003750FB /* NoMyeolmang */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		F504CB702E235AAE0060FB94 /* Resources */ = {
+		F5C006122E2379E7003750FB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5C0062C2E237A5B003750FB /* .swiftlint.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		F5C0062A2E237A35003750FB /* SwiftLint Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "SwiftLint Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]\nthen\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif command -v swiftlint >/dev/null 2>&1\nthen\n    swiftlint\nelse\n    echo \"warning: `swiftlint` command not found - See https://github.com/realm/SwiftLint#installation for installation instructions.\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
-		F504CB6E2E235AAE0060FB94 /* Sources */ = {
+		F5C006102E2379E7003750FB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -127,65 +155,7 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		F504CB7C2E235AAF0060FB94 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "NoMyeolmang-macOS/NoMyeolmang_macOS.entitlements";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = F7T7NU8578;
-				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 15.5;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.nomyeolmang.NoMyeolmang-macOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				REGISTER_APP_GROUPS = YES;
-				SDKROOT = macosx;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		F504CB7D2E235AAF0060FB94 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "NoMyeolmang-macOS/NoMyeolmang_macOS.entitlements";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = F7T7NU8578;
-				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 15.5;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.nomyeolmang.NoMyeolmang-macOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				REGISTER_APP_GROUPS = YES;
-				SDKROOT = macosx;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
-		F59087BD2E1F8D8100A7754D /* Debug */ = {
+		F5C0061E2E2379E8003750FB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -238,18 +208,18 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
+				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
-		F59087BE2E1F8D8100A7754D /* Release */ = {
+		F5C0061F2E2379E8003750FB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -296,38 +266,93 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				SDKROOT = iphoneos;
+				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F5C006212E2379E8003750FB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = NoMyeolmang/NoMyeolmang.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F7T7NU8578;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nomyeolmang.NoMyeolmang;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		F5C006222E2379E8003750FB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = NoMyeolmang/NoMyeolmang.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F7T7NU8578;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nomyeolmang.NoMyeolmang;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F504CB7B2E235AAF0060FB94 /* Build configuration list for PBXNativeTarget "NoMyeolmang-macOS" */ = {
+		F5C0060F2E2379E7003750FB /* Build configuration list for PBXProject "NoMyeolmang" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F504CB7C2E235AAF0060FB94 /* Debug */,
-				F504CB7D2E235AAF0060FB94 /* Release */,
+				F5C0061E2E2379E8003750FB /* Debug */,
+				F5C0061F2E2379E8003750FB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F59087992E1F8D8000A7754D /* Build configuration list for PBXProject "NoMyeolmang" */ = {
+		F5C006202E2379E8003750FB /* Build configuration list for PBXNativeTarget "NoMyeolmang" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F59087BD2E1F8D8100A7754D /* Debug */,
-				F59087BE2E1F8D8100A7754D /* Release */,
+				F5C006212E2379E8003750FB /* Debug */,
+				F5C006222E2379E8003750FB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = F59087962E1F8D8000A7754D /* Project object */;
+	rootObject = F5C0060C2E2379E7003750FB /* Project object */;
 }

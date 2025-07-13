@@ -1,6 +1,6 @@
 //
-//  NoMyeolmang_macOSApp.swift
-//  NoMyeolmang-macOS
+//  NoMyeolmangApp.swift
+//  NoMyeolmang
 //
 //  Created by Moo on 7/13/25.
 //
@@ -15,3 +15,7 @@ struct NoMyeolmangApp: App {
         }
     }
 }
+  
+
+
+

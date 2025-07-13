@@ -4,12 +4,12 @@
 
 # 포함할 디렉토리
 included:
-  - NoMyeolmang-macOS/Sources
+  - NoMyeolmang/Sources
 
 # 제외할 디렉토리
 excluded:
   - NoMyeolmang.xcodeproj
-  - NoMyeolmang-macOS/Resources
+  - NoMyeolmang/Resources
   - "*.entitlements"
   - .git
 
