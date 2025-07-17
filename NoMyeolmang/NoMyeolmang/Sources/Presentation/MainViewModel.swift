@@ -44,13 +44,8 @@ final class MainViewModel: ObservableObject {
         guard let blinkCount = Double(blinkCount),
               let faceBodyPresent = Double(faceBodyPresent),
               let phonePresent = Double(phonePresent),
-              let elapsedTime = Double(elapsedTime),
-              blinkCount >= 3.0 && blinkCount <= 20.0,
-              faceBodyPresent >= 0.0 && faceBodyPresent <= 1.0,
-              phonePresent >= 0.0 && phonePresent <= 1.0,
-              elapsedTime >= 1.0 && elapsedTime <= 30.0 else {
-            return nil
-        }
+              let elapsedTime = Double(elapsedTime)
+        else { return nil }
         
         return MLModelInput(
             blinkCountPerMin: blinkCount,
