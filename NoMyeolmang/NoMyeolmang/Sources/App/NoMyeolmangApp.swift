@@ -11,11 +11,7 @@ import SwiftUI
 struct NoMyeolmangApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
         }
     }
 }
-  
-
-
-
