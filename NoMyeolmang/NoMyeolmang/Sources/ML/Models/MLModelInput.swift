@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MLModelInput {
+struct MLModelInput: Codable {
     let blinkCountPerMin: Double
     let faceBodyPresent: Double
     let phonePresent: Double

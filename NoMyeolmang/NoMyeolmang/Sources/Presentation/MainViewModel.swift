@@ -5,6 +5,7 @@
 //  Created by Moo on 7/15/25.
 //
 
+import CoreML
 import Foundation
 
 final class MainViewModel: ObservableObject {
@@ -16,7 +17,7 @@ final class MainViewModel: ObservableObject {
     @Published var predictionResult: Double?
     @Published var errorMessage: String?
     @Published var showAlert: Bool = false
-    
+
     private let predictor: FocusScorePredictor
 
     init() {
@@ -25,33 +26,37 @@ final class MainViewModel: ObservableObject {
         }
         self.predictor = predictor
     }
-    
+
     func predict() {
         guard let input = makeModelInput() else {
             handlePredictionFailure()
             return
         }
-        
+
+        let userScore = Double(userScore)
+        saveUserData(input: input, label: userScore)
+
         if let result = predictor.run(input: input) {
             handlePredictionSuccess(result: result)
         } else {
             handlePredictionFailure()
         }
     }
-    
+
     private func makeModelInput() -> MLModelInput? {
         // 각 값의 입력 범위(실제 서비스에서는 필요없음)
         guard let blinkCount = Double(blinkCount),
-              let faceBodyPresent = Double(faceBodyPresent),
-              let phonePresent = Double(phonePresent),
-              let elapsedTime = Double(elapsedTime),
-              blinkCount >= 3.0 && blinkCount <= 20.0,
-              faceBodyPresent >= 0.0 && faceBodyPresent <= 1.0,
-              phonePresent >= 0.0 && phonePresent <= 1.0,
-              elapsedTime >= 1.0 && elapsedTime <= 30.0 else {
+            let faceBodyPresent = Double(faceBodyPresent),
+            let phonePresent = Double(phonePresent),
+            let elapsedTime = Double(elapsedTime),
+            blinkCount >= 3.0 && blinkCount <= 20.0,
+            faceBodyPresent >= 0.0 && faceBodyPresent <= 1.0,
+            phonePresent >= 0.0 && phonePresent <= 1.0,
+            elapsedTime >= 1.0 && elapsedTime <= 30.0
+        else {
             return nil
         }
-        
+
         return MLModelInput(
             blinkCountPerMin: blinkCount,
             faceBodyPresent: faceBodyPresent,
@@ -59,16 +64,51 @@ final class MainViewModel: ObservableObject {
             elapsedTime: elapsedTime
         )
     }
-    
+
     private func handlePredictionSuccess(result: Double) {
         predictionResult = result
         errorMessage = nil
         showAlert = false
     }
-    
+
     private func handlePredictionFailure() {
         predictionResult = nil
-        errorMessage = "입력값을 확인하세요.\n(눈 깜빡임: 3~20, 얼굴/신체: 0.0~1.0, 핸드폰: 0.0~1.0, 경과 시간: 1~30)"
+        errorMessage =
+            "입력값을 확인하세요.\n(눈 깜빡임: 3~20, 얼굴/신체: 0.0~1.0, 핸드폰: 0.0~1.0, 경과 시간: 1~30)"
         showAlert = true
+    }
+
+    func personalize() {
+        print("start personalization")
+
+        // 1. 사용자 입력 리스트 불러오기
+        let dataList = loadUserData()
+        print("count:",dataList.count)
+
+        // 2. input MLMultiArray, outputArray 만들기
+        var inputArray: [MLMultiArray] = []
+        var outputArray: [Double] = []
+        for data in dataList {
+            if let result = makeMultiArray(data: data.input) {
+                inputArray.append(result)
+            }
+            outputArray.append(data.label)
+        }
+
+        // 4. MLBatchProvider 만들기
+        let batchProvider = makeBatchProvider(
+            inputArray: inputArray,
+            outputArray: outputArray
+        )
+        print("batchProvider:", batchProvider)
+
+        // 5. MLUpdateTask로 모델 업데이트
+        if let updateTask = makeUpdateTask(batchProvider: batchProvider) {
+            print("updateTask resume")
+            
+        }
+
+        // 6. 업데이트된 모델 덮어쓰기
+        predictor.updateModel()
     }
 }

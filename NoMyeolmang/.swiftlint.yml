@@ -39,8 +39,8 @@ analyzer_rules:
 
 # 라인 길이 설정
 line_length:
-  warning: 120
-  error: 150
+  warning: 200
+  error: 300
   ignores_comments: true
   ignores_urls: true
 

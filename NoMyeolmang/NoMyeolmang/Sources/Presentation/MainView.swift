@@ -131,6 +131,44 @@ struct MainView: View {
                             )
                         }
                         
+                        Button(action: {
+                            viewModel.personalize()
+                        }) {
+                            HStack {
+                                Image(systemName: "brain.head.profile")
+                                Text("개인화시키기")
+                                    .fontWeight(.bold)
+                            }
+                            .font(.title3)
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity, minHeight: 50)
+                            .background(
+                                LinearGradient(
+                                    gradient: Gradient(colors: [
+                                        Color.accentColor.opacity(0.85),
+                                        Color.blue.opacity(0.85)
+                                    ]),
+                                    startPoint: .leading,
+                                    endPoint: .trailing
+                                )
+                            )
+                            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                            .shadow(color: .blue.opacity(0.13), radius: 6, x: 0, y: 3)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                                    .stroke(Color.white.opacity(0.25), lineWidth: 1)
+                            )
+                            .padding(.horizontal, 4)
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        .alert(isPresented: $viewModel.showAlert) {
+                            Alert(
+                                title: Text("입력 오류"),
+                                message: Text(viewModel.errorMessage ?? "알 수 없는 오류"),
+                                dismissButton: .default(Text("확인"))
+                            )
+                        }
+                        
                         if let result = viewModel.predictionResult {
                             VStack(spacing: 8) {
                                 Divider().padding(.vertical, 4)
