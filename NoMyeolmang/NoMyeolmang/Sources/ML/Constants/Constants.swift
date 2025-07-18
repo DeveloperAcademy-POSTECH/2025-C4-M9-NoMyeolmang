@@ -26,19 +26,5 @@ enum Constants {
 
     // 모델 입력,출력층 이름
     static let inputName = "dense_1_input"
-    static let outputName = "Identity_true"
-}
-
-struct ModelPaths {
-    static let documentsDirectory = FileManager.default.urls(
-        for: .documentDirectory,
-        in: .userDomainMask
-    ).first!
-
-    static let tempUpdatedModelURL = documentsDirectory.appendingPathComponent(
-        "TempUpdatedModel"
-    )
-    static let updatedModelURL = documentsDirectory.appendingPathComponent(
-        "UpdatedModel"
-    )
+    static let outputName = "Identity"
 }

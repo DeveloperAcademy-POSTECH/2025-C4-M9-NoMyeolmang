@@ -8,7 +8,7 @@
 import CoreML
 
 final class FocusScorePredictor {
-    private var model: FocusScore_Updatable
+    var model: FocusScore_Updatable
 
     init?() {
         guard
@@ -57,14 +57,5 @@ final class FocusScorePredictor {
         guard let result = try? model.prediction(dense_1_input: inputArray)
         else { return nil }
         return result.Identity[0].doubleValue
-    }
-
-    func updateModel() {
-        print("모델 교체 진입")
-        if let model: FocusScore_Updatable = loadUpdatedModel() {
-            print("✅ 모델 교체 성공!")
-        } else {
-            print("⛔️ 모델 교체 실패!")
-        }
     }
 }
