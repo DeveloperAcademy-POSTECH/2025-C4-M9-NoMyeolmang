@@ -20,5 +20,10 @@ struct TimerSettingView: View {
             }
             .navigationBarBackButtonHidden(true)
         }
+        .padding()
     }
+}
+
+#Preview {
+    TimerSettingView()
 }

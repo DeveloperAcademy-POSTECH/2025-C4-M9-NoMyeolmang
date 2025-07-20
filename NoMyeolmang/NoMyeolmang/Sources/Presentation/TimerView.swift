@@ -20,5 +20,10 @@ struct TimerView: View {
             }
             .navigationBarBackButtonHidden(true)
         }
+        .padding()
     }
+}
+
+#Preview {
+    TimerView()
 }
