@@ -18,10 +18,12 @@ struct ReportView: View {
             Button("다시 시작") {
                 coordinator.push(.timer)
             }
+            .navigationBarBackButtonHidden(true)
 
             Button("탐사 종료") {
                 coordinator.popToRoot() // TimerSettingView로
             }
+            .navigationBarBackButtonHidden(true)
         }
     }
 }

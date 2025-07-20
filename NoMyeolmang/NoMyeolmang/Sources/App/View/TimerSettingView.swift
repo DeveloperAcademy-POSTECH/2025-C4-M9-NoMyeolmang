@@ -18,6 +18,7 @@ struct TimerSettingView: View {
             Button("Start Timer") {
                 coordinator.push(.timer)
             }
+            .navigationBarBackButtonHidden(true)
         }
     }
 }

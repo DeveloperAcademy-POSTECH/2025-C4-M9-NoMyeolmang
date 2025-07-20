@@ -18,6 +18,7 @@ struct TimerView: View {
             Button("Next: Feedback") {
                 coordinator.push(.feedback)
             }
+            .navigationBarBackButtonHidden(true)
         }
     }
 }

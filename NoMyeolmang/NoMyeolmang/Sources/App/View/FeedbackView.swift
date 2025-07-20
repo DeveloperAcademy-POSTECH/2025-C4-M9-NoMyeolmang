@@ -18,6 +18,7 @@ struct FeedbackView: View {
             Button("Next: Report") {
                 coordinator.push(.report)
             }
+            .navigationBarBackButtonHidden(true)
         }
     }
 }
