@@ -9,7 +9,7 @@ import Foundation
 
 enum AppRoute: Hashable {
     case timerSetting
-    case timer
+    case timer(goalTime: TimeInterval)
     case feedback
     case report
 }
