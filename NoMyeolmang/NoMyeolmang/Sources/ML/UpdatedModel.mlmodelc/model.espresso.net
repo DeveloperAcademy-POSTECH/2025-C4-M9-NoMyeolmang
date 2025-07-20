@@ -1,0 +1,72 @@
+{
+  "storage" : "model.espresso.weights",
+  "analyses" : {
+
+  },
+  "properties" : {
+
+  },
+  "format_version" : 200,
+  "metadata_in_weights" : [
+
+  ],
+  "layers" : [
+    {
+      "nB" : 4,
+      "top" : "sequential\/dense_1\/Relu",
+      "has_biases" : 1,
+      "weights" : {
+
+      },
+      "nC" : 64,
+      "blob_weights" : 3,
+      "type" : "inner_product",
+      "has_relu" : 1,
+      "bottom" : "dense_1_input",
+      "blob_biases" : 1,
+      "has_tanh" : 0,
+      "debug_info" : "sequential\/dense_1\/BiasAdd",
+      "name" : "sequential\/dense_1\/BiasAdd",
+      "has_prelu" : 0
+    },
+    {
+      "nB" : 64,
+      "top" : "sequential\/dense_1_2\/Relu",
+      "has_biases" : 1,
+      "weights" : {
+
+      },
+      "nC" : 32,
+      "blob_weights" : 7,
+      "type" : "inner_product",
+      "has_relu" : 1,
+      "bottom" : "sequential\/dense_1\/Relu",
+      "blob_biases" : 5,
+      "has_tanh" : 0,
+      "debug_info" : "sequential\/dense_1_2\/BiasAdd",
+      "name" : "sequential\/dense_1_2\/BiasAdd",
+      "has_prelu" : 0
+    },
+    {
+      "has_prelu" : 0,
+      "top" : "Identity",
+      "has_biases" : 1,
+      "weights" : {
+
+      },
+      "nC" : 1,
+      "blob_weights" : 11,
+      "type" : "inner_product",
+      "has_relu" : 0,
+      "attributes" : {
+        "is_output" : 1
+      },
+      "bottom" : "sequential\/dense_1_2\/Relu",
+      "debug_info" : "Identity",
+      "has_tanh" : 0,
+      "blob_biases" : 9,
+      "name" : "Identity",
+      "nB" : 32
+    }
+  ]
+}

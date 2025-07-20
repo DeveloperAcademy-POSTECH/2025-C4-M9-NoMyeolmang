@@ -25,4 +25,8 @@ enum MinMaxScaler {
     static func scaleTime(_ value: Double) -> Double {
         return scale(value: value, min: Constants.elapsedTimeMinValue, max: Constants.elapsedTimeMaxValue)
     }
+    
+    static func scaleLabel(_ value: Double) -> Double {
+        return scale(value: value, min: 1, max: 5)
+    }
 }

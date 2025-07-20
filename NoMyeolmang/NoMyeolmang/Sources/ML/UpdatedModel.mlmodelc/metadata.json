@@ -1,0 +1,126 @@
+[
+  {
+    "metadataOutputVersion" : "3.0",
+    "userDefinedMetadata" : {
+      "com.github.apple.coremltools.version" : "8.3.0",
+      "com.github.apple.coremltools.source" : "tensorflow==2.12.0"
+    },
+    "availability" : {
+      "macOS" : "10.15",
+      "tvOS" : "13.0",
+      "visionOS" : "1.0",
+      "watchOS" : "6.0",
+      "iOS" : "13.0",
+      "macCatalyst" : "13.0"
+    },
+    "inputSchema" : [
+      {
+        "hasShapeFlexibility" : "0",
+        "isOptional" : "0",
+        "dataType" : "Float32",
+        "formattedType" : "MultiArray (Float32 1 × 4)",
+        "shortDescription" : "4-feature input vector for focus prediction",
+        "shape" : "[1, 4]",
+        "name" : "dense_1_input",
+        "type" : "MultiArray"
+      }
+    ],
+    "outputSchema" : [
+      {
+        "hasShapeFlexibility" : "0",
+        "isOptional" : "0",
+        "dataType" : "Float32",
+        "formattedType" : "MultiArray (Float32)",
+        "shortDescription" : "Regression output: predicted focus score",
+        "shape" : "[]",
+        "name" : "Identity",
+        "type" : "MultiArray"
+      }
+    ],
+    "trainingInputSchema" : [
+      {
+        "hasShapeFlexibility" : "0",
+        "isOptional" : "0",
+        "dataType" : "Float32",
+        "formattedType" : "MultiArray (Float32 1 × 4)",
+        "shortDescription" : "4-feature input vector for focus prediction",
+        "shape" : "[1, 4]",
+        "name" : "dense_1_input",
+        "type" : "MultiArray"
+      },
+      {
+        "hasShapeFlexibility" : "0",
+        "isOptional" : "0",
+        "dataType" : "Double",
+        "formattedType" : "MultiArray (Double 1)",
+        "shortDescription" : "",
+        "shape" : "[1]",
+        "name" : "Identity_true",
+        "type" : "MultiArray"
+      }
+    ],
+    "storagePrecision" : "Float32",
+    "modelParameters" : [
+
+    ],
+    "neuralNetworkLayerTypeHistogram" : {
+      "InnerProduct" : 3,
+      "ActivationReLU" : 2
+    },
+    "method" : "predict",
+    "updateParameters" : [
+      {
+        "defaultValue" : "10",
+        "allowedSet" : "[10]",
+        "scope" : "",
+        "name" : "epochs",
+        "dataType" : "Int64",
+        "shortDescription" : "Default number of iterations during training"
+      },
+      {
+        "defaultValue" : "true",
+        "scope" : "",
+        "name" : "shuffle",
+        "dataType" : "Bool",
+        "shortDescription" : "Controls whether data is shuffled on each epoch"
+      },
+      {
+        "defaultValue" : "0.010000",
+        "scope" : "",
+        "allowedRange" : "[0.000000, 1.000000]",
+        "name" : "learningRate",
+        "dataType" : "Double",
+        "shortDescription" : "Controls learning step size. Adjustable in progress"
+      },
+      {
+        "defaultValue" : "32",
+        "allowedSet" : "[32]",
+        "scope" : "",
+        "name" : "miniBatchSize",
+        "dataType" : "Int64",
+        "shortDescription" : "Number of examples used to compute single gradient step"
+      },
+      {
+        "defaultValue" : "0.000000",
+        "scope" : "",
+        "allowedRange" : "[0.000000, 1.000000]",
+        "name" : "momentum",
+        "dataType" : "Double",
+        "shortDescription" : "Helps accelerate gradients vectors in the right directions"
+      }
+    ],
+    "isUpdatable" : "1",
+    "specificationVersion" : 4,
+    "stateSchema" : [
+
+    ],
+    "computePrecision" : "Float16",
+    "shortDescription" : "An updatable focus score predictor using 4 behavioral input features.",
+    "license" : "MIT",
+    "generatedClassName" : "FocusScore_Updatable",
+    "author" : "YourName or Organization",
+    "modelType" : {
+      "name" : "MLModelType_neuralNetwork"
+    }
+  }
+]

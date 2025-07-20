@@ -21,7 +21,7 @@ class FocusPersonalizator {
 
         // 2. 사용자 데이터 -> MLBatchProvider로 만들기 (모델의 입력 형식)
         let batchProvider = makeBatchProvider()
-        //        checkBatchProvider(batchProvider: batchProvider)
+                checkBatchProvider(batchProvider: batchProvider)
 
         // 3. updateTask resume
         if let updateTask = makeUpdateTask(
@@ -120,28 +120,38 @@ class FocusPersonalizator {
         }
         return (input: inputArray, label: labelArray)
     }
-
-    func makeInputMultiArray(data: MLModelInput) -> MLMultiArray? {
-        do {
-            let multiArray = try MLMultiArray(
+    
+    private func makeInputMultiArray(data: MLModelInput) -> MLMultiArray? {
+        guard
+            let inputArray = try? MLMultiArray(
                 shape: [1, 4],
                 dataType: .float32
             )
-            multiArray[0] = NSNumber(value: Float(data.blinkCountPerMin))
-            multiArray[1] = NSNumber(value: Float(data.faceBodyPresent))
-            multiArray[2] = NSNumber(value: Float(data.phonePresent))
-            multiArray[3] = NSNumber(value: Float(data.elapsedTime))
-            return multiArray
-        } catch {
-            print("❌ MLMultiArray 생성 오류: \(error)")
+        else {
             return nil
         }
+
+        inputArray[0] = NSNumber(
+            value: MinMaxScaler.scaleBlink(data.blinkCountPerMin)
+        )
+        inputArray[1] = NSNumber(
+            value: MinMaxScaler.scaleFace(data.faceBodyPresent)
+        )
+        inputArray[2] = NSNumber(
+            value: MinMaxScaler.scalePhone(data.phonePresent)
+        )
+        inputArray[3] = NSNumber(
+            value: MinMaxScaler.scaleTime(data.elapsedTime)
+        )
+        return inputArray
     }
 
     func makeLabelMultiArray(data: Double) -> MLMultiArray? {
         do {
             let labelArray = try MLMultiArray(shape: [1], dataType: .float32)
-            labelArray[0] = NSNumber(value: Float(data))
+            labelArray[0] = NSNumber(
+                value: MinMaxScaler.scaleLabel(data)
+            )
             return labelArray
         } catch {
             print("❌ MLMultiArray 생성 오류: \(error)")

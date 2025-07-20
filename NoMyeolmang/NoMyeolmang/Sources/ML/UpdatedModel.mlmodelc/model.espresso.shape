@@ -1,0 +1,32 @@
+{
+  "layer_shapes" : {
+    "sequential\/dense_1_2\/Relu" : {
+      "k" : 1,
+      "w" : 32,
+      "n" : 1,
+      "_rank" : 2,
+      "h" : 1
+    },
+    "dense_1_input" : {
+      "k" : 1,
+      "w" : 4,
+      "n" : 1,
+      "_rank" : 2,
+      "h" : 1
+    },
+    "sequential\/dense_1\/Relu" : {
+      "k" : 1,
+      "w" : 64,
+      "n" : 1,
+      "_rank" : 2,
+      "h" : 1
+    },
+    "Identity" : {
+      "k" : 1,
+      "w" : 1,
+      "n" : 1,
+      "_rank" : 2,
+      "h" : 1
+    }
+  }
+}

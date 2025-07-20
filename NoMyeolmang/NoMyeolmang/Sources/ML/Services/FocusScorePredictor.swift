@@ -19,7 +19,6 @@ final class FocusScorePredictor {
         } else {
             return nil
         }
-
         print(model.model.modelDescription.isUpdatable)
     }
 
@@ -59,6 +58,8 @@ final class FocusScorePredictor {
     private func predict(inputArray: MLMultiArray) -> Double? {
         guard let result = try? model.prediction(dense_1_input: inputArray)
         else { return nil }
+        print("예측값: \(result.Identity[0])")
+        print(self.model.model.modelDescription)
         return result.Identity[0].doubleValue
     }
 }
