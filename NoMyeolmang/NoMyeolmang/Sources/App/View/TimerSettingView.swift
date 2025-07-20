@@ -12,7 +12,7 @@ struct TimerSettingView: View {
 
     var body: some View {
         VStack {
-            Text("⏱ Timer Setting")
+            Text("Timer Setting")
                 .font(.largeTitle)
 
             Button("Start Timer") {

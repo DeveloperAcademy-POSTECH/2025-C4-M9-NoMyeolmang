@@ -12,7 +12,7 @@ struct TimerView: View {
 
     var body: some View {
         VStack {
-            Text("⏰ Timer")
+            Text("Timer")
                 .font(.largeTitle)
 
             Button("Next: Feedback") {

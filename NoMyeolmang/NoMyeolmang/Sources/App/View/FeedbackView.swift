@@ -12,7 +12,7 @@ struct FeedbackView: View {
 
     var body: some View {
         VStack {
-            Text("📝 Feedback")
+            Text("Feedback")
                 .font(.largeTitle)
 
             Button("Next: Report") {

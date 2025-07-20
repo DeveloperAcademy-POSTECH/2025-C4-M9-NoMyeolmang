@@ -12,14 +12,14 @@ struct ReportView: View {
 
     var body: some View {
         VStack(spacing: 20) {
-            Text("📊 Report")
+            Text("Report")
                 .font(.largeTitle)
 
-            Button("🔁 다시 시작") {
+            Button("다시 시작") {
                 coordinator.push(.timer)
             }
 
-            Button("🏁 탐사 종료") {
+            Button("탐사 종료") {
                 coordinator.popToRoot() // TimerSettingView로
             }
         }

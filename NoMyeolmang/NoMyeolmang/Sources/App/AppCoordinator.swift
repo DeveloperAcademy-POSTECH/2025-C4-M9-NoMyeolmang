@@ -19,7 +19,9 @@ final class AppCoordinator: ObservableObject {
     }
 
     func replaceLast(with route: AppRoute) {
-        _ = path.popLast()
-        path.append(route)
-    }
+            if !path.isEmpty {
+                path.removeLast()
+            }
+            path.append(route)
+        }
 }
