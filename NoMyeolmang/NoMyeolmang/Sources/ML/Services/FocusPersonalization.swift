@@ -4,6 +4,9 @@ class FocusPersonalizator {
     private var documentsDirectory: URL
     private let tempUpdatedModelURL: URL
     private let updatedModelURL: URL
+    private var lastContext: MLUpdateContext
+
+    private var dataList: [UserData] = []
 
     init() {
         self.documentsDirectory = FileManager.default.urls(
@@ -11,48 +14,124 @@ class FocusPersonalizator {
             in: .userDomainMask
         ).first!
         self.tempUpdatedModelURL = documentsDirectory.appendingPathComponent(
-            "TempUpdatedModel"
+            "TempUpdatedModel".appending(".mlmodelc")
         )
         self.updatedModelURL = documentsDirectory.appendingPathComponent(
-            "UpdatedModel"
+            "UpdatedModel".appending(".mlmodelc")
         )
+        self.lastContext = MLUpdateContext()
     }
 
-    func makeBatchProvider(
-        inputArray: [MLMultiArray],
-        outputArray: [MLMultiArray]
-    )
-        -> MLArrayBatchProvider
-    {
+    func run(predictor: FocusScorePredictor) {
+
+        // 0. 모델 레이어 확인하기
+        //        checkModelLayer()
+
+        // 1. 최근 저장된 사용자 데이터 불러오기
+        print("(2) 사용자 최근 10개 데이터 불러오기")
+        self.dataList = loadUserData()
+        print("(2)-2 ✅ count:", dataList.count)
+
+        // 2. 사용자 데이터 -> MLBatchProvider로 만들기 (모델의 입력 형식)
+        let batchProvider = makeBatchProvider()
+        //        checkBatchProvider(batchProvider: batchProvider)
+
+        // 3. updateTask resume
+        if let updateTask = makeUpdateTask(
+            batchProvider: batchProvider,
+            predictor: predictor
+        ) {
+            updateTask.resume()
+        } else {
+            print("⛔️ 모델 업데이트 실패")
+        }
+
+    }
+
+    func checkModelLayer() {
+        do {
+            let config = MLModelConfiguration()
+            guard
+                let modelURL = Bundle.main.url(
+                    forResource: Constants.modelName,
+                    withExtension: Constants.modelCompiledType
+                )
+            else {
+                print(
+                    "⛔️ 모델 URL을 찾을 수 없습니다. 이름: \(Constants.modelName).\(Constants.modelCompiledType)"
+                )
+                return
+            }
+            let model = try MLModel(contentsOf: modelURL, configuration: config)
+
+            print("📥 [입력 키 목록]")
+            for input in model.modelDescription.inputDescriptionsByName {
+                print("  • \(input.key): \(input.value)")
+            }
+
+            print("📤 [출력 키 목록]")
+            for output in model.modelDescription.outputDescriptionsByName {
+                print("  • \(output.key): \(output.value)")
+            }
+        } catch {
+            print("⛔️ 모델 로드 또는 설명 조회 실패: \(error)")
+        }
+    }
+
+    func makeBatchProvider() -> MLArrayBatchProvider {
         var featureProviders: [MLFeatureProvider] = []
 
-        // MLFeatureProvier로 만들기
-        for (index, inputValue) in inputArray.enumerated() {
-            let outputValue = outputArray[index]
-            if let provider = makeProvider(
-                inputArray: inputValue,
-                label: outputValue
+        for data in dataList {
+            // 1. 사용자 데이터 -> MultiArray로 만들기 (모델의 입력 형식)
+            let (inputMA, labelMA) = self.makeMultiArray(data: data)
+
+            // 2. MultiArray -> MLFeatureValue로 만들기
+            let (inputFV, labelFV) = self.makeFeatureValue(
+                input: inputMA,
+                label: labelMA
+            )
+
+            // 3. MLFeatureValue -> MLFeatureProvider로 만들기
+            if let featureProvider = self.makeFeatureProvider(
+                input: inputFV,
+                label: labelFV
             ) {
-                // featureProviders 배열에 추가하기
-                featureProviders.append(provider)
+                featureProviders.append(featureProvider)
+            } else {
+                print("❌ MLFeatureProvider 생성 오류")
             }
         }
 
+        // 4. MLFeatureProvider -> MLBatchProvider로 만들기
         return MLArrayBatchProvider(array: featureProviders)
     }
 
-    func makeProvider(inputArray: MLMultiArray, label: MLMultiArray)
-        -> MLFeatureProvider?
-    {
-        let inputValue = MLFeatureValue(multiArray: inputArray)
-        let labelValue = MLFeatureValue(multiArray: label)
-        //        print("personalize>> input:", inputValue, ", label:", labelValue)
+    func checkBatchProvider(batchProvider: MLArrayBatchProvider) {
+        print("📦 batchProvider 전체 샘플 수: \(batchProvider.count)")
 
-        let dict: [String: MLFeatureValue] = [
-            Constants.inputName: inputValue, Constants.outputName: labelValue,
-        ]
-        let featureProvider = try? MLDictionaryFeatureProvider(dictionary: dict)
-        return featureProvider
+        for i in 0..<batchProvider.count {
+            let sample = batchProvider.features(at: i)
+            print("🔹 [샘플 \(i)]")
+
+            for feature in sample.featureNames {
+                if let value = sample.featureValue(for: feature) {
+                    print("    \(feature): \(value)")
+                } else {
+                    print("    \(feature): nil")
+                }
+            }
+        }
+    }
+
+    func makeMultiArray(data: UserData) -> (
+        input: MLMultiArray, label: MLMultiArray
+    ) {
+        guard let inputArray = self.makeInputMultiArray(data: data.input),
+            let labelArray = self.makeLabelMultiArray(data: data.label)
+        else {
+            fatalError("⛔️ MultiArray 생성 실패: 입력 또는 라벨 배열 생성에 실패했습니다.")
+        }
+        return (input: inputArray, label: labelArray)
     }
 
     func makeInputMultiArray(data: MLModelInput) -> MLMultiArray? {
@@ -83,67 +162,92 @@ class FocusPersonalizator {
         }
     }
 
+    func makeFeatureValue(input: MLMultiArray, label: MLMultiArray) -> (
+        input: MLFeatureValue, label: MLFeatureValue
+    ) {
+        let inputValue = MLFeatureValue(multiArray: input)
+        let labelValue = MLFeatureValue(multiArray: label)
+        return (input: inputValue, label: labelValue)
+    }
+
+    func makeFeatureProvider(input: MLFeatureValue, label: MLFeatureValue)
+        -> MLFeatureProvider?
+    {
+        let dict: [String: MLFeatureValue] = [
+            Constants.inputName: input, Constants.outputName: label,
+        ]
+        let featureProvider = try? MLDictionaryFeatureProvider(dictionary: dict)
+        return featureProvider
+    }
+
     func makeUpdateTask(
         batchProvider: MLArrayBatchProvider,
         predictor: FocusScorePredictor
-    ) {
-        do {
+    ) -> MLUpdateTask? {
+
+        let fileManager = FileManager.default
+        let modelURL: URL
+
+        if fileManager.fileExists(atPath: self.updatedModelURL.path) {
+            print("📦 업데이트된 모델 사용: \(self.updatedModelURL.path)")
+            modelURL = self.updatedModelURL
+        } else {
             guard
-                let modelURL = Bundle.main.url(
-                    forResource: "FocusScore_Updatable",
-                    withExtension: "mlmodelc"
+                let bundledURL = Bundle.main.url(
+                    forResource: Constants.modelName,
+                    withExtension: Constants.modelCompiledType
                 )
             else {
                 fatalError("⛔️ 모델 파일을 찾을 수 없습니다.")
             }
+            print("📦 번들 모델 사용: \(bundledURL.path)")
+            modelURL = bundledURL
+        }
 
-            let configutaion = MLModelConfiguration()
-            configutaion.computeUnits = .all
+        let configutaion = MLModelConfiguration()
+        configutaion.computeUnits = .all
 
-            let handlers = MLUpdateProgressHandlers(
-                forEvents: [.trainingBegin, .miniBatchEnd, .epochEnd],
-                progressHandler: { context in
-                    let event = context.event
-                    print("🔹 \(event)")
+        let handlers = MLUpdateProgressHandlers(
+            forEvents: [.trainingBegin, .miniBatchEnd, .epochEnd],
+            progressHandler: { context in
+                let event = context.event
+                print("🔹 \(event)")
 
-                    if event == .miniBatchEnd {
-                        if let loss = context.metrics[.lossValue] {
-                            print("미니배치 손실값: \(loss)")
-                        }
+                if event == .miniBatchEnd {
+                    if let loss = context.metrics[.lossValue] {
+                        print("미니배치 손실값: \(loss)")
                     }
-                },
-                completionHandler: { context in
-                    print(
-                        "✅ 업데이트Task 끝: \(context.event) \(context.parameters)"
-                    )
-
-                    self.saveUpdatedModel(
-                        context: context,
-                        predictor: predictor
-                    )
                 }
-            )
+            },
+            completionHandler: { context in
+                self.lastContext = context
+                print(
+                    "✅ 업데이트Task 끝: \(context.event) \(context.parameters)"
+                )
+                // 4. save model
+                self.saveUpdatedModel()
 
+                // 5. resave model
+                self.resave(predictor: predictor)
+            }
+        )
+
+        do {
             let updateTask = try MLUpdateTask(
                 forModelAt: modelURL,
                 trainingData: batchProvider,
                 configuration: configutaion,
                 progressHandlers: handlers,
             )
-            print("✅ 업데이트Task 시작")
-            updateTask.resume()
+            return updateTask
         } catch {
-            print("⛔️ 업데이트 실패:", error)
-            return
+            print("❌ UpdateTask 생성 오류: \(error)")
+            return nil
         }
-
     }
 
-    func saveUpdatedModel(
-        context: MLUpdateContext,
-        predictor: FocusScorePredictor
-    ) {
-        let updatedModel = context.model
+    func saveUpdatedModel() {
+        let updatedModel = self.lastContext.model
 
         do {
             print("🔹 모델 저장 로직 진입")
@@ -153,59 +257,41 @@ class FocusPersonalizator {
                 atPath: self.tempUpdatedModelURL.deletingLastPathComponent()
                     .path
             ) {
-                do {
-                    try FileManager.default.createDirectory(
-                        at: self.tempUpdatedModelURL
-                            .deletingLastPathComponent(),
-                        withIntermediateDirectories: true,
-                        attributes: nil
-                    )
-                    print(
-                        "📁 Temp directory created at: \(self.tempUpdatedModelURL.deletingLastPathComponent())"
-                    )
-                } catch {
-                    print("⛔️ 디렉토리 생성 실패: \(error)")
-                    return
-                }
+                try FileManager.default.createDirectory(
+                    at: self.tempUpdatedModelURL
+                        .deletingLastPathComponent(),
+                    withIntermediateDirectories: true,
+                    attributes: nil
+                )
             }
 
             // Save the updated model to temporary filename.
-            print("updatedModel 건들기 시작... 오류의 서막...")
-            print(updatedModel.modelDescription)
-            if let writableModel = updatedModel as? MLWritable {
-                try writableModel.write(to: self.tempUpdatedModelURL)
-                print("✅ 모델 저장 완료")
+            try updatedModel.write(to: self.tempUpdatedModelURL)
+            print("✅ 모델 저장 완료")
 
-                do {
-                    _ = try FileManager.default.replaceItemAt(
-                        self.updatedModelURL,
-                        withItemAt: self.tempUpdatedModelURL
-                    )
-                    print("✅ 모델 교체용 파일 교체 성공")
-                    print(
-                        "✅ Updated model saved to:\n\t\(self.updatedModelURL)"
-                    )
-                } catch {
-                    print("❌ 파일 교체 실패: \(error)")
-                    return
-                }
+            _ = try FileManager.default.replaceItemAt(
+                self.updatedModelURL,
+                withItemAt: self.tempUpdatedModelURL
+            )
+            print(
+                "✅ Updated model saved to:\n\t\(self.updatedModelURL)"
+            )
 
-                // 6. 업데이트된 모델 덮어쓰기
-                DispatchQueue.main.async {
-                    print("모델 교체 진입")
-                    if let updatedModel = self.loadUpdatedModel() {
-                        predictor.model = updatedModel
-                        print("✅ 모델 교체 성공!")
-                    } else {
-                        print("⛔️ 모델 교체 실패!")
-                    }
-                }
-            }
         } catch {
             print("⛔️ 모델 저장 실패: \(error)")
             return
         }
         print("모델 저장 완료")
+    }
+
+    func resave(predictor: FocusScorePredictor) {
+        print("모델 교체 진입")
+        if let updatedModel = self.loadUpdatedModel() {
+            predictor.model = updatedModel
+            print("✅ 모델 교체 성공!")
+        } else {
+            print("⛔️ 모델 교체 실패!")
+        }
     }
 
     func loadUpdatedModel() -> FocusScore_Updatable? {
@@ -218,14 +304,10 @@ class FocusPersonalizator {
         }
 
         // Create an instance of the updated model.
-        do {
-            let model = try? FocusScore_Updatable(
-                contentsOf: self.updatedModelURL
-            )
-            return model
-        } catch {
-            print("⛔️ 모델 불러오기 실패: \(error)")
-            return nil
-        }
+        let model = try? FocusScore_Updatable(
+            contentsOf: self.updatedModelURL
+        )
+
+        return model
     }
 }

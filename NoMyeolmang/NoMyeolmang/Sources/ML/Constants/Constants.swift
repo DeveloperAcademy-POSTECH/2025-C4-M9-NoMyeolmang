@@ -8,6 +8,9 @@
 import Foundation
 
 enum Constants {
+    // 최근 몇개의 데이터를 개인화에 사용할지
+    static let recordCount: Int = 10
+    
     // 눈 깜빡임 빈도(분)
     static let blinkCountPerMinValue: Double = 5.0
     static let blinkCounterPerMaxValue: Double = 20.0
@@ -24,7 +27,10 @@ enum Constants {
     static let elapsedTimeMinValue: Double = 1.0
     static let elapsedTimeMaxValue: Double = 30.0
 
-    // 모델 입력,출력층 이름
+    // 모델 관련 이름
+    static let modelName = "FocusScore_Updatable"
+    static let updatedModelName = "UpdatedModel"
+    static let modelCompiledType = "mlmodelc"
     static let inputName = "dense_1_input"
-    static let outputName = "Identity"
+    static let outputName = "Identity_true"
 }

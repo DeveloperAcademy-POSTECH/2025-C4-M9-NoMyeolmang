@@ -79,68 +79,9 @@ final class MainViewModel: ObservableObject {
             "입력값을 확인하세요.\n(눈 깜빡임: 3~20, 얼굴/신체: 0.0~1.0, 핸드폰: 0.0~1.0, 경과 시간: 1~30)"
         showAlert = true
     }
-
-    func checkModelLayer() {
-        do {
-            let config = MLModelConfiguration()
-            let modelURL = Bundle.main.url(forResource: "FocusScore_Updatable", withExtension: "mlmodelc")!
-            let model = try MLModel(contentsOf: modelURL, configuration: config)
-
-            print("📥 [입력 키 목록]")
-            for input in model.modelDescription.inputDescriptionsByName {
-                print("  • \(input.key): \(input.value)")
-            }
-
-            print("📤 [출력 키 목록]")
-            for output in model.modelDescription.outputDescriptionsByName {
-                print("  • \(output.key): \(output.value)")
-            }
-        } catch {
-            print("⛔️ 모델 로드 또는 설명 조회 실패: \(error)")
-        }
-    }
     
     func personalize() {
-        print("start personalization")
-
-        // 1. 사용자 입력 리스트 불러오기
-        let dataList = loadUserData()
-        print("count:", dataList.count)
-
-        // 2. input MLMultiArray, outputArray 만들기
-        var inputArray: [MLMultiArray] = []
-        var outputArray: [MLMultiArray] = []
-        for data in dataList {
-            if let result = personalizator.makeInputMultiArray(data: data.input) {
-                inputArray.append(result)
-            }
-            if let result = personalizator.makeLabelMultiArray(data: data.label) {
-                outputArray.append(result)
-            }        }
-
-        // 4. MLBatchProvider 만들기
-        let batchProvider = personalizator.makeBatchProvider(
-            inputArray: inputArray,
-            outputArray: outputArray
-        )
-        print("📦 batchProvider 전체 샘플 수: \(batchProvider.count)")
-
-        for i in 0..<batchProvider.count {
-            let sample = batchProvider.features(at: i)
-            print("🔹 [샘플 \(i)]")
-
-            for feature in sample.featureNames {
-                if let value = sample.featureValue(for: feature) {
-                    print("    \(feature): \(value)")
-                } else {
-                    print("    \(feature): nil")
-                }
-            }
-        }
-
-        // 5. MLUpdateTask로 모델 업데이트
-        personalizator.makeUpdateTask(batchProvider: batchProvider, predictor: predictor)
-        print("update predictor.model")
-
+        print("(1) 개인화 함수진입")
+        personalizator.run(predictor: predictor)
     }
 }

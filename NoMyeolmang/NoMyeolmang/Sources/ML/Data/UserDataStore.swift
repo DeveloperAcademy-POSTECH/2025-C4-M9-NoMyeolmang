@@ -25,12 +25,12 @@ func saveUserData(input: MLModelInput, label: Double) {
 }
 
 func loadUserData() -> [UserData] {
-    print("start loadUserData")
+    print("(2)-1 loadUserData")
     let defaults = UserDefaults.standard
     if let dataArray = defaults.array(forKey: "userDataList") as? [Data] {
         let decoder = JSONDecoder()
         var inputs = [UserData]()
-        for data in dataArray.suffix(10) {
+        for data in dataArray.suffix(Constants.recordCount) {
             if let userData = try? decoder.decode(UserData.self, from: data) {
                 inputs.append(userData)
             }
