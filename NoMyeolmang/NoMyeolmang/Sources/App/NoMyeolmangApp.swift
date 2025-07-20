@@ -11,8 +11,7 @@ import SwiftUI
 struct NoMyeolmangApp: App {
     var body: some Scene {
         WindowGroup {
-            RootView()
-                .environmentObject(AppCoordinator())
+            MainView()
         }
     }
 }
