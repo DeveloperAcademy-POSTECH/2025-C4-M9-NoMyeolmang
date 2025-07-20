@@ -15,7 +15,3 @@ struct NoMyeolmangApp: App {
         }
     }
 }
-  
-
-
-
