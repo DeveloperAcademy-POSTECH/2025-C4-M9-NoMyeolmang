@@ -21,12 +21,12 @@ struct RootView: View {
                         StartView()
                     // case .timerSetting:
                        // TimerSettingView() // 뷰 만들고 나서 주석 제거해주세요
-                    // case .timer:
-                       // TimerView()
+                    case .timer:
+                        TimerView()
                     // case .feedback:
                        // FeedbackView()
-                    // case .report:
-                       // ReportView()
+                    case .report:
+                       ReportView()
                     }
                 }
         }

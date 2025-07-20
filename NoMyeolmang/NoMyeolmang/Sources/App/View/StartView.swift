@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct StartView: View {
+    @EnvironmentObject var coordinator: NavigationCoordinator
     var body: some View {
-        Text("🚀 Start View")
+        Text("Start View")
     }
 }

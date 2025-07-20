@@ -12,16 +12,12 @@ struct NoticeView: View {
 
     var body: some View {
         VStack(spacing: 20) {
-            Text("📢 Notice View")
+            Text("Notice View")
                 .font(.largeTitle)
 
-            Button("👉 시작하기") {
+            Button("시작하기") {
                 coordinator.push(.start)
             }
-            .padding()
-            .background(Color.blue)
-            .foregroundColor(.white)
-            .cornerRadius(10)
         }
     }
 }

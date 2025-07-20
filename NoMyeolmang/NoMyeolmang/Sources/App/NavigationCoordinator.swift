@@ -11,9 +11,9 @@ enum AppRoute: Hashable {
     case notice
     case start
     // case timerSetting // 뷰 생성 후 주석 해제
-    // case timer
+    case timer
     // case feedback
-    // case report
+    case report
 }
 
 class NavigationCoordinator: ObservableObject {
@@ -31,11 +31,11 @@ class NavigationCoordinator: ObservableObject {
         path = [.start]
     }
 
-//    func jumpToTimer() {
-//        path = [.timer]
-//    }
+    func jumpToTimer() {
+        path = [.timer]
+    }
 
-//    func resetToNotice() {
-//        path = [.notice]
-//    }
+    func resetToNotice() {
+        path = [.notice]
+    }
 }
