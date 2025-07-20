@@ -5,8 +5,6 @@
 //  Created by 김소원 on 7/20/25.
 //
 
-// AppRoute.swift
-
 import Foundation
 
 enum AppRoute: Hashable {
