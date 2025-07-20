@@ -6,22 +6,25 @@
 //
 
 import CoreML
+import Foundation
 
 final class FocusScorePredictor {
     var model: FocusScore_Updatable
+    var modelURL: URL
 
     init?() {
-        guard
-            let model = try? FocusScore_Updatable(
-                configuration: MLModelConfiguration()
-            )
-        else { return nil }
-        self.model = model
+        self.modelURL = loadModelURL()
+        if let loadedModel = loadModel(url: self.modelURL){
+            self.model = loadedModel
+        } else {
+            return nil
+        }
 
         print(model.model.modelDescription.isUpdatable)
     }
 
     func run(input: MLModelInput) -> Double? {
+
         guard let inputArray = makeModelInputArray(input: input) else {
             return nil
         }

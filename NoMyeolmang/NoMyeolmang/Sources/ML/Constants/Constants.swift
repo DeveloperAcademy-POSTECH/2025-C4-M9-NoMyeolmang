@@ -33,4 +33,14 @@ enum Constants {
     static let modelCompiledType = "mlmodelc"
     static let inputName = "dense_1_input"
     static let outputName = "Identity_true"
+    static let documentsDirectory = FileManager.default.urls(
+        for: .documentDirectory,
+        in: .userDomainMask
+    ).first!
+    static let tempUpdatedModelURL = documentsDirectory.appendingPathComponent(
+        "TempUpdatedModel".appending(".mlmodelc")
+    )
+    static let updatedModelURL = documentsDirectory.appendingPathComponent(
+        "UpdatedModel".appending(".mlmodelc")
+    )
 }

@@ -30,6 +30,7 @@ final class MainViewModel: ObservableObject {
     }
 
     func predict() {
+        
         guard let input = makeModelInput() else {
             handlePredictionFailure()
             return

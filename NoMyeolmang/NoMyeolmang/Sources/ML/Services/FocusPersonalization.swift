@@ -1,24 +1,11 @@
 import CoreML
 
 class FocusPersonalizator {
-    private var documentsDirectory: URL
-    private let tempUpdatedModelURL: URL
-    private let updatedModelURL: URL
-    private var lastContext: MLUpdateContext
 
+    private var lastContext: MLUpdateContext
     private var dataList: [UserData] = []
 
     init() {
-        self.documentsDirectory = FileManager.default.urls(
-            for: .documentDirectory,
-            in: .userDomainMask
-        ).first!
-        self.tempUpdatedModelURL = documentsDirectory.appendingPathComponent(
-            "TempUpdatedModel".appending(".mlmodelc")
-        )
-        self.updatedModelURL = documentsDirectory.appendingPathComponent(
-            "UpdatedModel".appending(".mlmodelc")
-        )
         self.lastContext = MLUpdateContext()
     }
 
@@ -185,24 +172,7 @@ class FocusPersonalizator {
         predictor: FocusScorePredictor
     ) -> MLUpdateTask? {
 
-        let fileManager = FileManager.default
-        let modelURL: URL
-
-        if fileManager.fileExists(atPath: self.updatedModelURL.path) {
-            print("📦 업데이트된 모델 사용: \(self.updatedModelURL.path)")
-            modelURL = self.updatedModelURL
-        } else {
-            guard
-                let bundledURL = Bundle.main.url(
-                    forResource: Constants.modelName,
-                    withExtension: Constants.modelCompiledType
-                )
-            else {
-                fatalError("⛔️ 모델 파일을 찾을 수 없습니다.")
-            }
-            print("📦 번들 모델 사용: \(bundledURL.path)")
-            modelURL = bundledURL
-        }
+        let modelURL = loadModelURL()
 
         let configutaion = MLModelConfiguration()
         configutaion.computeUnits = .all
@@ -254,11 +224,11 @@ class FocusPersonalizator {
 
             // Ensure the directory exists
             if !FileManager.default.fileExists(
-                atPath: self.tempUpdatedModelURL.deletingLastPathComponent()
+                atPath: Constants.tempUpdatedModelURL.deletingLastPathComponent()
                     .path
             ) {
                 try FileManager.default.createDirectory(
-                    at: self.tempUpdatedModelURL
+                    at: Constants.tempUpdatedModelURL
                         .deletingLastPathComponent(),
                     withIntermediateDirectories: true,
                     attributes: nil
@@ -266,15 +236,15 @@ class FocusPersonalizator {
             }
 
             // Save the updated model to temporary filename.
-            try updatedModel.write(to: self.tempUpdatedModelURL)
+            try updatedModel.write(to: Constants.tempUpdatedModelURL)
             print("✅ 모델 저장 완료")
 
             _ = try FileManager.default.replaceItemAt(
-                self.updatedModelURL,
-                withItemAt: self.tempUpdatedModelURL
+                Constants.updatedModelURL,
+                withItemAt: Constants.tempUpdatedModelURL
             )
             print(
-                "✅ Updated model saved to:\n\t\(self.updatedModelURL)"
+                "✅ Updated model saved to:\n\t\(Constants.updatedModelURL)"
             )
 
         } catch {
@@ -286,28 +256,11 @@ class FocusPersonalizator {
 
     func resave(predictor: FocusScorePredictor) {
         print("모델 교체 진입")
-        if let updatedModel = self.loadUpdatedModel() {
+        if let updatedModel = loadModel(url: Constants.updatedModelURL) {
             predictor.model = updatedModel
             print("✅ 모델 교체 성공!")
         } else {
             print("⛔️ 모델 교체 실패!")
         }
-    }
-
-    func loadUpdatedModel() -> FocusScore_Updatable? {
-        let fileManager = FileManager.default
-
-        guard fileManager.fileExists(atPath: self.updatedModelURL.path)
-        else {
-            print("⛔️ 모델 파일이 존재하지 않음: \(self.updatedModelURL.path)")
-            return nil
-        }
-
-        // Create an instance of the updated model.
-        let model = try? FocusScore_Updatable(
-            contentsOf: self.updatedModelURL
-        )
-
-        return model
     }
 }
