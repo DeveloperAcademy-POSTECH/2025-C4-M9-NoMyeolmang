@@ -17,17 +17,25 @@ enum AppRoute: Hashable {
 }
 
 class NavigationCoordinator: ObservableObject {
-    @Published var path: [AppRoute] = [.start]
-    
+    @Published var path: [AppRoute] = [.notice]
+
     func push(_ route: AppRoute) {
         path.append(route)
     }
-    
+
     func pop() {
         _ = path.popLast()
     }
 
-    func reset() {
+    func resetToStart() {
         path = [.start]
+    }
+
+    func jumpToTimer() {
+        path = [.timer]
+    }
+
+    func resetToNotice() {
+        path = [.notice]
     }
 }
