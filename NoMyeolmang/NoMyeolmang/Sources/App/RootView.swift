@@ -8,28 +8,23 @@
 import SwiftUI
 
 struct RootView: View {
-    @StateObject var coordinator = NavigationCoordinator()
+    @EnvironmentObject var coordinator: AppCoordinator
 
     var body: some View {
         NavigationStack(path: $coordinator.path) {
-           NoticeView()
+            TimerSettingView()
                 .navigationDestination(for: AppRoute.self) { route in
                     switch route {
-                    case .notice:
-                        NoticeView()
-                    case .start:
-                        StartView()
-                    // case .timerSetting:
-                       // TimerSettingView() // 뷰 만들고 나서 주석 제거해주세요
+                    case .timerSetting:
+                        TimerSettingView()
                     case .timer:
                         TimerView()
-                    // case .feedback:
-                       // FeedbackView()
+                    case .feedback:
+                        FeedbackView()
                     case .report:
-                       ReportView()
+                        ReportView()
                     }
                 }
         }
-        .environmentObject(coordinator)
     }
 }

@@ -12,7 +12,7 @@ struct NoMyeolmangApp: App {
     var body: some Scene {
         WindowGroup {
             RootView()
-                .environmentObject(NavigationCoordinator())
+                .environmentObject(AppCoordinator())
         }
     }
 }
