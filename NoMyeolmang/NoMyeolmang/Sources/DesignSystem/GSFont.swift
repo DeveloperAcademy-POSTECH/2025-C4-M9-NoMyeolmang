@@ -10,7 +10,7 @@ import SwiftUI
 enum GSFont {
     
     // Pretendard-ExtraBold
-    static let ExtraBold36: Font = .custom("Pretendard-ExtraBold", size: 20)
+    static let ExtraBold20: Font = .custom("Pretendard-ExtraBold", size: 20)
     
     // Pretendard-SemiBold
     static let SemiBold28: Font = .custom("Pretendard-SemiBold", size: 28)
@@ -23,6 +23,7 @@ enum GSFont {
     // Pretendard Regular
     static let Regular16: Font = .custom("Pretendard-Regular", size: 16)
     static let Regular14: Font = .custom("Pretendard-Regular", size: 14)
+    static let Regular12: Font = .custom("Pretendard-Regular", size: 12)
 
     // Pretendard Light
     static let Light16: Font = .custom("Pretendard-Light", size: 16)
