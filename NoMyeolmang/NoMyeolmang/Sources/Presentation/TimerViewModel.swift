@@ -30,22 +30,22 @@ class TimerViewModel: ObservableObject {
             }
             print("tick")
         }
-        VertualTimerManager.shared.onTick = { [weak self] count in
+        VirtualTimerManager.shared.onTick = { [weak self] count in
             self?.focusCount = count
             print("tock")
         }
         ActualTimerManager.shared.start()
-        VertualTimerManager.shared.start()
+        VirtualTimerManager.shared.start()
     }
 
     func stop() {
         ActualTimerManager.shared.stop()
-        VertualTimerManager.shared.stop()
+        VirtualTimerManager.shared.stop()
     }
 
     func updateInterval() {
         let interval = focusLevel.tickSpeed()
-        VertualTimerManager.shared.updateInterval(to: interval)
+        VirtualTimerManager.shared.updateInterval(to: interval)
     }
 
     func predict() {

@@ -60,9 +60,9 @@ final class ActualTimerManager {
     }
 }
 
-final class VertualTimerManager {
+final class VirtualTimerManager {
     // MARK: Singleton
-    static let shared = VertualTimerManager()
+    static let shared = VirtualTimerManager()
     private init() {}
 
     // MARK: Properties
