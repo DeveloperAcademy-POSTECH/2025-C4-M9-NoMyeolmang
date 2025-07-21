@@ -20,5 +20,10 @@ struct FeedbackView: View {
             }
             .navigationBarBackButtonHidden(true)
         }
+        .padding()
     }
+}
+
+#Preview {
+    FeedbackView()
 }

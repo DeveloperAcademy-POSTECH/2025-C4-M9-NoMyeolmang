@@ -21,9 +21,15 @@ struct ReportView: View {
             .navigationBarBackButtonHidden(true)
 
             Button("탐사 종료") {
-                coordinator.popToRoot() // TimerSettingView로
+                coordinator.popToRoot()  // TimerSettingView로
             }
             .navigationBarBackButtonHidden(true)
         }
+        .padding()
+
     }
+}
+
+#Preview {
+    ReportView()
 }
