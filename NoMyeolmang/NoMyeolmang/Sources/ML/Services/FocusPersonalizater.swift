@@ -1,6 +1,6 @@
 import CoreML
 
-class FocusPersonalizator {
+class FocusPersonalizater {
 
     private var lastContext: MLUpdateContext
     private var dataList: [UserData] = []

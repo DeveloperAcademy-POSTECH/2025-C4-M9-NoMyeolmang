@@ -21,14 +21,14 @@ final class MainViewModel: ObservableObject {
     @Published var errorMessage: String?
 
     private let predictor: FocusScorePredictor
-    private let personalizator: FocusPersonalizator
+    private let personalizator: FocusPersonalizater
 
     init() {
         guard let predictor = FocusScorePredictor() else {
             fatalError("FocusScorePredictor 인스턴스 생성 실패")
         }
         self.predictor = predictor
-        self.personalizator = FocusPersonalizator()
+        self.personalizator = FocusPersonalizater()
     }
 
     func predict() {
