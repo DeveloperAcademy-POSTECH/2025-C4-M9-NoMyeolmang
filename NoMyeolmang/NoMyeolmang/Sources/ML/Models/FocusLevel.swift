@@ -16,11 +16,11 @@ enum FocusLevel: Int, CaseIterable, Identifiable {
 
     func convertedTime() -> Double {
         switch self {
-        case .lv1: return 0.5
-        case .lv2: return 0.7
-        case .lv3: return 0.85
-        case .lv4: return 1.0
-        case .lv5: return 2.0
+        case .lv1: return 0.5 / 2
+        case .lv2: return 0.7 / 2
+        case .lv3: return 0.85 / 2
+        case .lv4: return 1.0 / 2
+        case .lv5: return 2.0 / 2
         }
     }
     

@@ -16,7 +16,7 @@ struct ReportView: View {
                 .font(.largeTitle)
 
             Button("다시 시작") {
-                coordinator.push(.timer(goalTime: 300)) // ⚠️ 임시값: 이후 저장된 목표시간 값으로 수정 필요
+                coordinator.push(.timer) // ⚠️ 임시값: 이후 저장된 목표시간 값으로 수정 필요
             }
             .navigationBarBackButtonHidden(true)
 

@@ -9,13 +9,7 @@ import SwiftUI
 
 struct TimerView: View {
     @EnvironmentObject var coordinator: AppCoordinator
-    @StateObject private var viewModel: TimerViewModel
-
-    init(goalTime: TimeInterval) {
-        _viewModel = StateObject(
-            wrappedValue: TimerViewModel(goalTime: goalTime)
-        )
-    }
+    @StateObject private var viewModel = TimerViewModel()
 
     var body: some View {
         VStack {
@@ -25,13 +19,13 @@ struct TimerView: View {
                 Text("Focus Level 설정하기")
                     .font(.subheadline)
                     .foregroundColor(.secondary)
-                Picker("집중력 단계", selection: $viewModel.focusLevel) {
-                    ForEach(FocusLevel.allCases, id: \.self) { level in
-                        Text("\(level.rawValue)").tag(level)
-                    }
-                }
-                .pickerStyle(SegmentedPickerStyle())
-                .frame(width: 220)
+//                Picker("집중력 단계", selection: $viewModel.focusLevel) {
+//                    ForEach(FocusLevel.allCases, id: \.self) { level in
+//                        Text("\(level.rawValue)").tag(level)
+//                    }
+//                }
+//                .pickerStyle(SegmentedPickerStyle())
+//                .frame(width: 220)
 
                 VStack {
                     Text("실제 타이머")
@@ -71,5 +65,5 @@ struct TimerView: View {
 }
 
 #Preview {
-    TimerView(goalTime: 300)
+    TimerView()
 }

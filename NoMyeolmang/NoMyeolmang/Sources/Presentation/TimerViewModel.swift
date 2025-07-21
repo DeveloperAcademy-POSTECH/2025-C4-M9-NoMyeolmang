@@ -5,30 +5,32 @@
 //  Created by ohdodin on 7/20/25.
 //
 
+import Combine
 import Foundation
 import SwiftUI
 
 class TimerViewModel: ObservableObject {
-    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    @Published var goalTime: TimeInterval
-    @Published var actualElapsedTime: TimeInterval = 0
-    @Published var virtualFocusTime: TimeInterval = 0
-    @Published var focusLevel: FocusLevel = FocusLevel.lv4
+    @Published var timeElapsed: TimeInterval = 0
     
-    init(goalTime: TimeInterval){
-        self.goalTime = goalTime
-    }
-    
-    func addTime() {
-        actualElapsedTime += 1
-        virtualFocusTime += focusLevel.convertedTime()
-    }
-    
-    func calcActualTime() -> Int {
-        return Int(goalTime - actualElapsedTime)
-    }
-    
-    func calcVirtualTime() -> Int {
-        return Int(goalTime - virtualFocusTime)
-    }
+    private let manager: TimerManager
+        private var cancellables = Set<AnyCancellable>()
+
+        init(manager: TimerManager = TimerManager()) {
+            self.manager = manager
+            bind()
+        }
+
+        private func bind() {
+            manager.timePublisher
+                .receive(on: RunLoop.main)
+                .assign(to: &$timeElapsed)
+        }
+
+        func startTimer() {
+            manager.start()
+        }
+
+        func stopTimer() {
+            manager.clear()
+        }
 }

@@ -17,8 +17,8 @@ struct RootView: View {
                     switch route {
                     case .timerSetting:
                         TimerSettingView()
-                    case .timer(let goalTime):
-                        TimerView(goalTime: goalTime)
+                    case .timer:
+                        TimerView()
                     case .feedback:
                         FeedbackView()
                     case .report:
