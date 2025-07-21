@@ -55,6 +55,10 @@ struct TimerView: View {
             }
             .padding(.top, 4)
 
+            Button("예측하기") {
+                viewModel.predict()
+            }
+            
             Button("Next: Feedback") {
                 coordinator.push(.feedback)
             }
