@@ -11,16 +11,44 @@ struct FeedbackView: View {
     @EnvironmentObject var coordinator: AppCoordinator
 
     var body: some View {
-        VStack {
-            Text("Feedback")
-                .font(.largeTitle)
+        ZStack {
+            Image("backgroundSpace")
+                .resizable()
+                .scaledToFill()
+                .ignoresSafeArea()
+            
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
+                    
+                    ZStack {
+                        BlurView(material: .hudWindow)
+                            .frame(width: 600, height: 400)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
 
-            Button("Next: Report") {
-                coordinator.push(.report)
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(Color.white.opacity(0.1))
+                            .frame(width: 600, height: 400)
+                        
+                        VStack {
+                            Spacer()
+                            Button("탐사시간 확인하러 가기") {
+                                coordinator.push(.report)
+                            }
+                            .padding(.bottom, 24)
+                            .foregroundColor(.white)
+                        }
+                        .frame(width: 600, height: 400)
+                    }
+                    
+                    Spacer()
+                }
+                Spacer()
             }
-            .navigationBarBackButtonHidden(true)
+            .padding(100)
         }
-        .padding()
+        .navigationBarBackButtonHidden(true)
     }
 }
 

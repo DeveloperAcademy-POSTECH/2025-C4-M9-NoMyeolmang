@@ -9,13 +9,15 @@ import SwiftUI
 import AppKit
 
 struct BlurView: NSViewRepresentable {
+    var material: NSVisualEffectView.Material = .hudWindow
+    
     func makeNSView(context: Context) -> NSVisualEffectView {
         let view = NSVisualEffectView()
-        view.material = .hudWindow // .underWindowBackground, .sidebar 등으로 변경 가능하며 엔지와 조율 예정
-        view.blendingMode = .behindWindow
+        view.material = material
+        view.blendingMode = .withinWindow
         view.state = .active
         return view
     }
-    
+
     func updateNSView(_ nsView: NSVisualEffectView, context: Context) {}
 }
