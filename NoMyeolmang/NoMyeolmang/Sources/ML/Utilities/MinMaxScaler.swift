@@ -14,6 +14,22 @@ enum MinMaxScaler {
         )
     }
     
+    static func scaleYawn(_ value: Double) -> Double {
+        return safeScale(
+            value: value,
+            min: Constants.yawnCountPerMinValue,
+            max: Constants.yawnCounterPerMaxValue
+        )
+    }
+    
+    static func scaleLongBlink(_ value: Double) -> Double {
+        return safeScale(
+            value: value,
+            min: Constants.longBlinkCountPerMinValue,
+            max: Constants.longBlinkCounterPerMaxValue
+        )
+    }
+    
     static func scaleFace(_ value: Double) -> Double {
         return scale(value: value, min: Constants.faceBodyPresentMinValue, max: Constants.faceBodyPresentMaxValue)
     }
@@ -30,6 +46,7 @@ enum MinMaxScaler {
         guard max != min else { return 0.0 }
         return (value - min) / (max - min)
     }
+
     
     private static func softClip(value: Double, min: Double, max: Double) -> Double {
         return Swift.max(min, Swift.min(value, max))
@@ -38,5 +55,9 @@ enum MinMaxScaler {
     private static func safeScale(value: Double, min: Double, max: Double) -> Double {
         let clippedValue = softClip(value: value, min: min, max: max)
         return scale(value: clippedValue, min: min, max: max)
+    }
+    
+    static func inverseScale(_ value: Double) -> Double {
+        return value * (Constants.focusLevelMaxValue - Constants.focusLevelMinValue) + Constants.focusLevelMinValue
     }
 }

@@ -12,4 +12,6 @@ struct MLModelInput: Codable {
     let faceBodyPresent: Double
     let phonePresent: Double
     let elapsedTime: Double
+    let yawnCountPerMin: Double
+    let longBlinkCountPerMin: Double
 }

@@ -13,10 +13,12 @@ final class MainViewModel: ObservableObject {
     @Published var faceBodyPresent: String = "0.0"
     @Published var phonePresent: String = "0.0"
     @Published var elapsedTime: String = "0.0"
+    @Published var yawnCount: String = "0"
+    @Published var longBlinkCount: String = "0"
+    
     @Published var userScore: Int = 3
     @Published var predictionResult: Double?
     @Published var errorMessage: String?
-    @Published var showAlert: Bool = false
 
     private let predictor: FocusScorePredictor
     private let personalizator: FocusPersonalizator
@@ -32,7 +34,6 @@ final class MainViewModel: ObservableObject {
     func predict() {
         
         guard let input = makeModelInput() else {
-            handlePredictionFailure()
             return
         }
 
@@ -41,8 +42,6 @@ final class MainViewModel: ObservableObject {
 
         if let result = predictor.run(input: input) {
             handlePredictionSuccess(result: result)
-        } else {
-            handlePredictionFailure()
         }
     }
 
@@ -51,28 +50,23 @@ final class MainViewModel: ObservableObject {
         guard let blinkCount = Double(blinkCount),
               let faceBodyPresent = Double(faceBodyPresent),
               let phonePresent = Double(phonePresent),
-              let elapsedTime = Double(elapsedTime)
+              let elapsedTime = Double(elapsedTime),
+              let yawnCount = Double(yawnCount),
+              let longBlinkCount = Double(longBlinkCount)
         else { return nil }
         
         return MLModelInput(
             blinkCountPerMin: blinkCount,
             faceBodyPresent: faceBodyPresent,
             phonePresent: phonePresent,
-            elapsedTime: elapsedTime
+            elapsedTime: elapsedTime,
+            yawnCountPerMin: yawnCount,
+            longBlinkCountPerMin: longBlinkCount
         )
     }
 
     private func handlePredictionSuccess(result: Double) {
         predictionResult = result
-        errorMessage = nil
-        showAlert = false
-    }
-
-    private func handlePredictionFailure() {
-        predictionResult = nil
-        errorMessage =
-            "입력값을 확인하세요.\n(눈 깜빡임: 3~20, 얼굴/신체: 0.0~1.0, 핸드폰: 0.0~1.0, 경과 시간: 1~30)"
-        showAlert = true
     }
     
     func personalize() {

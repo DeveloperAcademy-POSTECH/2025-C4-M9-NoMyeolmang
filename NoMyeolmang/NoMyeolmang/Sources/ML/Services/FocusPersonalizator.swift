@@ -124,7 +124,7 @@ class FocusPersonalizator {
     private func makeInputMultiArray(data: MLModelInput) -> MLMultiArray? {
         guard
             let inputArray = try? MLMultiArray(
-                shape: [1, 4],
+                shape: [1, 6],
                 dataType: .float32
             )
         else {
@@ -142,6 +142,12 @@ class FocusPersonalizator {
         )
         inputArray[3] = NSNumber(
             value: MinMaxScaler.scaleTime(data.elapsedTime)
+        )
+        inputArray[4] = NSNumber(
+            value: MinMaxScaler.scaleYawn(data.yawnCountPerMin)
+        )
+        inputArray[5] = NSNumber(
+            value: MinMaxScaler.scaleLongBlink(data.longBlinkCountPerMin)
         )
         return inputArray
     }
@@ -171,7 +177,7 @@ class FocusPersonalizator {
         -> MLFeatureProvider?
     {
         let dict: [String: MLFeatureValue] = [
-            Constants.inputName: input, Constants.outputName: label,
+            Constants.inputName: input, Constants.updatableOutputName: label,
         ]
         let featureProvider = try? MLDictionaryFeatureProvider(dictionary: dict)
         return featureProvider

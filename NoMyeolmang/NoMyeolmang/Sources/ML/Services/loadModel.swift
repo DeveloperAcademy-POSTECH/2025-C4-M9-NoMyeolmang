@@ -8,7 +8,7 @@
 import CoreML
 import Foundation
 
-func loadModel(url: URL) -> FocusScore_Updatable? {
+func loadModel(url: URL) -> MLModel? {
     let fileManager = FileManager.default
 
     guard fileManager.fileExists(atPath: url.path)
@@ -18,7 +18,7 @@ func loadModel(url: URL) -> FocusScore_Updatable? {
     }
 
     // Create an instance of the updated model.
-    let model = try? FocusScore_Updatable(
+    let model = try? MLModel(
         contentsOf: url
     )
 

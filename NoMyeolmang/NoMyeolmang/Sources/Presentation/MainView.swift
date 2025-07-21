@@ -150,15 +150,6 @@ struct MainView: View {
                             .padding(.horizontal, 4)
                         }
                         .buttonStyle(PlainButtonStyle())
-                        .alert(isPresented: $viewModel.showAlert) {
-                            Alert(
-                                title: Text("입력 오류"),
-                                message: Text(
-                                    viewModel.errorMessage ?? "알 수 없는 오류"
-                                ),
-                                dismissButton: .default(Text("확인"))
-                            )
-                        }
 
                         Button(action: {
                             Task {
@@ -220,9 +211,9 @@ struct MainView: View {
                             .transition(.opacity)
                         }
                     }
-                    .padding(36)
+                    .padding(40)
                 }
-                .frame(maxWidth: 400)
+                .frame(maxWidth: 400, maxHeight: 600)
                 Spacer()
             }
         }
