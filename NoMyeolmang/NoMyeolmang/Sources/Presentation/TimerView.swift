@@ -32,23 +32,23 @@ struct TimerView: View {
                     Text(
                         String(
                             format: "%02d:%02d",
-                            viewModel.calcActualTime() / 60,
-                            viewModel.calcActualTime() % 60
+                            viewModel.tickCount / 60,
+                            viewModel.tickCount % 60
                         )
                     )
                     .font(.title)
                 }
-                VStack {
-                    Text("집중 타이머")
-                    Text(
-                        String(
-                            format: "%02d:%02d",
-                            viewModel.calcVirtualTime() / 60,
-                            viewModel.calcVirtualTime() % 60
-                        )
-                    )
-                    .font(.title)
-                }
+//                VStack {
+//                    Text("집중 타이머")
+//                    Text(
+//                        String(
+//                            format: "%02d:%02d",
+//                            viewModel.calcVirtualTime() / 60,
+//                            viewModel.calcVirtualTime() % 60
+//                        )
+//                    )
+//                    .font(.title)
+//                }
             }
             .padding(.top, 4)
 
@@ -58,9 +58,6 @@ struct TimerView: View {
             .navigationBarBackButtonHidden(true)
         }
         .padding()
-        .onReceive(viewModel.timer) { _ in
-            viewModel.addTime()
-        }
     }
 }
 

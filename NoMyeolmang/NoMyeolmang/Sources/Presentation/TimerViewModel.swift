@@ -10,27 +10,23 @@ import Foundation
 import SwiftUI
 
 class TimerViewModel: ObservableObject {
-    @Published var timeElapsed: TimeInterval = 0
+    @Published var tickCount: Int = 0
     
-    private let manager: TimerManager
-        private var cancellables = Set<AnyCancellable>()
-
-        init(manager: TimerManager = TimerManager()) {
-            self.manager = manager
-            bind()
+    init() {
+        ActualTimerManager.shared.onTick = { [weak self] count in
+            self?.tickCount = count
+            print("타이머 tick")
         }
-
-        private func bind() {
-            manager.timePublisher
-                .receive(on: RunLoop.main)
-                .assign(to: &$timeElapsed)
+        VertualTimerManager.shared.onTick = { [weak self] count in
+            self?.tickCount = count
+            print("타이머 tick")
         }
-
-        func startTimer() {
-            manager.start()
-        }
-
-        func stopTimer() {
-            manager.clear()
-        }
+        ActualTimerManager.shared.start()
+        VertualTimerManager.shared.start()
+    }
+    
+    func stop() {
+        ActualTimerManager.shared.stop()
+        VertualTimerManager.shared.stop()
+    }
 }

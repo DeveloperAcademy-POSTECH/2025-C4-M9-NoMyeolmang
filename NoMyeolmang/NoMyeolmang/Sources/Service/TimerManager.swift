@@ -5,40 +5,94 @@
 //  Created by ohdodin on 7/21/25.
 //
 
-import Combine
 import Foundation
 
-final class TimerManager {
-    private var timer: AnyCancellable?
-    private var interval: TimeInterval
-    var actualElapsedTime: TimeInterval = 0
-    var virtualFocusTime: TimeInterval = 0
-    var focusLevel: FocusLevel = FocusLevel.lv4
-    var isRunning: Bool = false
-    var goalTime: TimeInterval = 0
-
-    init(interval: TimeInterval = 0.5) {
+final class ActualTimerManager {
+    // MARK: Singleton
+    static let shared = ActualTimerManager()
+    private init() {}
+    
+    // MARK: Properties
+    private var timer: Timer?
+    private var interval: TimeInterval = 1.0
+    private var isRepeating: Bool = true
+    private var count: Int = 0
+    
+    // 타이머 이벤트 알림
+    var onTick: ((Int) -> Void)?
+    
+    // MARK: Public Methods
+    func start(interval: TimeInterval = 1.0, repeats: Bool = true) {
+        clear()
+        
         self.interval = interval
+        self.isRepeating = repeats
+        self.count = 0
+        
+        timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: repeats, block: { [weak self ] _ in
+            guard let self else {return}
+            self.count += 1
+            self.onTick?(self.count)
+        })
     }
-
-    func start() {
-        clear()  // 중복 방지
-        timer =
-            Timer
-            .publish(every: interval, on: .main, in: .common)
-            .autoconnect()
-            .sink { [weak self] _ in
-                guard let self = self else { return }
-                self.actualElapsedTime += self.interval
-                self.virtualFocusTime += self.focusLevel.convertedTime()
-            }
+    
+    func stop() {
+        clear()
     }
-
-    func clear() {
-        timer?.cancel()
+    
+    var isRunning: Bool {
+        return timer?.isValid ?? false
+    }
+    
+    //MARK: Private Methods
+    private func clear() {
+        timer?.invalidate()
         timer = nil
-        self.actualElapsedTime = 0
-        self.virtualFocusTime = 0
+    }
+
+}
+
+final class VertualTimerManager {
+    // MARK: Singleton
+    static let shared = VertualTimerManager()
+    private init() {}
+    
+    // MARK: Properties
+    private var timer: Timer?
+    private var interval: TimeInterval = 1.0
+    private var isRepeating: Bool = true
+    private var count: Int = 0
+    
+    // 타이머 이벤트 알림
+    var onTick: ((Int) -> Void)?
+    
+    // MARK: Public Methods
+    func start(interval: TimeInterval = 1.0, repeats: Bool = true) {
+        clear()
+        
+        self.interval = interval
+        self.isRepeating = repeats
+        self.count = 0
+        
+        timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: repeats, block: { [weak self ] _ in
+            guard let self else {return}
+            self.count += 1
+            self.onTick?(self.count)
+        })
+    }
+    
+    func stop() {
+        clear()
+    }
+    
+    var isRunning: Bool {
+        return timer?.isValid ?? false
+    }
+    
+    //MARK: Private Methods
+    private func clear() {
+        timer?.invalidate()
+        timer = nil
     }
 
 }
