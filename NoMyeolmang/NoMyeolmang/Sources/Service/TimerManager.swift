@@ -44,6 +44,11 @@ final class ActualTimerManager {
     func stop() {
         clear()
     }
+    
+    func setGoalTime(newGoalTime: Int) {
+        self.goalTime = newGoalTime
+        print(self.goalTime)
+    }
 
     var isRunning: Bool {
         return timer?.isValid ?? false
@@ -52,7 +57,7 @@ final class ActualTimerManager {
     var lastingTime: Int {
         return goalTime - count
     }
-
+    
     // MARK: Private Methods
     private func clear() {
         timer?.invalidate()
