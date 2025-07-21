@@ -53,12 +53,11 @@ final class ActualTimerManager {
         return goalTime - count
     }
 
-    //MARK: Private Methods
+    // MARK: Private Methods
     private func clear() {
         timer?.invalidate()
         timer = nil
     }
-
 }
 
 final class VertualTimerManager {
@@ -111,7 +110,7 @@ final class VertualTimerManager {
         return timer?.isValid ?? false
     }
 
-    //MARK: Private Methods
+    // MARK: Private Methods
     private func clear() {
         timer?.invalidate()
         timer = nil
@@ -128,5 +127,4 @@ final class VertualTimerManager {
             self.onTick?(self.count)
         }
     }
-
 }
