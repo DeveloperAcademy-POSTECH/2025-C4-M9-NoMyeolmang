@@ -19,36 +19,39 @@ struct TimerView: View {
                 Text("Focus Level 설정하기")
                     .font(.subheadline)
                     .foregroundColor(.secondary)
-//                Picker("집중력 단계", selection: $viewModel.focusLevel) {
-//                    ForEach(FocusLevel.allCases, id: \.self) { level in
-//                        Text("\(level.rawValue)").tag(level)
-//                    }
-//                }
-//                .pickerStyle(SegmentedPickerStyle())
-//                .frame(width: 220)
+                Picker("집중력 단계", selection: $viewModel.focusLevel) {
+                    ForEach(FocusLevel.allCases, id: \.self) { level in
+                        Text("\(level.rawValue)").tag(level)
+                    }
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                .frame(width: 220)
+                .onChange(of: viewModel.focusLevel) { newLevel in
+                    viewModel.updateInterval(for: newLevel)
+                }
 
                 VStack {
                     Text("실제 타이머")
                     Text(
                         String(
                             format: "%02d:%02d",
-                            viewModel.tickCount / 60,
-                            viewModel.tickCount % 60
+                            viewModel.remainingTime / 60,
+                            viewModel.remainingTime % 60
                         )
                     )
                     .font(.title)
                 }
-//                VStack {
-//                    Text("집중 타이머")
-//                    Text(
-//                        String(
-//                            format: "%02d:%02d",
-//                            viewModel.calcVirtualTime() / 60,
-//                            viewModel.calcVirtualTime() % 60
-//                        )
-//                    )
-//                    .font(.title)
-//                }
+                VStack {
+                    Text("집중 타이머")
+                    Text(
+                        String(
+                            format: "%02d:%02d",
+                            viewModel.focusCount / 60,
+                            viewModel.focusCount % 60
+                        )
+                    )
+                    .font(.title)
+                }
             }
             .padding(.top, 4)
 

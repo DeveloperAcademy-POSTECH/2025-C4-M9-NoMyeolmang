@@ -10,23 +10,30 @@ import Foundation
 import SwiftUI
 
 class TimerViewModel: ObservableObject {
-    @Published var tickCount: Int = 0
-    
+    @Published var remainingTime: Int = 0
+    @Published var focusCount: Int = 0
+    @Published var focusLevel = FocusLevel.lv4
+
     init() {
         ActualTimerManager.shared.onTick = { [weak self] count in
-            self?.tickCount = count
-            print("타이머 tick")
+            self?.remainingTime = ActualTimerManager.shared.lastingTime
+            print("tick")
         }
         VertualTimerManager.shared.onTick = { [weak self] count in
-            self?.tickCount = count
-            print("타이머 tick")
+            self?.focusCount = count
+            print("tock")
         }
         ActualTimerManager.shared.start()
         VertualTimerManager.shared.start()
     }
-    
+
     func stop() {
         ActualTimerManager.shared.stop()
         VertualTimerManager.shared.stop()
+    }
+
+    func updateInterval(for level: FocusLevel) {
+        let interval = level.tickSpeed()
+        VertualTimerManager.shared.updateInterval(to: interval)
     }
 }
