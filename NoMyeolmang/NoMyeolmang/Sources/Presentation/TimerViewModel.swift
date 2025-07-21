@@ -30,11 +30,9 @@ class TimerViewModel: ObservableObject {
                 // ⚠️ vision 데이터 저장하는 코드 필요
                 self?.predict() // 데이터로부터 예측하는 코드 (⚠️ 데이터 그냥 리터럴로 박아둔 상태)
             }
-            print("tick")
         }
         virtualTimer.onTick = { [weak self] count in
             self?.focusCount = count
-            print("tock")
         }
         actualTimer.start()
         virtualTimer.start()
