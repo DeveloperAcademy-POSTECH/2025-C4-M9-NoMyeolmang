@@ -150,7 +150,7 @@ class FocusPersonalizator {
         do {
             let labelArray = try MLMultiArray(shape: [1], dataType: .float32)
             labelArray[0] = NSNumber(
-                value: MinMaxScaler.scaleLabel(data)
+                value: data
             )
             return labelArray
         } catch {
