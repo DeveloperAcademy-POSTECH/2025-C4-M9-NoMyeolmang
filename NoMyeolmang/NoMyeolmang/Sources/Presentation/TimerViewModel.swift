@@ -15,32 +15,34 @@ class TimerViewModel: ObservableObject {
     @Published var focusLevel = FocusLevel.lv4
     private let predictor: FocusScorePredictor
     private var count: Int = 0
+    let actualTimer = ActualTimerManager.shared
+    let virtualTimer = VirtualTimerManager.shared
 
     init() {
         guard let predictor = FocusScorePredictor() else {
             fatalError("⛔️ FocusScorePredictor 인스턴스 생성 실패")
         }
         self.predictor = predictor
-        ActualTimerManager.shared.onTick = { [weak self] count in
+        actualTimer.onTick = { [weak self] count in
             self?.count = count
-            self?.remainingTime = ActualTimerManager.shared.lastingTime
+            self?.remainingTime = self?.actualTimer.lastingTime ?? 0
             if count % 60 == 0 {
                 // ⚠️ vision 데이터 저장하는 코드 필요
                 self?.predict() // 데이터로부터 예측하는 코드 (⚠️ 데이터 그냥 리터럴로 박아둔 상태)
             }
             print("tick")
         }
-        VirtualTimerManager.shared.onTick = { [weak self] count in
+        virtualTimer.onTick = { [weak self] count in
             self?.focusCount = count
             print("tock")
         }
-        ActualTimerManager.shared.start()
-        VirtualTimerManager.shared.start()
+        actualTimer.start()
+        virtualTimer.start()
     }
 
     func stop() {
-        ActualTimerManager.shared.stop()
-        VirtualTimerManager.shared.stop()
+        actualTimer.stop()
+        virtualTimer.stop()
     }
 
     func updateInterval() {
