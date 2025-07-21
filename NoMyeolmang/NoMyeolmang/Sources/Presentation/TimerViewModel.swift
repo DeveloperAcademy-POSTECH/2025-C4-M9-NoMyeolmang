@@ -14,6 +14,7 @@ class TimerViewModel: ObservableObject {
     @Published var focusCount: Int = 0
     @Published var focusLevel = FocusLevel.lv4
     private let predictor: FocusScorePredictor
+    private var count: Int = 0
 
     init() {
         guard let predictor = FocusScorePredictor() else {
@@ -21,7 +22,12 @@ class TimerViewModel: ObservableObject {
         }
         self.predictor = predictor
         ActualTimerManager.shared.onTick = { [weak self] count in
+            self?.count = count
             self?.remainingTime = ActualTimerManager.shared.lastingTime
+            if count % 60 == 0 {
+                // ⚠️ vision 데이터 저장하는 코드 필요
+                self?.predict() // 데이터로부터 예측하는 코드 (⚠️ 데이터 그냥 리터럴로 박아둔 상태)
+            }
             print("tick")
         }
         VertualTimerManager.shared.onTick = { [weak self] count in
@@ -37,8 +43,8 @@ class TimerViewModel: ObservableObject {
         VertualTimerManager.shared.stop()
     }
 
-    func updateInterval(for level: FocusLevel) {
-        let interval = level.tickSpeed()
+    func updateInterval() {
+        let interval = focusLevel.tickSpeed()
         VertualTimerManager.shared.updateInterval(to: interval)
     }
 
@@ -50,7 +56,8 @@ class TimerViewModel: ObservableObject {
 
         let focusRawvalue = Int(result.rounded())
         if let level = FocusLevel(rawValue: focusRawvalue) {
-            updateInterval(for: level)
+            focusLevel = level
+            updateInterval()
         }
     }
 }

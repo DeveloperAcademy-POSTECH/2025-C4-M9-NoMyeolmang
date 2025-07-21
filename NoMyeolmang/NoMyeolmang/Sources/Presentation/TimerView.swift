@@ -32,6 +32,10 @@ struct TimerView: View {
                 }
                 VStack {
                     Text("집중 타이머")
+                    // ✅ 집중력 단계 뷰에서 불러오는 코드
+                    Text("Lv.\(viewModel.focusLevel.rawValue)")
+                    Text("speed: \(viewModel.focusLevel.tickSpeed())")
+                    // ⚠️ 집중력 타이머는 확인용, 이후 삭제
                     Text(
                         String(
                             format: "%02d:%02d",
@@ -43,10 +47,6 @@ struct TimerView: View {
                 }
             }
             .padding(.top, 4)
-
-            Button("예측하기") {
-                viewModel.predict()
-            }
             
             Button("STOP") {
                 viewModel.stop()
