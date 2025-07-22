@@ -15,9 +15,7 @@ class FocusPersonalizater {
         //        checkModelLayer()
 
         // 1. 최근 저장된 사용자 데이터 불러오기
-        print("(2) 사용자 최근 10개 데이터 불러오기")
         self.dataList = loadUserData()
-        print("(2)-2 ✅ count:", dataList.count)
 
         // 2. 사용자 데이터 -> MLBatchProvider로 만들기 (모델의 입력 형식)
         let batchProvider = makeBatchProvider()

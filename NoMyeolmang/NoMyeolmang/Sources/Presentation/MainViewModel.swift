@@ -70,7 +70,6 @@ final class MainViewModel: ObservableObject {
     }
     
     func personalize() {
-        print("(1) 개인화 함수진입")
         personalizator.run(predictor: predictor)
     }
 }
