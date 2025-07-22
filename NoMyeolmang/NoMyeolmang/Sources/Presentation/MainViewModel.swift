@@ -20,7 +20,7 @@ final class MainViewModel: ObservableObject {
     @Published var predictionResult: Double?
     @Published var errorMessage: String?
 
-    private let predictor: FocusScorePredictor
+    private var predictor: FocusScorePredictor
     private let personalizater: FocusPersonalizater
 
     init() {
@@ -32,14 +32,11 @@ final class MainViewModel: ObservableObject {
     }
 
     func predict() {
-
         guard let input = makeModelInput() else {
             return
         }
-
         let userScore = Double(userScore)
         saveUserData(input: input, label: userScore)
-
         if let result = predictor.run(input: input) {
             handlePredictionSuccess(result: result)
         }
@@ -71,7 +68,11 @@ final class MainViewModel: ObservableObject {
 
     func personalize() {
         personalizater.run { updatedModel in
-            
+            if let updatedPredictor = FocusScorePredictor(
+                modelURL: Constants.updatedModelURL
+            ) {
+                self.predictor = updatedPredictor
+            }
         }
     }
 }
