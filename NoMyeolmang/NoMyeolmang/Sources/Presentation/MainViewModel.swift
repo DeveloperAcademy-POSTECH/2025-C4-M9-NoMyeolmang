@@ -15,24 +15,24 @@ final class MainViewModel: ObservableObject {
     @Published var elapsedTime: String = "0.0"
     @Published var yawnCount: String = "0"
     @Published var longBlinkCount: String = "0"
-    
+
     @Published var userScore: Int = 3
     @Published var predictionResult: Double?
     @Published var errorMessage: String?
 
     private let predictor: FocusScorePredictor
-    private let personalizator: FocusPersonalizater
+    private let personalizater: FocusPersonalizater
 
     init() {
         guard let predictor = FocusScorePredictor() else {
             fatalError("FocusScorePredictor 인스턴스 생성 실패")
         }
         self.predictor = predictor
-        self.personalizator = FocusPersonalizater()
+        self.personalizater = FocusPersonalizater()
     }
 
     func predict() {
-        
+
         guard let input = makeModelInput() else {
             return
         }
@@ -48,13 +48,13 @@ final class MainViewModel: ObservableObject {
     private func makeModelInput() -> MLModelInput? {
         // 각 값의 입력 범위(실제 서비스에서는 필요없음)
         guard let blinkCount = Double(blinkCount),
-              let faceBodyPresent = Double(faceBodyPresent),
-              let phonePresent = Double(phonePresent),
-              let elapsedTime = Double(elapsedTime),
-              let yawnCount = Double(yawnCount),
-              let longBlinkCount = Double(longBlinkCount)
+            let faceBodyPresent = Double(faceBodyPresent),
+            let phonePresent = Double(phonePresent),
+            let elapsedTime = Double(elapsedTime),
+            let yawnCount = Double(yawnCount),
+            let longBlinkCount = Double(longBlinkCount)
         else { return nil }
-        
+
         return MLModelInput(
             blinkCountPerMin: blinkCount,
             faceBodyPresent: faceBodyPresent,
@@ -68,8 +68,10 @@ final class MainViewModel: ObservableObject {
     private func handlePredictionSuccess(result: Double) {
         predictionResult = result
     }
-    
+
     func personalize() {
-        personalizator.run(predictor: predictor)
+        personalizater.run { updatedModel in
+            
+        }
     }
 }

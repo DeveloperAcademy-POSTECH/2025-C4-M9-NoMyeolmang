@@ -9,22 +9,22 @@ class FocusPersonalizater {
         self.lastContext = nil
     }
 
-    func run(predictor: FocusScorePredictor) {
+    func run(onModelUpdated: @escaping (MLModel) -> Void) {
 
         // 0. 모델 레이어 확인하기
-//         checkModelLayer()
+        //         checkModelLayer()
 
         // 1. 최근 저장된 사용자 데이터 불러오기
         self.dataList = loadUserData()
 
         // 2. 사용자 데이터 -> MLBatchProvider로 만들기 (모델의 입력 형식)
         let batchProvider = makeBatchProvider()
-                checkBatchProvider(batchProvider: batchProvider)
+        checkBatchProvider(batchProvider: batchProvider)
 
         // 3. updateTask resume
         if let updateTask = makeUpdateTask(
             batchProvider: batchProvider,
-            predictor: predictor
+            onModelUpdated: onModelUpdated
         ) {
             updateTask.resume()
         } else {
@@ -67,7 +67,8 @@ class FocusPersonalizater {
 
         for data in dataList {
             // 1. 사용자 데이터 -> MultiArray로 만들기 (모델의 입력 형식)
-            guard let (inputMA, labelMA) = self.makeMultiArray(data: data) else {
+            guard let (inputMA, labelMA) = self.makeMultiArray(data: data)
+            else {
                 print("⛔️ 샘플 스킵됨 (데이터 오류)")
                 continue
             }
@@ -121,7 +122,7 @@ class FocusPersonalizater {
         }
         return (input: inputArray, label: labelArray)
     }
-    
+
     private func makeInputMultiArray(data: MLModelInput) -> MLMultiArray? {
         guard
             let inputArray = try? MLMultiArray(
@@ -186,11 +187,10 @@ class FocusPersonalizater {
 
     func makeUpdateTask(
         batchProvider: MLArrayBatchProvider,
-        predictor: FocusScorePredictor
+        onModelUpdated: @escaping (MLModel) -> Void
     ) -> MLUpdateTask? {
 
         let modelURL = loadModelURL()
-
         let configutaion = MLModelConfiguration()
         configutaion.computeUnits = .all
 
@@ -199,7 +199,6 @@ class FocusPersonalizater {
             progressHandler: { context in
                 let event = context.event
                 print("🔹 \(event)")
-
                 if event == .miniBatchEnd {
                     if let loss = context.metrics[.lossValue] {
                         print("미니배치 손실값: \(loss)")
@@ -208,12 +207,12 @@ class FocusPersonalizater {
             },
             completionHandler: { context in
                 self.lastContext = context
-                
+
                 // 4. save model
                 self.saveUpdatedModel()
 
                 // 5. resave model
-                self.resave(predictor: predictor)
+                onModelUpdated(context.model)
             }
         )
 
@@ -240,7 +239,8 @@ class FocusPersonalizater {
         do {
             // Ensure the directory exists
             if !FileManager.default.fileExists(
-                atPath: Constants.tempUpdatedModelURL.deletingLastPathComponent()
+                atPath: Constants.tempUpdatedModelURL
+                    .deletingLastPathComponent()
                     .path
             ) {
                 try FileManager.default.createDirectory(
@@ -263,11 +263,11 @@ class FocusPersonalizater {
         }
     }
 
-    func resave(predictor: FocusScorePredictor) {
-        if let updatedModel = loadModel(url: Constants.updatedModelURL) {
-            predictor.model = updatedModel
-        } else {
-            print("⛔️ 모델 교체 실패!")
-        }
-    }
+    //    func resave(predictor: FocusScorePredictor) {
+    //        if let updatedModel = loadModel(url: Constants.updatedModelURL) {
+    //            predictor.model = updatedModel
+    //        } else {
+    //            print("⛔️ 모델 교체 실패!")
+    //        }
+    //    }
 }

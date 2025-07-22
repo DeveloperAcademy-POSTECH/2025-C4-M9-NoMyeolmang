@@ -9,21 +9,24 @@ import CoreML
 import Foundation
 
 final class FocusScorePredictor {
-    var model: MLModel
-    var modelURL: URL
+    private let model: MLModel
 
-    init?() {
-        self.modelURL = loadModelURL()
-        if let loadedModel = loadModel(url: self.modelURL) {
-            self.model = loadedModel
-        } else {
-            return nil
-        }
-        print(self.model.modelDescription.isUpdatable)
+    init?(modelURL: URL) {
+        guard let model = try? MLModel(contentsOf: modelURL) else { return nil }
+        self.model = model
+    }
+
+    convenience init?() {
+        guard
+            let bundleURL = Bundle.main.url(
+                forResource: "FocusScore_Updatable",
+                withExtension: "mlmodelc"
+            )
+        else { return nil }
+        self.init(modelURL: bundleURL)
     }
 
     func run(input: MLModelInput) -> Double? {
-
         guard let inputArray = makeModelInputArray(input: input) else {
             return nil
         }
@@ -71,7 +74,7 @@ final class FocusScorePredictor {
             print("⛔️ inputFeatures 생성 실패")
             return nil
         }
-                
+
         guard let result = try? model.prediction(from: inputFeatures)
         else {
             print("⛔️ prediction 실패")
