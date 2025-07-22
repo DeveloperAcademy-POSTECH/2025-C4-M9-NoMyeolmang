@@ -9,7 +9,7 @@ import SwiftUI
 import AppKit
 
 struct BlurView: NSViewRepresentable {
-    var material: NSVisualEffectView.Material = .hudWindow
+    var material: NSVisualEffectView.Material = .hudWindow // .popover, .menu
     
     func makeNSView(context: Context) -> NSVisualEffectView {
         let view = NSVisualEffectView()
