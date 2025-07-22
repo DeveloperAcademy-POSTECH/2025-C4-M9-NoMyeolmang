@@ -16,7 +16,7 @@ struct TimerSettingView: View {
                 .font(.largeTitle)
 
             Button("Start Timer") {
-                coordinator.push(.timer)
+                coordinator.push(.timer) // ⚠️ 임시값: 이후 저장된 목표시간 값으로 수정 필요
             }
             .navigationBarBackButtonHidden(true)
         }

@@ -16,7 +16,12 @@ final class FocusScorePredictor {
     }
 
     convenience init?() {
-        guard let bundleURL = Bundle.main.url(forResource: "FocusScore_Updatable", withExtension: "mlmodelc") else { return nil }
+        guard
+            let bundleURL = Bundle.main.url(
+                forResource: "FocusScore_Updatable",
+                withExtension: "mlmodelc"
+            )
+        else { return nil }
         self.init(modelURL: bundleURL)
     }
 
@@ -27,7 +32,7 @@ final class FocusScorePredictor {
 
     private func makeModelInputArray(input: MLModelInput) -> MLMultiArray? {
         guard let inputArray = try? MLMultiArray(shape: [1, 4], dataType: .float32) else { return nil }
-        
+
         inputArray[0] = NSNumber(value: MinMaxScaler.scaleBlink(input.blinkCountPerMin))
         inputArray[1] = NSNumber(value: MinMaxScaler.scaleFace(input.faceBodyPresent))
         inputArray[2] = NSNumber(value: MinMaxScaler.scalePhone(input.phonePresent))
