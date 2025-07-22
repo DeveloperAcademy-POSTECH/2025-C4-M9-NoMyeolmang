@@ -2,11 +2,11 @@ import CoreML
 
 class FocusPersonalizater {
 
-    private var lastContext: MLUpdateContext
+    private var lastContext: MLUpdateContext?
     private var dataList: [UserData] = []
 
     init() {
-        self.lastContext = MLUpdateContext()
+        self.lastContext = nil
     }
 
     func run(predictor: FocusScorePredictor) {
@@ -67,7 +67,10 @@ class FocusPersonalizater {
 
         for data in dataList {
             // 1. 사용자 데이터 -> MultiArray로 만들기 (모델의 입력 형식)
-            let (inputMA, labelMA) = self.makeMultiArray(data: data)
+            guard let (inputMA, labelMA) = self.makeMultiArray(data: data) else {
+                print("⛔️ 샘플 스킵됨 (데이터 오류)")
+                continue
+            }
 
             // 2. MultiArray -> MLFeatureValue로 만들기
             let (inputFV, labelFV) = self.makeFeatureValue(
@@ -109,11 +112,12 @@ class FocusPersonalizater {
 
     func makeMultiArray(data: UserData) -> (
         input: MLMultiArray, label: MLMultiArray
-    ) {
+    )? {
         guard let inputArray = self.makeInputMultiArray(data: data.input),
             let labelArray = self.makeLabelMultiArray(data: data.label)
         else {
-            fatalError("⛔️ MultiArray 생성 실패: 입력 또는 라벨 배열 생성에 실패했습니다.")
+            print("⛔️ MultiArray 생성 실패: 입력 또는 라벨 배열 생성에 실패했습니다.")
+            return nil
         }
         return (input: inputArray, label: labelArray)
     }
@@ -228,7 +232,10 @@ class FocusPersonalizater {
     }
 
     func saveUpdatedModel() {
-        let updatedModel = self.lastContext.model
+        guard let updatedModel = self.lastContext?.model else {
+            print("⛔️ 업데이트된 모델이 없습니다.")
+            return
+        }
 
         do {
             // Ensure the directory exists
@@ -250,7 +257,6 @@ class FocusPersonalizater {
                 Constants.updatedModelURL,
                 withItemAt: Constants.tempUpdatedModelURL
             )
-
         } catch {
             print("⛔️ 모델 저장 실패: \(error)")
             return
