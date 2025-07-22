@@ -26,7 +26,6 @@ struct ReportView: View {
             .navigationBarBackButtonHidden(true)
         }
         .padding()
-
     }
 }
 

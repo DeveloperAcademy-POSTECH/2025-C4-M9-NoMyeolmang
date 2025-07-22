@@ -15,23 +15,35 @@ struct GSButton: View {
     var body: some View {
         Button(action: action) {
             Text(title)
-                .font(GSFont.SemiBold16)
-                .tracking(-0.32) // 자간 계산 16 × -0.02 = -0.32
-                .lineSpacing(6.4) // 행간 계산 16 × 1.4 = 22.4
+                .textStyle(GSFont.SemiBold16)
                 .foregroundColor(.white)
-                .background(
-                    ZStack {
-                        BlurView()
-                            .frame(width: width, height: 44)
-                        Color.white.opacity(0.14)
-                    }
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color.white.opacity(0.7), lineWidth: 1)
-                        )
-                        .cornerRadius(10)
-                )
+                .background(Color.clear)
         }
+        .frame(width: width, height: 44)
+        .background(
+            RoundedRectangle(cornerRadius: 10)
+                .fill(Color.white.opacity(0.14))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.white.opacity(0.7), lineWidth: 1)
+                )
+            
+//            ZStack {
+//                BlurView()
+//                    .clipShape(RoundedRectangle(cornerRadius: 10))
+//                RoundedRectangle(cornerRadius: 10)
+//                    .fill(Color.white.opacity(0.00000000001))
+//                RoundedRectangle(cornerRadius: 10)
+//                    .stroke(Color.white.opacity(0.7), lineWidth: 1)
+//            }
+        )
+        .shadow(color: Color.black.opacity(0.0168), radius: 2.21, x: 0, y: 2.77)
+        .shadow(color: Color.black.opacity(0.022), radius: 5.32, x: 0, y: 6.65)
+        .shadow(color: Color.black.opacity(0.025), radius: 10.02, x: 0, y: 12.52)
+        .shadow(color: Color.black.opacity(0.0273), radius: 17.87, x: 0, y: 22.34)
+        .shadow(color: Color.black.opacity(0.0304), radius: 33.42, x: 0, y: 41.78)
+        .shadow(color: Color.black.opacity(0.04), radius: 80, x: 0, y: 100)
+        .buttonStyle(.plain)
     }
 }
 

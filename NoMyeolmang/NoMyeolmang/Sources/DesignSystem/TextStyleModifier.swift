@@ -20,7 +20,7 @@ struct TextStyleModifier: ViewModifier {
 }
 
 extension View {
-    func textStyle(_ font: Font, size: CGFloat) -> some View {
-        self.modifier(TextStyleModifier(font: font, fontSize: size))
+    func textStyle(_ style: GSFontStyle) -> some View {
+        self.modifier(TextStyleModifier(font: style.font, fontSize: style.size))
     }
 }
