@@ -12,7 +12,7 @@ class FocusPersonalizater {
     func run(predictor: FocusScorePredictor) {
 
         // 0. 모델 레이어 확인하기
-        //        checkModelLayer()
+//         checkModelLayer()
 
         // 1. 최근 저장된 사용자 데이터 불러오기
         self.dataList = loadUserData()
@@ -30,7 +30,6 @@ class FocusPersonalizater {
         } else {
             print("⛔️ 모델 업데이트 실패")
         }
-
     }
 
     func checkModelLayer() {
@@ -205,9 +204,7 @@ class FocusPersonalizater {
             },
             completionHandler: { context in
                 self.lastContext = context
-                print(
-                    "✅ 업데이트Task 끝: \(context.event) \(context.parameters)"
-                )
+                
                 // 4. save model
                 self.saveUpdatedModel()
 
@@ -234,8 +231,6 @@ class FocusPersonalizater {
         let updatedModel = self.lastContext.model
 
         do {
-            print("🔹 모델 저장 로직 진입")
-
             // Ensure the directory exists
             if !FileManager.default.fileExists(
                 atPath: Constants.tempUpdatedModelURL.deletingLastPathComponent()
@@ -251,28 +246,20 @@ class FocusPersonalizater {
 
             // Save the updated model to temporary filename.
             try updatedModel.write(to: Constants.tempUpdatedModelURL)
-            print("✅ 모델 저장 완료")
-
             _ = try FileManager.default.replaceItemAt(
                 Constants.updatedModelURL,
                 withItemAt: Constants.tempUpdatedModelURL
-            )
-            print(
-                "✅ Updated model saved to:\n\t\(Constants.updatedModelURL)"
             )
 
         } catch {
             print("⛔️ 모델 저장 실패: \(error)")
             return
         }
-        print("모델 저장 완료")
     }
 
     func resave(predictor: FocusScorePredictor) {
-        print("모델 교체 진입")
         if let updatedModel = loadModel(url: Constants.updatedModelURL) {
             predictor.model = updatedModel
-            print("✅ 모델 교체 성공!")
         } else {
             print("⛔️ 모델 교체 실패!")
         }
