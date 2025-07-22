@@ -6,7 +6,6 @@
 //
 
 import CoreML
-import Foundation
 
 final class FocusScorePredictor {
     private let model: MLModel
