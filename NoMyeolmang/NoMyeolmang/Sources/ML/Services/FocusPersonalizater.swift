@@ -262,12 +262,4 @@ class FocusPersonalizater {
             return
         }
     }
-
-    //    func resave(predictor: FocusScorePredictor) {
-    //        if let updatedModel = loadModel(url: Constants.updatedModelURL) {
-    //            predictor.model = updatedModel
-    //        } else {
-    //            print("⛔️ 모델 교체 실패!")
-    //        }
-    //    }
 }
