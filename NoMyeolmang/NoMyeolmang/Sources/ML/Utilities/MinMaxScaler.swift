@@ -47,7 +47,6 @@ enum MinMaxScaler {
         return (value - min) / (max - min)
     }
 
-    
     private static func softClip(value: Double, min: Double, max: Double) -> Double {
         return Swift.max(min, Swift.min(value, max))
     }

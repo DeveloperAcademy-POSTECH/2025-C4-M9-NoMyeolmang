@@ -67,7 +67,7 @@ final class MainViewModel: ObservableObject {
     }
 
     func personalize() {
-        personalizater.run { updatedModel in
+        personalizater.run { _ in
             if let updatedPredictor = FocusScorePredictor(
                 modelURL: Constants.updatedModelURL
             ) {

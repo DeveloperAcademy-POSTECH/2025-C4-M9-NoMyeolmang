@@ -179,7 +179,7 @@ class FocusPersonalizater {
         -> MLFeatureProvider?
     {
         let dict: [String: MLFeatureValue] = [
-            Constants.inputName: input, Constants.updatableOutputName: label,
+            Constants.inputName: input, Constants.updatableOutputName: label
         ]
         let featureProvider = try? MLDictionaryFeatureProvider(dictionary: dict)
         return featureProvider
