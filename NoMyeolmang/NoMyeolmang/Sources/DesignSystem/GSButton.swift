@@ -15,7 +15,7 @@ struct GSButton: View {
     var body: some View {
         Button(action: action) {
             Text(title)
-                .font(GSFont.SemiBold16)
+                .textStyle(GSFont.SemiBold20)
                 .tracking(-0.32) // 자간 계산 16 × -0.02 = -0.32
                 .lineSpacing(6.4) // 행간 계산 16 × 1.4 = 22.4
                 .foregroundColor(.white)

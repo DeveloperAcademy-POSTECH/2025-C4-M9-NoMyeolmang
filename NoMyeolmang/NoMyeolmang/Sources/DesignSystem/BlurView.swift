@@ -5,8 +5,8 @@
 //  Created by 김소원 on 7/21/25.
 //
 
-import SwiftUI
 import AppKit
+import SwiftUI
 
 struct BlurView: NSViewRepresentable {
     var material: NSVisualEffectView.Material = .hudWindow // .popover, .menu
