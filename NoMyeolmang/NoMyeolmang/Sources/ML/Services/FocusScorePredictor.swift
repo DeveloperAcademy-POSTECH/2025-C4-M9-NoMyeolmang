@@ -25,61 +25,25 @@ final class FocusScorePredictor {
         self.init(modelURL: bundleURL)
     }
 
-    func run() -> Double? {
-        guard let input = makeModelInput() else { return nil }
-        guard let inputArray = makeModelInputArray(input: input) else {
-            return nil
-        }
+    func run(input: MLModelInput) -> Double? {
+        guard let inputArray = makeModelInputArray(input: input) else { return nil }
         return predict(inputArray: inputArray)
     }
 
-    private func makeModelInput() -> MLModelInput? {
-        // ⚠️ 입력값 vision에서 받아와야 함
-        let blinkCount = Double(19)
-        let faceBodyPresent = Double(1)
-        let phonePresent = Double(0)
-        let elapsedTime = Double(3)
-
-        return MLModelInput(
-            blinkCountPerMin: blinkCount,
-            faceBodyPresent: faceBodyPresent,
-            phonePresent: phonePresent,
-            elapsedTime: elapsedTime
-        )
-    }
-
     private func makeModelInputArray(input: MLModelInput) -> MLMultiArray? {
-        guard
-            let inputArray = try? MLMultiArray(
-                shape: [1, 4],
-                dataType: .float32
-            )
-        else { return nil }
+        guard let inputArray = try? MLMultiArray(shape: [1, 4], dataType: .float32) else { return nil }
 
-        inputArray[0] = NSNumber(
-            value: MinMaxScaler.scaleBlink(input.blinkCountPerMin)
-        )
-        inputArray[1] = NSNumber(
-            value: MinMaxScaler.scaleFace(input.faceBodyPresent)
-        )
-        inputArray[2] = NSNumber(
-            value: MinMaxScaler.scalePhone(input.phonePresent)
-        )
-        inputArray[3] = NSNumber(
-            value: MinMaxScaler.scaleTime(input.elapsedTime)
-        )
+        inputArray[0] = NSNumber(value: MinMaxScaler.scaleBlink(input.blinkCountPerMin))
+        inputArray[1] = NSNumber(value: MinMaxScaler.scaleFace(input.faceBodyPresent))
+        inputArray[2] = NSNumber(value: MinMaxScaler.scalePhone(input.phonePresent))
+        inputArray[3] = NSNumber(value: MinMaxScaler.scaleTime(input.elapsedTime))
         return inputArray
     }
 
     private func predict(inputArray: MLMultiArray) -> Double? {
-        guard
-            let inputFeatures = try? MLDictionaryFeatureProvider(dictionary: [
-                "dense_1_input": inputArray
-            ]),
-            let result = try? model.prediction(from: inputFeatures),
-            let outputArray = result.featureValue(for: "Identity")?
-                .multiArrayValue
-        else { return nil }
+        guard let inputFeatures = try? MLDictionaryFeatureProvider(dictionary: ["dense_1_input": inputArray]),
+              let result = try? model.prediction(from: inputFeatures),
+              let outputArray = result.featureValue(for: "Identity")?.multiArrayValue else { return nil }
         return outputArray[0].doubleValue
     }
 }

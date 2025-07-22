@@ -32,7 +32,7 @@ final class MainViewModel: ObservableObject {
             return
         }
         
-        if let result = predictor.run() {
+        if let result = predictor.run(input: input) {
             handlePredictionSuccess(result: result)
         } else {
             handlePredictionFailure()

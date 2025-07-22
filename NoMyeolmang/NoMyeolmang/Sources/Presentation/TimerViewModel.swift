@@ -49,7 +49,8 @@ class TimerViewModel: ObservableObject {
     }
 
     func predict() {
-        guard let result = predictor.run() else {
+        let input = MLModelInput(blinkCountPerMin: 10.0, faceBodyPresent: 1.0, phonePresent: 0.0, elapsedTime: 10.0) // ⚠️ 임시코드
+        guard let result = predictor.run(input: input) else {
             print("⛔️ 예측 실패")
             return
         }
