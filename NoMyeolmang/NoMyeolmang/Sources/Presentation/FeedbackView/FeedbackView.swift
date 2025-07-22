@@ -21,8 +21,8 @@ struct FeedbackView: View {
             Image("planet")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 300)
-                .offset(y: 143) // 상대 위치로 조정
+                .frame(width: 450, height: 176)
+                .offset(y: 120) // 상대 위치로 조정
             
 //            BlurView(material: .hudWindow)
 //                .frame(width: 600, height: 400)
@@ -34,12 +34,12 @@ struct FeedbackView: View {
             
             VStack {
                 Text("얼마나 몰입했는지 알려주세요")
-                    .textStyle(GSFont.SemiBold20)
+                    .textStyle(GSFont.SemiBold18)
                     .foregroundColor(.white)
                     .padding(.top, 34)
                 
                 Text("입력해주신 값은 집중력을 더 정확하게\n파악하기 위해서 쓰여요.")
-                    .textStyle(GSFont.SemiBold20)
+                    .textStyle(GSFont.Regular14)
                     .foregroundColor(.white)
                     .multilineTextAlignment(.center)
                     .padding(.top, 12)
