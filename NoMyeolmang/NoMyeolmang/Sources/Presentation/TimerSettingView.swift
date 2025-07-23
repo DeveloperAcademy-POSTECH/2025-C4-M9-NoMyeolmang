@@ -7,43 +7,39 @@
 
 import SwiftUI
 
-// .frame(width: 800, height: 600)
-// 가운데 반응형으로 바꾸기
 struct TimerSettingView: View {
     @EnvironmentObject var coordinator: AppCoordinator
-
+    @State private var isRecommendedSelected = true
+    
     var body: some View {
         content
             .environment(\.backgroundImageName, "SpaceshipBackground")
     }
-
+    
     private var content: some View {
         ZStack {
-            
             Image("SpaceshipBackground")
-                .frame(width: 800, height: 600)
-            
-            CustomBlurView(blurRadius: 10, cornerRadius: 0)
+                .resizable()
                 .ignoresSafeArea()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 800, height: 600, alignment: .center)
             
-            VStack {
+            VStack(spacing: 0) {
+                ToggleTabView(isRecommendedSelected: $isRecommendedSelected)
                 
                 ZStack {
-                    RoundedRectangle(cornerRadius: 40)
-                        .fill(Color.white.opacity(0.04))
-                        .frame(width: 235, height: 40)
-                    
-                    RoundedRectangle(cornerRadius: 40)
-                        .stroke(Color.white.opacity(0.55), lineWidth: 1)
-                        .frame(width: 235, height: 40)
-                }
-                .padding(.top, 95)
-                
-                ZStack {
-                    // 사각형 수정해야함, 색상 약간 있음
                     ZStack {
-                        Color.white.opacity(0.14)
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                        LinearGradient(
+                            gradient: Gradient(colors: [
+                                Color("939393").opacity(0.02),
+                                Color("A471C8").opacity(0.3)
+                            ]),
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                        .opacity(0.4)
+                        //                         블러뷰 수정 후 담을 예정
                         CustomBlurView(blurRadius: 10, cornerRadius: 10)
                     }
                     .frame(width: 329, height: 161)
@@ -52,37 +48,42 @@ struct TimerSettingView: View {
                         .stroke(Color.white.opacity(0.7), lineWidth: 1)
                         .frame(width: 329, height: 161)
                     
-                    VStack {
+                    VStack(spacing: 0) {
                         Text("반복 학습에 적합한 시간")
                             .textStyle(GSFont.Regular16)
                             .foregroundColor(.white)
-                            .padding(.top, 34)
+                            .padding(.top, 52.5)
                         
                         Text("30분") // 시간 받아와야함
                             .textStyle(GSFont.SemiBold24)
                             .foregroundColor(.white)
-                            .padding(.top, 34)
-                    }                    
+                    }
+                    .frame(width: 329, height: 161, alignment: .top)
                 }
                 .padding(.top, 24)
                 
                 ZStack {
-                    CustomBlurView(blurRadius: 10, cornerRadius: 10)
-                        .frame(width: 250, height: 44)
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
-
+                    
+//                    CustomBlurView(blurRadius: 10, cornerRadius: 10)
+//                        .frame(width: 250, height: 44)
+//                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                    
+                     // opacity
                     Color.white.opacity(0.14)
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                        .frame(width: 250, height: 44)
-
+                                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                                            .frame(width: 250, height: 44)
+                    
                     GSButton(title: "집중 시작하기", width: 250) {
                         coordinator.push(.timer) // ⚠️ 임시값: 이후 저장된 목표시간 값으로 수정 필요 (도딘의 메모)
                     }
                 }
+                .padding(.top, 39)
             }
-            .padding(.top, 39)
-            .padding(.bottom, 197)
-        }.navigationBarBackButtonHidden(true)
+            .padding(.top, 95)
+            .padding(.bottom, 200)
+        }
+        .frame(minWidth: 800, minHeight: 600)
+        .navigationBarBackButtonHidden(true)
     }
 }
 
