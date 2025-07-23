@@ -7,18 +7,16 @@
 
 import CoreML
 
-
 class FocusPersonalizater: Personalizater {
     private let modelURL: URL
-    private let userDataRepository: UserDataRepository
-    
+
     required init(modelURL: URL) {
         self.modelURL = modelURL
     }
 
     func run(from userTrainingDataList: [UserTrainingData]) -> Bool {
-        
-        let batchProvider = makeBatchProvider(from userTrainingDataList: [UserTrainingData])
+
+        let batchProvider = makeBatchProvider(from: userTrainingDataList)
         checkBatchProvider(batchProvider: batchProvider)
 
         if let updateTask = makeUpdateTask(
@@ -32,7 +30,9 @@ class FocusPersonalizater: Personalizater {
         return true
     }
 
-    func makeBatchProvider(from userTrainingDataList: [UserTrainingData]) -> MLArrayBatchProvider {
+    func makeBatchProvider(from userTrainingDataList: [UserTrainingData])
+        -> MLArrayBatchProvider
+    {
         var featureProviders: [MLFeatureProvider] = []
 
         for data in userTrainingDataList {
@@ -84,8 +84,8 @@ class FocusPersonalizater: Personalizater {
     func makeMultiArray(data: UserTrainingData) -> (
         input: MLMultiArray, label: MLMultiArray
     )? {
-        guard let inputArray = self.makeInputMultiArray(data: data.Features),
-            let labelArray = self.makeLabelMultiArray(data: data.label)
+        guard let inputArray = self.makeInputMultiArray(data: data.features),
+            let labelArray = self.makeLabelMultiArray(data: data.userScore)
         else {
             print("⛔️ MultiArray 생성 실패: 입력 또는 라벨 배열 생성에 실패했습니다.")
             return nil
@@ -93,7 +93,7 @@ class FocusPersonalizater: Personalizater {
         return (input: inputArray, label: labelArray)
     }
 
-    private func makeInputMultiArray(data: MLModelInput) -> MLMultiArray? {
+    private func makeInputMultiArray(data: Features) -> MLMultiArray? {
         guard
             let inputArray = try? MLMultiArray(
                 shape: [1, 6],
@@ -116,10 +116,10 @@ class FocusPersonalizater: Personalizater {
             value: MinMaxScaler.scaleTime(data.elapsedTime)
         )
         inputArray[4] = NSNumber(
-            value: MinMaxScaler.scaleYawn(data.yawnCountPerMin)
+            value: MinMaxScaler.scaleYawn(data.yawnPerMin)
         )
         inputArray[5] = NSNumber(
-            value: MinMaxScaler.scaleLongBlink(data.longBlinkCountPerMin)
+            value: MinMaxScaler.scaleLongBlink(data.longBlinkPerMin)
         )
         return inputArray
     }
@@ -149,15 +149,14 @@ class FocusPersonalizater: Personalizater {
         -> MLFeatureProvider?
     {
         let dict: [String: MLFeatureValue] = [
-            Constants.inputName: input, Constants.updatableOutputName: label
+            Configuration.inputName: input, Configuration.updatableOutputName: label,
         ]
         let featureProvider = try? MLDictionaryFeatureProvider(dictionary: dict)
         return featureProvider
     }
 
     func makeUpdateTask(
-        batchProvider: MLArrayBatchProvider,
-        onModelUpdated: @escaping (MLModel) -> Void
+        batchProvider: MLArrayBatchProvider
     ) -> MLUpdateTask? {
 
         let configutaion = MLModelConfiguration()
@@ -200,12 +199,12 @@ class FocusPersonalizater: Personalizater {
         do {
             // Ensure the directory exists
             if !FileManager.default.fileExists(
-                atPath: Constants.tempUpdatedModelURL
+                atPath: Configuration.tempUpdatedModelURL
                     .deletingLastPathComponent()
                     .path
             ) {
                 try FileManager.default.createDirectory(
-                    at: Constants.tempUpdatedModelURL
+                    at: Configuration.tempUpdatedModelURL
                         .deletingLastPathComponent(),
                     withIntermediateDirectories: true,
                     attributes: nil
@@ -213,10 +212,10 @@ class FocusPersonalizater: Personalizater {
             }
 
             // Save the updated model to temporary filename.
-            try updatedModel.write(to: Constants.tempUpdatedModelURL)
+            try updatedModel.write(to: Configuration.tempUpdatedModelURL)
             _ = try FileManager.default.replaceItemAt(
-                Constants.updatedModelURL,
-                withItemAt: Constants.tempUpdatedModelURL
+                Configuration.updatedModelURL,
+                withItemAt: Configuration.tempUpdatedModelURL
             )
         } catch {
             print("⛔️ 모델 저장 실패: \(error)")
