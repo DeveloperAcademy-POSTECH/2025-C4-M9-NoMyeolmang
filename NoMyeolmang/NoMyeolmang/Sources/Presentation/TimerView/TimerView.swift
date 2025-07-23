@@ -15,31 +15,7 @@ struct TimerView: View {
         ZStack {
             SpaceshipView()
             VStack {
-                VStack {
-                    Text("남은 시간")
-                        .textStyle(GSFont.Regular16)
-                        .foregroundStyle(Color.white)
-                    Text(
-                        String(
-                            format: "%02d : %02d",
-                            viewModel.remainingTime / 60,
-                            viewModel.remainingTime % 60
-                        )
-                    )
-                    .foregroundStyle(Color.white)
-                    .font(.custom("SpoqaHanSansNeo-Bold", size: 52))
-                    .tracking(-3)
-                }
-                .padding(.top, 4)
-
-                Button {
-                    viewModel.stop()
-                    coordinator.push(.timerSetting)
-                } label: {
-                    Image("timerstop")
-                }
-                .buttonStyle(.plain)
-                .navigationBarBackButtonHidden()
+                TimeLeftStopView()
                 
                 Button("Next: Feedback") {
                     coordinator.push(.feedback)
