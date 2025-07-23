@@ -10,6 +10,7 @@ import CoreImage
 import CoreImage.CIFilterBuiltins
 import SwiftUI
 
+
 private struct BackgroundImageNameKey: EnvironmentKey {
     static let defaultValue: String = "backgroundSpace"
 }
@@ -33,11 +34,11 @@ struct CustomBlurView: NSViewRepresentable {
         DispatchQueue.main.async {
             applyBlur(to: view, backgroundName: backgroundName, blurRadius: blurRadius, cornerRadius: cornerRadius)
         }
-        
         return view
     }
     
     func updateNSView(_ nsView: NSView, context: Context) {
+
         // 배경이미지 로드 잘 하고 있는지 확인해보기
         guard let nsImage = NSImage(named: NSImage.Name(backgroundName)),
               let tiffData = nsImage.tiffRepresentation,
