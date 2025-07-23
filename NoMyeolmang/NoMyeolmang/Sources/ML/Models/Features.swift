@@ -1,15 +1,15 @@
 //
-//  MLModelInput.swift
+//  Featrues.swift
 //  NoMyeolmang
 //
-//  Created by Moo on 7/15/25.
+//  Created by Muchan Kim on 7/23/25.
 //
 
-import Foundation
-
-struct MLModelInput {
+struct Features: Codable {
     let blinkCountPerMin: Double
     let faceBodyPresent: Double
     let phonePresent: Double
     let elapsedTime: Double
+    let yawnPerMin: Double
+    let longBlinkPerMin: Double
 }

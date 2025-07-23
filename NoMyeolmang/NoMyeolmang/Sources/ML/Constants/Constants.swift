@@ -22,4 +22,12 @@ enum Constants {
     // 경과 시간
     static let elapsedTimeMinValue: Double  = 1.0
     static let elapsedTimeMaxValue: Double  = 30.0
+    
+    // 하품 빈도(분)
+    static let yawnCountPerMinValue: Double = 0.0
+    static let yawnCounterPerMaxValue: Double = 5.0
+    
+    // 긴 눈 깜빡임 빈도(분)
+    static let longBlinkCountPerMinValue: Double = 0.0
+    static let longBlinkCounterPerMaxValue: Double = 4.0
 }
