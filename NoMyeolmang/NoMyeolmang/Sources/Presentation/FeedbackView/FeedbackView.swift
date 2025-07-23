@@ -18,19 +18,13 @@ struct FeedbackView: View {
                 .scaledToFill()
                 .ignoresSafeArea()
             
-            ZStack {
-                
-                // 배경 확정 시 삭제 예정
-                Image("planet")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 450, height: 176)
-                    .blur(radius: 10)
-
-                CustomBlurView(blurRadius: 10, cornerRadius: 0)
-                    .frame(width: 450, height: 176)
-            }
-            .offset(y: 120)
+            // 배경 확정 시 삭제 예정
+            Image("planet")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 450, height: 176)
+                .blur(radius: 10)
+                .offset(y: 120)
             
             RoundedRectangle(cornerRadius: 10)
                 .fill(Color.white.opacity(0.14))
@@ -67,4 +61,5 @@ struct FeedbackView: View {
 
 #Preview {
     FeedbackView()
+        .environment(\.backgroundImageName, "backgroundSpace")
 }
