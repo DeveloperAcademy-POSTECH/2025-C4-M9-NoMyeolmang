@@ -62,11 +62,9 @@ struct TimerSettingView: View {
                             .textStyle(GSFont.SemiBold24)
                             .foregroundColor(.white)
                             .padding(.top, 34)
-                    }
-                    
+                    }                    
                 }
                 .padding(.top, 24)
-                
                 
                 ZStack {
                     CustomBlurView(blurRadius: 10, cornerRadius: 10)
