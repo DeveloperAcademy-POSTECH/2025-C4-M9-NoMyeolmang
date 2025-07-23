@@ -21,21 +21,13 @@ struct GSButton: View {
         }
         .frame(width: width, height: 44)
         .background(
-            RoundedRectangle(cornerRadius: 10)
-                .fill(Color.white.opacity(0.14))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.white.opacity(0.7), lineWidth: 1)
-                )
-            
-//            ZStack {
-//                BlurView()
-//                    .clipShape(RoundedRectangle(cornerRadius: 10))
-//                RoundedRectangle(cornerRadius: 10)
-//                    .fill(Color.white.opacity(0.00000000001))
-//                RoundedRectangle(cornerRadius: 10)
-//                    .stroke(Color.white.opacity(0.7), lineWidth: 1)
-//            }
+            ZStack {
+                Color.white.opacity(0.14)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                CustomBlurView(blurRadius: 20, cornerRadius: 10)
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color.white.opacity(0.7), lineWidth: 1)
+            }
         )
         .shadow(color: Color.black.opacity(0.0168), radius: 2.21, x: 0, y: 2.77)
         .shadow(color: Color.black.opacity(0.022), radius: 5.32, x: 0, y: 6.65)
@@ -49,7 +41,13 @@ struct GSButton: View {
 
 #Preview {
     ZStack {
-        Color.black.ignoresSafeArea()
+        Image("backgroundSpace")
+            .resizable()
+        
+        RoundedRectangle(cornerRadius: 10)
+            .fill(Color.white.opacity(0.14))
+            .frame(width: 400, height: 300)
+        
         VStack(spacing: 20) {
             GSButton(title: "집중 시작하기", width: 250) {
                 print("250 버튼")
