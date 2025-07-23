@@ -17,14 +17,10 @@ class FocusPersonalizater: Personalizater {
     }
 
     func run(from userTrainingDataList: [UserTrainingData]) -> Bool {
-        // 0. 모델 레이어 확인하기
-        // checkModelLayer()
-
-        // 2. 사용자 데이터 -> MLBatchProvider로 만들기 (모델의 입력 형식)
+        
         let batchProvider = makeBatchProvider(from userTrainingDataList: [UserTrainingData])
         checkBatchProvider(batchProvider: batchProvider)
 
-        // 3. updateTask resume
         if let updateTask = makeUpdateTask(
             batchProvider: batchProvider
         ) {
@@ -34,22 +30,6 @@ class FocusPersonalizater: Personalizater {
             return false
         }
         return true
-    }
-
-    func checkModelLayer() {
-        do {
-            print("📥 [입력 키 목록]")
-            for input in model.modelDescription.inputDescriptionsByName {
-                print("  • \(input.key): \(input.value)")
-            }
-
-            print("📤 [출력 키 목록]")
-            for output in model.modelDescription.outputDescriptionsByName {
-                print("  • \(output.key): \(output.value)")
-            }
-        } catch {
-            print("⛔️ 모델 로드 또는 설명 조회 실패: \(error)")
-        }
     }
 
     func makeBatchProvider(from userTrainingDataList: [UserTrainingData]) -> MLArrayBatchProvider {

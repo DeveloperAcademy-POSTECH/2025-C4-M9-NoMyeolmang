@@ -9,6 +9,5 @@ import CoreML
 import Foundation
 
 protocol Personalizater {
-    init?(modelURL: URL)
     func run(from userTrainingDataList: [UserTrainingData] ) -> Bool
 }
