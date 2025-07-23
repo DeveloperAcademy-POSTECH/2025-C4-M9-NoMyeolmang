@@ -38,7 +38,7 @@ struct CustomBlurView: NSViewRepresentable {
     }
     
     func updateNSView(_ nsView: NSView, context: Context) {
-        // 배경이미지 로드는 잘 하고 있음 ???
+        // 배경이미지 로드 잘 하고 있는지 확인해보기
         guard let nsImage = NSImage(named: NSImage.Name(backgroundName)),
               let tiffData = nsImage.tiffRepresentation,
               let ciImage = CIImage(data: tiffData) else {
@@ -59,7 +59,7 @@ struct CustomBlurView: NSViewRepresentable {
             if let existing = nsView.subviews.compactMap({ $0 as? NSImageView }).first {
                 imageView = existing
             } else {
-                // 이미지는 잘 씌워주고 잇음 ??
+                // 이미지는 잘 씌워주고 있는지 확인해보기
                 imageView = NSImageView(frame: nsView.bounds)
                 imageView.autoresizingMask = [.width, .height]
                 nsView.addSubview(imageView, positioned: .below, relativeTo: nil)
@@ -70,10 +70,10 @@ struct CustomBlurView: NSViewRepresentable {
             imageView.layer?.cornerRadius = cornerRadius
             imageView.layer?.masksToBounds = true
         } else {
-            print("블러 실패: \(backgroundName)")
+            print("Blur 실패: \(backgroundName)")
         }
 
-        // 오버레이는 로드는 잘 하고 있음 ???
+        // 오버레이는 로드는 잘 하고 있는지 확인해보기
         var overlay: NSView
         if let existing = nsView.subviews.last(where: { !($0 is NSImageView) }) {
             overlay = existing
@@ -81,7 +81,7 @@ struct CustomBlurView: NSViewRepresentable {
             overlay = NSView(frame: nsView.bounds)
             overlay.autoresizingMask = [.width, .height]
             nsView.addSubview(overlay)
-            print("nsView.subviews에 오버레이 추가 ㅇㅋ")
+            print("nsView.subviews에 오버레이 추가 성공")
         }
         overlay.wantsLayer = true
         overlay.layer?.backgroundColor = NSColor.white.withAlphaComponent(0.14).cgColor

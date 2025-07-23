@@ -64,9 +64,10 @@ struct TimerSettingView: View {
                 
                 ZStack {
                     
-//                    CustomBlurView(blurRadius: 10, cornerRadius: 10)
-//                        .frame(width: 250, height: 44)
-//                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                    // CustomBlurView 사용하는 경우
+                    CustomBlurView(blurRadius: 10, cornerRadius: 10)
+                        .frame(width: 250, height: 44)
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
                     
                      // opacity
                     Color.white.opacity(0.14)
