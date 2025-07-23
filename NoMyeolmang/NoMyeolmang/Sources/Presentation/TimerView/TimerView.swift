@@ -12,18 +12,21 @@ struct TimerView: View {
     @StateObject private var viewModel = TimerViewModel()
 
     var body: some View {
-        ZStack {
-            SpaceshipView()
-            VStack {
-                TimeLeftStopView()
-                
-                Button("Next: Feedback") {
-                    coordinator.push(.feedback)
+        GeometryReader { geo in
+            ZStack {
+                SpaceshipView()
+                    .offset(y: geo.size.height * 0.15)
+                VStack {
+                    TimeLeftStopView()
+                        .offset(y: geo.size.height * -0.1)
+                    
+                    Button("Next: Feedback") {
+                        coordinator.push(.feedback)
+                    }
+                    .navigationBarBackButtonHidden(true)
                 }
-                .navigationBarBackButtonHidden(true)
             }
         }
-        .padding()
         .frame(width: 800, height: 600)
     }
 }

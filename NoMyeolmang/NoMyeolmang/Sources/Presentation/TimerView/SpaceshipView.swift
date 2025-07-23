@@ -16,18 +16,19 @@ struct SpaceshipView: View {
             if isShowing {
                 Image("spaceship")
                     .resizable()
+                    .frame(width: 300, height: 600)
                     .scaledToFit()
-                    .frame(height: 500)
                     .transition(.move(edge: .bottom))
             }
         }
+        .frame(width: 800, height: 600)
         .onAppear {
             withAnimation(
-                .spring(response: 0.7, dampingFraction: 0.6, blendDuration: 0.5)
+                .spring(response: 1.5, dampingFraction: 0.6, blendDuration: 0.5)
             ) {
                 isShowing = true
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 withAnimation(
                     .spring(
                         response: 0.4,
