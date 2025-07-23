@@ -15,44 +15,31 @@ struct TimerView: View {
         ZStack {
             SpaceshipView()
             VStack {
-                Text("Timer")
-                    .font(.largeTitle)
-                VStack(spacing: 8) {
-                    Text("Focus Level 설정하기")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                    VStack {
-                        Text("실제 타이머")
-                        Text(
-                            String(
-                                format: "%02d:%02d",
-                                viewModel.remainingTime / 60,
-                                viewModel.remainingTime % 60
-                            )
+                VStack {
+                    Text("남은 시간")
+                        .textStyle(GSFont.Regular16)
+                        .foregroundStyle(Color.white)
+                    Text(
+                        String(
+                            format: "%02d : %02d",
+                            viewModel.remainingTime / 60,
+                            viewModel.remainingTime % 60
                         )
-                        .font(.title)
-                    }
-                    VStack {
-                        Text("집중 타이머")
-                        // ✅ 집중력 단계 뷰에서 불러오는 코드
-                        Text("Lv.\(viewModel.focusLevel.rawValue)")
-                        Text("speed: \(viewModel.focusLevel.tickSpeed())")
-                        // ⚠️ 집중력 타이머는 확인용, 이후 삭제
-                        Text(
-                            String(
-                                format: "%02d:%02d",
-                                viewModel.focusCount / 60,
-                                viewModel.focusCount % 60
-                            )
-                        )
-                        .font(.title)
-                    }
+                    )
+                    .foregroundStyle(Color.white)
+                    .font(.custom("SpoqaHanSansNeo-Bold", size: 52))
+                    .tracking(-3)
                 }
                 .padding(.top, 4)
-                
-                Button("STOP") {
+
+                Button {
                     viewModel.stop()
+                    coordinator.push(.timerSetting)
+                } label: {
+                    Image("timerstop")
                 }
+                .buttonStyle(.plain)
+                .navigationBarBackButtonHidden()
                 
                 Button("Next: Feedback") {
                     coordinator.push(.feedback)
