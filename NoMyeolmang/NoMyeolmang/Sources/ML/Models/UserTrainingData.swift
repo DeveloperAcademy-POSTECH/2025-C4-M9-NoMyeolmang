@@ -10,13 +10,13 @@ import SwiftData
 
 @Model
 final class UserTrainingData {
-    var features: [Features]
+    var features: Features
     var predictedScore: Double
     var userScore: Double
     var createdAt: Date
 
     init(
-        features: [Features],
+        features: Features,
         predictedScore: Double,
         userScore: Double,
         createdAt: Date = Date()
