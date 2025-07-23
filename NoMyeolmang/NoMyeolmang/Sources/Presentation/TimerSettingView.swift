@@ -13,11 +13,20 @@ struct TimerSettingView: View {
     @EnvironmentObject var coordinator: AppCoordinator
 
     var body: some View {
+        content
+            .environment(\.backgroundImageName, "SpaceshipBackground")
+    }
+
+    private var content: some View {
         ZStack {
+            
+            Image("SpaceshipBackground")
+            
             CustomBlurView(blurRadius: 10, cornerRadius: 0)
                 .ignoresSafeArea()
             
             VStack {
+                
                 ZStack{
                     RoundedRectangle(cornerRadius: 40)
                         .fill(Color.white.opacity(0.04))
