@@ -26,9 +26,6 @@ struct FeedbackView: View {
                     .scaledToFit()
                     .frame(width: 450, height: 176)
                     .blur(radius: 10)
-
-                CustomBlurView(blurRadius: 10, cornerRadius: 0)
-                    .frame(width: 450, height: 176)
             }
             .offset(y: 120)
             
@@ -67,4 +64,5 @@ struct FeedbackView: View {
 
 #Preview {
     FeedbackView()
+        .environment(\.backgroundImageName, "backgroundSpace")
 }

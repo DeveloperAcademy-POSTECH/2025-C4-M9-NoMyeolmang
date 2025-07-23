@@ -22,7 +22,8 @@ struct GSButton: View {
         .frame(width: width, height: 44)
         .background(
             ZStack {
-                CustomBlurView(blurRadius: 10, cornerRadius: 10)
+//                CustomBlurView(blurRadius: 10, cornerRadius: 10)
+//                    .clipShape(RoundedRectangle(cornerRadius: 10))
                 Color.white.opacity(0.14)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                 RoundedRectangle(cornerRadius: 10)

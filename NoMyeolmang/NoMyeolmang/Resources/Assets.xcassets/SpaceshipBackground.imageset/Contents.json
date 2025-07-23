@@ -1,19 +1,27 @@
 {
   "images" : [
     {
-      "filename" : "SpaceshipBackground.svg",
+      "filename" : "SpaceshipBackground.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "SpaceshipBackground 1.svg",
+      "filename" : "SpaceshipBackground 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "SpaceshipBackground 2.svg",
+      "filename" : "SpaceshipBackground 2.png",
       "idiom" : "universal",
       "scale" : "3x"
+    },
+    {
+      "idiom" : "mac",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "mac",
+      "scale" : "2x"
     }
   ],
   "info" : {
