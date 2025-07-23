@@ -10,16 +10,28 @@ import CoreImage
 import CoreImage.CIFilterBuiltins
 import SwiftUI
 
+private struct BackgroundImageNameKey: EnvironmentKey {
+    static let defaultValue: String = "backgroundSpace"
+}
+
+extension EnvironmentValues {
+    var backgroundImageName: String {
+        get { self[BackgroundImageNameKey.self] }
+        set { self[BackgroundImageNameKey.self] = newValue }
+    }
+}
+
 struct CustomBlurView: NSViewRepresentable {
     var blurRadius: CGFloat = 10.0
     var cornerRadius: CGFloat = 10.0
+    @Environment(\.backgroundImageName) private var backgroundName
     
     func makeNSView(context: Context) -> NSView {
         let view = NSView()
         view.wantsLayer = true
         
         // 배경 확정 시 forResource 변경 예정
-        guard let url = Bundle.main.url(forResource: "backgroundSpace", withExtension: "png"),
+        guard let url = Bundle.main.url(forResource: backgroundName, withExtension: "png"),
               let ciImage = CIImage(contentsOf: url) else {
             return view
         }
@@ -56,7 +68,7 @@ struct CustomBlurView: NSViewRepresentable {
         // 배경 확정 시 forResource 변경 예정
         // 반응형 고려해서 배경이 바뀌거나 크기가 바뀔 때도 적용시키려고 뒀는데,
         // 변화가 크지 않다면 삭제 예정
-        guard let url = Bundle.main.url(forResource: "backgroundSpace", withExtension: "png"),
+        guard let url = Bundle.main.url(forResource: backgroundName, withExtension: "png"),
               let ciImage = CIImage(contentsOf: url) else { return }
         
         let filter = CIFilter.gaussianBlur()
