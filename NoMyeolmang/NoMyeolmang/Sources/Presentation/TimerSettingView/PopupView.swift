@@ -34,26 +34,23 @@ struct PopupGuideView: View {
         .frame(width: 268, height: 402)
         .background(Color("191735"))
         .cornerRadius(21.775)
-        // 색 추가
-        .shadow(color: Color(red: 0.12, green: 0.15, blue: 0.53).opacity(0.13), radius: 13.4, x: 0, y: 6.7)
+        .shadow(color: Color("1F2687").opacity(0.13), radius: 13.4, x: 0, y: 6.7)
         .overlay(
-            // 그림자
-            RoundedRectangle(cornerRadius: 22)
-                .stroke(Color.white.opacity(0.9), lineWidth: 6.7)
-                .blur(radius: 20.1)
-                .mask(
-                    RoundedRectangle(cornerRadius: 21.775)
-                        .fill(LinearGradient(
-                            gradient: Gradient(colors: [.black, .clear]),
-                            startPoint: .top,
-                            endPoint: .bottom
-                        ))
-                )
-            .overlay(
-                    // 테두리
-                    RoundedRectangle(cornerRadius: 22)
-                        .stroke(Color.white.opacity(0.8), lineWidth: 0.8)
-                )
+            ZStack {
+                RoundedRectangle(cornerRadius: 22)
+                    .stroke(Color.white.opacity(0.9), lineWidth: 6.7)
+                    .blur(radius: 16)
+                    .mask(
+                        RoundedRectangle(cornerRadius: 21.775)
+                            .fill(LinearGradient(
+                                gradient: Gradient(colors: [.black, .clear]),
+                                startPoint: .top,
+                                endPoint: .bottom
+                            ))
+                    )
+                RoundedRectangle(cornerRadius: 22)
+                    .stroke(Color.white.opacity(0.8), lineWidth: 0.8)
+            }
         )
     }
 }
