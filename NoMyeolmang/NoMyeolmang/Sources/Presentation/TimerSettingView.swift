@@ -13,7 +13,6 @@ struct TimerSettingView: View {
     
     var body: some View {
         content
-            .environment(\.backgroundImageName, "SpaceshipBackground")
     }
     
     private var content: some View {
@@ -39,8 +38,7 @@ struct TimerSettingView: View {
                         )
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                         .opacity(0.4)
-                        //                         블러뷰 수정 후 담을 예정
-                        CustomBlurView(blurRadius: 10, cornerRadius: 10)
+                        
                     }
                     .frame(width: 329, height: 161)
                     
@@ -63,11 +61,6 @@ struct TimerSettingView: View {
                 .padding(.top, 24)
                 
                 ZStack {
-                    
-                    // CustomBlurView 사용하는 경우
-                    CustomBlurView(blurRadius: 10, cornerRadius: 10)
-                        .frame(width: 250, height: 44)
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
                     
                      // opacity
                     Color.white.opacity(0.14)

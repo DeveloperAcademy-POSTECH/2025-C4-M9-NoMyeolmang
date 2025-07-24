@@ -61,5 +61,4 @@ struct FeedbackView: View {
 
 #Preview {
     FeedbackView()
-        .environment(\.backgroundImageName, "backgroundSpace")
 }

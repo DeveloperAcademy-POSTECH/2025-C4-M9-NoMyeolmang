@@ -184,7 +184,7 @@ final class FocusPersonalizater: Personalizater {
                 forModelAt: modelURL,
                 trainingData: batchProvider,
                 configuration: configutaion,
-                progressHandlers: handlers,
+                progressHandlers: handlers
             )
             return updateTask
         } catch {
