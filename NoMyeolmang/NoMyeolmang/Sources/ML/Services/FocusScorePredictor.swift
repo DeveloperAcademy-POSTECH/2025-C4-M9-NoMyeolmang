@@ -16,7 +16,7 @@ final class FocusScorePredictor: Predictor {
 
     func run(from features: Features) -> UserTrainingData {
         let predictedScore = predict(features: features) ?? 0.0
-        return UserTrainingData(features: [features], predictedScore: predictedScore, userScore: 0.0)
+        return UserTrainingData(features: features, predictedScore: predictedScore, userScore: 0.0)
     }
 
     private func makeModelInputArray(features: Features) -> MLMultiArray? {
