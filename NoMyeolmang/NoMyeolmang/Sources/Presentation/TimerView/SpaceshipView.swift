@@ -21,7 +21,6 @@ struct SpaceshipView: View {
                     .transition(.move(edge: .bottom))
             }
         }
-        .frame(width: 800, height: 600)
         .onAppear {
             withAnimation(
                 .spring(response: 1.5, dampingFraction: 0.6, blendDuration: 0.5)

@@ -13,21 +13,22 @@ struct TimerView: View {
 
     var body: some View {
         GeometryReader { geo in
-            ZStack {
+            ZStack(alignment: .center) {
                 SpaceshipView()
                     .offset(y: geo.size.height * 0.15)
-                VStack {
+                    .frame(maxWidth: .infinity, alignment: .center)
+                VStack(alignment: .center) {
                     TimeLeftStopView()
-                        .offset(y: geo.size.height * -0.1)
-                    
                     Button("Next: Feedback") {
                         coordinator.push(.feedback)
                     }
                     .navigationBarBackButtonHidden(true)
                 }
+                .frame(maxWidth: .infinity, alignment: .center)
             }
         }
-        .frame(width: 800, height: 600)
+        .background(TimerBackgroundView())
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
     }
 }
 
