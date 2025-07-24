@@ -8,7 +8,7 @@
 import CoreML
 import Foundation
 
-struct ModelLoader {
+enum ModelLoader {
     static func loadModel() -> MLModel? {
         let fileManager = FileManager.default
         let url = loadModelURL()
