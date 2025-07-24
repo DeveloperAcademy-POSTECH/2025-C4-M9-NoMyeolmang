@@ -18,14 +18,6 @@ struct FeedbackView: View {
                 .scaledToFill()
                 .ignoresSafeArea()
             
-            // 배경 확정 시 삭제 예정
-            Image("planet")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 450, height: 176)
-                .blur(radius: 10)
-                .offset(y: 120)
-            
             RoundedRectangle(cornerRadius: 10)
                 .fill(Color.white.opacity(0.14))
                 .frame(width: 600, height: 400)
