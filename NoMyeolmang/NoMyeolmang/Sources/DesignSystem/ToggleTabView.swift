@@ -23,10 +23,7 @@ struct ToggleTabView: View {
                 .frame(width: 110, height: 32)
                 .offset(x: isRecommendedSelected ? 5 : 120)
                 .shadow(color: Color.black.opacity(0.25), radius: 7, x: 0, y: 0)
-                .animation(.easeInOut(duration: 0.2), value: isRecommendedSelected) // 임시 애니메이션으로, 디자이너와 협의 예정
-//                .animation(.spring(response: 0.3, dampingFraction: 0.6), value: isRecommendedSelected)
-//                .animation(.easeOut(duration: 0.18), value: isRecommendedSelected)
-//                .animation(.linear(duration: 0.15), value: isRecommendedSelected)
+                .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isRecommendedSelected)
 
             HStack {
                 Spacer().frame(width: 34.5)

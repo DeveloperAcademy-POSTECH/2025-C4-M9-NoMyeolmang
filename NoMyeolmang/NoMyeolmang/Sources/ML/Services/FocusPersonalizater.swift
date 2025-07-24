@@ -185,7 +185,7 @@ final class FocusPersonalizater: Personalizater {
                 trainingData: batchProvider,
                 configuration: configutaion,
                 progressHandlers: handlers
-            )
+             )
             return updateTask
         } catch {
             print("❌ UpdateTask 생성 오류: \(error)")
