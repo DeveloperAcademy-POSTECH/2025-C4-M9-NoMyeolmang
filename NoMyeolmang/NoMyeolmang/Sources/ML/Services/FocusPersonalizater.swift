@@ -7,10 +7,10 @@
 
 import CoreML
 
-class FocusPersonalizater: Personalizater {
+final class FocusPersonalizater: Personalizater {
     private let modelURL: URL
 
-    required init(modelURL: URL) {
+    init(modelURL: URL) {
         self.modelURL = modelURL
     }
 
@@ -30,7 +30,7 @@ class FocusPersonalizater: Personalizater {
         return true
     }
 
-    func makeBatchProvider(from userTrainingDataList: [UserTrainingData])
+    private func makeBatchProvider(from userTrainingDataList: [UserTrainingData])
         -> MLArrayBatchProvider
     {
         var featureProviders: [MLFeatureProvider] = []
@@ -64,7 +64,7 @@ class FocusPersonalizater: Personalizater {
         return MLArrayBatchProvider(array: featureProviders)
     }
 
-    func checkBatchProvider(batchProvider: MLArrayBatchProvider) {
+    private func checkBatchProvider(batchProvider: MLArrayBatchProvider) {
         print("📦 batchProvider 전체 샘플 수: \(batchProvider.count)")
 
         for i in 0..<batchProvider.count {
@@ -81,7 +81,7 @@ class FocusPersonalizater: Personalizater {
         }
     }
 
-    func makeMultiArray(data: UserTrainingData) -> (
+    private func makeMultiArray(data: UserTrainingData) -> (
         input: MLMultiArray, label: MLMultiArray
     )? {
         guard let inputArray = self.makeInputMultiArray(data: data.features),
@@ -124,7 +124,7 @@ class FocusPersonalizater: Personalizater {
         return inputArray
     }
 
-    func makeLabelMultiArray(data: Double) -> MLMultiArray? {
+    private func makeLabelMultiArray(data: Double) -> MLMultiArray? {
         do {
             let labelArray = try MLMultiArray(shape: [1], dataType: .float32)
             labelArray[0] = NSNumber(
@@ -137,7 +137,7 @@ class FocusPersonalizater: Personalizater {
         }
     }
 
-    func makeFeatureValue(input: MLMultiArray, label: MLMultiArray) -> (
+    private func makeFeatureValue(input: MLMultiArray, label: MLMultiArray) -> (
         input: MLFeatureValue, label: MLFeatureValue
     ) {
         let inputValue = MLFeatureValue(multiArray: input)
@@ -145,7 +145,7 @@ class FocusPersonalizater: Personalizater {
         return (input: inputValue, label: labelValue)
     }
 
-    func makeFeatureProvider(input: MLFeatureValue, label: MLFeatureValue)
+    private func makeFeatureProvider(input: MLFeatureValue, label: MLFeatureValue)
         -> MLFeatureProvider?
     {
         let dict: [String: MLFeatureValue] = [
@@ -155,7 +155,7 @@ class FocusPersonalizater: Personalizater {
         return featureProvider
     }
 
-    func makeUpdateTask(
+    private func makeUpdateTask(
         batchProvider: MLArrayBatchProvider
     ) -> MLUpdateTask? {
 
@@ -193,7 +193,7 @@ class FocusPersonalizater: Personalizater {
         }
     }
 
-    func saveUpdatedModel(context: MLUpdateContext) {
+    private func saveUpdatedModel(context: MLUpdateContext) {
         let updatedModel = context.model
 
         do {
