@@ -15,35 +15,41 @@ struct GuidanceTooltipView: View {
     let bubbleImageName: String
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Text(text)
-                .textStyle(GSFont.Regular12)
-                .foregroundColor(.white)
-
-            HStack {
-                Button("확인", action: onConfirm)
-                    .textStyle(GSFont.SemiBold14)
-                    .foregroundColor(Color("7243D4"))
-
-                Spacer()
-
-                Text("\(step)/\(total)")
-                    .font(.system(size: 13))
-                    .foregroundColor(.white.opacity(0.6))
-            }
-        }
-        .padding(14)
-        .background(
+        ZStack(alignment: .topLeading) {
             Image(bubbleImageName)
                 .resizable()
-                .renderingMode(.template)
-                .foregroundColor(Color.white.opacity(0.1))
-        )
-        .frame(width: 220)
+                .frame(width: 196, height: bubbleImageName == "tooltipBubble2" ? 101 : 83)
+            
+            VStack(alignment: .leading, spacing: 0) {
+                Text(text)
+                    .textStyle(GSFont.Regular12)
+                    .foregroundColor(Color("232323"))
+                    .padding(.top, 14)
+
+                HStack(spacing: 0) {
+                    Button(action: onConfirm) {
+                        Text("확인")
+                            .textStyle(GSFont.SemiBold12)
+                            .foregroundColor(Color("7243D4"))
+                    }
+                    .buttonStyle(.plain)
+
+                    Spacer()
+
+                    Text("\(step)/\(total)")
+                        .textStyle(GSFont.Regular12)
+                        .foregroundColor(Color("232323"))
+                        .padding(.trailing, 23)
+                }
+                .padding(.top, 8)
+            }
+            .padding(.leading, 14)
+        }
+        .frame(width: 196, height: bubbleImageName == "tooltipBubble2" ? 101 : 83)
     }
 }
 
-#Preview("안내 1") {
+ #Preview("안내 1") {
     ZStack {
         Color.black.ignoresSafeArea()
         GuidanceTooltipView(
@@ -53,20 +59,18 @@ struct GuidanceTooltipView: View {
             onConfirm: {},
             bubbleImageName: "tooltipBubble1"
         )
-        .offset(x: -100, y: -80)
     }
-}
+ }
 
-#Preview("안내 2") {
+ #Preview("안내 2") {
     ZStack {
         Color.black.ignoresSafeArea()
         GuidanceTooltipView(
-            text: "집중도는 탐사 종료 후 분석되어\n당신만의 리듬을 추천해드려요.",
+            text: "탐사 시작 시, 집중 정도에 따라서\n변하는 탐사 속도를 통해 집중력을 확인할 수 있습니다.",
             step: 2,
             total: 2,
             onConfirm: {},
             bubbleImageName: "tooltipBubble2"
         )
-        .offset(x: 100, y: 80)
     }
-}
+ }
