@@ -24,6 +24,7 @@ enum GSFont {
     static let SemiBold18 = GSFontStyle(font: .custom("Pretendard-SemiBold", size: 18), size: 18)
     static let SemiBold16 = GSFontStyle(font: .custom("Pretendard-SemiBold", size: 16), size: 16)
     static let SemiBold14 = GSFontStyle(font: .custom("Pretendard-SemiBold", size: 14), size: 14)
+    static let SemiBold12 = GSFontStyle(font: .custom("Pretendard-SemiBold", size: 12), size: 12)
 
     // Pretendard Regular
     static let Regular16 = GSFontStyle(font: .custom("Pretendard-Regular", size: 16), size: 16)
