@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TimerView: View {
     @EnvironmentObject var coordinator: AppCoordinator
-    @StateObject private var viewModel = TimerViewModel()
+    //@StateObject private var viewModel = TimerViewModel()
 
     var body: some View {
         GeometryReader { geo in

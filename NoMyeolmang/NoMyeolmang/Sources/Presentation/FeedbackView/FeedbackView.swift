@@ -18,16 +18,6 @@ struct FeedbackView: View {
                 .scaledToFill()
                 .ignoresSafeArea()
             
-            Image("planet")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 450, height: 176)
-                .offset(y: 120) // 상대 위치로 조정
-            
-//            BlurView(material: .hudWindow)
-//                .frame(width: 600, height: 400)
-//                .clipShape(RoundedRectangle(cornerRadius: 10))
-            
             RoundedRectangle(cornerRadius: 10)
                 .fill(Color.white.opacity(0.14))
                 .frame(width: 600, height: 400)

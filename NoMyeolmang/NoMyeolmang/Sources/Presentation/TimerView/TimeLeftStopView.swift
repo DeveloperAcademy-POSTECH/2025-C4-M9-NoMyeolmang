@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TimeLeftStopView: View {
-    @StateObject private var viewModel = TimerViewModel()
+    //@StateObject private var viewModel = TimerViewModel()
     @EnvironmentObject var coordinator: AppCoordinator
     
     var body: some View {
@@ -19,9 +19,9 @@ struct TimeLeftStopView: View {
             
             Text(
                 String(
-                    format: "%02d : %02d",
-                    viewModel.remainingTime / 60,
-                    viewModel.remainingTime % 60
+                    format: "%02d : %02d"
+//                    viewModel.remainingTime / 60,
+//                    viewModel.remainingTime % 60
                 )
             )
             .foregroundStyle(Color.white)
@@ -29,7 +29,7 @@ struct TimeLeftStopView: View {
             .tracking(-3)
             
             Button {
-                viewModel.stop()
+//                viewModel.stop()
                 coordinator.push(.timerSetting)
             } label: {
                 Image("timerstop")
