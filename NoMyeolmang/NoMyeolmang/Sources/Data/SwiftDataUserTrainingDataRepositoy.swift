@@ -34,10 +34,9 @@ final class SwiftDataUserTrainingDataRepository: UserTrainingDataRepository {
             throw error
         }
     }
-
+    
     func update(to newScore: Double, count: Int) async throws -> Bool {
-        let predicate = #Predicate<UserTrainingData> { $0.userScore == 0.0 }
-        let descriptor = makeFetchDescriptor(predicate: predicate, fetchLimit: count)
+        let descriptor = makeFetchDescriptor(fetchLimit: count)
         do {
             let results = try context.fetch(descriptor)
             results.forEach { $0.userScore = newScore }
