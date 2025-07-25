@@ -30,8 +30,19 @@ struct TimerSettingView: View {
             VStack(spacing: 0) {
                 ToggleTabView(isRecommendedSelected: $isRecommendedSelected)
                 
-                FocusTimeSetting()
-                .padding(.top, 24)
+                ZStack(alignment: .top) {
+                    FocusTimeSetting()
+                        .frame(width: 329)
+                        .padding(.top, 24)
+                    
+                    if popupStep == popupData.count || popupStep == popupData.count + 1 {
+                        GuidanceTooltipView(
+                            total: 2,
+                            onConfirm: { popupStep += 1 }
+                        )
+                        .offset(x: -265, y: 80)
+                    }
+                }
                 
                 ZStack {
                     Color.white.opacity(0.14)
@@ -53,30 +64,6 @@ struct TimerSettingView: View {
                     notice: popupData[popupStep].1,
                     onNext: { popupStep += 1 }
                 )
-            } else if popupStep == popupData.count {
-                ZStack {
-                    Color("252525")
-                        .opacity(0.8)
-                        .ignoresSafeArea()
-
-                    GuidanceTooltipView(
-                        total: 2,
-                        onConfirm: { popupStep += 1 }
-                    )
-                    .padding(.top, 300)
-                }
-            } else if popupStep == popupData.count + 1 {
-                ZStack {
-                    Color("252525")
-                        .opacity(0.8)
-                        .ignoresSafeArea()
-
-                    GuidanceTooltipView(
-                        total: 2,
-                        onConfirm: { popupStep += 1 }
-                    )
-                    .padding(.top, 300)
-                }
             }
         }
         .frame(minWidth: 800, minHeight: 600)
