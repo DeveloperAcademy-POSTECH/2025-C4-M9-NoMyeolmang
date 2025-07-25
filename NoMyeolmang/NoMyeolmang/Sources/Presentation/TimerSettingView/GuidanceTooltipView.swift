@@ -8,20 +8,20 @@
 import SwiftUI
 
 struct GuidanceTooltipView: View {
+    let step: Int
     let total: Int
     let onConfirm: () -> Void
 
-    @State private var currentStep: Int = 1
-
     var body: some View {
-        let currentImage = currentStep == 1 ? "tooltipBubble1" : "tooltipBubble2"
+        let currentImage = step == 1 ? "tooltipBubble1" : "tooltipBubble2"
+
         ZStack(alignment: .topLeading) {
             Image(currentImage)
                 .resizable()
-                .frame(width: 196, height: currentStep == 1 ? 83 : 101)
-            
+                .frame(width: 196, height: step == 1 ? 83 : 101)
+
             VStack(alignment: .leading, spacing: 0) {
-                Text(currentStep == 1
+                Text(step == 1
                      ? "학습을 진행하는 해당 시간동안\n집중력이 실시간으로 측정됩니다."
                      : "탐사 시작 시, 집중 정도에 따라서\n변하는 탐사 속도를 통해 집중력을 확인할 수 있습니다.")
                     .textStyle(GSFont.Regular12)
@@ -30,11 +30,7 @@ struct GuidanceTooltipView: View {
 
                 HStack(spacing: 0) {
                     Button(action: {
-                        if currentStep < total {
-                            currentStep += 1
-                        } else {
-                            onConfirm()
-                        }
+                        onConfirm()
                     }) {
                         Text("확인")
                             .textStyle(GSFont.SemiBold12)
@@ -44,7 +40,7 @@ struct GuidanceTooltipView: View {
 
                     Spacer()
 
-                    Text("\(currentStep)/\(total)")
+                    Text("\(step)/\(total)")
                         .textStyle(GSFont.Regular12)
                         .foregroundColor(Color("232323"))
                         .padding(.trailing, 23)
@@ -53,16 +49,16 @@ struct GuidanceTooltipView: View {
             }
             .padding(.leading, 14)
         }
-        .frame(width: 196, height: currentStep == 1 ? 83 : 101)
+        .frame(width: 196, height: step == 1 ? 83 : 101)
     }
 }
 
- #Preview("안내") {
-    ZStack {
-        Color.black.ignoresSafeArea()
-        GuidanceTooltipView(
-            total: 2,
-            onConfirm: {}
-        )
-    }
- }
+// #Preview("안내") {
+//    ZStack {
+//        Color.black.ignoresSafeArea()
+//        GuidanceTooltipView(
+//            total: 2,
+//            onConfirm: {}
+//        )
+//    }
+// }

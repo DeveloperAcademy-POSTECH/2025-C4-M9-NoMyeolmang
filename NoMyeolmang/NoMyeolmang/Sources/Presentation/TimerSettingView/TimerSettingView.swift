@@ -18,7 +18,6 @@ struct TimerSettingView: View {
     ]
     
     var body: some View {
-        let boxSize = CGSize(width: 329, height: 161)
         
         ZStack {
             Image("SpaceshipBackground")
@@ -35,20 +34,24 @@ struct TimerSettingView: View {
                         .frame(width: 329)
                         .padding(.top, 24)
                     
-                    if popupStep == popupData.count || popupStep == popupData.count + 1 {
+                    if popupStep == popupData.count {
                         GuidanceTooltipView(
+                            step: 1,
                             total: 2,
                             onConfirm: { popupStep += 1 }
                         )
                         .offset(x: -265, y: 80)
+                    } else if popupStep == popupData.count + 1 {
+                        GuidanceTooltipView(
+                            step: 2,
+                            total: 2,
+                            onConfirm: { popupStep += 1 }
+                        )
+                        .offset(x: -225, y: 165)
                     }
                 }
                 
                 ZStack {
-                    Color.white.opacity(0.14)
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                        .frame(width: 250, height: 44)
-                    
                     GSButton(title: "집중 시작하기", width: 250) {
                         coordinator.push(.timer)
                     }
