@@ -15,7 +15,7 @@ struct PopoverView: View {
     var body: some View {
         VStack(spacing: 20) {
             if isStopped {
-                Text("타이머가 멈췄을 때의 뷰를 보여줄 수 있음")
+                Text("타이머 멈췄을 때의\n뷰는 여기")
                     .textStyle(GSFont.SemiBold18)
             } else {
                 Text("🌠🎸")

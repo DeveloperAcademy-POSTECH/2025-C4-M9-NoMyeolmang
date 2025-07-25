@@ -26,6 +26,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 },
                 onStop: {
                     self.countdownTimer?.invalidate()
+                    self.countdownTimer = nil
                     self.statusItem?.button?.title = "Stopped" // Done 으로 처리되지만 우선 작업 시 편의를 위해 Stopped에서 수정하지 않음
                 }
             )
@@ -52,6 +53,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     func startCountdown() {
+        if countdownTimer != nil {
+            return
+        }
+
         updateStatusItemTitle()
 
         countdownTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
@@ -60,6 +65,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
             if self.remainingSeconds <= 0 {
                 self.countdownTimer?.invalidate()
+                self.countdownTimer = nil
                 self.statusItem?.button?.title = "Done" // 타이머 끝나면 어떻게 보여줄건지 확인하기
             }
         }
