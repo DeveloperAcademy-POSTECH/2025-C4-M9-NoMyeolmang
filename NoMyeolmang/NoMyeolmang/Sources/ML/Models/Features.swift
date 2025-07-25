@@ -2,10 +2,10 @@
 //  Featrues.swift
 //  NoMyeolmang
 //
-//  Created by Muchan Kim on 7/23/25.
+//  Updated by Moo on 7/25/25.
 //
 
-struct Features: Codable {
+struct Features: Codable, Sendable {
     let blinkCountPerMin: Double
     let faceBodyPresent: Double
     let phonePresent: Double
