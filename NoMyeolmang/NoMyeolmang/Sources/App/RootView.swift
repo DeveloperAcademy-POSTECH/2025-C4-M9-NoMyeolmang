@@ -26,5 +26,6 @@ struct RootView: View {
                     }
                 }
         }
+        .frame(minWidth: 800, minHeight: 600)
     }
 }

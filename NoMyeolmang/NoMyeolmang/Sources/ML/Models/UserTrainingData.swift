@@ -2,14 +2,14 @@
 //  UserTrainingData.swift
 //  NoMyeolmang
 //
-//  Created by Muchan Kim on 7/23/25.
+//  Updated by Moo on 7/25/25.
 //
 
 import Foundation
 import SwiftData
 
 @Model
-final class UserTrainingData {
+final class UserTrainingData: Sendable {
     var features: Features
     var predictedScore: Double
     var userScore: Double

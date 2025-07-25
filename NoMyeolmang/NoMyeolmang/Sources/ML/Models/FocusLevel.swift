@@ -7,12 +7,12 @@
 
 import Foundation
 
-enum FocusLevel: Int, CaseIterable, Identifiable {
-    case lv1 = 1
-    case lv2 = 2
-    case lv3 = 3
-    case lv4 = 4
-    case lv5 = 5
+enum FocusLevel: Double, CaseIterable, Identifiable {
+    case lv1 = 1.0
+    case lv2 = 2.0
+    case lv3 = 3.0
+    case lv4 = 4.0
+    case lv5 = 5.0
 
     func tickSpeed() -> Double {
         switch self {
@@ -24,9 +24,9 @@ enum FocusLevel: Int, CaseIterable, Identifiable {
         }
     }
     
-    static func from(rawValue: Int) -> FocusLevel? {
+    static func from(rawValue: Double) -> FocusLevel? {
         return FocusLevel(rawValue: rawValue)
     }
     
-    var id: Int { rawValue }
+    var id: Double { rawValue }
 }
