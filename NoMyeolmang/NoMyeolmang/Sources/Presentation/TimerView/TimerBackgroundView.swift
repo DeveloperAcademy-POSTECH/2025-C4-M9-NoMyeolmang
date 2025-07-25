@@ -8,16 +8,24 @@
 import SwiftUI
 
 struct TimerBackgroundView: View {
-    // 이미지 높이
+    // MARK: 이미지 크기 따라 값 바꿔줄것
+    // 이미지 크기
     let imageHeight: CGFloat = 4000
-    // 화면 높이 -> geometry로 받아오도록 수정하기
-    @State private var screenHeight: CGFloat = 650
+    let imageWidth: CGFloat = 1512
+    
+    // 화면 크기
+    @State private var screenHeight: CGFloat = 600
+    @State private var screenWidth: CGFloat = 800
+    
+    // 표시되는 이미지 크기
+    @State private var displayWidth: CGFloat = 0
+    @State private var displayHeight: CGFloat = 0
+    
     // 애니메이션 진행 상태
     @State private var offsetY: CGFloat = 0
+    
     // 타이머
     @State private var timer: Timer?
-    // 최초 위치
-    @State private var initialOffsetY: CGFloat = 0
         
     // 전체 애니메이션 시간 (초) -> 100% 기준속도 기록해두기
     @State private var duration: Double = 12
@@ -28,38 +36,68 @@ struct TimerBackgroundView: View {
                 Image("timerBackground")
                     .resizable()
                     .scaledToFill()
-                    .frame(height: imageHeight)
+                    .frame(width: geo.size.width, height: geo.size.height)
                     .offset(y: offsetY)
+                    .clipped()
                     .onAppear {
-                        startLoopingAnimation(screenHeight: geo.size.height)
+                        checkInitialPosition(screenSize: geo.size)
+                        startLoopingAnimation()
                     }
                     .onDisappear {
                         timer?.invalidate()
                     }
+                    .onChange(of: geo.size) { oldSize, newSize in
+                        timer?.invalidate()
+                        checkInitialPosition(screenSize: newSize)
+                        startLoopingAnimation()
+                    }
             }
-            .clipped()
         }
-        .frame(maxWidth: .infinity, alignment: .center)
         .ignoresSafeArea()
+        //.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+    }
+    
+    func checkInitialPosition(screenSize: CGSize) {
+        screenWidth = screenSize.width
+        screenHeight = screenSize.height
+        
+        let imageAspectRatio = imageWidth / imageHeight
+        let screenAspectRatio = screenWidth / screenHeight
+        
+        if imageAspectRatio > screenAspectRatio {
+            // 이미지가 더 넓은 경우: 높이에 맞춤
+            displayHeight = screenHeight
+            displayWidth = displayHeight * imageAspectRatio
+        } else {
+            // 이미지가 더 좁은 경우: 너비에 맞춤
+            displayWidth = screenWidth
+            displayHeight = displayWidth / imageAspectRatio
+        }
+
+        // 이미지 하단 = 화면 하단
+        offsetY = -(displayHeight - screenHeight) / 2
     }
             
-    func startLoopingAnimation(screenHeight: CGFloat) {
-        // 한 번에 이동해야 하는 거리
-        let totalMove = imageHeight - screenHeight
+    func startLoopingAnimation() {
+        // 이미지 하단 = 화면 하단
+        let startY = -(displayHeight - screenHeight) / 2
+        // 이미지 상단 = 화면 상단
+        let endY = (displayHeight - screenHeight) / 2
+        
+        offsetY = startY
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 1/60, repeats: true) { _ in
+            // 이동 거리
+            let totalDistance = endY - startY
+            let movePerFrame = totalDistance / (duration * 60)
             
-        offsetY = -totalMove
-        // 1초마다 업데이트
-        timer = Timer
-            .scheduledTimer(withTimeInterval: 1/60, repeats: true) { _ in
-                // 1프레임당 이동 거리
-                let movePerFrame = totalMove / (duration * 60)
-                offsetY += movePerFrame
-                // 이미지가 끝까지 올라가면 다시 시작
-                if offsetY >= 0 {
-                    offsetY = -totalMove
-                    duration = 25
-                }
+            offsetY += movePerFrame
+            
+            // 다시시작!
+            if offsetY >= endY {
+                offsetY = startY
             }
+        }
     }
 }
 
