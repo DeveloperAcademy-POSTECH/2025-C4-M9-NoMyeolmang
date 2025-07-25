@@ -19,16 +19,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         popover.behavior = .transient
         popover.contentViewController = NSViewController()
         popover.contentViewController?.view = NSHostingView(
-            rootView: PopoverView(onStart: {
-                self.popover.performClose(nil)
-                self.startCountdown()
-            })
+            rootView: PopoverView(
+                onStart: {
+                    self.popover.performClose(nil)
+                    self.startCountdown()
+                },
+                onStop: {
+                    self.countdownTimer?.invalidate()
+                    self.statusItem?.button?.title = "Stopped" // Done 으로 처리되지만 우선 작업 시 편의를 위해 Stopped에서 수정하지 않음
+                }
+            )
         )
 
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 
         if let button = statusItem?.button {
-            button.image = NSImage(systemSymbolName: "star.fill", accessibilityDescription: "상단바 아이콘 변경 예정")
+            button.image = NSImage(systemSymbolName: "star.fill", accessibilityDescription: "상단바 아이콘 변경 예정, 확정 시 의미 담기")
             button.action = #selector(togglePopover(_:))
             button.target = self
             button.image?.isTemplate = true
@@ -41,7 +47,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             popover.performClose(sender)
         } else {
             popover.contentSize = NSSize(width: 230, height: 270)
-            popover.show(relativeTo: .zero, of: button, preferredEdge: .minY)
+            popover.behavior = .transient
+            popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
         }
     }
     func startCountdown() {

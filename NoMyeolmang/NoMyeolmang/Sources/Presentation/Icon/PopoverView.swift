@@ -9,13 +9,24 @@ import SwiftUI
 
 struct PopoverView: View {
     var onStart: () -> Void
+    var onStop: () -> Void
+    @State private var isStopped = false
 
     var body: some View {
         VStack(spacing: 20) {
-            Text("🌠🎸")
-                .textStyle(GSFont.SemiBold18)
-            Button("시작하기") {
-                onStart() // 타이머뷰에도 담아야함 (다른 브랜치에서 작업 예정)
+            if isStopped {
+                Text("타이머가 멈췄을 때의 뷰를 보여줄 수 있음")
+                    .textStyle(GSFont.SemiBold18)
+            } else {
+                Text("🌠🎸")
+                    .textStyle(GSFont.SemiBold18)
+                Button("시작하기") {
+                    onStart()
+                }
+                Button("멈추기") {
+                    isStopped = true
+                    onStop()
+                }
             }
         }
         .frame(width: 230, height: 270)
