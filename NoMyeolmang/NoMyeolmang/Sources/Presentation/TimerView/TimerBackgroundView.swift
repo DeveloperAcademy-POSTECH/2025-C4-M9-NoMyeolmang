@@ -10,7 +10,7 @@ import SwiftUI
 struct TimerBackgroundView: View {
     // MARK: 이미지 크기 따라 값 바꿔줄것
     // 이미지 크기
-    let imageHeight: CGFloat = 4000
+    let imageHeight: CGFloat = 6140
     let imageWidth: CGFloat = 1512
     
     // 화면 크기
