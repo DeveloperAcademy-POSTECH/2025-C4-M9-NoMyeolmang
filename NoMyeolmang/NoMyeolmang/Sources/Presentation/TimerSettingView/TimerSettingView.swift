@@ -39,19 +39,11 @@ struct TimerSettingView: View {
                         .padding(.top, 24)
                     
                     if popupStep == popupData.count {
-                        GuidanceTooltipView(
-                            step: 1,
+                        GuidanceTooltipViewStep1(
                             total: 2,
                             onConfirm: { popupStep += 1 }
                         )
                         .offset(x: -265, y: 80)
-                    } else if popupStep == popupData.count + 1 {
-                        GuidanceTooltipView(
-                            step: 2,
-                            total: 2,
-                            onConfirm: { popupStep += 1 }
-                        )
-                        .offset(x: -225, y: 165)
                     }
                 }
                 
@@ -60,6 +52,18 @@ struct TimerSettingView: View {
                         coordinator.push(.timer)
                     }
                 }
+                .overlay(
+                    Group {
+                        if popupStep == popupData.count + 1 {
+                            GuidanceTooltipViewStep2(
+                                total: 2,
+                                onConfirm: { popupStep += 1 }
+                            )
+                            .offset(x: 0, y: 0)
+                        }
+                    },
+                    alignment: .top
+                )
                 .padding(.top, 39)
             }
             .padding(.top, 95)
