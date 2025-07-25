@@ -59,7 +59,7 @@ struct TimerSettingView: View {
                                 total: 2,
                                 onConfirm: { popupStep += 1 }
                             )
-                            .offset(x: 0, y: 0)
+                            .offset(x: -225, y: -60)
                         }
                     },
                     alignment: .top
