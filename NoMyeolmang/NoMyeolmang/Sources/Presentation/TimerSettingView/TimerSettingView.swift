@@ -20,6 +20,10 @@ struct TimerSettingView: View {
     var body: some View {
         
         ZStack {
+            Color("252525")
+                .opacity(0.55)
+                .edgesIgnoringSafeArea(.all)
+            
             Image("SpaceshipBackground")
                 .resizable()
                 .ignoresSafeArea()
