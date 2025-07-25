@@ -79,6 +79,30 @@ struct TimerSettingView: View {
                     notice: popupData[popupStep].1,
                     onNext: { popupStep += 1 }
                 )
+            } else if popupStep == popupData.count {
+                ZStack {
+                    Color("252525")
+                        .opacity(0.8)
+                        .ignoresSafeArea()
+
+                    GuidanceTooltipView(
+                        total: 2,
+                        onConfirm: { popupStep += 1 }
+                    )
+                    .padding(.top, 300)
+                }
+            } else if popupStep == popupData.count + 1 {
+                ZStack {
+                    Color("252525")
+                        .opacity(0.8)
+                        .ignoresSafeArea()
+
+                    GuidanceTooltipView(
+                        total: 2,
+                        onConfirm: { popupStep += 1 }
+                    )
+                    .padding(.top, 300)
+                }
             }
         }
         .frame(minWidth: 800, minHeight: 600)

@@ -8,26 +8,34 @@
 import SwiftUI
 
 struct GuidanceTooltipView: View {
-    let text: String
-    let step: Int
     let total: Int
     let onConfirm: () -> Void
-    let bubbleImageName: String
+
+    @State private var currentStep: Int = 1
 
     var body: some View {
+        let currentImage = currentStep == 1 ? "tooltipBubble1" : "tooltipBubble2"
         ZStack(alignment: .topLeading) {
-            Image(bubbleImageName)
+            Image(currentImage)
                 .resizable()
-                .frame(width: 196, height: bubbleImageName == "tooltipBubble2" ? 101 : 83)
+                .frame(width: 196, height: currentStep == 1 ? 83 : 101)
             
             VStack(alignment: .leading, spacing: 0) {
-                Text(text)
+                Text(currentStep == 1
+                     ? "학습을 진행하는 해당 시간동안\n집중력이 실시간으로 측정됩니다."
+                     : "탐사 시작 시, 집중 정도에 따라서\n변하는 탐사 속도를 통해 집중력을 확인할 수 있습니다.")
                     .textStyle(GSFont.Regular12)
                     .foregroundColor(Color("232323"))
                     .padding(.top, 14)
 
                 HStack(spacing: 0) {
-                    Button(action: onConfirm) {
+                    Button(action: {
+                        if currentStep < total {
+                            currentStep += 1
+                        } else {
+                            onConfirm()
+                        }
+                    }) {
                         Text("확인")
                             .textStyle(GSFont.SemiBold12)
                             .foregroundColor(Color("7243D4"))
@@ -36,7 +44,7 @@ struct GuidanceTooltipView: View {
 
                     Spacer()
 
-                    Text("\(step)/\(total)")
+                    Text("\(currentStep)/\(total)")
                         .textStyle(GSFont.Regular12)
                         .foregroundColor(Color("232323"))
                         .padding(.trailing, 23)
@@ -45,32 +53,16 @@ struct GuidanceTooltipView: View {
             }
             .padding(.leading, 14)
         }
-        .frame(width: 196, height: bubbleImageName == "tooltipBubble2" ? 101 : 83)
+        .frame(width: 196, height: currentStep == 1 ? 83 : 101)
     }
 }
 
- #Preview("안내 1") {
+ #Preview("안내") {
     ZStack {
         Color.black.ignoresSafeArea()
         GuidanceTooltipView(
-            text: "학습을 진행하는 해당 시간동안\n집중력이 실시간으로 측정됩니다.",
-            step: 1,
             total: 2,
-            onConfirm: {},
-            bubbleImageName: "tooltipBubble1"
-        )
-    }
- }
-
- #Preview("안내 2") {
-    ZStack {
-        Color.black.ignoresSafeArea()
-        GuidanceTooltipView(
-            text: "탐사 시작 시, 집중 정도에 따라서\n변하는 탐사 속도를 통해 집중력을 확인할 수 있습니다.",
-            step: 2,
-            total: 2,
-            onConfirm: {},
-            bubbleImageName: "tooltipBubble2"
+            onConfirm: {}
         )
     }
  }
