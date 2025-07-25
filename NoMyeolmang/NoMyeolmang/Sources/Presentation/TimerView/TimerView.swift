@@ -15,7 +15,6 @@ struct TimerView: View {
         GeometryReader { geo in
             ZStack(alignment: .center) {
                 SpaceshipView()
-                    .offset(y: geo.size.height * 0.15)
                     .frame(maxWidth: .infinity, alignment: .center)
                 VStack(alignment: .center) {
                     TimeLeftStopView()
@@ -26,9 +25,9 @@ struct TimerView: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .center)
             }
+            .frame(width: geo.size.width, height: geo.size.height)
         }
         .background(TimerBackgroundView())
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
     }
 }
 

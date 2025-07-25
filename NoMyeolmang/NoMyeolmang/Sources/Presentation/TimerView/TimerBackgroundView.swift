@@ -28,8 +28,8 @@ struct TimerBackgroundView: View {
     @State private var timer: Timer?
         
     // 전체 애니메이션 시간 (초) -> 100% 기준속도 기록해두기
-    @State private var duration: Double = 12
-
+    @State private var duration: Double = 30
+    
     var body: some View {
         GeometryReader { geo in
             ZStack(alignment: .center) {
@@ -54,7 +54,6 @@ struct TimerBackgroundView: View {
             }
         }
         .ignoresSafeArea()
-        //.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
     }
     
     func checkInitialPosition(screenSize: CGSize) {
