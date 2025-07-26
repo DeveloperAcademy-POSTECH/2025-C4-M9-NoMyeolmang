@@ -17,8 +17,7 @@ final class FeedbackViewModel: ObservableObject {
     @Published var selectedIndex: Int?
     let recordCount = 10
 
-    init(repository: UserTrainingDataRepository, personalizater: Personalizater)
-    {
+    init(repository: UserTrainingDataRepository, personalizater: Personalizater) {
         self.repository = repository
         self.personalizater = personalizater
     }
@@ -60,11 +59,10 @@ final class FeedbackViewModel: ObservableObject {
             }
             
             // 개인화 모듈에 넘겨주기
-            let isPersonalized = personalizater.run(from: recentDataList)
+            let isPersonalized = try await personalizater.run(from: recentDataList)
             
             print("✅ 개인화 성공!")
             return isPersonalized
-            
         } catch {
             print("❌ 에러: \(error.localizedDescription)")
             return false
