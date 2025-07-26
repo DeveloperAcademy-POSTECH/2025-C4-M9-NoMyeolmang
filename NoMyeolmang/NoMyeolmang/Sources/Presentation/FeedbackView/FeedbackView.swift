@@ -46,10 +46,8 @@ struct FeedbackView: View {
                 GSButton(title: "탐사시간 확인하러 가기", width: 250) {
                     Task {
                         do {
-                            try await viewModel.updateTrainingData()
-                            try await viewModel.personalizing()
-                        } catch {
-                            print("실패")
+                            let isUpdated = await viewModel.updateTrainingData()
+                            let isPersonalized = await viewModel.personalizing()
                         }
                     }
                     coordinator.push(.report)

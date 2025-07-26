@@ -42,7 +42,7 @@ struct HoverRatingView: View {
                         .onHover { hovering in
                             hoveredIndex = hovering ? number : nil
                         }
-                        .onTapGesture{
+                        .onTapGesture {
                             selectedIndex = number
                         }
 

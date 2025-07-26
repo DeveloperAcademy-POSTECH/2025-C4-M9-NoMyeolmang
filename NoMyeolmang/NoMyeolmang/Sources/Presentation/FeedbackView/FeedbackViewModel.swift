@@ -55,12 +55,13 @@ class FeedbackViewModel: ObservableObject {
         }
     }
 
+    @MainActor
     func personalizing() async -> Bool {
-
+        
         do {
             // recentData 불러오기
             let recentDataList = try await repository.fetch(count: recordCount)
-
+            
             // recentData에 정답값이 0.0이 아닌지 확인
             let allNonZero = recentDataList.allSatisfy { $0.userScore != 0.0 }
             if !allNonZero {
@@ -69,16 +70,12 @@ class FeedbackViewModel: ObservableObject {
             }
             
             // 개인화 모듈에 넘겨주기
-            personalizater.run(from: recentDataList)
-
+            let isPersonalized = personalizater.run(from: recentDataList)
+            return isPersonalized
             
         } catch {
             print("❌ 에러: \(error.localizedDescription)")
             return false
         }
-        // 성공하면 성공 print
-        print("✅ 개인화 성공!")
-        return true
     }
-
 }
