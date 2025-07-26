@@ -18,23 +18,28 @@ class ReportViewModel: ObservableObject {
     @Published var earthTime = ""
     @Published var focusTime = ""
     
-    func calMaxDistance() {
+    func calMaxDistance() -> Int {
         maxDistance = actualTime * 2 / 60
+        return maxDistance
     }
     
-    func calReachedDistance() {
+    func calReachedDistance() -> Int {
         reachedDistance = virtualTime / 60
+        return reachedDistance
     }
     
-    func calReachedRatio() {
+    func calReachedRatio() -> Int {
         reachedRatio = reachedDistance * 100 / maxDistance
+        return reachedRatio
     }
     
-    func calEarthTime() {
+    func calEarthTime() -> String {
         earthTime = String(format: "%02d:%02d", actualTime / 60, actualTime % 60)
+        return earthTime
     }
     
-    func calFocusTime() {
+    func calFocusTime() -> String {
         focusTime = String(format: "%02d:%02d", virtualTime / 60, virtualTime % 60)
+        return focusTime
     }
 }
