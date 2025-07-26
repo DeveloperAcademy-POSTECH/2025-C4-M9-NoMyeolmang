@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TimerBackgroundView: View {
+    let animationDuration: Double
     // MARK: 이미지 크기 따라 값 바꿔줄것
     // 이미지 크기
     let imageHeight: CGFloat = 6140
@@ -26,9 +27,6 @@ struct TimerBackgroundView: View {
     
     // 타이머
     @State private var timer: Timer?
-        
-    // 전체 애니메이션 시간 (초) -> 100% 기준속도 기록해두기
-    @State private var duration: Double = 30
     
     var body: some View {
         GeometryReader { geo in
@@ -88,7 +86,7 @@ struct TimerBackgroundView: View {
         timer = Timer.scheduledTimer(withTimeInterval: 1/60, repeats: true) { _ in
             // 이동 거리
             let totalDistance = endY - startY
-            let movePerFrame = totalDistance / (duration * 60)
+            let movePerFrame = totalDistance / (animationDuration * 60)
             
             offsetY += movePerFrame
             
@@ -101,5 +99,5 @@ struct TimerBackgroundView: View {
 }
 
 #Preview {
-    TimerBackgroundView()
+    TimerBackgroundView(animationDuration: 30.0)
 }
