@@ -5,12 +5,20 @@
 //  Created by 김소원 on 7/26/25.
 //
 
-import SwiftUI
+import Foundation
 import Combine
+import SwiftUI
 
 struct PersonalTimerSettingView: View {
-    @State private var newGoalTime: Int?
-    @State private var inputText: String = ""
+    @State private var newGoalTimeText: String = ""
+    private let numberFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .none
+        formatter.maximum = 999
+        formatter.generatesDecimalNumbers = false
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        return formatter
+    }()
     @FocusState private var isTextFieldFocused: Bool
 
     var body: some View {
@@ -24,39 +32,27 @@ struct PersonalTimerSettingView: View {
 
             HStack(spacing: 0) {
                 HStack(alignment: .firstTextBaseline, spacing: 0) {
-                    TextField(
-                        "",
-                        text: $inputText
-                    )
-                    .multilineTextAlignment(.center)
-                    .textStyle(GSFont.SemiBold24)
-                    .foregroundColor(.white)
-                    .background(Color.clear)
-                    .textFieldStyle(PlainTextFieldStyle())
-                    .focused($isTextFieldFocused)
-                    .onAppear {
-                        isTextFieldFocused = true
-                    }
-                    .accentColor(.white)
-                    .frame(minWidth: 20, minHeight: 32)
-                    .fixedSize()
-                    .onChange(of: inputText) { newValue in
-                        let filtered = newValue.filter { "0123456789".contains($0) }
-                        guard filtered == newValue else { return }
-                        if let number = Int(filtered.prefix(3)) {
-                            newGoalTime = number
-                        } else {
-                            newGoalTime = nil
+                    TextField("", text: $newGoalTimeText)
+                        .onChange(of: newGoalTimeText) { newValue in
+                            let filtered = newValue.filter { $0.isNumber }
+                            if filtered != newValue {
+                                newGoalTimeText = filtered
+                            }
                         }
-                    }
-                    .onReceive(Just(inputText)) { newValue in
-                        let filtered = newValue.filter { "0123456789".contains($0) }
-                        if filtered != newValue {
-                            inputText = filtered
+                        .multilineTextAlignment(.center)
+                        .textStyle(GSFont.SemiBold24)
+                        .foregroundColor(.white)
+                        .background(Color.clear)
+                        .textFieldStyle(PlainTextFieldStyle())
+                        .focused($isTextFieldFocused)
+                        .onAppear {
+                            isTextFieldFocused = true
                         }
-                    }
+                        .accentColor(.white)
+                        .frame(minWidth: 20, minHeight: 32)
+                        .fixedSize()
 
-                    if newGoalTime != nil {
+                    if let value = Int(newGoalTimeText) {
                         Text("분")
                             .textStyle(GSFont.SemiBold24)
                             .foregroundColor(.white)
