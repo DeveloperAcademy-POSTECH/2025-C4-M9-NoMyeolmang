@@ -10,6 +10,7 @@ import SwiftUI
 struct OnboardingView: View {
     @Binding var showOnboarding: Bool
     @State private var popupStep: Int = 0
+
     let popupData: [(String, String)] = [
         ("끊기지 않는 학습 리듬을 위해", "눈 깜빡임, 하품 같은 몸의 반응을 분석해\n몰입 상태를 실시간으로 알려드려요.\n집중력이 떨어지는 순간, 다시 몰입을 도와드릴게요."),
         ("영상은 저장되지 않아요", "얼굴을 촬영하거나 영상을 저장하지 않아요.\n모든 분석은 기기 내에서만 이루어지며.\n오직 집중을 돕기 위해서 사용해요."),
@@ -18,67 +19,25 @@ struct OnboardingView: View {
 
     var body: some View {
         ZStack {
-            Image("SpaceshipBackground")
-                .resizable()
-                .ignoresSafeArea()
-                .scaledToFill()
-                .zIndex(0)
+            OnboardingContainerView(popupStep: popupStep)
 
-            if popupStep == popupData.count || popupStep == popupData.count + 1 {
-                ZStack {
-                    Color.clear
-                        .background(
-                            Color("252525")
-                                .opacity(0.55)
-                        )
-                        .ignoresSafeArea()
-                        .zIndex(0.05)
-                }
-            }
+            OnboardingMainContentView(
+                popupStep: popupStep,
+                popupDataCount: popupData.count
+            )
 
-            VStack(spacing: 0) {
-                ToggleTabView(isRecommendedSelected: .constant(true))
-                    .opacity((popupStep == popupData.count || popupStep == popupData.count + 1) ? 0.3 : 1)
-                    .zIndex(popupStep == popupData.count ? 0.6 : 0)
-
-                FocusTimeSetting()
-                    .frame(width: 329)
-                    .padding(.top, 24)
-                    .opacity(popupStep == popupData.count ? 1 : 0.3)
-                    .zIndex(popupStep == popupData.count ? 99 : 0)
-
-                GSButton(title: "집중 시작하기", width: 250) {
-                }
-                .padding(.top, 39)
-                .opacity(popupStep == popupData.count + 1 ? 1 : 0.3)
-                .zIndex(popupStep == popupData.count + 1 ? 99 : 0)
-            }
-            .padding(.top, 95)
-            .padding(.bottom, 200)
-
-            if popupStep < popupData.count {
-                PopupGuideView(
-                    message: popupData[popupStep].0,
-                    notice: popupData[popupStep].1,
-                    onNext: { popupStep += 1 }
-                )
-            } else if popupStep == popupData.count {
-                GuidanceTooltipViewStep1(
-                    total: 2,
-                    onConfirm: { popupStep += 1 }
-                )
-                .offset(x: -265, y: -50)
-                .zIndex(99)
-            } else if popupStep == popupData.count + 1 {
-                GuidanceTooltipViewStep2(
-                    total: 2,
-                    onConfirm: {
-                        showOnboarding = false
+            OnboardingPopupOverlay(
+                popupStep: popupStep,
+                popupData: popupData,
+                onAdvance: {
+                    if popupStep < popupData.count + 1 {
+                        popupStep += 1
                     }
-                )
-                .offset(x: -225, y: 50)
-                .zIndex(99)
-            }
+                },
+                onComplete: {
+                    showOnboarding = false
+                }
+            )
         }
     }
 }
