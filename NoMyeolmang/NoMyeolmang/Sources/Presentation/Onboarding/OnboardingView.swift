@@ -18,8 +18,30 @@ struct OnboardingView: View {
 
     var body: some View {
         ZStack {
-            TimerSettingViewContentOnly(isRecommendedSelected: .constant(true))
-                .zIndex(0)
+            if popupStep == popupData.count || popupStep == popupData.count + 1 {
+                Color("252525")
+                    .opacity(0.55)
+                    .edgesIgnoringSafeArea(.all)
+                    .zIndex(0.5)
+            }
+
+            VStack(spacing: 0) {
+                ToggleTabView(isRecommendedSelected: .constant(true))
+                    .zIndex(popupStep == popupData.count ? 0.6 : 0)
+
+                FocusTimeSetting()
+                    .frame(width: 329)
+                    .padding(.top, 24)
+                    .zIndex(popupStep == popupData.count ? 2 : 0)
+
+                GSButton(title: "집중 시작하기", width: 250) {
+                    // Insert appropriate action
+                }
+                .padding(.top, 39)
+                .zIndex(popupStep == popupData.count + 1 ? 2 : 0)
+            }
+            .padding(.top, 95)
+            .padding(.bottom, 200)
 
             if popupStep < popupData.count {
                 PopupGuideView(
@@ -33,7 +55,7 @@ struct OnboardingView: View {
                     onConfirm: { popupStep += 1 }
                 )
                 .offset(x: -265, y: -50)
-                .zIndex(1)
+                .zIndex(99)
             } else if popupStep == popupData.count + 1 {
                 GuidanceTooltipViewStep2(
                     total: 2,
@@ -41,8 +63,8 @@ struct OnboardingView: View {
                         showOnboarding = false
                     }
                 )
-                .offset(x: -235, y: 50)
-                .zIndex(1)
+                .offset(x: -225, y: 50)
+                .zIndex(99)
             }
         }
     }
