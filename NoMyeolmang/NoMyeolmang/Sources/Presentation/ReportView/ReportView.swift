@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ReportView: View {
     @EnvironmentObject var coordinator: AppCoordinator
-    @ObservedObject var viewModel = ReportViewModel()
+    @StateObject var viewModel = ReportViewModel()
 
     var body: some View {
         VStack(spacing: 20) {

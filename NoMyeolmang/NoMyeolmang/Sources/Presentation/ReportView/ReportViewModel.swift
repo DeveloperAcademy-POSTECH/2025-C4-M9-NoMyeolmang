@@ -7,7 +7,8 @@
 
 import Foundation
 
-class ReportViewModel: ObservableObject {
+@MainActor
+final class ReportViewModel: ObservableObject {
     @Published var maxDistance = 30
     @Published var reachedDistance = 26
     @Published var reachedRatio = 79
