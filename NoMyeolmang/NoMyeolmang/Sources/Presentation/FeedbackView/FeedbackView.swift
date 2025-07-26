@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct FeedbackView: View {
-    @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var coordinator: AppCoordinator
     @ObservedObject var viewModel: FeedbackViewModel
 
@@ -46,8 +45,7 @@ struct FeedbackView: View {
                 GSButton(title: "탐사시간 확인하러 가기", width: 250) {
                     Task {
                         do {
-                            let isUpdated = await viewModel.updateTrainingData()
-                            let isPersonalized = await viewModel.personalizing()
+                            let isUpdated = await viewModel.updateTrainingDataAndPersonalize()
                         }
                     }
                     coordinator.push(.report)
