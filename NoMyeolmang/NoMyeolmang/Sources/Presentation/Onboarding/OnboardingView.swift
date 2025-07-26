@@ -35,7 +35,6 @@ struct OnboardingView: View {
                     .zIndex(popupStep == popupData.count ? 2 : 0)
 
                 GSButton(title: "집중 시작하기", width: 250) {
-                    // Insert appropriate action
                 }
                 .padding(.top, 39)
                 .zIndex(popupStep == popupData.count + 1 ? 2 : 0)
