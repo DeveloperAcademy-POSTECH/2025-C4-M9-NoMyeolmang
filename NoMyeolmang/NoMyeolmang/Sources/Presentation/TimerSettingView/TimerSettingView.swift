@@ -12,17 +12,25 @@ struct TimerSettingView: View {
     @State private var isRecommendedSelected = true
     @State private var showOnboarding = true
     
-    var body: some View {
-        
+    var backgroundView: some View {
         ZStack {
             Color("252525")
                 .opacity(0.55)
                 .edgesIgnoringSafeArea(.all)
-            
+                .allowsHitTesting(false)
+
             Image("SpaceshipBackground")
                 .resizable()
-                .ignoresSafeArea()
                 .scaledToFill()
+                .ignoresSafeArea()
+                .allowsHitTesting(false)
+        }
+    }
+    
+    var body: some View {
+        
+        ZStack {
+            backgroundView
             
             if showOnboarding {
                 OnboardingView(showOnboarding: $showOnboarding)
@@ -32,9 +40,15 @@ struct TimerSettingView: View {
                 VStack(spacing: 0) {
                     ToggleTabView(isRecommendedSelected: $isRecommendedSelected)
                     
-                    FocusTimeSetting()
-                        .frame(width: 329)
-                        .padding(.top, 24)
+                    Group {
+                        if isRecommendedSelected {
+                            FocusTimeSetting()
+                        } else {
+                            PersonalTimerSettingView()
+                        }
+                    }
+                    .frame(width: 329)
+                    .padding(.top, 24)
                     
                     ZStack {
                         GSButton(title: "집중 시작하기", width: 250) {
