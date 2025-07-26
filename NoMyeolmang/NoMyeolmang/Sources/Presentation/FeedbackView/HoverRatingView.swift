@@ -20,14 +20,14 @@ private func hoverDescription(for number: Int) -> String {
 }
 
 struct HoverRatingView: View {
-    @Binding var hoveredIndex: Int?
+    @ObservedObject var viewModel: FeedbackViewModel
 
     var body: some View {
         HStack(spacing: 35) {
             ForEach(1...5, id: \.self) { number in
                 ZStack {
                     Circle()
-                        .fill(Color("5C436D").opacity(0.4))
+                        .fill(viewModel.selectedIndex == number ? Color(.red) : Color("5C436D").opacity(0.4))
                         .overlay(
                             Circle()
                                 .stroke(Color.white, lineWidth: 1.2)
@@ -39,10 +39,14 @@ struct HoverRatingView: View {
                                 .foregroundColor(.white)
                         )
                         .onHover { hovering in
-                            hoveredIndex = hovering ? number : nil
+                            viewModel.hoveredIndex = hovering ? number : nil
+                        }
+                        .onTapGesture{
+                            viewModel.selectedIndex = number
+                            print(viewModel.selectedIndex)
                         }
 
-                    if hoveredIndex == number {
+                    if viewModel.hoveredIndex == number {
                         Text(hoverDescription(for: number))
                             .textStyle(GSFont.Regular12)
                             .foregroundColor(.white)
