@@ -18,26 +18,40 @@ struct OnboardingView: View {
 
     var body: some View {
         ZStack {
+            Image("SpaceshipBackground")
+                .resizable()
+                .ignoresSafeArea()
+                .scaledToFill()
+                .zIndex(0)
+
             if popupStep == popupData.count || popupStep == popupData.count + 1 {
-                Color("252525")
-                    .opacity(0.55)
-                    .edgesIgnoringSafeArea(.all)
-                    .zIndex(0.5)
+                ZStack {
+                    Color.clear
+                        .background(
+                            Color("252525")
+                                .opacity(0.55)
+                        )
+                        .ignoresSafeArea()
+                        .zIndex(0.05)
+                }
             }
 
             VStack(spacing: 0) {
                 ToggleTabView(isRecommendedSelected: .constant(true))
+                    .opacity((popupStep == popupData.count || popupStep == popupData.count + 1) ? 0.3 : 1)
                     .zIndex(popupStep == popupData.count ? 0.6 : 0)
 
                 FocusTimeSetting()
                     .frame(width: 329)
                     .padding(.top, 24)
-                    .zIndex(popupStep == popupData.count ? 2 : 0)
+                    .opacity(popupStep == popupData.count ? 1 : 0.3)
+                    .zIndex(popupStep == popupData.count ? 99 : 0)
 
                 GSButton(title: "집중 시작하기", width: 250) {
                 }
                 .padding(.top, 39)
-                .zIndex(popupStep == popupData.count + 1 ? 2 : 0)
+                .opacity(popupStep == popupData.count + 1 ? 1 : 0.3)
+                .zIndex(popupStep == popupData.count + 1 ? 99 : 0)
             }
             .padding(.top, 95)
             .padding(.bottom, 200)
