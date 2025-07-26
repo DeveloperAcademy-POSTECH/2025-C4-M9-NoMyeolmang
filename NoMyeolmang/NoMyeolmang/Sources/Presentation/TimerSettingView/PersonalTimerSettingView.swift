@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import Combine
 
 struct PersonalTimerSettingView: View {
     @State private var newGoalTime: Int?
+    @State private var inputText: String = ""
     @FocusState private var isTextFieldFocused: Bool
 
     var body: some View {
@@ -24,13 +26,7 @@ struct PersonalTimerSettingView: View {
                 HStack(alignment: .firstTextBaseline, spacing: 0) {
                     TextField(
                         "",
-                        text: Binding(
-                            get: { newGoalTime.map(String.init) ?? "" },
-                            set: {
-                                let filtered = $0.filter { "0123456789".contains($0) }
-                                newGoalTime = Int(filtered)
-                            }
-                        )
+                        text: $inputText
                     )
                     .multilineTextAlignment(.center)
                     .textStyle(GSFont.SemiBold24)
@@ -44,6 +40,21 @@ struct PersonalTimerSettingView: View {
                     .accentColor(.white)
                     .frame(minWidth: 20, minHeight: 32)
                     .fixedSize()
+                    .onChange(of: inputText) { newValue in
+                        let filtered = newValue.filter { "0123456789".contains($0) }
+                        guard filtered == newValue else { return }
+                        if let number = Int(filtered.prefix(3)) {
+                            newGoalTime = number
+                        } else {
+                            newGoalTime = nil
+                        }
+                    }
+                    .onReceive(Just(inputText)) { newValue in
+                        let filtered = newValue.filter { "0123456789".contains($0) }
+                        if filtered != newValue {
+                            inputText = filtered
+                        }
+                    }
 
                     if newGoalTime != nil {
                         Text("분")
