@@ -21,6 +21,7 @@ struct FocusTimeSetting: View {
             Text("30분") // 시간 받아와야함
                 .textStyle(GSFont.SemiBold24)
                 .foregroundColor(.white)
+                .padding(.top, 4)
         }
         .frame(width: boxSize.width, height: boxSize.height, alignment: .top)
         .background(

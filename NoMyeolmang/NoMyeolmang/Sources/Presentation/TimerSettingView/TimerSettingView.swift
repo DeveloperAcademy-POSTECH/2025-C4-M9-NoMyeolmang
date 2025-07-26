@@ -23,7 +23,6 @@ struct TimerSettingView: View {
                 .resizable()
                 .ignoresSafeArea()
                 .scaledToFill()
-              //  .frame(width: 800, height: 600, alignment: .center)
             
             if showOnboarding {
                 OnboardingView(showOnboarding: $showOnboarding)

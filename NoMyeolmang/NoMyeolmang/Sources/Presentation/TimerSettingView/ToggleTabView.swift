@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-// 블러 반영해야함
 struct ToggleTabView: View {
     @Binding var isRecommendedSelected: Bool
 
