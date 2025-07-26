@@ -24,6 +24,16 @@ enum FocusLevel: Double, CaseIterable, Identifiable {
         }
     }
     
+    func backgroundDuration() -> Double {
+        switch self {
+        case .lv1: return 45.0
+        case .lv2: return 37.0
+        case .lv3: return 33.0
+        case .lv4: return 30.0  // 기본 속도 (30초)
+        case .lv5: return 20.0
+        }
+    }
+    
     static func from(rawValue: Double) -> FocusLevel? {
         return FocusLevel(rawValue: rawValue)
     }
