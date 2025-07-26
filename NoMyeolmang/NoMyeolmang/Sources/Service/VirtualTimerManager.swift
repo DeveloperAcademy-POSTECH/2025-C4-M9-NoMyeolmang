@@ -16,7 +16,7 @@ final class VirtualTimerManager {
     private var timer: Timer?
     private var interval: TimeInterval = 1.0
     private var isRepeating: Bool = true
-    var count: Int = 0
+    var count: Int = 487
 
     // 타이머 이벤트 알림
     var onTick: ((Int) -> Void)?

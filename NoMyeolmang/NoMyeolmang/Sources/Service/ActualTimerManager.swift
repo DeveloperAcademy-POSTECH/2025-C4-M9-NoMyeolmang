@@ -17,7 +17,7 @@ final class ActualTimerManager {
     private var interval: TimeInterval = 1.0
     private var isRepeating: Bool = true
     private var goalTime: Int = 300
-    var count: Int = 0
+    var count: Int = 300
 
     // 타이머 이벤트 알림
     var onTick: ((Int) -> Void)?
