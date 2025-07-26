@@ -20,7 +20,8 @@ private func hoverDescription(for number: Int) -> String {
 }
 
 struct HoverRatingView: View {
-    @ObservedObject var viewModel: FeedbackViewModel
+    @Binding var selectedIndex: Int?
+    @Binding var hoveredIndex: Int?
 
     var body: some View {
         HStack(spacing: 35) {
@@ -39,14 +40,13 @@ struct HoverRatingView: View {
                                 .foregroundColor(.white)
                         )
                         .onHover { hovering in
-                            viewModel.hoveredIndex = hovering ? number : nil
+                            hoveredIndex = hovering ? number : nil
                         }
                         .onTapGesture{
-                            viewModel.selectedIndex = number
-                            print(viewModel.selectedIndex)
+                            selectedIndex = number
                         }
 
-                    if viewModel.hoveredIndex == number {
+                    if hoveredIndex == number {
                         Text(hoverDescription(for: number))
                             .textStyle(GSFont.Regular12)
                             .foregroundColor(.white)
@@ -63,4 +63,8 @@ struct HoverRatingView: View {
             }
         }
     }
+}
+
+#Preview {
+    HoverRatingView(selectedIndex: .constant(nil), hoveredIndex: .constant(nil))
 }

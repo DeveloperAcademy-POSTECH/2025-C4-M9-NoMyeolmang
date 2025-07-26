@@ -35,7 +35,10 @@ struct FeedbackView: View {
                     .multilineTextAlignment(.center)
                     .padding(.top, 12)
 
-                HoverRatingView(viewModel: viewModel)
+                HoverRatingView(
+                    selectedIndex: $viewModel.selectedIndex,
+                    hoveredIndex: $viewModel.hoveredIndex
+                )
                     .padding(.top, 51)
 
                 Spacer()
@@ -53,13 +56,6 @@ struct FeedbackView: View {
                 }
                 .padding(.bottom, 51)
                 .disabled(viewModel.selectedIndex == nil)
-
-                // test code
-                Button("테스트 데이터 생성") {
-                    Task { @MainActor in
-                        try await viewModel.writeTestData()
-                    }
-                }
             }
             .frame(width: 600, height: 400)
             .padding(100)
