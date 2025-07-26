@@ -6,5 +6,5 @@
 //
 
 protocol Personalizater {
-    func run(from userTrainingDataList: [UserTrainingData] ) -> Bool
+    func run(from userTrainingDataList: [UserTrainingData]) async throws -> Bool
 }

@@ -14,23 +14,23 @@ final class FocusPersonalizater: Personalizater {
         self.modelURL = modelURL
     }
 
-    func run(from userTrainingDataList: [UserTrainingData]) -> Bool {
+    func run(from userTrainingDataList: [UserTrainingData]) async throws -> Bool
+    {
+        do {
+            let batchProvider = makeBatchProvider(from: userTrainingDataList)
+            checkBatchProvider(batchProvider: batchProvider)
 
-        let batchProvider = makeBatchProvider(from: userTrainingDataList)
-        checkBatchProvider(batchProvider: batchProvider)
-
-        if let updateTask = makeUpdateTask(
-            batchProvider: batchProvider
-        ) {
-            updateTask.resume()
-        } else {
-            print("⛔️ 모델 업데이트 실패")
+            try await makeUpdateTask(batchProvider: batchProvider)
+            return true
+        } catch {
+            print("Error: \(error.localizedDescription)")
             return false
         }
-        return true
     }
 
-    private func makeBatchProvider(from userTrainingDataList: [UserTrainingData])
+    private func makeBatchProvider(
+        from userTrainingDataList: [UserTrainingData]
+    )
         -> MLArrayBatchProvider
     {
         var featureProviders: [MLFeatureProvider] = []
@@ -67,9 +67,9 @@ final class FocusPersonalizater: Personalizater {
     private func checkBatchProvider(batchProvider: MLArrayBatchProvider) {
         print("📦 batchProvider 전체 샘플 수: \(batchProvider.count)")
 
-        for i in 0..<batchProvider.count {
-            let sample = batchProvider.features(at: i)
-            print("🔹 [샘플 \(i)]")
+        for sampleIndex in 0..<batchProvider.count {
+            let sample = batchProvider.features(at: sampleIndex)
+            print("🔹 [샘플 \(sampleIndex)]")
 
             for feature in sample.featureNames {
                 if let value = sample.featureValue(for: feature) {
@@ -145,11 +145,15 @@ final class FocusPersonalizater: Personalizater {
         return (input: inputValue, label: labelValue)
     }
 
-    private func makeFeatureProvider(input: MLFeatureValue, label: MLFeatureValue)
+    private func makeFeatureProvider(
+        input: MLFeatureValue,
+        label: MLFeatureValue
+    )
         -> MLFeatureProvider?
     {
         let dict: [String: MLFeatureValue] = [
-            Configuration.inputName: input, Configuration.updatableOutputName: label,
+            Configuration.inputName: input,
+            Configuration.updatableOutputName: label,
         ]
         let featureProvider = try? MLDictionaryFeatureProvider(dictionary: dict)
         return featureProvider
@@ -157,7 +161,7 @@ final class FocusPersonalizater: Personalizater {
 
     private func makeUpdateTask(
         batchProvider: MLArrayBatchProvider
-    ) -> MLUpdateTask? {
+    ) async throws {
 
         let configutaion = MLModelConfiguration()
         configutaion.computeUnits = .all
@@ -174,8 +178,14 @@ final class FocusPersonalizater: Personalizater {
                 }
             },
             completionHandler: { context in
-                // 4. save model
-                self.saveUpdatedModel(context: context)
+                Task {
+                    do {
+                        try await self.saveUpdatedModel(context: context)
+                        print("학습 완료")
+                    } catch {
+                        print("⛔️ 모델 저장 실패: \(error)")
+                    }
+                }
             }
         )
 
@@ -185,15 +195,15 @@ final class FocusPersonalizater: Personalizater {
                 trainingData: batchProvider,
                 configuration: configutaion,
                 progressHandlers: handlers
-             )
-            return updateTask
+            )
+            updateTask.resume()
         } catch {
             print("❌ UpdateTask 생성 오류: \(error)")
-            return nil
+            return
         }
     }
 
-    private func saveUpdatedModel(context: MLUpdateContext) {
+    private func saveUpdatedModel(context: MLUpdateContext) async throws {
         let updatedModel = context.model
 
         do {
