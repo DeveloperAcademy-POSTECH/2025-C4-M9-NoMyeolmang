@@ -18,31 +18,8 @@ struct OnboardingView: View {
 
     var body: some View {
         ZStack {
-            Image("SpaceshipBackground")
-                .resizable()
-                .ignoresSafeArea()
-                .scaledToFill()
-            
-            Color("252525")
-                .opacity(0.55)
-                .edgesIgnoringSafeArea(.all)
-
-                VStack(spacing: 0) {
-                    Image("togglemask")
-                        .frame(width: 235, height: 40)
-                    
-                    FocusTimeSetting()
-                        .frame(width: 329, height: 161)
-                        .padding(.top, 24)
-                    
-                    ZStack {
-                        Image("buttonmask")
-                            .frame(width: 250, height: 44)
-                    }
-                    .padding(.top, 39)
-                }
-                .padding(.top, 95)
-                .padding(.bottom, 200)
+            TimerSettingViewContentOnly(isRecommendedSelected: .constant(true))
+                .zIndex(0)
 
             if popupStep < popupData.count {
                 PopupGuideView(
@@ -55,7 +32,7 @@ struct OnboardingView: View {
                     total: 2,
                     onConfirm: { popupStep += 1 }
                 )
-                .offset(x: -265, y: 80)
+                .offset(x: -265, y: -50)
                 .zIndex(1)
             } else if popupStep == popupData.count + 1 {
                 GuidanceTooltipViewStep2(
@@ -64,7 +41,7 @@ struct OnboardingView: View {
                         showOnboarding = false
                     }
                 )
-                .offset(x: -225, y: -60)
+                .offset(x: -235, y: 50)
                 .zIndex(1)
             }
         }
