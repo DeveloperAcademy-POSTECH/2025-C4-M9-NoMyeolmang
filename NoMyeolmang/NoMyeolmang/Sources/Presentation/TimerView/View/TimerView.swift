@@ -9,22 +9,21 @@ import SwiftUI
 
 struct TimerView: View {
     @EnvironmentObject var coordinator: AppCoordinator
-    
-    @State private var formattedTime: String = "30:00"
-    @State private var focusLevel: FocusLevel = .lv1
+    @ObservedObject var viewModel: TimerViewModel
     
     var body: some View {
         GeometryReader { geo in
             ZStack(alignment: .center) {
-                TimerBackgroundView(animationDuration: focusLevel.backgroundDuration())
+                TimerBackgroundView(animationDuration: viewModel.backgroundDuration)
                 
                 SpaceshipView()
                     .frame(maxWidth: .infinity, alignment: .center)
                 
                 VStack(alignment: .center, spacing: 32) {
-                    TimeLeftView(remainingTimeText: formattedTime)
+                    TimeLeftView(remainingTimeText: viewModel.formattedTime)
                     
                     TimerStopButton {
+                        viewModel.stopSession()
                         coordinator.replaceLast(with: .timerSetting)
                     }
                     Button("Next: Feedback") {
@@ -37,9 +36,15 @@ struct TimerView: View {
             .frame(width: geo.size.width, height: geo.size.height)
         }
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            print("뷰모델 가동 - 세션 시작")
+            viewModel.startSession()
+        }
+        .onDisappear {
+            print("뷰모델 정지 - 세션 종료")
+            if viewModel.isRunning {
+                viewModel.stopSession()
+            }
+        }
     }
-}
-
-#Preview {
-    TimerView()
 }
