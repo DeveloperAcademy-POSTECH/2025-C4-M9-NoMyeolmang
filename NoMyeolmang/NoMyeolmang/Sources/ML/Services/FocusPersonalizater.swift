@@ -143,8 +143,7 @@ final class FocusPersonalizater: Personalizater {
     private func makeFeatureProvider(
         input: MLFeatureValue,
         label: MLFeatureValue
-    )
-        -> MLFeatureProvider? {
+    ) -> MLFeatureProvider? {
         let dict: [String: MLFeatureValue] = [
             Configuration.inputName: input,
             Configuration.updatableOutputName: label]
@@ -153,8 +152,6 @@ final class FocusPersonalizater: Personalizater {
     }
 
     private func makeUpdateTask(batchProvider: MLArrayBatchProvider) async throws {
-        let continuation = CheckedContinuation<Void, Error>.self
-        
         return await withCheckedContinuation { continuation in
             let configutaion = MLModelConfiguration()
             configutaion.computeUnits = .all
