@@ -30,6 +30,7 @@ final class ActualTimerManager {
 
         self.interval = interval
         self.isRepeating = repeats
+        self.count = 0
         
         // 🔹 타이머 시작 직전에 즉시 1회 호출
         self.onTick?(self.count)
@@ -69,7 +70,6 @@ final class ActualTimerManager {
 
     // MARK: Private Methods
     private func clear() {
-        self.count = 0
         timer?.invalidate()
         timer = nil
     }
