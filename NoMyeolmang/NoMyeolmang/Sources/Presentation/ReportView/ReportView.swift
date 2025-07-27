@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ReportView: View {
     @EnvironmentObject var coordinator: AppCoordinator
-    @StateObject var viewModel = ReportViewModel()
+    @ObservedObject var viewModel: ReportViewModel
 
     var body: some View {
         VStack(spacing: 20) {
@@ -47,8 +47,4 @@ struct ReportView: View {
             viewModel.calDistanceTime()
         }
     }
-}
-
-#Preview {
-    ReportView()
 }

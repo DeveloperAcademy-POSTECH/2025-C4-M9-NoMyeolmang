@@ -11,7 +11,6 @@ struct RootView: View {
     @EnvironmentObject var coordinator: AppCoordinator
     @Environment(\.modelContext) private var context
 
-
     var body: some View {
         NavigationStack(path: $coordinator.path) {
             TimerSettingView()
@@ -27,7 +26,8 @@ struct RootView: View {
                         let viewModel = FeedbackViewModel(repository: repository, personalizater: personalizater)
                         FeedbackView(viewModel: viewModel)
                     case .report:
-                        ReportView()
+                        let viewModel = ReportViewModel()
+                        ReportView(viewModel: viewModel)
                     }
                 }
         }
