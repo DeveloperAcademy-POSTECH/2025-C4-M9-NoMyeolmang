@@ -47,7 +47,13 @@ struct TimerBackgroundView: View {
                     .onChange(of: geo.size) { oldSize, newSize in
                         timer?.invalidate()
                         checkInitialPosition(screenSize: newSize)
-                        startLoopingAnimation()
+                        startLoopingAnimation()  // 화면 크기 변경 시에는 리셋 필요
+                    }
+                    .onChange(of: animationDuration) { oldDuration, newDuration in
+                        print("🚀 배경 속도 변경 감지: \(oldDuration) → \(newDuration)")
+                        timer?.invalidate()
+                        // 🆕 위치 보존하며 속도만 변경
+                        startLoopingAnimationKeepingPosition()
                     }
             }
         }
@@ -75,26 +81,48 @@ struct TimerBackgroundView: View {
         offsetY = -(displayHeight - screenHeight) / 2
     }
             
+    // 🆕 기존 함수 (처음 시작용)
     func startLoopingAnimation() {
-        // 이미지 하단 = 화면 하단
         let startY = -(displayHeight - screenHeight) / 2
-        // 이미지 상단 = 화면 상단
         let endY = (displayHeight - screenHeight) / 2
         
-        offsetY = startY
+        offsetY = startY  // 처음 위치로 초기화
+        
+        createAnimationTimer(startY: startY, endY: endY)
+    }
+    
+    // 🆕 새 함수 (위치 보존용)
+    func startLoopingAnimationKeepingPosition() {
+        let startY = -(displayHeight - screenHeight) / 2
+        let endY = (displayHeight - screenHeight) / 2
+        
+        // offsetY는 현재 위치 유지! 초기화하지 않음
+        print("📍 현재 위치 유지: \(offsetY)")
+        
+        createAnimationTimer(startY: startY, endY: endY)
+    }
+    
+    // 🆕 공통 타이머 생성 함수
+    private func createAnimationTimer(startY: CGFloat, endY: CGFloat) {
+        print("🎬 애니메이션 시작 - duration: \(animationDuration)초")
         
         timer = Timer.scheduledTimer(withTimeInterval: 1/60, repeats: true) { _ in
-            // 이동 거리
             let totalDistance = endY - startY
             let movePerFrame = totalDistance / (animationDuration * 60)
             
             offsetY += movePerFrame
             
-            // 다시시작!
+            // 루프 처리
             if offsetY >= endY {
+                print("🔄 애니메이션 루프 완료 - 재시작")
                 offsetY = startY
             }
         }
+        
+        // 속도 로그
+        let totalDistance = endY - startY
+        let pixelsPerSecond = totalDistance / animationDuration
+        print("⚡ 새로운 속도: \(pixelsPerSecond)px/s")
     }
 }
 
