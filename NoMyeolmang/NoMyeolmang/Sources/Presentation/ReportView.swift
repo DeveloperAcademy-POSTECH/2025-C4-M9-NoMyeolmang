@@ -5,28 +5,87 @@
 //  Created by 김소원 on 7/20/25.
 //
 
+
 import SwiftUI
 
 struct ReportView: View {
     @EnvironmentObject var coordinator: AppCoordinator
 
     var body: some View {
-        VStack(spacing: 20) {
-            Text("Report")
-                .font(.largeTitle)
+        let boxSize = CGSize(width: 345, height: 119)
 
-            Button("다시 시작") {
-                coordinator.push(.timer) // ⚠️ 임시값: 이후 저장된 목표시간 값으로 수정 필요
-            }
-            .navigationBarBackButtonHidden(true)
+        ZStack {
+            Image("backgroundSpace")
+                .resizable()
+                .ignoresSafeArea()
+                .scaledToFill()
+                .frame(width: 800, height: 600, alignment: .center)
+            
+            RoundedRectangle(cornerRadius: 10)
+                .fill(Color.white.opacity(0.14))
+                .frame(width: 600, height: 400)
+            
+            VStack {
+                Text("이번 여정에서 총 00km를 탐사했어요")
+                    .textStyle(GSFont.SemiBold20)
+                    .padding(.top, 34)
+                Text("완전 몰입 시 도달할 수 있는 00km 중 00%까지 도달했어요")
+                    .textStyle(GSFont.Regular16)
+                    .padding(.top,1)
 
-            Button("탐사 종료") {
-                coordinator.popToRoot()  // TimerSettingView로
-            }
-            .navigationBarBackButtonHidden(true)
-        }
-        .padding()
-    }
+                HStack(spacing: 48){
+                    VStack(spacing: 2){
+                        Text("지구 시간")
+                            .textStyle(GSFont.Light14)
+                        Text("30:00")
+                            .textStyle(GSFont.SemiBold28)
+                        }
+                    Rectangle()
+                        .fill(Color.white)
+                        .frame(width: 1, height: 99)
+                        .padding(.top, 10)
+                        .padding(.bottom, 10)
+                        .opacity(0.1)
+                    VStack(spacing: 2){
+                        Text("탐사 시간")
+                            .textStyle(GSFont.Light14)
+                        Text("22:12")
+                            .textStyle(GSFont.SemiBold28)
+                        }
+                    } // hstack
+                
+                .frame(width: boxSize.width, height: boxSize.height, alignment: .top)
+                .background(
+                    LinearGradient(
+                        gradient: Gradient(colors: [
+                            Color("939393").opacity(0.02),
+                            Color("A471C8").opacity(0.3)
+                        ]),
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                    .opacity(0.4)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.white.opacity(0.7), lineWidth: 1)
+                )
+                .padding(.top, 25)
+                
+                
+                GSButton(title: "다시 시작하기", width: 250) {
+                    coordinator.push(.timer)
+                }
+                .padding(.top, 52)
+                
+                GSButton(title: "종료하기", width: 250) {
+                    coordinator.popToRoot()
+                }
+                .padding(.bottom, 25)
+            } // vstack
+        } // zstack
+    } // body
 }
 
 #Preview {
