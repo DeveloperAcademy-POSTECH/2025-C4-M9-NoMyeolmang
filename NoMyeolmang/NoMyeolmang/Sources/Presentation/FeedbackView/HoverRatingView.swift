@@ -20,6 +20,7 @@ private func hoverDescription(for number: Int) -> String {
 }
 
 struct HoverRatingView: View {
+    @Binding var selectedIndex: Int?
     @Binding var hoveredIndex: Int?
 
     var body: some View {
@@ -27,7 +28,7 @@ struct HoverRatingView: View {
             ForEach(1...5, id: \.self) { number in
                 ZStack {
                     Circle()
-                        .fill(Color("5C436D").opacity(0.4))
+                        .fill(selectedIndex == number ? Color("ReportViewSelectedColor") : Color("5C436D").opacity(0.4))
                         .overlay(
                             Circle()
                                 .stroke(Color.white, lineWidth: 1.2)
@@ -40,6 +41,9 @@ struct HoverRatingView: View {
                         )
                         .onHover { hovering in
                             hoveredIndex = hovering ? number : nil
+                        }
+                        .onTapGesture {
+                            selectedIndex = number
                         }
 
                     if hoveredIndex == number {
@@ -59,4 +63,8 @@ struct HoverRatingView: View {
             }
         }
     }
+}
+
+#Preview {
+    HoverRatingView(selectedIndex: .constant(nil), hoveredIndex: .constant(nil))
 }

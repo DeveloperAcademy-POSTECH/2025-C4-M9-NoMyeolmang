@@ -9,6 +9,8 @@ import SwiftUI
 
 struct RootView: View {
     @EnvironmentObject var coordinator: AppCoordinator
+    @Environment(\.modelContext) private var context
+
 
     var body: some View {
         NavigationStack(path: $coordinator.path) {
@@ -20,7 +22,10 @@ struct RootView: View {
                     case .timer:
                         TimerView()
                     case .feedback:
-                        FeedbackView()
+                        let personalizater = FocusPersonalizater(modelURL: ModelLoader.loadModelURL())
+                        let repository = SwiftDataUserTrainingDataRepository(context: context)
+                        let viewModel = FeedbackViewModel(repository: repository, personalizater: personalizater)
+                        FeedbackView(viewModel: viewModel)
                     case .report:
                         ReportView()
                     }
