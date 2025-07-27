@@ -35,7 +35,20 @@ enum FocusLevel: Double, CaseIterable, Identifiable {
     }
     
     static func from(rawValue: Double) -> FocusLevel? {
-        return FocusLevel(rawValue: rawValue)
+        switch rawValue {
+        case 0.0..<1.0:
+            return .lv1
+        case 1.0..<2.0:
+            return .lv2
+        case 2.0..<3.0:
+            return .lv3
+        case 3.0..<4.0:
+            return .lv4
+        case 4.0...5.0:
+            return .lv5
+        default:
+            return .lv4
+        }
     }
     
     var id: Double { rawValue }
