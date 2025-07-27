@@ -28,17 +28,21 @@ struct ReportView: View {
             VStack {
                 Text("이번 여정에서 총 00km를 탐사했어요")
                     .textStyle(GSFont.SemiBold20)
+                    .foregroundColor(.white)
                     .padding(.top, 34)
                 Text("완전 몰입 시 도달할 수 있는 00km 중 00%까지 도달했어요")
                     .textStyle(GSFont.Regular16)
+                    .foregroundColor(.white)
                     .padding(.top,1)
 
                 HStack(spacing: 48){
                     VStack(spacing: 2){
                         Text("지구 시간")
                             .textStyle(GSFont.Light14)
+                            .foregroundColor(.white)
                         Text("30:00")
                             .textStyle(GSFont.SemiBold28)
+                            .foregroundColor(.white)
                         }
                     Rectangle()
                         .fill(Color.white)
@@ -49,8 +53,10 @@ struct ReportView: View {
                     VStack(spacing: 2){
                         Text("탐사 시간")
                             .textStyle(GSFont.Light14)
+                            .foregroundColor(.white)
                         Text("22:12")
                             .textStyle(GSFont.SemiBold28)
+                            .foregroundColor(.white)
                         }
                     } // hstack
                 
