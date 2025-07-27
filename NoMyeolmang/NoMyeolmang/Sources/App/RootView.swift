@@ -21,7 +21,10 @@ struct RootView: View {
                         case .timerSetting:
                             TimerSettingView()
                         case .timer:
-                            TimerView()
+                            let predictor = FocusScorePredictor(model: ModelLoader.loadModel()!)
+                            let repository = SwiftDataUserTrainingDataRepository(context: context)
+                            let viewModel = TimerViewModel(predictor: predictor, repository: repository)
+                            TimerView(viewModel: viewModel)
                         case .feedback:
                             let personalizater = FocusPersonalizater(modelURL: ModelLoader.loadModelURL())
                             let repository = SwiftDataUserTrainingDataRepository(context: context)
