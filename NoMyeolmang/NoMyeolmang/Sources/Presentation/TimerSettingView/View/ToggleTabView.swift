@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ToggleTabView: View {
-    @Binding var isRecommendedSelected: Bool
+    @Binding var isRecommendedSelected: TabType
+    @Binding var goalTime: Int
 
     var body: some View {
         ZStack(alignment: .leading) {
@@ -20,7 +21,7 @@ struct ToggleTabView: View {
             RoundedRectangle(cornerRadius: 40)
                 .fill(Color("#9D86DB80").opacity(0.55))
                 .frame(width: 110, height: 32)
-                .offset(x: isRecommendedSelected ? 5 : 120)
+                .offset(x: isRecommendedSelected == .recommended ? 5 : 120)
                 .shadow(color: Color.black.opacity(0.25), radius: 7, x: 0, y: 0)
                 .allowsHitTesting(false)
                 .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isRecommendedSelected)
@@ -34,7 +35,8 @@ struct ToggleTabView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .onTapGesture {
                         withAnimation {
-                            isRecommendedSelected = true
+                            isRecommendedSelected = .recommended
+                            goalTime = 30  // 추천 시간으로 설정
                         }
                     }
 
@@ -46,7 +48,7 @@ struct ToggleTabView: View {
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .onTapGesture {
                         withAnimation {
-                            isRecommendedSelected = false
+                            isRecommendedSelected = .personal
                         }
                     }
 
@@ -60,10 +62,11 @@ struct ToggleTabView: View {
 
 #Preview(traits: .sizeThatFitsLayout) {
     struct ToggleTabPreviewWrapper: View {
-        @State private var isRecommendedSelected = true
+        @State private var selectedTab: TabType = .recommended
+        @State private var goalTime = 30
 
         var body: some View {
-            ToggleTabView(isRecommendedSelected: $isRecommendedSelected)
+            ToggleTabView(isRecommendedSelected: $selectedTab, goalTime: $goalTime)
                 .padding()
                 .background(Color.black)
         }

@@ -10,6 +10,7 @@ import Foundation
 import SwiftUI
 
 struct PersonalTimerSettingView: View {
+    @Binding var goalTime: Int
     @State private var newGoalTimeText: String = ""
     private let numberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -37,6 +38,10 @@ struct PersonalTimerSettingView: View {
                             let filtered = newGoalTimeText.filter { $0.isNumber }
                             if filtered != newGoalTimeText {
                                 newGoalTimeText = filtered
+                            }
+                            // goalTime에 직접 연결
+                            if let time = Int(filtered), time > 0 {
+                                goalTime = time
                             }
                         }
                         .multilineTextAlignment(.center)
@@ -81,5 +86,13 @@ struct PersonalTimerSettingView: View {
 }
 
 #Preview {
-    PersonalTimerSettingView()
+    struct PreviewWrapper: View {
+        @State private var goalTime = 30
+        
+        var body: some View {
+            PersonalTimerSettingView(goalTime: $goalTime)
+        }
+    }
+    
+    return PreviewWrapper()
 }

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct FocusTimeSetting: View {
+    @Binding var goalTime: Int
     
     var body: some View {
         let boxSize = CGSize(width: 329, height: 161)
@@ -18,7 +19,7 @@ struct FocusTimeSetting: View {
                 .foregroundColor(.white)
                 .padding(.top, 52.5)
             
-            Text("30분") // 시간 받아와야함
+            Text("\(goalTime)분")
                 .textStyle(GSFont.SemiBold24)
                 .foregroundColor(.white)
                 .padding(.top, 4)
@@ -42,6 +43,15 @@ struct FocusTimeSetting: View {
         )
     }
 }
+
 #Preview {
-    FocusTimeSetting()
+    struct PreviewWrapper: View {
+        @State private var goalTime = 30
+        
+        var body: some View {
+            FocusTimeSetting(goalTime: $goalTime)
+        }
+    }
+    
+    return PreviewWrapper()
 }

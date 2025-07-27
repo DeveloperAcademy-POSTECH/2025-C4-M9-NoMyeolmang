@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TimerSettingView: View {
     @EnvironmentObject var coordinator: AppCoordinator
-    @State private var isRecommendedSelected = true
+    @ObservedObject var viewModel: TimerSettingViewModel
     
     var backgroundView: some View {
         ZStack {
@@ -27,13 +27,13 @@ struct TimerSettingView: View {
             backgroundView
             
             VStack(spacing: 0) {
-                ToggleTabView(isRecommendedSelected: $isRecommendedSelected)
+                ToggleTabView(isRecommendedSelected: $viewModel.selectedTab, goalTime: $viewModel.goalTime)
                 
                 Group {
-                    if isRecommendedSelected {
-                        FocusTimeSetting()
+                    if viewModel.selectedTab == .recommended {
+                        FocusTimeSetting(goalTime: $viewModel.goalTime)
                     } else {
-                        PersonalTimerSettingView()
+                        PersonalTimerSettingView(goalTime: $viewModel.goalTime)
                     }
                 }
                 .frame(width: 329)
@@ -41,6 +41,7 @@ struct TimerSettingView: View {
                 
                 ZStack {
                     GSButton(title: "집중 시작하기", width: 250) {
+                        viewModel.startFocusSession()
                         coordinator.push(.timer)
                     }
                 }
@@ -52,8 +53,4 @@ struct TimerSettingView: View {
         .frame(minWidth: 800, minHeight: 600)
         .navigationBarBackButtonHidden(true)
     }
-}
-
-#Preview {
-    TimerSettingView()
 }
