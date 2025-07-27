@@ -38,17 +38,15 @@ struct FeedbackView: View {
                     selectedIndex: $viewModel.selectedIndex,
                     hoveredIndex: $viewModel.hoveredIndex
                 )
-                    .padding(.top, 51)
+                .padding(.top, 51)
 
                 Spacer()
 
                 GSButton(title: "탐사시간 확인하러 가기", width: 250) {
                     Task {
-                        do {
-                            let isUpdated = await viewModel.updateTrainingDataAndPersonalize()
-                        }
+                        let _ = await viewModel.updateTrainingDataAndPersonalize()
+                        coordinator.push(.report)
                     }
-                    coordinator.push(.report)
                 }
                 .padding(.bottom, 51)
                 .disabled(viewModel.selectedIndex == nil)

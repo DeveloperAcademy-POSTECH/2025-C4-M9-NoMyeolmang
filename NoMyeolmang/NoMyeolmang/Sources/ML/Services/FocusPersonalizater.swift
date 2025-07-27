@@ -14,25 +14,20 @@ final class FocusPersonalizater: Personalizater {
         self.modelURL = modelURL
     }
 
-    func run(from userTrainingDataList: [UserTrainingData]) -> Bool {
+    func run(from userTrainingDataList: [UserTrainingData]) async throws -> Bool {
+        do {
+            let batchProvider = makeBatchProvider(from: userTrainingDataList)
+            checkBatchProvider(batchProvider: batchProvider)
 
-        let batchProvider = makeBatchProvider(from: userTrainingDataList)
-        checkBatchProvider(batchProvider: batchProvider)
-
-        if let updateTask = makeUpdateTask(
-            batchProvider: batchProvider
-        ) {
-            updateTask.resume()
-        } else {
-            print("⛔️ 모델 업데이트 실패")
+            try await makeUpdateTask(batchProvider: batchProvider)
+            return true
+        } catch {
+            print("Error: \(error.localizedDescription)")
             return false
         }
-        return true
     }
 
-    private func makeBatchProvider(from userTrainingDataList: [UserTrainingData])
-        -> MLArrayBatchProvider
-    {
+    private func makeBatchProvider(from userTrainingDataList: [UserTrainingData]) -> MLArrayBatchProvider {
         var featureProviders: [MLFeatureProvider] = []
 
         for data in userTrainingDataList {
@@ -67,9 +62,9 @@ final class FocusPersonalizater: Personalizater {
     private func checkBatchProvider(batchProvider: MLArrayBatchProvider) {
         print("📦 batchProvider 전체 샘플 수: \(batchProvider.count)")
 
-        for i in 0..<batchProvider.count {
-            let sample = batchProvider.features(at: i)
-            print("🔹 [샘플 \(i)]")
+        for sampleIndex in 0..<batchProvider.count {
+            let sample = batchProvider.features(at: sampleIndex)
+            print("🔹 [샘플 \(sampleIndex)]")
 
             for feature in sample.featureNames {
                 if let value = sample.featureValue(for: feature) {
@@ -145,55 +140,63 @@ final class FocusPersonalizater: Personalizater {
         return (input: inputValue, label: labelValue)
     }
 
-    private func makeFeatureProvider(input: MLFeatureValue, label: MLFeatureValue)
-        -> MLFeatureProvider?
-    {
+    private func makeFeatureProvider(
+        input: MLFeatureValue,
+        label: MLFeatureValue
+    ) -> MLFeatureProvider? {
         let dict: [String: MLFeatureValue] = [
-            Configuration.inputName: input, Configuration.updatableOutputName: label,
-        ]
+            Configuration.inputName: input,
+            Configuration.updatableOutputName: label]
         let featureProvider = try? MLDictionaryFeatureProvider(dictionary: dict)
         return featureProvider
     }
 
-    private func makeUpdateTask(
-        batchProvider: MLArrayBatchProvider
-    ) -> MLUpdateTask? {
+    private func makeUpdateTask(batchProvider: MLArrayBatchProvider) async throws {
+        return try await withCheckedThrowingContinuation { continuation in
+            let configuration = MLModelConfiguration()
+            configuration.computeUnits = .all
 
-        let configutaion = MLModelConfiguration()
-        configutaion.computeUnits = .all
-
-        let handlers = MLUpdateProgressHandlers(
-            forEvents: [.trainingBegin, .miniBatchEnd, .epochEnd],
-            progressHandler: { context in
-                let event = context.event
-                print("🔹 \(event)")
-                if event == .miniBatchEnd {
-                    if let loss = context.metrics[.lossValue] {
-                        print("미니배치 손실값: \(loss)")
+            let handlers = MLUpdateProgressHandlers(
+                forEvents: [.trainingBegin, .miniBatchEnd, .epochEnd],
+                progressHandler: { context in
+                    let event = context.event
+                    print("🔹 \(event)")
+                    if event == .miniBatchEnd {
+                        if let loss = context.metrics[.lossValue] {
+                            print("미니배치 손실값: \(loss)")
+                        }
+                    }
+                },
+                completionHandler: { context in
+                    Task {
+                        do {
+                            try await self.saveUpdatedModel(context: context)
+                            print("✅ 학습 완료")
+                            continuation.resume()
+                        } catch {
+                            print("⛔️ 모델 저장 실패: \(error)")
+                            continuation.resume(throwing: error)
+                        }
                     }
                 }
-            },
-            completionHandler: { context in
-                // 4. save model
-                self.saveUpdatedModel(context: context)
-            }
-        )
+            )
 
-        do {
-            let updateTask = try MLUpdateTask(
-                forModelAt: modelURL,
-                trainingData: batchProvider,
-                configuration: configutaion,
-                progressHandlers: handlers
-             )
-            return updateTask
-        } catch {
-            print("❌ UpdateTask 생성 오류: \(error)")
-            return nil
+            do {
+                let updateTask = try MLUpdateTask(
+                    forModelAt: modelURL,
+                    trainingData: batchProvider,
+                    configuration: configuration,
+                    progressHandlers: handlers
+                )
+                updateTask.resume()
+            } catch {
+                print("❌ UpdateTask 생성 오류: \(error)")
+                continuation.resume(throwing: error)
+            }
         }
     }
 
-    private func saveUpdatedModel(context: MLUpdateContext) {
+    private func saveUpdatedModel(context: MLUpdateContext) async throws {
         let updatedModel = context.model
 
         do {
