@@ -60,8 +60,7 @@ final class FeedbackViewModel: ObservableObject {
             
             // 개인화 모듈에 넘겨주기
             let isPersonalized = try await personalizater.run(from: recentDataList)
-            
-            print("✅ 개인화 성공!")
+            print("✅ 개인화 성공! \(isPersonalized)")
             return isPersonalized
         } catch {
             print("❌ 에러: \(error.localizedDescription)")

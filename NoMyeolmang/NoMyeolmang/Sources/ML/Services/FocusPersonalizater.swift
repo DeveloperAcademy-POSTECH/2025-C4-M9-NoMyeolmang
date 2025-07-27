@@ -14,8 +14,7 @@ final class FocusPersonalizater: Personalizater {
         self.modelURL = modelURL
     }
 
-    func run(from userTrainingDataList: [UserTrainingData]) async throws -> Bool
-    {
+    func run(from userTrainingDataList: [UserTrainingData]) async throws -> Bool {
         do {
             let batchProvider = makeBatchProvider(from: userTrainingDataList)
             checkBatchProvider(batchProvider: batchProvider)
@@ -28,11 +27,7 @@ final class FocusPersonalizater: Personalizater {
         }
     }
 
-    private func makeBatchProvider(
-        from userTrainingDataList: [UserTrainingData]
-    )
-        -> MLArrayBatchProvider
-    {
+    private func makeBatchProvider(from userTrainingDataList: [UserTrainingData]) -> MLArrayBatchProvider {
         var featureProviders: [MLFeatureProvider] = []
 
         for data in userTrainingDataList {
@@ -149,57 +144,55 @@ final class FocusPersonalizater: Personalizater {
         input: MLFeatureValue,
         label: MLFeatureValue
     )
-        -> MLFeatureProvider?
-    {
+        -> MLFeatureProvider? {
         let dict: [String: MLFeatureValue] = [
             Configuration.inputName: input,
-            Configuration.updatableOutputName: label,
-        ]
+            Configuration.updatableOutputName: label]
         let featureProvider = try? MLDictionaryFeatureProvider(dictionary: dict)
         return featureProvider
     }
 
-    private func makeUpdateTask(
-        batchProvider: MLArrayBatchProvider
-    ) async throws {
+    private func makeUpdateTask(batchProvider: MLArrayBatchProvider) async throws {
+        let continuation = CheckedContinuation<Void, Error>.self
+        
+        return await withCheckedContinuation { continuation in
+            let configutaion = MLModelConfiguration()
+            configutaion.computeUnits = .all
 
-        let configutaion = MLModelConfiguration()
-        configutaion.computeUnits = .all
-
-        let handlers = MLUpdateProgressHandlers(
-            forEvents: [.trainingBegin, .miniBatchEnd, .epochEnd],
-            progressHandler: { context in
-                let event = context.event
-                print("🔹 \(event)")
-                if event == .miniBatchEnd {
-                    if let loss = context.metrics[.lossValue] {
-                        print("미니배치 손실값: \(loss)")
+            let handlers = MLUpdateProgressHandlers(
+                forEvents: [.trainingBegin, .miniBatchEnd, .epochEnd],
+                progressHandler: { context in
+                    let event = context.event
+                    print("🔹 \(event)")
+                    if event == .miniBatchEnd {
+                        if let loss = context.metrics[.lossValue] {
+                            print("미니배치 손실값: \(loss)")
+                        }
+                    }
+                },
+                completionHandler: { context in
+                    Task {
+                        do {
+                            try await self.saveUpdatedModel(context: context)
+                            print("학습 완료")
+                        } catch {
+                            print("⛔️ 모델 저장 실패: \(error)")
+                        }
                     }
                 }
-            },
-            completionHandler: { context in
-                Task {
-                    do {
-                        try await self.saveUpdatedModel(context: context)
-                        print("학습 완료")
-                    } catch {
-                        print("⛔️ 모델 저장 실패: \(error)")
-                    }
-                }
-            }
-        )
-
-        do {
-            let updateTask = try MLUpdateTask(
-                forModelAt: modelURL,
-                trainingData: batchProvider,
-                configuration: configutaion,
-                progressHandlers: handlers
             )
-            updateTask.resume()
-        } catch {
-            print("❌ UpdateTask 생성 오류: \(error)")
-            return
+
+            do {
+                let updateTask = try MLUpdateTask(
+                    forModelAt: modelURL,
+                    trainingData: batchProvider,
+                    configuration: configutaion,
+                    progressHandlers: handlers
+                )
+                updateTask.resume()
+            } catch {
+                print("❌ UpdateTask 생성 오류: \(error)")
+            }
         }
     }
 
