@@ -13,16 +13,19 @@ struct RootView: View {
     @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding = false
 
     private let predictor = FocusScorePredictor(model: ModelLoader.loadModel()!)
+    private var personalizater = FocusPersonalizater(modelURL: ModelLoader.loadModelURL())
     private var repository: UserTrainingDataRepository {
         SwiftDataUserTrainingDataRepository(context: context)
     }
-
+    
     var body: some View {
         if hasSeenOnboarding {
             NavigationStack(path: $coordinator.path) {
                 TimerSettingView()
                     .navigationDestination(for: AppRoute.self) { route in
                         switch route {
+                        case .timerSetting:
+                            TimerSettingView()
                         case .timer:
                             TimerView(
                                 viewModel: TimerViewModel(
@@ -34,13 +37,11 @@ struct RootView: View {
                             FeedbackView(
                                 viewModel: FeedbackViewModel(
                                     repository: repository,
-                                    personalizater: FocusPersonalizater(modelURL: ModelLoader.loadModelURL())
+                                    personalizater: personalizater
                                 )
                             )
                         case .report:
                             ReportView(viewModel: ReportViewModel())
-                        default:
-                            EmptyView()
                         }
                     }
             }
