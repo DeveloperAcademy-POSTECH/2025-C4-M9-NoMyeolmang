@@ -153,8 +153,8 @@ final class FocusPersonalizater: Personalizater {
 
     private func makeUpdateTask(batchProvider: MLArrayBatchProvider) async throws {
         return try await withCheckedThrowingContinuation { continuation in
-            let configutaion = MLModelConfiguration()
-            configutaion.computeUnits = .all
+            let configuration = MLModelConfiguration()
+            configuration.computeUnits = .all
 
             let handlers = MLUpdateProgressHandlers(
                 forEvents: [.trainingBegin, .miniBatchEnd, .epochEnd],
@@ -185,7 +185,7 @@ final class FocusPersonalizater: Personalizater {
                 let updateTask = try MLUpdateTask(
                     forModelAt: modelURL,
                     trainingData: batchProvider,
-                    configuration: configutaion,
+                    configuration: configuration,
                     progressHandlers: handlers
                 )
                 updateTask.resume()
