@@ -5,8 +5,8 @@
 //  Created by 김소원 on 7/26/25.
 //
 
-import Foundation
 import Combine
+import Foundation
 import SwiftUI
 
 struct PersonalTimerSettingView: View {
@@ -33,9 +33,9 @@ struct PersonalTimerSettingView: View {
             HStack(spacing: 0) {
                 HStack(alignment: .firstTextBaseline, spacing: 0) {
                     TextField("", text: $newGoalTimeText)
-                        .onChange(of: newGoalTimeText) { newValue in
-                            let filtered = newValue.filter { $0.isNumber }
-                            if filtered != newValue {
+                        .onChange(of: newGoalTimeText) {
+                            let filtered = newGoalTimeText.filter { $0.isNumber }
+                            if filtered != newGoalTimeText {
                                 newGoalTimeText = filtered
                             }
                         }
