@@ -152,7 +152,7 @@ final class FocusPersonalizater: Personalizater {
     }
 
     private func makeUpdateTask(batchProvider: MLArrayBatchProvider) async throws {
-        return await withCheckedContinuation { continuation in
+        return try await withCheckedThrowingContinuation { continuation in
             let configutaion = MLModelConfiguration()
             configutaion.computeUnits = .all
 
@@ -172,8 +172,10 @@ final class FocusPersonalizater: Personalizater {
                         do {
                             try await self.saveUpdatedModel(context: context)
                             print("학습 완료")
+                            continuation.resume()
                         } catch {
                             print("⛔️ 모델 저장 실패: \(error)")
+                            continuation.resume(throwing: error)
                         }
                     }
                 }
@@ -189,6 +191,7 @@ final class FocusPersonalizater: Personalizater {
                 updateTask.resume()
             } catch {
                 print("❌ UpdateTask 생성 오류: \(error)")
+                continuation.resume(throwing: error)
             }
         }
     }
