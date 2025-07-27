@@ -171,7 +171,7 @@ final class FocusPersonalizater: Personalizater {
                     Task {
                         do {
                             try await self.saveUpdatedModel(context: context)
-                            print("학습 완료")
+                            print("✅ 학습 완료")
                             continuation.resume()
                         } catch {
                             print("⛔️ 모델 저장 실패: \(error)")
