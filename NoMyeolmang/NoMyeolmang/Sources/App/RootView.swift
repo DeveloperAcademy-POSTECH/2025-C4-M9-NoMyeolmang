@@ -9,8 +9,9 @@ import SwiftUI
 
 struct RootView: View {
     @EnvironmentObject var coordinator: AppCoordinator
-    @State private var hasSeenOnboarding = UserDefaults.standard.bool(forKey: "hasSeenOnboarding")
-
+    @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding = false
+    @Environment(\.modelContext) private var context
+    
     var body: some View {
         if hasSeenOnboarding {
             NavigationStack(path: $coordinator.path) {
@@ -22,7 +23,10 @@ struct RootView: View {
                         case .timer:
                             TimerView()
                         case .feedback:
-                            FeedbackView()
+                            let personalizater = FocusPersonalizater(modelURL: ModelLoader.loadModelURL())
+                            let repository = SwiftDataUserTrainingDataRepository(context: context)
+                            let viewModel = FeedbackViewModel(repository: repository, personalizater: personalizater)
+                            FeedbackView(viewModel: viewModel)
                         case .report:
                             ReportView()
                         }

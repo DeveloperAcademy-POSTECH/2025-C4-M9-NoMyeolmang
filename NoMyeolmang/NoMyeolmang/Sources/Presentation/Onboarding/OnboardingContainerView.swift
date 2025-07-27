@@ -16,7 +16,7 @@ struct OnboardingContainerView: View {
                 .resizable()
                 .ignoresSafeArea()
                 .scaledToFill()
-                .opacity(popupStep == 3 || popupStep == 4 ? 0.3 : 1.0)
+                .opacity(1.0)
                 .zIndex(0)
             
             if popupStep == 3 || popupStep == 4 {

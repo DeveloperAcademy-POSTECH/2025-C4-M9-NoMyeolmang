@@ -13,11 +13,6 @@ struct TimerSettingView: View {
     
     var backgroundView: some View {
         ZStack {
-            Color("252525")
-                .opacity(0.55)
-                .edgesIgnoringSafeArea(.all)
-                .allowsHitTesting(false)
-
             Image("SpaceshipBackground")
                 .resizable()
                 .scaledToFill()
