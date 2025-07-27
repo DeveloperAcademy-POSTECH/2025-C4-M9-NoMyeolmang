@@ -22,11 +22,15 @@ struct SettingPopoverView: View {
                 .textStyle(GSFont.SemiBold24)
                 .foregroundStyle(Color.white)
             
-            GSButton(title: "다음으로", width: 160) {
-                print("다음!")
+            Button {
+                print("다음으로 버튼 눌림!")
+            } label: {
+                Text("다음으로")
+                    .modifier(PopoverButtonModifier())
             }
+            .buttonStyle(.plain)
         }
-        .background(Color.blue)
+        .background(Color.black)
     }
 }
 
