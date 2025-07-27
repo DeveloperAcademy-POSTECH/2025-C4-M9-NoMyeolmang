@@ -9,30 +9,38 @@ import SwiftUI
 
 struct RootView: View {
     @EnvironmentObject var coordinator: AppCoordinator
-    @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding = false
     @Environment(\.modelContext) private var context
-    
+    @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding = false
+
+    private let predictor = FocusScorePredictor(model: ModelLoader.loadModel()!)
+    private var repository: UserTrainingDataRepository {
+        SwiftDataUserTrainingDataRepository(context: context)
+    }
+
     var body: some View {
         if hasSeenOnboarding {
             NavigationStack(path: $coordinator.path) {
                 TimerSettingView()
                     .navigationDestination(for: AppRoute.self) { route in
                         switch route {
-                        case .timerSetting:
-                            TimerSettingView()
                         case .timer:
-                            let predictor = FocusScorePredictor(model: ModelLoader.loadModel()!)
-                            let repository = SwiftDataUserTrainingDataRepository(context: context)
-                            let viewModel = TimerViewModel(predictor: predictor, repository: repository)
-                            TimerView(viewModel: viewModel)
+                            TimerView(
+                                viewModel: TimerViewModel(
+                                    predictor: predictor,
+                                    repository: repository
+                                )
+                            )
                         case .feedback:
-                            let personalizater = FocusPersonalizater(modelURL: ModelLoader.loadModelURL())
-                            let repository = SwiftDataUserTrainingDataRepository(context: context)
-                            let viewModel = FeedbackViewModel(repository: repository, personalizater: personalizater)
-                            FeedbackView(viewModel: viewModel)
+                            FeedbackView(
+                                viewModel: FeedbackViewModel(
+                                    repository: repository,
+                                    personalizater: FocusPersonalizater(modelURL: ModelLoader.loadModelURL())
+                                )
+                            )
                         case .report:
-                            let viewModel = ReportViewModel()
-                            ReportView(viewModel: viewModel)
+                            ReportView(viewModel: ReportViewModel())
+                        default:
+                            EmptyView()
                         }
                     }
             }
