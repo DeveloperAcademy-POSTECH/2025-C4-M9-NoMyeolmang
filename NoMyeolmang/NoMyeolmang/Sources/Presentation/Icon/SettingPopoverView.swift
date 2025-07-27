@@ -12,16 +12,10 @@ struct SettingPopoverView: View {
     
     var body: some View {
         VStack {
-            PopoverToggleView(isRecommendedTimeSelected: true)
+            PopoverToggleView(isRecommendedTimeSelected: $isRecommendedTimeSelected)
             
-            Text("반복 학습에 적합한 시간")
-                .textStyle(GSFont.Regular12)
-                .foregroundStyle(Color.white)
+            PopoverTimerSettingView(isRecommendedTimeSelected: $isRecommendedTimeSelected)
 
-            Text("30분")
-                .textStyle(GSFont.SemiBold24)
-                .foregroundStyle(Color.white)
-            
             Button {
                 print("다음으로 버튼 눌림!")
             } label: {

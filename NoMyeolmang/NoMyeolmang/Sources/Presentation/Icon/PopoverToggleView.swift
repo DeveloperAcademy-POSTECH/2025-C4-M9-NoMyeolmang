@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PopoverToggleView: View {
-    @State var isRecommendedTimeSelected: Bool = true
+    @Binding var isRecommendedTimeSelected: Bool
     
     var body: some View {
         ZStack {
@@ -53,8 +53,4 @@ struct PopoverToggleView: View {
             }
         }
     }
-}
-
-#Preview {
-    PopoverToggleView()
 }
