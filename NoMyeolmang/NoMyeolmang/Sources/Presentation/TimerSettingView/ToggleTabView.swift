@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-// 블러 반영해야함
 struct ToggleTabView: View {
     @Binding var isRecommendedSelected: Bool
 
@@ -23,6 +22,7 @@ struct ToggleTabView: View {
                 .frame(width: 110, height: 32)
                 .offset(x: isRecommendedSelected ? 5 : 120)
                 .shadow(color: Color.black.opacity(0.25), radius: 7, x: 0, y: 0)
+                .allowsHitTesting(false)
                 .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isRecommendedSelected)
 
             HStack {
