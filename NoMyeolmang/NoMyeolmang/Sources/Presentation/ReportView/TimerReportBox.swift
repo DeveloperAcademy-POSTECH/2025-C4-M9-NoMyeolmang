@@ -13,8 +13,8 @@ struct TimerReportBox: View {
     let boxSize = CGSize(width: 345, height: 119)
     
     var body: some View {
-        HStack(spacing: 48){
-            VStack(spacing: 2){
+        HStack(spacing: 48) {
+            VStack(spacing: 2) {
                 Text("지구 시간")
                     .textStyle(GSFont.Light14)
                     .foregroundColor(.white)
@@ -28,7 +28,7 @@ struct TimerReportBox: View {
                 .padding(.top, 10)
                 .padding(.bottom, 10)
                 .opacity(0.1)
-            VStack(spacing: 2){
+            VStack(spacing: 2) {
                 Text("탐사 시간")
                     .textStyle(GSFont.Light14)
                     .foregroundColor(.white)

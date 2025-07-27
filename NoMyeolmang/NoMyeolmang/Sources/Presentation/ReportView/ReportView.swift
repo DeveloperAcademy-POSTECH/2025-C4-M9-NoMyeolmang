@@ -5,7 +5,6 @@
 //  Created by 김소원 on 7/20/25.
 //
 
-
 import SwiftUI
 
 struct ReportView: View {
@@ -32,10 +31,9 @@ struct ReportView: View {
                 Text("완전 몰입 시 도달할 수 있는 \(viewModel.maxDistance)km 중 \(viewModel.reachedRatio)%까지 도달했어요")
                     .textStyle(GSFont.Regular16)
                     .foregroundColor(.white)
-                    .padding(.top,1)
+                    .padding(.top, 1)
 
                 TimerReportBox(earthTime: viewModel.earthTime, focusTime: viewModel.focusTime)
-                
                 
                 GSButton(title: "다시 시작하기", width: 250) {
                     coordinator.push(.timer)
