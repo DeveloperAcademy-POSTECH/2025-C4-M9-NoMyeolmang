@@ -2,17 +2,25 @@
 //  TimerViewModel.swift
 //  NoMyeolmang
 //
-//  Created by Moo on 7/26/25.
+//  Updated by Moo on 7/27/25.
 //
 
+// TimerViewModel.swift
+
 import AVFoundation
+
+enum TimerViewState: Equatable {
+    case isReady
+    case isRunning
+    case isCompleted
+}
 
 @MainActor
 final class TimerViewModel: ObservableObject {
     @Published var formattedTime: String = "30:00"
     @Published var backgroundDuration: Double = 30.0
     @Published var currentFocusLevel: FocusLevel = .lv4
-    @Published var isRunning: Bool = false
+    @Published var sessionState: TimerViewState = .isReady
 
     private let cameraManager: CameraManager
     private let analysisManager: AnalysisManager
@@ -37,28 +45,33 @@ final class TimerViewModel: ObservableObject {
         self.predictor = predictor
         self.repository = repository
 
-        configureCameraFrameHandler()
-        configureTimerSync()
+        bindCameraFrameHandler()
+        bindTimerSync()
     }
 
     func startSession() {
-        guard !isRunning else { return }
-        isRunning = true
+        guard sessionState != .isRunning else { return }
+        sessionState = .isRunning
 
-        prepareSession()
+        readySession()
         startTimers()
     }
 
     func stopSession() {
-        isRunning = false
+        guard sessionState == .isRunning else { return }
+        sessionState = .isReady
         stopAll()
     }
 
-    private func prepareSession() {
+    // MARK: - Session Preparation
+
+    private func readySession() {
         analysisManager.readyForSession()
         cameraManager.start()
         startAnalysisTimer()
     }
+
+    // MARK: - Timer Control
 
     private func startTimers() {
         actualTimer.start()
@@ -74,7 +87,9 @@ final class TimerViewModel: ObservableObject {
         virtualTimer.stop()
     }
 
-    private func configureTimerSync() {
+    // MARK: - Bindings
+
+    private func bindTimerSync() {
         actualTimer.onTick = { [weak self] _ in
             Task { @MainActor in
                 self?.updateFormattedTime()
@@ -82,22 +97,24 @@ final class TimerViewModel: ObservableObject {
         }
         actualTimer.onFinish = { [weak self] in
             Task { @MainActor in
-                self?.onTimerFinished()
+                self?.handleTimerFinished()
             }
         }
     }
 
-    private func configureCameraFrameHandler() {
+    private func bindCameraFrameHandler() {
         cameraManager.onFrame = { [weak self] pixelBuffer in
             guard let self, !self.isProcessingFrame else { return }
             self.isProcessingFrame = true
             Task { @MainActor in
                 defer { self.isProcessingFrame = false }
                 self.latestPixelBuffer = pixelBuffer
-                await self.analysisManager.analyze(pixelBuffer: pixelBuffer)
+                await self.handleFrameAnalysis(pixelBuffer)
             }
         }
     }
+
+    // MARK: - Analysis Timer
 
     private func startAnalysisTimer() {
         analysisTimer = Timer.scheduledTimer(withTimeInterval: 10.0, repeats: true) { [weak self] _ in
@@ -113,21 +130,15 @@ final class TimerViewModel: ObservableObject {
         analysisTimer = nil
     }
 
+    // MARK: - State Update
+
     private func updateFormattedTime() {
-        let remaining = max(actualTimer.lastingTime, 0)
-        formattedTime = String(format: "%02d:%02d", remaining / 60, remaining % 60)
+        formattedTime = Self.formatTime(actualTimer.lastingTime)
     }
 
-    private func onTimerFinished() {
-        stopSession()
-        printFinalResult()
-    }
-
-    private func printFinalResult() {
-        print("🎯 타이머 완료 - 최종 결과:")
-        print("📊 실제 경과 시간: \(actualTimer.count)초")
-        print("⚡ 가상 축적 시간: \(virtualTimer.count)초")
-        print("🧠 최종 집중도: \(currentFocusLevel)")
+    private static func formatTime(_ seconds: Int) -> String {
+        let remaining = max(seconds, 0)
+        return String(format: "%02d:%02d", remaining / 60, remaining % 60)
     }
 
     private func updateFocusLevel(_ newLevel: FocusLevel) {
@@ -135,6 +146,27 @@ final class TimerViewModel: ObservableObject {
         backgroundDuration = newLevel.backgroundDuration()
         virtualTimer.updateInterval(to: newLevel.tickSpeed())
         print("🎯 집중도 업데이트: \(newLevel) -> 배경: \(backgroundDuration)초, 가상속도: \(newLevel.tickSpeed())")
+    }
+
+    // MARK: - Timer Finish
+
+    private func handleTimerFinished() {
+        printFinalResult()
+        stopAll()
+        sessionState = .isCompleted
+    }
+
+    private func printFinalResult() {
+        print("🎯 타이머 완료 - 최종 결과:")
+        print("📊 실제 경과 시간: \(actualTimer.count)초")
+        print("⚡ 가상 축적 시간: \(virtualTimer.count)초")
+        print("🧠 최근 집중력 스코어: \(currentFocusLevel)")
+    }
+
+    // MARK: - Analysis
+
+    private func handleFrameAnalysis(_ pixelBuffer: CVPixelBuffer) async {
+        await analysisManager.analyze(pixelBuffer: pixelBuffer)
     }
 
     private func handleAnalysisTimerTick() async {
@@ -145,7 +177,6 @@ final class TimerViewModel: ObservableObject {
         if let newLevel = FocusLevel.from(rawValue: userTrainingData.predictedScore) {
             updateFocusLevel(newLevel)
         }
-
         do {
             let success = try await repository.write(input: [userTrainingData])
             if success {
