@@ -27,7 +27,6 @@ final class VisionYawnDetector: YawnDetector {
         let mar = calculateMouthAspectRatio(mouth: outerLips)
         let isYawningNow = mar > marThreshold
         updateYawnState(isYawning: isYawningNow)
-        print("MAR: \(mar), isYawningNow: \(isYawningNow), yawnCount: \(yawnCount)")
         return yawnCount
     }
 

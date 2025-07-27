@@ -16,7 +16,7 @@ final class VirtualTimerManager {
     private var timer: Timer?
     private var interval: TimeInterval = 1.0
     private var isRepeating: Bool = true
-    private var count: Int = 0
+    var count: Int = 0
 
     // 타이머 이벤트 알림
     var onTick: ((Int) -> Void)?
@@ -27,7 +27,6 @@ final class VirtualTimerManager {
 
         self.interval = interval
         self.isRepeating = repeats
-        self.count = 0
 
         timer = Timer.scheduledTimer(
             withTimeInterval: interval,
@@ -59,6 +58,7 @@ final class VirtualTimerManager {
 
     // MARK: Private Methods
     private func clear() {
+        self.count = 0
         timer?.invalidate()
         timer = nil
     }

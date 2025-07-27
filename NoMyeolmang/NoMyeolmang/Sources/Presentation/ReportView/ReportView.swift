@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ReportView: View {
     @EnvironmentObject var coordinator: AppCoordinator
+    @ObservedObject var viewModel: ReportViewModel
 
     var body: some View {
         let boxSize = CGSize(width: 345, height: 119)
@@ -26,11 +27,11 @@ struct ReportView: View {
                 .frame(width: 600, height: 400)
             
             VStack {
-                Text("이번 여정에서 총 00km를 탐사했어요")
+                Text("이번 여정에서 총 \(viewModel.reachedDistance)km를 탐사했어요")
                     .textStyle(GSFont.SemiBold20)
                     .foregroundColor(.white)
                     .padding(.top, 34)
-                Text("완전 몰입 시 도달할 수 있는 00km 중 00%까지 도달했어요")
+                Text("완전 몰입 시 도달할 수 있는 \(viewModel.maxDistance)km 중 \(viewModel.reachedRatio)%까지 도달했어요")
                     .textStyle(GSFont.Regular16)
                     .foregroundColor(.white)
                     .padding(.top,1)
@@ -40,7 +41,7 @@ struct ReportView: View {
                         Text("지구 시간")
                             .textStyle(GSFont.Light14)
                             .foregroundColor(.white)
-                        Text("30:00")
+                        Text(viewModel.earthTime)
                             .textStyle(GSFont.SemiBold28)
                             .foregroundColor(.white)
                         }
@@ -54,7 +55,7 @@ struct ReportView: View {
                         Text("탐사 시간")
                             .textStyle(GSFont.Light14)
                             .foregroundColor(.white)
-                        Text("22:12")
+                        Text(viewModel.focusTime)
                             .textStyle(GSFont.SemiBold28)
                             .foregroundColor(.white)
                         }
@@ -91,9 +92,8 @@ struct ReportView: View {
                 .padding(.bottom, 25)
             } // vstack
         } // zstack
+		.onAppear {
+            viewModel.calDistanceTime()
+        }
     } // body
-}
-
-#Preview {
-    ReportView()
 }
