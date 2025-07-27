@@ -17,17 +17,16 @@ struct GSButton: View {
             Text(title)
                 .textStyle(GSFont.SemiBold16)
                 .foregroundColor(.white)
-                .background(Color.clear)
+                .frame(width: width, height: 44)
+                .background(
+                    ZStack {
+                        Color.white.opacity(0.2)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.white.opacity(0.7), lineWidth: 1)
+                    }
+            )
         }
-        .frame(width: width, height: 44)
-        .background(
-            ZStack {
-                Color.white.opacity(0.2)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.white.opacity(0.7), lineWidth: 1)
-            }
-        )
         .shadow(color: Color.black.opacity(0.0168), radius: 2.21, x: 0, y: 2.77)
         .shadow(color: Color.black.opacity(0.022), radius: 5.32, x: 0, y: 6.65)
         .shadow(color: Color.black.opacity(0.025), radius: 10.02, x: 0, y: 12.52)
