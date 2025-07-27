@@ -19,7 +19,7 @@ struct PopoverButtonModifier: ViewModifier {
             .contentShape(Rectangle())
             .background(
                 ZStack {
-                    Color("#9D86DB80").opacity(0.7)
+                    Color("#554B6EB2").opacity(0.7)
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                     RoundedRectangle(cornerRadius: 10)
                         .stroke(Color.white.opacity(0.7), lineWidth: 1)
