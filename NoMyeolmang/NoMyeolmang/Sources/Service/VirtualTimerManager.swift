@@ -27,6 +27,7 @@ final class VirtualTimerManager {
 
         self.interval = interval
         self.isRepeating = repeats
+        self.count = 0
 
         timer = Timer.scheduledTimer(
             withTimeInterval: interval,
@@ -58,7 +59,6 @@ final class VirtualTimerManager {
 
     // MARK: Private Methods
     private func clear() {
-        self.count = 0
         timer?.invalidate()
         timer = nil
     }

@@ -10,30 +10,53 @@ import SwiftUI
 struct RootView: View {
     @EnvironmentObject var coordinator: AppCoordinator
     @Environment(\.modelContext) private var context
+    @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding = false
 
+    private let predictor = FocusScorePredictor(model: ModelLoader.loadModel()!)
+    private var personalizater = FocusPersonalizater(modelURL: ModelLoader.loadModelURL())
+    private var repository: UserTrainingDataRepository {
+        SwiftDataUserTrainingDataRepository(context: context)
+    }
+    
     var body: some View {
-        NavigationStack(path: $coordinator.path) {
-            TimerSettingView()
-                .navigationDestination(for: AppRoute.self) { route in
-                    switch route {
-                    case .timerSetting:
-                        TimerSettingView()
-                    case .timer:
-                        let predictor = FocusScorePredictor(model: ModelLoader.loadModel()!)
-                        let repository = SwiftDataUserTrainingDataRepository(context: context)
-                        let viewModel = TimerViewModel(predictor: predictor, repository: repository)
-                        TimerView(viewModel: viewModel)
-                    case .feedback:
-                        let personalizater = FocusPersonalizater(modelURL: ModelLoader.loadModelURL())
-                        let repository = SwiftDataUserTrainingDataRepository(context: context)
-                        let viewModel = FeedbackViewModel(repository: repository, personalizater: personalizater)
-                        FeedbackView(viewModel: viewModel)
-                    case .report:
-                        let viewModel = ReportViewModel()
-                        ReportView(viewModel: viewModel)
+        if hasSeenOnboarding {
+            NavigationStack(path: $coordinator.path) {
+                TimerSettingView()
+                    .navigationDestination(for: AppRoute.self) { route in
+                        switch route {
+                        case .timerSetting:
+                            TimerSettingView()
+                        case .timer:
+                            TimerView(
+                                viewModel: TimerViewModel(
+                                    predictor: predictor,
+                                    repository: repository
+                                )
+                            )
+                        case .feedback:
+                            FeedbackView(
+                                viewModel: FeedbackViewModel(
+                                    repository: repository,
+                                    personalizater: personalizater
+                                )
+                            )
+                        case .report:
+                            ReportView(viewModel: ReportViewModel())
+                        }
+                    }
+            }
+            .frame(minWidth: 800, minHeight: 600)
+        } else {
+            OnboardingView(showOnboarding: Binding(
+                get: { !hasSeenOnboarding },
+                set: { newValue in
+                    if !newValue {
+                        UserDefaults.standard.set(true, forKey: "hasSeenOnboarding")
+                        hasSeenOnboarding = true
                     }
                 }
+            ))
+            .frame(minWidth: 800, minHeight: 600)
         }
-        .frame(minWidth: 800, minHeight: 600)
     }
 }

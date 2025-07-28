@@ -10,15 +10,18 @@ import SwiftUI
 struct SpaceshipView: View {
     @State private var isShowing = false
     @State private var offsetY: CGFloat = 0
+    let spaceshipHeight = CGFloat(600)
+    let spaceshipBlank = CGFloat(74)
     
     var body: some View {
         VStack {
             if isShowing {
                 Image("spaceship")
                     .resizable()
-                    .frame(width: 300, height: 600)
+                    .frame(width: 300, height: spaceshipHeight)
                     .scaledToFit()
                     .transition(.move(edge: .bottom))
+                    .offset(y: offsetY + spaceshipBlank)
             }
         }
         .onAppear {
