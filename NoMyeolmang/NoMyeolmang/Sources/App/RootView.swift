@@ -11,37 +11,30 @@ struct RootView: View {
     @EnvironmentObject var coordinator: AppCoordinator
     @Environment(\.modelContext) private var context
     @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding = false
-
-    private let predictor = FocusScorePredictor(model: ModelLoader.loadModel()!)
-    private var personalizater = FocusPersonalizater(modelURL: ModelLoader.loadModelURL())
-    private var repository: UserTrainingDataRepository {
-        SwiftDataUserTrainingDataRepository(context: context)
-    }
-    
+        
     var body: some View {
+        let repository = SwiftDataUserTrainingDataRepository(context: context)
+        let predictor = FocusScorePredictor(model: ModelLoader.loadModel()!)
+        let personalizater = FocusPersonalizater(modelURL: ModelLoader.loadModelURL())
+        
+        let timerViewModel = TimerViewModel(predictor: predictor, repository: repository)
+        let feedbackViewModel = FeedbackViewModel(repository: repository, personalizater: personalizater)
+        let timerSettingViewModel = TimerSettingViewModel()
+        let reportViewModel = ReportViewModel()
+        
         if hasSeenOnboarding {
             NavigationStack(path: $coordinator.path) {
-                TimerSettingView()
+                TimerSettingView(viewModel: timerSettingViewModel)
                     .navigationDestination(for: AppRoute.self) { route in
                         switch route {
                         case .timerSetting:
-                            TimerSettingView()
+                            TimerSettingView(viewModel: timerSettingViewModel)
                         case .timer:
-                            TimerView(
-                                viewModel: TimerViewModel(
-                                    predictor: predictor,
-                                    repository: repository
-                                )
-                            )
+                            TimerView(viewModel: timerViewModel)
                         case .feedback:
-                            FeedbackView(
-                                viewModel: FeedbackViewModel(
-                                    repository: repository,
-                                    personalizater: personalizater
-                                )
-                            )
+                            FeedbackView(viewModel: feedbackViewModel)
                         case .report:
-                            ReportView(viewModel: ReportViewModel())
+                            ReportView(viewModel: reportViewModel)
                         }
                     }
             }
