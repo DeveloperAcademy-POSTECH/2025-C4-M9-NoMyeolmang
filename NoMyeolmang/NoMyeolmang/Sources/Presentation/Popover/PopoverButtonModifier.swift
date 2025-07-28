@@ -15,14 +15,14 @@ struct PopoverButtonModifier: ViewModifier {
             .textStyle(GSFont.SemiBold14)
             .foregroundStyle(Color.white)
             .frame(width: 160, height: 30)
-            .cornerRadius(4)
+            .cornerRadius(5)
             .contentShape(Rectangle())
             .background(
                 ZStack {
-                    Color("#554B6EB2").opacity(0.7)
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.white.opacity(0.7), lineWidth: 1)
+                    Color("#554B6EB2")
+                        .clipShape(RoundedRectangle(cornerRadius: 5))
+                    RoundedRectangle(cornerRadius: 5)
+                        .stroke(Color.white.opacity(0.7), lineWidth: 0.8)
                 }
             )
             .shadow(color: Color.black.opacity(0.0168), radius: 2.21, x: 0, y: 2.77)

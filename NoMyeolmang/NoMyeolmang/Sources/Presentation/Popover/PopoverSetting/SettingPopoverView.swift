@@ -29,22 +29,22 @@ struct SettingPopoverView: View {
             .padding(.bottom, 20)
         }
         .frame(width: 230, height: 270)
-        .background(Color.white.opacity(0.0001))
-        .background(Color("E2E2E2").opacity(0.35))
+        .background(Color("1B0F36"))
         .clipShape(RoundedRectangle(cornerRadius: 10))
-        .shadow(color: .black.opacity(0.15),
-                radius: 4, x: 0, y: 2)
-        .shadow(color: .black.opacity(0.18),
-                radius: 15, x: 0, y: 8)
+        .shadow(color: .black.opacity(0.15), radius: 4, x: 0, y: 2)
+        .shadow(color: .black.opacity(0.18), radius: 15, x: 0, y: 8)
         .overlay(
-            RoundedRectangle(cornerRadius: 10)
-                .stroke(Color.white.opacity(0.5), lineWidth: 0.5)
-                .blur(radius: 1)
-                .offset(x: 0, y: 0.5)
-                .mask(RoundedRectangle(cornerRadius: 10))
-        )
-        .background(
-            .ultraThinMaterial
+            ZStack {
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color.white.opacity(0.5), lineWidth: 1)
+                    .blur(radius: 2)
+                    .offset(y: 0.5)
+                    .mask(RoundedRectangle(cornerRadius: 10))
+                
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color.white.opacity(0.25), lineWidth: 0.5)
+                    .mask(RoundedRectangle(cornerRadius: 10))
+            }
         )
     }
 }
