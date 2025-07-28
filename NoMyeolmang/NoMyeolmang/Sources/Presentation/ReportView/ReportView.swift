@@ -17,7 +17,6 @@ struct ReportView: View {
                 .resizable()
                 .ignoresSafeArea()
                 .scaledToFill()
-                .frame(width: 800, height: 600, alignment: .center)
             
             RoundedRectangle(cornerRadius: 10)
                 .fill(Color.white.opacity(0.14))
