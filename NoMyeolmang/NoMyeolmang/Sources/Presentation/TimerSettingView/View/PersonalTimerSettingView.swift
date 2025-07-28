@@ -18,10 +18,16 @@ struct PersonalTimerSettingView: View {
         let boxSize = CGSize(width: 329, height: 161)
 
         VStack(spacing: 0) {
-            Text("시간을 입력해 주세요")
+            Text("10-30분 설정만 가능해요")
+                .textStyle(GSFont.Light12)
+                .foregroundColor(Color("CEB0FF"))
+                .padding(.top, 20)
+            
+            Text("시간을 설정해 주세요")
                 .textStyle(GSFont.Regular16)
                 .foregroundColor(.white)
-                .padding(.top, 52.5)
+                .padding(.top, 4)
+                .padding(.bottom, 12)
 
             HStack(spacing: 0) {
                 HStack(alignment: .firstTextBaseline, spacing: 0) {
@@ -41,7 +47,7 @@ struct PersonalTimerSettingView: View {
                         .textFieldStyle(PlainTextFieldStyle())
                         .focused($isTextFieldFocused)
                         .onAppear {
-                            goalTime = 0  
+                            goalTime = 0
                             newGoalTimeText = ""
                             isTextFieldFocused = true
                         }
