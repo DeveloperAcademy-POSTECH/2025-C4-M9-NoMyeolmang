@@ -23,6 +23,10 @@ struct HoverRatingView: View {
     @Binding var selectedIndex: Int?
     @Binding var hoveredIndex: Int?
 
+    var isSelectionValid: Bool {
+        selectedIndex != nil
+    }
+
     var body: some View {
         HStack(spacing: 35) {
             ForEach(1...5, id: \.self) { number in

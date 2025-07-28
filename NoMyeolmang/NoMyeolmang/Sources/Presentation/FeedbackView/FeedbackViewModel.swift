@@ -17,6 +17,10 @@ final class FeedbackViewModel: ObservableObject {
     @Published var selectedIndex: Int?
     let recordCount = 10
 
+    var isSelectionValid: Bool {
+        selectedIndex != nil
+    }
+
     init(repository: UserTrainingDataRepository, personalizater: Personalizater) {
         self.repository = repository
         self.personalizater = personalizater
