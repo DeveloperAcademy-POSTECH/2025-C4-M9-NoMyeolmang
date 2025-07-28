@@ -21,11 +21,11 @@ struct RootView: View {
     var body: some View {
         if hasSeenOnboarding {
             NavigationStack(path: $coordinator.path) {
-                TimerSettingView()
+                TimerSettingView(viewModel: TimerSettingViewModel())
                     .navigationDestination(for: AppRoute.self) { route in
                         switch route {
                         case .timerSetting:
-                            TimerSettingView()
+                            TimerSettingView(viewModel: TimerSettingViewModel())
                         case .timer:
                             TimerView(
                                 viewModel: TimerViewModel(
