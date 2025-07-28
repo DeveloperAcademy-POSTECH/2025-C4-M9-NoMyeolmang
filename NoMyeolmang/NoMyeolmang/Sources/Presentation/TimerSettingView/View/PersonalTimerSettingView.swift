@@ -12,14 +12,6 @@ import SwiftUI
 struct PersonalTimerSettingView: View {
     @Binding var goalTime: Int
     @State private var newGoalTimeText: String = ""
-    private let numberFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .none
-        formatter.maximum = 999
-        formatter.generatesDecimalNumbers = false
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        return formatter
-    }()
     @FocusState private var isTextFieldFocused: Bool
 
     var body: some View {
@@ -40,24 +32,22 @@ struct PersonalTimerSettingView: View {
                                 newGoalTimeText = filtered
                             }
                             // goalTime에 직접 연결
-                            if let time = Int(filtered), time > 0 {
+                            if let time = Int(filtered), (10...30).contains(time) {
                                 goalTime = time
                             }
                         }
                         .multilineTextAlignment(.center)
                         .textStyle(GSFont.SemiBold24)
                         .foregroundColor(.white)
-                        .background(Color.clear)
                         .textFieldStyle(PlainTextFieldStyle())
                         .focused($isTextFieldFocused)
                         .onAppear {
                             isTextFieldFocused = true
                         }
-                        .accentColor(.white)
                         .frame(minWidth: 20, minHeight: 32)
                         .fixedSize()
 
-                    if let value = Int(newGoalTimeText) {
+                    if Int(newGoalTimeText) != nil {
                         Text("분")
                             .textStyle(GSFont.SemiBold24)
                             .foregroundColor(.white)

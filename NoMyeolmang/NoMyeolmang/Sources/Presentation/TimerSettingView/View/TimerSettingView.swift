@@ -11,6 +11,10 @@ struct TimerSettingView: View {
     @EnvironmentObject var coordinator: AppCoordinator
     @ObservedObject var viewModel: TimerSettingViewModel
     
+    var isTimeValid: Bool {
+        (10...30).contains(viewModel.goalTime)
+    }
+    
     var backgroundView: some View {
         ZStack {
             Image("SpaceshipBackground")
