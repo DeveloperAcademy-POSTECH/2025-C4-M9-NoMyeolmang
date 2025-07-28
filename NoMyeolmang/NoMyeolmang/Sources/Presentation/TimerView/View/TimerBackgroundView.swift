@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TimerBackgroundView: View {
     let animationDuration: Double
+    @Binding var sessionState: TimerViewState
     // MARK: 이미지 크기 따라 값 바꿔줄것
     // 이미지 크기
     let imageHeight: CGFloat = 6140
@@ -42,10 +43,6 @@ struct TimerBackgroundView: View {
                         checkInitialPosition(screenSize: geo.size)
                         startLoopingAnimation()
                     }
-                    .onDisappear {
-                        timer?.invalidate()
-                        print("::DisAppear:", offsetY, timer)
-                    }
                     .onChange(of: geo.size) { oldSize, newSize in
                         let (oldStartY, oldEndY) = calculateStartEndY()
                         updateOffsetRatio(startY: oldStartY, endY: oldEndY)
@@ -56,7 +53,6 @@ struct TimerBackgroundView: View {
                             startY: newStartY,
                             endY: newEndY
                         )
-
                         timer?.invalidate()
                         startLoopingAnimationKeepingPosition()
                     }
@@ -69,8 +65,16 @@ struct TimerBackgroundView: View {
                         startLoopingAnimationKeepingPosition()
                     }
             }
+
         }
         .ignoresSafeArea()
+        .onChange(of: sessionState) {
+            if sessionState == .isCompleted {
+                print("🛑 Timer invalidated:", offsetY)
+                timer?.invalidate()
+                timer = nil
+            }
+        }
     }
 
     // 공통 startY/endY 계산 함수 추가
@@ -117,30 +121,32 @@ struct TimerBackgroundView: View {
 
     // 🆕 공통 타이머 생성 함수
     private func createAnimationTimer(startY: CGFloat, endY: CGFloat) {
-        print("🎬 애니메이션 시작 - duration: \(animationDuration)초")
-        
-        // 초기화
-        timer?.invalidate()
-        timer = nil
-        
-        timer = Timer.scheduledTimer(withTimeInterval: 1 / 60, repeats: true) {
-            _ in
-            let totalDistance = endY - startY
-            let movePerFrame = totalDistance / (animationDuration * 60)
-
-            offsetY += movePerFrame
-
-            // 루프 처리
-            if offsetY >= endY {
-                print("🔄 애니메이션 루프 완료 - 재시작")
-                offsetY = startY
+        if sessionState == .isRunning {
+            print("🎬 애니메이션 시작 - duration: \(animationDuration)초")
+            
+            // 초기화
+            timer?.invalidate()
+            timer = nil
+            
+            timer = Timer.scheduledTimer(withTimeInterval: 1 / 60, repeats: true) {
+                _ in
+                let totalDistance = endY - startY
+                let movePerFrame = totalDistance / (animationDuration * 60)
+                
+                offsetY += movePerFrame
+                
+                // 루프 처리
+                if offsetY >= endY {
+                    print("🔄 애니메이션 루프 완료 - 재시작")
+                    offsetY = startY
+                }
             }
+            
+            // 속도 로그
+            let totalDistance = endY - startY
+            let pixelsPerSecond = totalDistance / animationDuration
+            print("⚡ 새로운 속도: \(pixelsPerSecond)px/s")
         }
-
-        // 속도 로그
-        let totalDistance = endY - startY
-        let pixelsPerSecond = totalDistance / animationDuration
-        print("⚡ 새로운 속도: \(pixelsPerSecond)px/s")
     }
 
     // offsetY 위치를 비율로 저장
@@ -159,5 +165,5 @@ struct TimerBackgroundView: View {
 }
 
 #Preview {
-    TimerBackgroundView(animationDuration: 30.0)
+    TimerBackgroundView(animationDuration: 30.0, sessionState: .constant(TimerViewState.isRunning))
 }

@@ -14,7 +14,7 @@ struct TimerView: View {
     var body: some View {
         GeometryReader { geo in
             ZStack(alignment: .center) {
-                TimerBackgroundView(animationDuration: viewModel.backgroundDuration)
+                TimerBackgroundView(animationDuration: viewModel.backgroundDuration, sessionState: $viewModel.sessionState)
 
                 SpaceshipView()
                     .frame(maxWidth: .infinity, alignment: .center)
@@ -27,6 +27,7 @@ struct TimerView: View {
                         coordinator.replaceLast(with: .timerSetting)
                     }
                     Button("Next: Feedback") {
+                        viewModel.handleTimerFinished()
                         coordinator.push(.feedback)
                     }
                     .navigationBarBackButtonHidden(true)

@@ -150,7 +150,7 @@ final class TimerViewModel: ObservableObject {
 
     // MARK: - Timer Finish
 
-    private func handleTimerFinished() {
+    func handleTimerFinished() {
         printFinalResult()
         stopAll()
         sessionState = .isCompleted
