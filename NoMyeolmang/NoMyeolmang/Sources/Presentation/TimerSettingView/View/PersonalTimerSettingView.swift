@@ -41,7 +41,7 @@ struct PersonalTimerSettingView: View {
                         .textFieldStyle(PlainTextFieldStyle())
                         .focused($isTextFieldFocused)
                         .onAppear {
-                            newGoalTimeText = "\(goalTime)"
+                            newGoalTimeText = ""
                             isTextFieldFocused = true
                         }
                         .frame(minWidth: 20, minHeight: 32)

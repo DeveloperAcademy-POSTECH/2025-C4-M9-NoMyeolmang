@@ -32,6 +32,12 @@ final class TimerSettingViewModel: ObservableObject {
 
     func selectTab(_ tab: TabType) {
         selectedTab = tab
+        switch tab {
+        case .recommended:
+            goalTime = 30
+        case .personal:
+            goalTime = 0
+        }
         validateGoalTime()
     }
 
