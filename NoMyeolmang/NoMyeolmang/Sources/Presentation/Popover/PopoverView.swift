@@ -8,9 +8,12 @@
 import SwiftUI
 
 struct PopoverView: View {
+    var onStart: () -> Void
+    var onStop: () -> Void
+    
     var body: some View {
         VStack(spacing: 20) {
-            SettingPopoverView()
+            SettingPopoverView(onStart: onStart, onStop: onStop)
         }
         .frame(width: 230, height: 270)
     }

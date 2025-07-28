@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct SettingPopoverView: View {
+    var onStart: () -> Void
+    var onStop: () -> Void
+    
     @State private var isRecommendedTimeSelected: Bool = true
     
     var body: some View {
@@ -32,6 +35,3 @@ struct SettingPopoverView: View {
     }
 }
 
-#Preview {
-    SettingPopoverView()
-}

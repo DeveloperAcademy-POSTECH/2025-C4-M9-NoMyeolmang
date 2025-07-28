@@ -10,7 +10,6 @@ import SwiftUI
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     var statusItem: NSStatusItem?
-//    var popover = NSPopover()
     var countdownTimer: Timer?
     var remainingSeconds: Int = 30 * 60
     var popoverWindowController: PopoverWindowController?
