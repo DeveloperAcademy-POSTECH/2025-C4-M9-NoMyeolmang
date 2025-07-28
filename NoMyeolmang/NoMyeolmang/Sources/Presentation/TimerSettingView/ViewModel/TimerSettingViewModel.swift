@@ -38,7 +38,6 @@ final class TimerSettingViewModel: ObservableObject {
         case .personal:
             goalTime = 0
         }
-        validateGoalTime()
     }
 
     private func validateGoalTime() {

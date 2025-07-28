@@ -11,7 +11,6 @@ struct TimerSettingView: View {
     @EnvironmentObject var coordinator: AppCoordinator
     @ObservedObject var viewModel: TimerSettingViewModel
     
-    
     var backgroundView: some View {
         ZStack {
             Image("SpaceshipBackground")
@@ -28,7 +27,7 @@ struct TimerSettingView: View {
             backgroundView
             
             VStack(spacing: 0) {
-                ToggleTabView(isRecommendedSelected: $viewModel.selectedTab, goalTime: $viewModel.goalTime)
+                ToggleTabView(viewModel: viewModel, isRecommendedSelected: $viewModel.selectedTab, goalTime: $viewModel.goalTime)
                 
                 Group {
                     if viewModel.selectedTab == .recommended {
