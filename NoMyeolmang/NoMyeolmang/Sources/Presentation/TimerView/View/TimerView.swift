@@ -38,11 +38,16 @@ struct TimerView: View {
         }
         .navigationBarBackButtonHidden(true)
         .onChange(of: viewModel.sessionState, perform: handleSessionStateChange)
-        .onAppear(perform: handleAppear)
+        .onAppear{
+            viewModel.sessionState = .isReady
+            handleAppear()
+        }
         .onDisappear(perform: handleDisappear)
     }
 
-    private func handleSessionStateChange(_ new: TimerViewState) {
+    private func handleSessionStateChange(_ new: TimerViewState?) {
+        guard let new else { return }
+        
         if new == .isCompleted {
             coordinator.push(.feedback)
         }

@@ -20,7 +20,7 @@ final class TimerViewModel: ObservableObject {
     @Published var formattedTime: String = "30:00"
     @Published var backgroundDuration: Double = 30.0
     @Published var currentFocusLevel: FocusLevel = .lv4
-    @Published var sessionState: TimerViewState = .isReady
+    @Published var sessionState: TimerViewState? = nil
 
     private let cameraManager: CameraManager
     private let analysisManager: AnalysisManager
