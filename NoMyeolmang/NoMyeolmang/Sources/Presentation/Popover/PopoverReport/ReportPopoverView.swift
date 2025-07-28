@@ -11,6 +11,7 @@ struct ReportPopoverView: View {
     var body: some View {
         VStack {
             PopoverReportTimeView()
+                .padding(.bottom, 42)
             
             VStack {
                 Button {
