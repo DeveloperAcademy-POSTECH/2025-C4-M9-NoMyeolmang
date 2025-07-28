@@ -40,7 +40,7 @@ struct PersonalTimerSettingView: View {
                                 newGoalTimeText = filtered
                             }
                             // goalTime에 직접 연결
-                            if let time = Int(filtered), time > 0 {
+                            if let time = Int(filtered), (10...30).contains(time) {
                                 goalTime = time
                             }
                         }
