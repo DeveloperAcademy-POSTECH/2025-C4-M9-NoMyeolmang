@@ -24,6 +24,7 @@ struct SettingPopoverView: View {
 
             Button {
                 print("다음으로 버튼 눌림!")
+                onStart()
             } label: {
                 Text("다음으로")
                     .modifier(PopoverButtonModifier())
@@ -34,4 +35,3 @@ struct SettingPopoverView: View {
         .modifier(PopoverBgModifier())
     }
 }
-

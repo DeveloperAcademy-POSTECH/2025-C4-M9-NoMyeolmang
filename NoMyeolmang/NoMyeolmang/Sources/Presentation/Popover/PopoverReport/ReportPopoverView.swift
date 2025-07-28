@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ReportPopoverView: View {
+    var onStart: () -> Void
+    var onStop: () -> Void
+    
     var body: some View {
         VStack {
             PopoverReportTimeView()
@@ -16,6 +19,7 @@ struct ReportPopoverView: View {
             VStack {
                 Button {
                     print("다시 시작하기 버튼 눌림!")
+                    onStart()
                 } label: {
                     Text("다시 시작하기")
                         .modifier(PopoverButtonModifier())
@@ -24,6 +28,7 @@ struct ReportPopoverView: View {
                 
                 Button {
                     print("탐사 종료하기 버튼 눌림!")
+                    onStop()
                 } label: {
                     Text("탐사 종료하기")
                         .modifier(PopoverButtonModifier())
@@ -33,8 +38,4 @@ struct ReportPopoverView: View {
         }
         .modifier(PopoverBgModifier())
     }
-}
-
-#Preview {
-    ReportPopoverView()
 }

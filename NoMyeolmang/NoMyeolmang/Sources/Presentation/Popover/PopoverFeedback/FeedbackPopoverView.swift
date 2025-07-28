@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct FeedbackPopoverView: View {
+    var onStart: () -> Void
+    var onStop: () -> Void
+    
     var body: some View {
         VStack {
             VStack {
@@ -30,6 +33,7 @@ struct FeedbackPopoverView: View {
 
             Button {
                 print("완료 버튼 눌림! 🥹")
+                onStart()
             } label: {
                 Text("완료")
                     .modifier(PopoverButtonModifier())
