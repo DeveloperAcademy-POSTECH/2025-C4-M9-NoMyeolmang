@@ -31,8 +31,7 @@ struct PersonalTimerSettingView: View {
                             if filtered != newGoalTimeText {
                                 newGoalTimeText = filtered
                             }
-                            // goalTime에 직접 연결
-                            if let time = Int(filtered), (10...30).contains(time) {
+                            if let time = Int(filtered) {
                                 goalTime = time
                             }
                         }
@@ -42,6 +41,7 @@ struct PersonalTimerSettingView: View {
                         .textFieldStyle(PlainTextFieldStyle())
                         .focused($isTextFieldFocused)
                         .onAppear {
+                            newGoalTimeText = "\(goalTime)"
                             isTextFieldFocused = true
                         }
                         .frame(minWidth: 20, minHeight: 32)
