@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct PopoverTimeLeftView: View {
+    let remainingTime: String
+    
     var body: some View {
         VStack {
             Text("남은 시간")
@@ -15,13 +17,14 @@ struct PopoverTimeLeftView: View {
                 .foregroundStyle(Color.white)
                 .padding(.bottom, 4)
             
-            Text("00:00")
+            Text(remainingTime)
                 .foregroundStyle(Color.white)
                 .textStyle(GSFont.SemiBold24)
+                .tracking(-3)
         }
     }
 }
 
 #Preview {
-    PopoverTimeLeftView()
+    PopoverTimeLeftView(remainingTime: "05 : 30")
 }

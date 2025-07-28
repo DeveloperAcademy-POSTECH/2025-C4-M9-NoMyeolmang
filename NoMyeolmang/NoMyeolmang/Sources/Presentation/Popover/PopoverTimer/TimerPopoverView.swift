@@ -11,7 +11,7 @@ struct TimerPopoverView: View {
     var body: some View {
         VStack {
             Spacer()
-            PopoverTimeLeftView()
+            PopoverTimeLeftView(remainingTime: "05 : 30")
             PopoverTimerStopButton {
                 print("버튼 눌림!")
             }
