@@ -27,32 +27,34 @@ struct ToggleTabView: View {
                 .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isRecommendedSelected)
 
             HStack {
-                Spacer().frame(width: 34.5)
+                Spacer().frame(width: 5)
 
                 Text("맞춤 추천")
                     .textStyle(GSFont.SemiBold14)
                     .foregroundColor(.white)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .frame(width: 110, height: 32)
+                    .contentShape(Rectangle())
                     .onTapGesture {
                         withAnimation {
                             isRecommendedSelected = .recommended
-                            goalTime = 30  // 추천 시간으로 설정
+                            goalTime = 30
                         }
                     }
 
-                Spacer().frame(width: 64)
+                Spacer().frame(width: 5)
 
                 Text("직접 설정")
                     .textStyle(GSFont.SemiBold14)
                     .foregroundColor(.white)
-                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    .frame(width: 110, height: 32)
+                    .contentShape(Rectangle())
                     .onTapGesture {
                         withAnimation {
                             isRecommendedSelected = .personal
                         }
                     }
 
-                Spacer().frame(width: 34.5)
+                Spacer().frame(width: 5)
             }
             .frame(width: 235, height: 40)
         }
