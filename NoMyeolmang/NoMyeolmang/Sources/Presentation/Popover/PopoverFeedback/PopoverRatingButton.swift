@@ -7,62 +7,50 @@
 
 import SwiftUI
 
-private func hoverDescription(for number: Int) -> String {
-    switch number {
-    case 1: return "전혀 몰입하지 않았어요"
-    case 2: return "조금 산만했어요"
-    case 3: return "보통이에요"
-    case 4: return "꽤 집중했어요"
-    case 5: return "완전히 몰입했어요"
-    default: return ""
-    }
-}
-
 struct PopoverRatingButton: View {
-    @Binding var selectedIndex: Int?
-    @Binding var hoveredIndex: Int?
+    @State var selectedNumber: Int?
 
     var body: some View {
         HStack(spacing: 12) {
             ForEach(1...5, id: \.self) { number in
                 ZStack {
                     Circle()
-                        .fill(selectedIndex == number ? Color("ReportViewSelectedColor") : Color("5C436D").opacity(0.4))
+                        .fill(Color.white.opacity(0.38))
+                        .frame(width: 30)
                         .overlay(
-                            Circle()
-                                .stroke(Color.white, lineWidth: 1.2)
+                            selectedNumber == number ? AppGradients.hoverGradient : nil
                         )
-                        .frame(width: 30, height: 30)
-                        .overlay(
-                            Text("\(number)")
-                                .font(.custom("Pretendard-ExtraBold", size: 12))
-                                .foregroundColor(.white)
+                        .clipShape(Circle())
+                        .background(Circle().fill(Color.clear)
+                            .stroke(Color.white.opacity(0.65), lineWidth: 0.65)
                         )
-                        .onHover { hovering in
-                            hoveredIndex = hovering ? number : nil
-                        }
-                        .onTapGesture {
-                            selectedIndex = number
-                        }
-
-                    if hoveredIndex == number {
-                        Text(hoverDescription(for: number))
-                            .textStyle(GSFont.Regular12)
-                            .foregroundColor(.white)
-                            .lineLimit(1)
-                            .fixedSize()
-                            .padding(.vertical, 8)
-                            .padding(.horizontal, 12)
-                            .background(Color("1C1C1ED9").opacity(0.85))
-                            .cornerRadius(6)
-                            .offset(y: -50)
-                    }
+                        
+                    Text("\(number)")
+                        .font(.system(size: 12))
+                        .bold()
+                        .foregroundStyle(Color.white)
+                }
+                .onTapGesture {
+                    selectedNumber = number
                 }
             }
         }
     }
 }
 
+extension Color {
+    static let bPurple = Color("3E154B")
+    static let bIndigo = Color("231151")
+}
+
+struct AppGradients {
+    static let hoverGradient = LinearGradient(
+        colors: [.bPurple, .bIndigo],
+        startPoint: .top,
+        endPoint: .bottom
+    )
+}
+
 #Preview {
-    PopoverRatingButton(selectedIndex: .constant(nil), hoveredIndex: .constant(nil))
+    PopoverRatingButton()
 }

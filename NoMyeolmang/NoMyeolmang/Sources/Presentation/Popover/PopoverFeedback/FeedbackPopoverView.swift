@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct FeedbackPopoverView: View {
-    @ObservedObject var viewModel: FeedbackViewModel
-    
     var body: some View {
         VStack {
             VStack {
@@ -27,8 +25,7 @@ struct FeedbackPopoverView: View {
             }
             .padding(.top, 38)
             
-            PopoverRatingButton(selectedIndex: $viewModel.selectedIndex,
-                                hoveredIndex: $viewModel.hoveredIndex)
+            PopoverRatingButton()
             .padding(.top, 38)
 
             Button {

@@ -30,4 +30,3 @@ struct PopoverBgModifier: ViewModifier {
             )
     }
 }
-
