@@ -18,7 +18,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 
         if let button = statusItem?.button {
-            button.image = NSImage(systemSymbolName: "star.fill", accessibilityDescription: "상단바 아이콘 변경 예정, 확정 시 의미 담기")
+            button.image = NSImage(named: "menuIcon")
             button.action = #selector(togglePopover(_:))
             button.target = self
             button.image?.isTemplate = true
@@ -34,7 +34,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 let rootView = PopoverRootView(
                     onClick: {
                         self.popoverWindowController?.window?.orderOut(nil)
-                        // 타이머 시작 흐름
                         print("onClick")
                     }
                 )
