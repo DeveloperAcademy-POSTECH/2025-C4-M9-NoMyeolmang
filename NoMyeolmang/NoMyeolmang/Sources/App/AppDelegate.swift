@@ -10,32 +10,15 @@ import SwiftUI
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     var statusItem: NSStatusItem?
-    var popover = NSPopover()
     var countdownTimer: Timer?
     var remainingSeconds: Int = 30 * 60
+    var popoverWindowController: PopoverWindowController?
 
     func applicationDidFinishLaunching(_ notification: Notification) {
-        popover.contentSize = NSSize(width: 230, height: 270)
-        popover.behavior = .transient
-        popover.contentViewController = NSViewController()
-        popover.contentViewController?.view = NSHostingView(
-            rootView: PopoverView(
-                onStart: {
-                    self.popover.performClose(nil)
-                    self.startCountdown()
-                },
-                onStop: {
-                    self.countdownTimer?.invalidate()
-                    self.countdownTimer = nil
-                    self.statusItem?.button?.title = "Stopped" // Done 으로 처리되지만 우선 작업 시 편의를 위해 Stopped에서 수정하지 않음
-                }
-            )
-        )
-
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 
         if let button = statusItem?.button {
-            button.image = NSImage(systemSymbolName: "star.fill", accessibilityDescription: "상단바 아이콘 변경 예정, 확정 시 의미 담기")
+            button.image = NSImage(named: "menuIcon")
             button.action = #selector(togglePopover(_:))
             button.target = self
             button.image?.isTemplate = true
@@ -44,14 +27,34 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @objc func togglePopover(_ sender: AnyObject?) {
         guard let button = statusItem?.button else { return }
-        if popover.isShown {
-            popover.performClose(sender)
-        } else {
-            popover.contentSize = NSSize(width: 230, height: 270)
-            popover.behavior = .transient
-            popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
-        }
+
+            if let window = popoverWindowController?.window, window.isVisible {
+                window.orderOut(nil)
+            } else {
+                let rootView = PopoverRootView(
+                    onClick: {
+                        self.popoverWindowController?.window?.orderOut(nil)
+                        print("onClick")
+                    }
+                )
+
+                popoverWindowController = PopoverWindowController(rootView: rootView)
+
+                if let window = popoverWindowController?.window,
+                   let screen = button.window?.screen {
+                    
+                    let buttonRect = button.convert(button.bounds, to: nil)
+                    let buttonOrigin = button.window?.convertPoint(toScreen: buttonRect.origin) ?? .zero
+
+                    let popupX = buttonOrigin.x
+                    let popupY = buttonOrigin.y
+
+                    window.setFrameTopLeftPoint(NSPoint(x: popupX, y: popupY))
+                    window.makeKeyAndOrderFront(nil)
+                }
+            }
     }
+    
     func startCountdown() {
         if countdownTimer != nil {
             return
