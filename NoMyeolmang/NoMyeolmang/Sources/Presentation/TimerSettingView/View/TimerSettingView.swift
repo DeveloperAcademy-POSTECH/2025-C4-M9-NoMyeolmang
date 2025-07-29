@@ -28,9 +28,10 @@ struct TimerSettingView: View {
             
             VStack(spacing: 0) {
                 ToggleTabView(
-                    viewModel: viewModel,
-                    isRecommendedSelected: $viewModel.selectedTab,
-                    goalTime: $viewModel.goalTime
+                    selectedTab: $viewModel.selectedTab,
+                    onTabSelected: { tab in
+                        viewModel.selectTab(tab)
+                    }
                 )
                 
                 Group {
