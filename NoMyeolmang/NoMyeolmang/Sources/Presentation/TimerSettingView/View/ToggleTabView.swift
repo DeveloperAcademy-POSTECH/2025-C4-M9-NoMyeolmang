@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ToggleTabView: View {
+    @ObservedObject var viewModel: TimerSettingViewModel
     @Binding var isRecommendedSelected: TabType
     @Binding var goalTime: Int
 
@@ -68,7 +69,7 @@ struct ToggleTabView: View {
         @State private var goalTime = 30
 
         var body: some View {
-            ToggleTabView(isRecommendedSelected: $selectedTab, goalTime: $goalTime)
+            ToggleTabView(viewModel: TimerSettingViewModel(), isRecommendedSelected: $selectedTab, goalTime: $goalTime)
                 .padding()
                 .background(Color.black)
         }

@@ -11,10 +11,6 @@ struct TimerSettingView: View {
     @EnvironmentObject var coordinator: AppCoordinator
     @ObservedObject var viewModel: TimerSettingViewModel
     
-    var isTimeValid: Bool {
-        (10...30).contains(viewModel.goalTime)
-    }
-    
     var backgroundView: some View {
         ZStack {
             Image("SpaceshipBackground")
@@ -31,7 +27,11 @@ struct TimerSettingView: View {
             backgroundView
             
             VStack(spacing: 0) {
-                ToggleTabView(isRecommendedSelected: $viewModel.selectedTab, goalTime: $viewModel.goalTime)
+                ToggleTabView(
+                    viewModel: viewModel,
+                    isRecommendedSelected: $viewModel.selectedTab,
+                    goalTime: $viewModel.goalTime
+                )
                 
                 Group {
                     if viewModel.selectedTab == .recommended {
@@ -44,10 +44,10 @@ struct TimerSettingView: View {
                 .padding(.top, 24)
                 
                 ZStack {
-                    GSButton(title: "집중 시작하기", width: 250) {
+                    GSButton(title: "집중 시작하기", width: 250, action: {
                         viewModel.startFocusSession()
                         coordinator.push(.timer)
-                    }
+                    }, isDisabled: !viewModel.isValid)
                 }
                 .padding(.top, 39)
             }
