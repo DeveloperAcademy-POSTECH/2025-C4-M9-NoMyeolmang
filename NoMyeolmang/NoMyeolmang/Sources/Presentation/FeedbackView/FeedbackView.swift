@@ -36,7 +36,8 @@ struct FeedbackView: View {
 
                 HoverRatingView(
                     selectedIndex: $viewModel.selectedIndex,
-                    hoveredIndex: $viewModel.hoveredIndex
+                    hoveredIndex: $viewModel.hoveredIndex,
+                    isSelectionValid: viewModel.isSelectionValid
                 )
                 .padding(.top, 51)
 
