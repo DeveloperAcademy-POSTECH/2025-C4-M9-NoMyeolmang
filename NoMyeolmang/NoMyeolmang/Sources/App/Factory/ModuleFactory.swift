@@ -15,6 +15,11 @@ protocol ModuleFactoryProtocol {
     func makeFeedbackView() -> FeedbackView
     func makeReportView() -> ReportView
     func makeOnboardingView(showOnboarding: Binding<Bool>) -> OnboardingView
+    
+    func makeSettingPopoverView() -> SettingPopoverView
+    func makeTimerPopoverView() -> TimerPopoverView
+    func makeFeedbackPopoverView() -> FeedbackPopoverView
+    func makeReportPopoverView() -> ReportPopoverView
 }
 
 @MainActor
@@ -42,36 +47,45 @@ final class ModuleFactory: ModuleFactoryProtocol {
     
     private lazy var cameraManager = CameraManager()
     private lazy var analysisManager = AnalysisManager()
+    
+    private lazy var timerSettingViewModel = TimerSettingViewModel()
+    private lazy var timerViewModel = TimerViewModel(predictor: focusScorePredictor,repository: userTrainingDataRepository)
+    private lazy var feedbackViewModel = FeedbackViewModel(repository: userTrainingDataRepository, personalizater: focusPersonalizater)
+    private lazy var reportViewModel = ReportViewModel()
         
     func makeTimerSettingView() -> TimerSettingView {
-        let viewModel = TimerSettingViewModel()
-        return TimerSettingView(viewModel: viewModel)
+        return TimerSettingView(viewModel: timerSettingViewModel)
     }
     
     func makeTimerView() -> TimerView {
-        let viewModel = TimerViewModel(
-            predictor: focusScorePredictor,
-            repository: userTrainingDataRepository,
-            cameraManager: cameraManager,
-            analysisManager: analysisManager
-        )
-        return TimerView(viewModel: viewModel)
+        return TimerView(viewModel: timerViewModel)
     }
     
     func makeFeedbackView() -> FeedbackView {
-        let viewModel = FeedbackViewModel(
-            repository: userTrainingDataRepository,
-            personalizater: focusPersonalizater
-        )
-        return FeedbackView(viewModel: viewModel)
+        return FeedbackView(viewModel: feedbackViewModel)
     }
     
     func makeReportView() -> ReportView {
-        let viewModel = ReportViewModel()
-        return ReportView(viewModel: viewModel)
+        return ReportView(viewModel: reportViewModel)
     }
     
     func makeOnboardingView(showOnboarding: Binding<Bool>) -> OnboardingView {
         return OnboardingView(showOnboarding: showOnboarding)
+    }
+    
+    func makeSettingPopoverView() -> SettingPopoverView {
+        return SettingPopoverView(viewModel: timerSettingViewModel)
+    }
+    
+    func makeTimerPopoverView() -> TimerPopoverView {
+        return TimerPopoverView(viewModel: timerViewModel)
+    }
+    
+    func makeFeedbackPopoverView() -> FeedbackPopoverView {
+        return FeedbackPopoverView(viewModel: feedbackViewModel)
+    }
+    
+    func makeReportPopoverView() -> ReportPopoverView {
+        return ReportPopoverView(viewModel: reportViewModel)
     }
 }
