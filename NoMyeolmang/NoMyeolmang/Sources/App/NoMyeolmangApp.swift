@@ -11,7 +11,8 @@ import SwiftUI
 @main
 struct NoMyeolmangApp: App {
     @State private var coordinator = AppCoordinator()
-    
+    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+
     var modelContainer: ModelContainer = {
         do {
             return try ModelContainer(for: UserTrainingData.self)
