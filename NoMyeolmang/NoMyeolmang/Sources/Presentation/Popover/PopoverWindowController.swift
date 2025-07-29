@@ -8,25 +8,30 @@
 import AppKit
 import SwiftUI
 
-class PopoverWindowController: NSWindowController {
+class PopoverWindowController: NSObject {
+    private var popover: NSPopover
+    
     init(rootView: some View) {
-        let hostingView = NSHostingView(rootView: rootView)
-        let window = NSWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 230, height: 270),
-            styleMask: [.titled, .closable],
-            backing: .buffered,
-            defer: false
-        )
-        window.contentView = hostingView
-        window.isOpaque = false
-        window.backgroundColor = .clear
-        window.hasShadow = true
-        window.level = .floating
-
-        super.init(window: window)
+        let hostingController = NSHostingController(rootView: rootView)
+        
+        popover = NSPopover()
+        popover.contentSize = NSSize(width: 230, height: 270)
+        popover.behavior = .transient
+        popover.contentViewController = hostingController
+        popover.appearance = NSAppearance(named: .vibrantDark)
+        
+        super.init()
     }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    
+    func show(relativeTo button: NSButton) {
+        popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
+    }
+    
+    func close() {
+        popover.performClose(nil)
+    }
+    
+    var isShown: Bool {
+        return popover.isShown
     }
 }
