@@ -11,7 +11,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F5C006142E2379E7003750FB /* NoMyeolmang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoMyeolmang.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5C006142E2379E7003750FB /* timé.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "timé.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5C0062B2E237A5B003750FB /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -46,7 +46,7 @@
 		F5C006152E2379E7003750FB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F5C006142E2379E7003750FB /* NoMyeolmang.app */,
+				F5C006142E2379E7003750FB /* timé.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -54,9 +54,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F5C006132E2379E7003750FB /* NoMyeolmang */ = {
+		F5C006132E2379E7003750FB /* timé */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F5C006202E2379E8003750FB /* Build configuration list for PBXNativeTarget "NoMyeolmang" */;
+			buildConfigurationList = F5C006202E2379E8003750FB /* Build configuration list for PBXNativeTarget "timé" */;
 			buildPhases = (
 				F5C006102E2379E7003750FB /* Sources */,
 				F5C006112E2379E7003750FB /* Frameworks */,
@@ -70,11 +70,11 @@
 			fileSystemSynchronizedGroups = (
 				F5C006162E2379E7003750FB /* NoMyeolmang */,
 			);
-			name = NoMyeolmang;
+			name = "timé";
 			packageProductDependencies = (
 			);
 			productName = NoMyeolmang;
-			productReference = F5C006142E2379E7003750FB /* NoMyeolmang.app */;
+			productReference = F5C006142E2379E7003750FB /* timé.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -92,7 +92,7 @@
 					};
 				};
 			};
-			buildConfigurationList = F5C0060F2E2379E7003750FB /* Build configuration list for PBXProject "NoMyeolmang" */;
+			buildConfigurationList = F5C0060F2E2379E7003750FB /* Build configuration list for PBXProject "timé" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -106,7 +106,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F5C006132E2379E7003750FB /* NoMyeolmang */,
+				F5C006132E2379E7003750FB /* timé */,
 			);
 		};
 /* End PBXProject section */
@@ -285,7 +285,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = B28VK9SGQ5;
+				DEVELOPMENT_TEAM = 5SF56ZM8WP;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -317,7 +317,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = B28VK9SGQ5;
+				DEVELOPMENT_TEAM = 5SF56ZM8WP;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -342,7 +342,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F5C0060F2E2379E7003750FB /* Build configuration list for PBXProject "NoMyeolmang" */ = {
+		F5C0060F2E2379E7003750FB /* Build configuration list for PBXProject "timé" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F5C0061E2E2379E8003750FB /* Debug */,
@@ -351,7 +351,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F5C006202E2379E8003750FB /* Build configuration list for PBXNativeTarget "NoMyeolmang" */ = {
+		F5C006202E2379E8003750FB /* Build configuration list for PBXNativeTarget "timé" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F5C006212E2379E8003750FB /* Debug */,
