@@ -22,6 +22,7 @@ private func hoverDescription(for number: Int) -> String {
 struct HoverRatingView: View {
     @Binding var selectedIndex: Int?
     @Binding var hoveredIndex: Int?
+    var isSelectionValid: Bool
 
     var body: some View {
         HStack(spacing: 35) {
@@ -66,5 +67,5 @@ struct HoverRatingView: View {
 }
 
 #Preview {
-    HoverRatingView(selectedIndex: .constant(nil), hoveredIndex: .constant(nil))
+    HoverRatingView(selectedIndex: .constant(nil), hoveredIndex: .constant(nil), isSelectionValid: false)
 }

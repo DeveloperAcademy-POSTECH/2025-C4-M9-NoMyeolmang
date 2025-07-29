@@ -36,7 +36,8 @@ struct FeedbackView: View {
 
                 HoverRatingView(
                     selectedIndex: $viewModel.selectedIndex,
-                    hoveredIndex: $viewModel.hoveredIndex
+                    hoveredIndex: $viewModel.hoveredIndex,
+                    isSelectionValid: viewModel.isSelectionValid
                 )
                 .padding(.top, 51)
 
@@ -44,12 +45,12 @@ struct FeedbackView: View {
 
                 GSButton(title: "탐사시간 확인하러 가기", width: 250) {
                     Task {
-                        let _ = await viewModel.updateTrainingDataAndPersonalize()
+                        _ = await viewModel.updateTrainingDataAndPersonalize()
                         coordinator.push(.report)
                     }
                 }
                 .padding(.bottom, 51)
-                .disabled(viewModel.selectedIndex == nil)
+                .disabled(!viewModel.isSelectionValid)
             }
             .frame(width: 600, height: 400)
             .padding(100)

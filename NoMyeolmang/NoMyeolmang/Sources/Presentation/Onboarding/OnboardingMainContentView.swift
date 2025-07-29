@@ -13,7 +13,11 @@ struct OnboardingMainContentView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            ToggleTabView(isRecommendedSelected: .constant(.recommended), goalTime: .constant(30))
+            ToggleTabView(
+                viewModel: TimerSettingViewModel(),
+                isRecommendedSelected: .constant(.recommended),
+                goalTime: .constant(30)
+            )
                 .opacity((popupStep == popupDataCount || popupStep == popupDataCount + 1) ? 0.3 : 1)
                 .zIndex(popupStep == popupDataCount ? 0.6 : 0)
             FocusTimeSetting(goalTime: .constant(30))

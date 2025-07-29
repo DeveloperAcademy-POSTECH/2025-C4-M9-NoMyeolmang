@@ -12,24 +12,22 @@ import SwiftUI
 struct PersonalTimerSettingView: View {
     @Binding var goalTime: Int
     @State private var newGoalTimeText: String = ""
-    private let numberFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .none
-        formatter.maximum = 999
-        formatter.generatesDecimalNumbers = false
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        return formatter
-    }()
     @FocusState private var isTextFieldFocused: Bool
 
     var body: some View {
         let boxSize = CGSize(width: 329, height: 161)
 
         VStack(spacing: 0) {
-            Text("시간을 입력해 주세요")
+            Text("10-30분 설정만 가능해요")
+                .textStyle(GSFont.Light12)
+                .foregroundColor(Color("CEB0FF"))
+                .padding(.top, 20)
+            
+            Text("시간을 설정해 주세요")
                 .textStyle(GSFont.Regular16)
                 .foregroundColor(.white)
-                .padding(.top, 52.5)
+                .padding(.top, 4)
+                .padding(.bottom, 12)
 
             HStack(spacing: 0) {
                 HStack(alignment: .firstTextBaseline, spacing: 0) {
@@ -39,25 +37,24 @@ struct PersonalTimerSettingView: View {
                             if filtered != newGoalTimeText {
                                 newGoalTimeText = filtered
                             }
-                            // goalTime에 직접 연결
-                            if let time = Int(filtered), time > 0 {
+                            if let time = Int(filtered) {
                                 goalTime = time
                             }
                         }
                         .multilineTextAlignment(.center)
                         .textStyle(GSFont.SemiBold24)
                         .foregroundColor(.white)
-                        .background(Color.clear)
                         .textFieldStyle(PlainTextFieldStyle())
                         .focused($isTextFieldFocused)
                         .onAppear {
+                            goalTime = 0
+                            newGoalTimeText = ""
                             isTextFieldFocused = true
                         }
-                        .accentColor(.white)
                         .frame(minWidth: 20, minHeight: 32)
                         .fixedSize()
 
-                    if let value = Int(newGoalTimeText) {
+                    if Int(newGoalTimeText) != nil {
                         Text("분")
                             .textStyle(GSFont.SemiBold24)
                             .foregroundColor(.white)

@@ -14,7 +14,7 @@ struct TimerView: View {
     var body: some View {
         GeometryReader { geo in
             ZStack(alignment: .center) {
-                TimerBackgroundView(animationDuration: viewModel.backgroundDuration)
+                TimerBackgroundView(animationDuration: viewModel.backgroundDuration, sessionState: $viewModel.sessionState)
 
                 SpaceshipView()
                     .frame(maxWidth: .infinity, alignment: .center)
@@ -27,6 +27,7 @@ struct TimerView: View {
                         coordinator.replaceLast(with: .timerSetting)
                     }
                     Button("Next: Feedback") {
+                        viewModel.handleTimerFinished()
                         coordinator.push(.feedback)
                     }
                     .navigationBarBackButtonHidden(true)
@@ -37,11 +38,16 @@ struct TimerView: View {
         }
         .navigationBarBackButtonHidden(true)
         .onChange(of: viewModel.sessionState, perform: handleSessionStateChange)
-        .onAppear(perform: handleAppear)
+        .onAppear{
+            viewModel.sessionState = .isReady
+            handleAppear()
+        }
         .onDisappear(perform: handleDisappear)
     }
 
-    private func handleSessionStateChange(_ new: TimerViewState) {
+    private func handleSessionStateChange(_ new: TimerViewState?) {
+        guard let new else { return }
+        
         if new == .isCompleted {
             coordinator.push(.feedback)
         }

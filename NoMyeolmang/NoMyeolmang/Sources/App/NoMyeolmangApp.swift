@@ -10,12 +10,22 @@ import SwiftUI
 
 @main
 struct NoMyeolmangApp: App {
-    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @State private var coordinator = AppCoordinator()
+    
+    var modelContainer: ModelContainer = {
+        do {
+            return try ModelContainer(for: UserTrainingData.self)
+        } catch {
+            fatalError("Could not create ModelContainer: \(error)")
+        }
+    }()
+    
     var body: some Scene {
         WindowGroup {
-            RootView()
-                .environmentObject(AppCoordinator())
-                .modelContainer(for: UserTrainingData.self)
+            RootView(
+                moduleFactory: ModuleFactory(modelContext: modelContainer.mainContext)
+            )
+            .environmentObject(coordinator)
         }
     }
 }

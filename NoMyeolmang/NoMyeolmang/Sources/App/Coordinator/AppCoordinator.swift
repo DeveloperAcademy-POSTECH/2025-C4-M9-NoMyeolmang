@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@MainActor
 final class AppCoordinator: ObservableObject {
     @Published var path = NavigationPath()
 
@@ -19,9 +20,9 @@ final class AppCoordinator: ObservableObject {
     }
 
     func replaceLast(with route: AppRoute) {
-            if !path.isEmpty {
-                path.removeLast()
-            }
-            path.append(route)
+        if !path.isEmpty {
+            path.removeLast()
         }
+        path.append(route)
+    }
 }

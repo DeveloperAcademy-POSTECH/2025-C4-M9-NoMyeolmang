@@ -22,7 +22,7 @@ final class ReportViewModel: ObservableObject {
     func calDistanceTime() {
         maxDistance = actualTime * 2 / 60
         reachedDistance = virtualTime / 60
-        reachedRatio = reachedDistance * 100 / maxDistance
+        reachedRatio = maxDistance == 0 ? 0 : reachedDistance * 100 / maxDistance
         earthTime = String(format: "%02d:%02d", actualTime / 60, actualTime % 60)
         focusTime = String(format: "%02d:%02d", virtualTime / 60, virtualTime % 60)
     }

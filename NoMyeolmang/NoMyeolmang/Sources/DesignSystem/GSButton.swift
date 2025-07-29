@@ -11,21 +11,22 @@ struct GSButton: View {
     let title: String
     let width: CGFloat
     let action: () -> Void
+    var isDisabled: Bool = false
     
     var body: some View {
         Button(action: action) {
             Text(title)
                 .textStyle(GSFont.SemiBold16)
-                .foregroundColor(.white)
+                .foregroundColor(.white.opacity(isDisabled ? 0.7 : 1.0))
                 .frame(width: width, height: 44)
                 .background(
                     ZStack {
                         Color.white.opacity(0.2)
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                         RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color.white.opacity(0.7), lineWidth: 1)
+                            .stroke(Color.white.opacity(isDisabled ? 0.3 : 0.7), lineWidth: 1)
                     }
-            )
+                )
         }
         .shadow(color: Color.black.opacity(0.0168), radius: 2.21, x: 0, y: 2.77)
         .shadow(color: Color.black.opacity(0.022), radius: 5.32, x: 0, y: 6.65)
@@ -34,6 +35,7 @@ struct GSButton: View {
         .shadow(color: Color.black.opacity(0.0304), radius: 33.42, x: 0, y: 41.78)
         .shadow(color: Color.black.opacity(0.04), radius: 80, x: 0, y: 100)
         .buttonStyle(.plain)
+        .disabled(isDisabled)
     }
 }
 
