@@ -2,7 +2,7 @@
 //  NoMyeolmangApp.swift
 //  NoMyeolmang
 //
-//  Updated by Moo on 7/24/25.
+//  Updated by Moo on 7/29/25.
 //
 
 import SwiftData
@@ -10,8 +10,9 @@ import SwiftUI
 
 @main
 struct NoMyeolmangApp: App {
-    @State private var coordinator = AppCoordinator()
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @State private var coordinator = AppCoordinator()
+    @State private var moduleFactory: ModuleFactory?
 
     var modelContainer: ModelContainer = {
         do {
@@ -20,13 +21,22 @@ struct NoMyeolmangApp: App {
             fatalError("Could not create ModelContainer: \(error)")
         }
     }()
-    
+        
     var body: some Scene {
         WindowGroup {
-            RootView(
-                moduleFactory: ModuleFactory(modelContext: modelContainer.mainContext)
-            )
-            .environmentObject(coordinator)
+            if let moduleFactory = moduleFactory {
+                RootView(moduleFactory: moduleFactory)
+                    .environmentObject(coordinator)
+            } else {
+                ProgressView()
+                    .onAppear {
+                        self.moduleFactory = ModuleFactory(modelContext: modelContainer.mainContext)
+                        
+                        appDelegate.moduleFactory = self.moduleFactory
+                        appDelegate.coordinator = coordinator
+                    }
+            }
         }
+        .windowStyle(.hiddenTitleBar)
     }
 }
