@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct FeedbackPopoverView: View {
+    @EnvironmentObject var coordinator: AppCoordinator
+    @ObservedObject var viewModel: FeedbackViewModel
+    
     var body: some View {
         VStack {
             VStack {
@@ -25,16 +28,23 @@ struct FeedbackPopoverView: View {
             }
             .padding(.top, 38)
             
-            PopoverRatingButton()
+            PopoverRatingButton(
+                selectedIndex: $viewModel.selectedIndex,
+                hoveredIndex: $viewModel.hoveredIndex
+            )
             .padding(.top, 38)
 
             Button {
-                print("완료 버튼 눌림! 🥹")
+                Task {
+                    _ = await viewModel.updateTrainingDataAndPersonalize()
+                    coordinator.push(.report)
+                }
             } label: {
                 Text("완료")
                     .modifier(PopoverButtonModifier())
             }
             .buttonStyle(.plain)
+            .disabled(!viewModel.isSelectionValid)
             .padding(.bottom, 20)
             .padding(.top, 65)
         }

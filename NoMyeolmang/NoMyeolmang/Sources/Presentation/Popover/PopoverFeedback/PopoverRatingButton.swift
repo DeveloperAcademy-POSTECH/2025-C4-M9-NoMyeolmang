@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct PopoverRatingButton: View {
-    @State var selectedNumber: Int?
+    @Binding var selectedIndex: Int?
+    @Binding var hoveredIndex: Int?
 
     var body: some View {
         HStack(spacing: 12) {
@@ -18,7 +19,7 @@ struct PopoverRatingButton: View {
                         .fill(Color.white.opacity(0.38))
                         .frame(width: 30)
                         .overlay(
-                            selectedNumber == number ? AppGradients.hoverGradient : nil
+                            selectedIndex == number ? AppGradients.hoverGradient : nil
                         )
                         .clipShape(Circle())
                         .background(Circle().fill(Color.clear)
@@ -30,8 +31,11 @@ struct PopoverRatingButton: View {
                         .bold()
                         .foregroundStyle(Color.white)
                 }
+                .onHover { hovering in
+                    hoveredIndex = hovering ? number : nil
+                }
                 .onTapGesture {
-                    selectedNumber = number
+                    selectedIndex = number
                 }
             }
         }
@@ -49,8 +53,4 @@ struct AppGradients {
         startPoint: .top,
         endPoint: .bottom
     )
-}
-
-#Preview {
-    PopoverRatingButton()
 }
