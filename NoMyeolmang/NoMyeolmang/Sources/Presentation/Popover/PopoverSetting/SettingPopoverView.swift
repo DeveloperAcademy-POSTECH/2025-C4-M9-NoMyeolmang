@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct SettingPopoverView: View {
-    var onStart: () -> Void
-    var onStop: () -> Void
     
     @State private var isRecommendedTimeSelected: Bool = true
     
@@ -23,9 +21,7 @@ struct SettingPopoverView: View {
                 .padding(.bottom, 65)
 
             Button {
-                print("다음으로 버튼 눌림!")
-                onStart()
-            } label: {
+                print("다음으로 버튼 눌림!")            } label: {
                 Text("다음으로")
                     .modifier(PopoverButtonModifier())
             }

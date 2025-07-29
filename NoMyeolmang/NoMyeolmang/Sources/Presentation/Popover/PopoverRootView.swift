@@ -14,9 +14,8 @@ enum PopoverPage {
     case report
 }
 
-struct PopoverView: View {
-    var onStart: () -> Void
-    var onStop: () -> Void
+struct PopoverRootView: View {
+    var onClick: () -> Void
     
     @State var page: PopoverPage = .setting
     
@@ -24,13 +23,13 @@ struct PopoverView: View {
         VStack {
             switch page {
             case .setting:
-                SettingPopoverView(onStart: { page = .timer }, onStop: onStop)
+                SettingPopoverView()
             case .timer:
-                TimerPopoverView(onStart: { page = .feedback }, onStop: onStop)
+                TimerPopoverView()
             case .feedback:
-                FeedbackPopoverView(onStart: { page = .report }, onStop: onStop)
+                FeedbackPopoverView()
             case .report:
-                ReportPopoverView(onStart: { page = .timer }, onStop: { page = .setting })
+                ReportPopoverView()
             }
         }
         .frame(width: 230, height: 270)

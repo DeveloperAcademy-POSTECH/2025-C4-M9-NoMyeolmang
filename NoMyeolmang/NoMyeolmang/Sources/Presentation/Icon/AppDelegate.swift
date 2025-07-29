@@ -31,15 +31,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             if let window = popoverWindowController?.window, window.isVisible {
                 window.orderOut(nil)
             } else {
-                let rootView = PopoverView(
-                    onStart: {
+                let rootView = PopoverRootView(
+                    onClick: {
                         self.popoverWindowController?.window?.orderOut(nil)
-                        self.startCountdown()
-                    },
-                    onStop: {
-                        self.countdownTimer?.invalidate()
-                        self.countdownTimer = nil
-                        self.statusItem?.button?.title = "Stopped"
+                        // 타이머 시작 흐름
+                        print("onClick")
                     }
                 )
 
