@@ -8,24 +8,35 @@
 import SwiftUI
 
 struct SettingPopoverView: View {
-    
-    @State private var isRecommendedTimeSelected: Bool = true
+    @EnvironmentObject var coordinator: AppCoordinator
+    @ObservedObject var viewModel: TimerSettingViewModel
     
     var body: some View {
         VStack {
-            PopoverToggleView(isRecommendedTimeSelected: $isRecommendedTimeSelected)
+            PopoverToggleView(
+                selectedTab: $viewModel.selectedTab,
+                onTabSelected: { tab in
+                    viewModel.selectTab(tab)
+                }
+            )
                 .padding(.top, 16)
                 .padding(.bottom, 57)
             
-            PopoverTimerSettingView(isRecommendedTimeSelected: $isRecommendedTimeSelected)
+            PopoverTimerSettingView(
+                selectedTab: viewModel.selectedTab,
+                goalTime: $viewModel.goalTime
+            )
                 .padding(.bottom, 65)
 
             Button {
-                print("다음으로 버튼 눌림!")            } label: {
+                viewModel.startFocusSession()
+                coordinator.push(.timer)
+            } label: {
                 Text("다음으로")
                     .modifier(PopoverButtonModifier())
             }
             .buttonStyle(.plain)
+            .disabled(!viewModel.isValid)
             .padding(.bottom, 20)
         }
         .modifier(PopoverBgModifier())

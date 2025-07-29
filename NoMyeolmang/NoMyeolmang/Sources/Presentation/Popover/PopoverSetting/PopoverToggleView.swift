@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct PopoverToggleView: View {
-    @Binding var isRecommendedTimeSelected: Bool
+    @Binding var selectedTab: TabType
+    let onTabSelected: (TabType) -> Void
     
     var body: some View {
         ZStack {
@@ -20,14 +21,13 @@ struct PopoverToggleView: View {
             RoundedRectangle(cornerRadius: 29)
                 .fill(Color("#9D86DB80").opacity(0.5))
                 .frame(width: 70, height: 26)
-                .offset(x: isRecommendedTimeSelected ? -39 : 39)
+                .offset(x: selectedTab == .recommended ? -39 : 39)
                 .shadow(color: Color.black.opacity(0.25), radius: 7, x: 0, y: 0)
-                .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isRecommendedTimeSelected)
+                .animation(.spring(response: 0.3, dampingFraction: 0.7), value: selectedTab)
 
             HStack {
                 Button {
-                    print("✨ 맞춤 추천 렛츠고")
-                    isRecommendedTimeSelected = true
+                    onTabSelected(.recommended)
                 } label: {
                     Text("맞춤 추천")
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -39,8 +39,7 @@ struct PopoverToggleView: View {
                 .buttonStyle(.plain)
                 
                 Button {
-                    print("✨ 직접 설정 렛츠고")
-                    isRecommendedTimeSelected = false
+                    onTabSelected(.personal)
                 } label: {
                     Text("직접 설정")
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
