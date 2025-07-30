@@ -71,4 +71,9 @@ final class FeedbackViewModel: ObservableObject {
             return false
         }
     }
+    
+    func clear() {
+        hoveredIndex = nil
+        selectedIndex = nil
+    }
 }

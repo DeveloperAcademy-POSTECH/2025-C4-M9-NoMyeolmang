@@ -56,5 +56,11 @@ struct FeedbackView: View {
             .padding(100)
         }
         .navigationBarBackButtonHidden(true)
+        .onReceive(coordinator.$path) { path in
+            // 최상단이 Timer라면 (필요한 조건으로 조정)
+            if let top = path.last, top == .feedback {
+                viewModel.clear()
+            }
+        }
     }
 }

@@ -57,5 +57,11 @@ struct TimerSettingView: View {
         }
         .frame(minWidth: 800, minHeight: 600)
         .navigationBarBackButtonHidden(true)
+        .onReceive(coordinator.$path) { path in
+            // 최상단이 Timer라면 (필요한 조건으로 조정)
+            if path.isEmpty {
+                viewModel.clear()
+            }
+        }
     }
 }

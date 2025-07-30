@@ -13,16 +13,19 @@ final class AppCoordinator: ObservableObject {
 
     func push(_ route: AppRoute) {
         path.append(route)
+        print("🥶 \(path.count)")
     }
 
     func pop(_ steps: Int = 1) {
         guard steps > 0, !path.isEmpty else { return }
         let c = min(steps, path.count)
         path.removeLast(c)
+        print("🥶 \(path.count)")
     }
 
     func popToRoot() {
         path.removeLast(path.count)
+        print("🥶 \(path.count)")
     }
 
     func replaceLast(with route: AppRoute) {
@@ -30,5 +33,6 @@ final class AppCoordinator: ObservableObject {
             path.removeLast()
         }
         path.append(route)
+        print("🥶 \(path.count)")
     }
 }

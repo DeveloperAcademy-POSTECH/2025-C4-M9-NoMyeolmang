@@ -46,8 +46,7 @@ struct TimerView: View {
         .onReceive(coordinator.$path) { path in
             // 최상단이 Timer라면 (필요한 조건으로 조정)
             if let top = path.last, top == .timer {
-                guard viewModel.sessionState != .isReady else { return }
-                viewModel.sessionState = .isReady
+                viewModel.clear()
                 handleAppear()
             }
         }

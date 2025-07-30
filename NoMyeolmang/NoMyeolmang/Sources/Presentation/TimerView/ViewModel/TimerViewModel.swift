@@ -189,4 +189,8 @@ final class TimerViewModel: ObservableObject {
         }
         analysisManager.resetState()
     }
+    
+    func clear(){
+        stopSession()
+    }
 }

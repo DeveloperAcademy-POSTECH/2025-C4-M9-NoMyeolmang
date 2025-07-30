@@ -21,7 +21,7 @@ struct ReportPopoverView: View {
             
             VStack {
                 Button {
-                    coordinator.push(.timer)
+                    coordinator.pop(2)
                 } label: {
                     Text("다시 시작하기")
                         .modifier(PopoverButtonModifier())

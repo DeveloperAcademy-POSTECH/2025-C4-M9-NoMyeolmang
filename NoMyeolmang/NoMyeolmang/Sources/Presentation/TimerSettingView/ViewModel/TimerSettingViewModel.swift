@@ -51,4 +51,9 @@ final class TimerSettingViewModel: ObservableObject {
     func startFocusSession() {
         ActualTimerManager.shared.setGoalTime(newGoalTime: goalTime * 60)
     }
+    
+    func clear(){
+        selectedTab = .recommended
+        goalTime = 30
+    }
 }
