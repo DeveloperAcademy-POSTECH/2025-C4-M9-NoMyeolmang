@@ -40,7 +40,7 @@ final class TimerSettingViewModel: ObservableObject {
         }
     }
 
-    private func validateGoalTime() {
+    func validateGoalTime() {
         if selectedTab == .recommended {
             isValid = true
         } else {
