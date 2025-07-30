@@ -18,7 +18,6 @@ struct ReportPopoverView: View {
                 focusTime: viewModel.focusTime
             )
             .padding(.top, 32)
-            .padding(.bottom, 42)
             
             VStack(spacing: 0) {
                 Button {
@@ -38,6 +37,7 @@ struct ReportPopoverView: View {
                 .buttonStyle(.plain)
                 .padding(.top, 5)
             }
+            .padding(.top, 42)
             .padding(.bottom, 20)
         }
         .modifier(PopoverBgModifier())
