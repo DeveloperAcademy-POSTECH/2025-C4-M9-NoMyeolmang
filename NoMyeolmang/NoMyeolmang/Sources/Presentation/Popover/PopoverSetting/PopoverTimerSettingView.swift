@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct PopoverTimerSettingView: View {
-    @Binding var isRecommendedTimeSelected: Bool
-    @State private var timeInput = 30
+    let selectedTab: TabType
+    @Binding var goalTime: Int
+    @State private var timeInputText: String = ""
     
     private var numberFormatter: NumberFormatter {
             let formatter = NumberFormatter()
@@ -22,13 +23,13 @@ struct PopoverTimerSettingView: View {
     
     var body: some View {
         VStack {
-            if isRecommendedTimeSelected {
+            if selectedTab == .recommended {
                 Text("반복 학습에 적합한 시간")
                     .textStyle(GSFont.Regular12)
                     .foregroundStyle(Color.white)
                     .padding(.bottom, 4)
                 
-                Text("30분")
+                Text("\(goalTime)분")
                     .textStyle(GSFont.SemiBold24)
                     .foregroundStyle(Color.white)
             } else {
@@ -38,18 +39,32 @@ struct PopoverTimerSettingView: View {
                     .padding(.bottom, 4)
                 
                 HStack(spacing: -0.1) {
-                    TextField("30", value: $timeInput, formatter: numberFormatter)
+                    TextField("", text: $timeInputText)
+                        .onChange(of: timeInputText) {
+                            let filtered = timeInputText.filter { $0.isNumber }
+                            if filtered != timeInputText {
+                                timeInputText = filtered
+                            }
+                            if let time = Int(filtered) {
+                                goalTime = time
+                            }
+                        }
                         .textStyle(GSFont.SemiBold24)
                         .foregroundStyle(Color.white)
                         .textFieldStyle(.plain)
                         .frame(width: 25)
-                        .onChange(of: timeInput) {
-                            print(timeInput)
+                        .onAppear {
+                            if selectedTab == .personal {
+                                goalTime = 0
+                                timeInputText = ""
+                            }
                         }
                     
-                    Text("분")
-                        .textStyle(GSFont.SemiBold24)
-                        .foregroundStyle(Color.white)
+                    if Int(timeInputText) != nil {
+                        Text("분")
+                            .textStyle(GSFont.SemiBold24)
+                            .foregroundStyle(Color.white)
+                    }
                 }
             }
         }

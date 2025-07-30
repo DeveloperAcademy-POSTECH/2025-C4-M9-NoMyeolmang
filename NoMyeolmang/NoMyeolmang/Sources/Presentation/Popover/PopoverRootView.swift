@@ -1,36 +1,37 @@
 //
-//  PopoverView..swift
+//  PopoverRootView.swift
 //  NoMyeolmang
 //
-//  Created by 김소원 on 7/25/25.
+//  Updated by Moo on 7/29/25.
 //
 
 import SwiftUI
 
-enum PopoverPage {
-    case setting
-    case timer
-    case feedback
-    case report
-}
-
 struct PopoverRootView: View {
-    var onClick: () -> Void
+    @EnvironmentObject var coordinator: AppCoordinator
     
-    @State var page: PopoverPage = .setting
+    private let moduleFactory: ModuleFactoryProtocol
+    
+    init(moduleFactory: ModuleFactoryProtocol) {
+        self.moduleFactory = moduleFactory
+    }
     
     var body: some View {
-        VStack {
-            switch page {
-            case .setting:
-                SettingPopoverView()
-            case .timer:
-                TimerPopoverView()
-            case .feedback:
-                FeedbackPopoverView()
-            case .report:
-                ReportPopoverView()
-            }
+        NavigationStack(
+            path: Binding(
+                get: { coordinator.path },
+                set: { coordinator.path = $0 }
+            )
+        ) {
+            moduleFactory.makeSettingPopoverView()
+                .navigationDestination(for: AppRoute.self) { route in
+                    switch route {
+                    case .timerSetting: moduleFactory.makeSettingPopoverView()
+                    case .timer: moduleFactory.makeTimerPopoverView()
+                    case .feedback: moduleFactory.makeFeedbackPopoverView()
+                    case .report: moduleFactory.makeReportPopoverView()
+                    }
+                }
         }
         .frame(width: 230, height: 270)
     }

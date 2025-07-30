@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct ToggleTabView: View {
-    @ObservedObject var viewModel: TimerSettingViewModel
-    @Binding var isRecommendedSelected: TabType
-    @Binding var goalTime: Int
+    @Binding var selectedTab: TabType
+    let onTabSelected: (TabType) -> Void
 
     var body: some View {
         ZStack(alignment: .leading) {
@@ -22,10 +21,10 @@ struct ToggleTabView: View {
             RoundedRectangle(cornerRadius: 40)
                 .fill(Color("#9D86DB80").opacity(0.55))
                 .frame(width: 110, height: 32)
-                .offset(x: isRecommendedSelected == .recommended ? 5 : 120)
+                .offset(x: selectedTab == .recommended ? 5 : 120)
                 .shadow(color: Color.black.opacity(0.25), radius: 7, x: 0, y: 0)
                 .allowsHitTesting(false)
-                .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isRecommendedSelected)
+                .animation(.spring(response: 0.3, dampingFraction: 0.7), value: selectedTab)
 
             HStack {
                 Spacer().frame(width: 5)
@@ -37,11 +36,7 @@ struct ToggleTabView: View {
                     .contentShape(Rectangle())
                     .onTapGesture {
                         withAnimation {
-                            if isRecommendedSelected != .recommended {
-                                isRecommendedSelected = .recommended
-                                goalTime = 30
-                            }
-                            viewModel.validateGoalTime()
+                            onTabSelected(.recommended)
                         }
                     }
 
@@ -54,8 +49,7 @@ struct ToggleTabView: View {
                     .contentShape(Rectangle())
                     .onTapGesture {
                         withAnimation {
-                            isRecommendedSelected = .personal
-                            viewModel.validateGoalTime()
+                            onTabSelected(.personal)
                         }
                     }
 
@@ -70,10 +64,14 @@ struct ToggleTabView: View {
 #Preview(traits: .sizeThatFitsLayout) {
     struct ToggleTabPreviewWrapper: View {
         @State private var selectedTab: TabType = .recommended
-        @State private var goalTime = 30
 
         var body: some View {
-            ToggleTabView(viewModel: TimerSettingViewModel(), isRecommendedSelected: $selectedTab, goalTime: $goalTime)
+            ToggleTabView(
+                selectedTab: $selectedTab,
+                onTabSelected: { tab in
+                    selectedTab = tab
+                }
+            )
                 .padding()
                 .background(Color.black)
         }
