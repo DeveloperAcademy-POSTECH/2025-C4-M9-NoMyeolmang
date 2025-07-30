@@ -18,25 +18,25 @@ struct RootView: View {
     }
     
     var body: some View {
-//        if hasSeenOnboarding {
-//            NavigationStack(
-//                path: Binding(
-//                    get: { coordinator.path },
-//                    set: { coordinator.path = $0 }
-//                )
-//            ) {
-//                moduleFactory.makeTimerSettingView()
-//                    .navigationDestination(for: AppRoute.self) { route in
-//                        switch route {
-//                        case .timerSetting: moduleFactory.makeTimerSettingView()
-//                        case .timer: moduleFactory.makeTimerView()
-//                        case .feedback: moduleFactory.makeFeedbackView()
-//                        case .report: moduleFactory.makeReportView()
-//                        }
-//                    }
-//            }
-//            .frame(minWidth: 800, minHeight: 600)
-//        } else {
+        if hasSeenOnboarding {
+            NavigationStack(
+                path: Binding(
+                    get: { coordinator.path },
+                    set: { coordinator.path = $0 }
+                )
+            ) {
+                moduleFactory.makeTimerSettingView()
+                    .navigationDestination(for: AppRoute.self) { route in
+                        switch route {
+                        case .timerSetting: moduleFactory.makeTimerSettingView()
+                        case .timer: moduleFactory.makeTimerView()
+                        case .feedback: moduleFactory.makeFeedbackView()
+                        case .report: moduleFactory.makeReportView()
+                        }
+                    }
+            }
+            .frame(minWidth: 800, minHeight: 600)
+        } else {
             moduleFactory.makeOnboardingView(
                 showOnboarding: Binding(
                     get: { !hasSeenOnboarding },
@@ -51,4 +51,4 @@ struct RootView: View {
             .frame(minWidth: 800, minHeight: 600)
         }
     }
-//}
+}
