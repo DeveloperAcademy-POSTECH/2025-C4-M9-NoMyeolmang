@@ -17,13 +17,14 @@ struct PopoverRatingButton: View {
                 ZStack {
                     Circle()
                         .fill(Color.white.opacity(0.38))
-                        .frame(width: 30)
+                        .frame(width: 30, height: 30)
                         .overlay(
                             selectedIndex == number ? AppGradients.hoverGradient : nil
                         )
                         .clipShape(Circle())
                         .background(Circle().fill(Color.clear)
                             .stroke(Color.white.opacity(0.65), lineWidth: 0.65)
+                            .frame(width: 30, height: 30)
                         )
                         
                     Text("\(number)")
