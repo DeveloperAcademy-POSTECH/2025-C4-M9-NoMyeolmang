@@ -33,11 +33,13 @@ struct PersonalTimerSettingView: View {
                 HStack(alignment: .firstTextBaseline, spacing: 0) {
                     TextField("", text: $newGoalTimeText)
                         .onChange(of: newGoalTimeText) {
-                            let filtered = newGoalTimeText.filter { $0.isNumber }
-                            if filtered != newGoalTimeText {
-                                newGoalTimeText = filtered
+                            let digitsOnly = newGoalTimeText.filter { $0.isNumber }
+                            if digitsOnly.count > 2 {
+                                newGoalTimeText = String(digitsOnly.prefix(2))
+                            } else if digitsOnly != newGoalTimeText {
+                                newGoalTimeText = digitsOnly
                             }
-                            if let time = Int(filtered) {
+                            if let time = Int(newGoalTimeText) {
                                 goalTime = time
                             }
                         }
