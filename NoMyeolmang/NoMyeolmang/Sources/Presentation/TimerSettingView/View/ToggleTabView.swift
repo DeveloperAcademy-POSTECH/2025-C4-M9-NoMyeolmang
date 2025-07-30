@@ -37,8 +37,11 @@ struct ToggleTabView: View {
                     .contentShape(Rectangle())
                     .onTapGesture {
                         withAnimation {
-                            isRecommendedSelected = .recommended
-                            goalTime = 30
+                            if isRecommendedSelected != .recommended {
+                                isRecommendedSelected = .recommended
+                                goalTime = 30
+                            }
+                            viewModel.validateGoalTime()
                         }
                     }
 
@@ -52,6 +55,7 @@ struct ToggleTabView: View {
                     .onTapGesture {
                         withAnimation {
                             isRecommendedSelected = .personal
+                            viewModel.validateGoalTime()
                         }
                     }
 

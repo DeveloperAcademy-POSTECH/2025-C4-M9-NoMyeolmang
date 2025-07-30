@@ -37,7 +37,7 @@ struct TimerSettingView: View {
                     if viewModel.selectedTab == .recommended {
                         FocusTimeSetting(goalTime: $viewModel.goalTime)
                     } else {
-                        PersonalTimerSettingView(goalTime: $viewModel.goalTime)
+                        PersonalTimerSettingView(viewModel: viewModel, goalTime: $viewModel.goalTime)
                     }
                 }
                 .frame(width: 329)

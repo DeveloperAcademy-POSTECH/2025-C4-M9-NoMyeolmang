@@ -10,9 +10,17 @@ import Foundation
 import SwiftUI
 
 struct PersonalTimerSettingView: View {
+    @ObservedObject var viewModel: TimerSettingViewModel
     @Binding var goalTime: Int
     @State private var newGoalTimeText: String = ""
     @FocusState private var isTextFieldFocused: Bool
+
+    var isValidInput: Bool {
+        if let time = Int(newGoalTimeText) {
+            return (10...30).contains(time)
+        }
+        return false
+    }
 
     var body: some View {
         let boxSize = CGSize(width: 329, height: 161)
@@ -39,8 +47,18 @@ struct PersonalTimerSettingView: View {
                             } else if digitsOnly != newGoalTimeText {
                                 newGoalTimeText = digitsOnly
                             }
-                            if let time = Int(newGoalTimeText) {
+
+                            if let time = Int(newGoalTimeText), (10...30).contains(time) {
                                 goalTime = time
+                            } else {
+                                goalTime = 0
+                            }
+
+                            viewModel.validateGoalTime()
+                        }
+                        .onSubmit {
+                            if !isValidInput {
+                                newGoalTimeText = ""
                             }
                         }
                         .multilineTextAlignment(.center)
@@ -49,14 +67,27 @@ struct PersonalTimerSettingView: View {
                         .textFieldStyle(PlainTextFieldStyle())
                         .focused($isTextFieldFocused)
                         .onAppear {
-                            goalTime = 0
-                            newGoalTimeText = ""
+                            if viewModel.selectedTab == .personal {
+                                newGoalTimeText = ""
+                                goalTime = 0
+                            } else {
+                                newGoalTimeText = "\(goalTime)"
+                            }
+
+                            viewModel.validateGoalTime()
                             isTextFieldFocused = true
+                        }
+                        .onChange(of: viewModel.selectedTab) { newValue in
+                            if newValue == .personal {
+                                newGoalTimeText = ""
+                                goalTime = 0
+                                viewModel.validateGoalTime()
+                            }
                         }
                         .frame(minWidth: 20, minHeight: 32)
                         .fixedSize()
 
-                    if Int(newGoalTimeText) != nil {
+                    if !newGoalTimeText.isEmpty {
                         Text("분")
                             .textStyle(GSFont.SemiBold24)
                             .foregroundColor(.white)
@@ -89,7 +120,7 @@ struct PersonalTimerSettingView: View {
         @State private var goalTime = 30
         
         var body: some View {
-            PersonalTimerSettingView(goalTime: $goalTime)
+            PersonalTimerSettingView(viewModel: TimerSettingViewModel(), goalTime: $goalTime)
         }
     }
     
