@@ -32,7 +32,7 @@ struct FeedbackView: View {
                     .textStyle(GSFont.Regular14)
                     .foregroundColor(.white)
                     .multilineTextAlignment(.center)
-                    .padding(.top, 12)
+                    .offset(y: 11)
 
                 HoverRatingView(
                     selectedIndex: $viewModel.selectedIndex,
