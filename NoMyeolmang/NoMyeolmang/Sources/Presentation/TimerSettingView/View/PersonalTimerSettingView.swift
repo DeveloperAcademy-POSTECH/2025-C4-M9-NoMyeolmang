@@ -29,7 +29,7 @@ struct PersonalTimerSettingView: View {
             Text("10-30분 설정만 가능해요")
                 .textStyle(GSFont.Light12)
                 .foregroundColor(Color("CEB0FF"))
-                .padding(.top, 20)
+                .padding(.top, 24)
             
             Text("시간을 설정해 주세요")
                 .textStyle(GSFont.Regular16)
