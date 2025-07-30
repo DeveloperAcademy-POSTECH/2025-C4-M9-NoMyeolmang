@@ -73,6 +73,8 @@ struct TimerView: View {
 
     private func handleAppear() {
         print("뷰모델 가동 - 세션 시작")
+        isTimerOut = false
+        isSpaceshipOut = false
         viewModel.startSession()
     }
 
