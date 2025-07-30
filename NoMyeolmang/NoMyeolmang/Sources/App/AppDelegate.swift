@@ -1,22 +1,31 @@
 //
-//  AppDelegate..swift
+//  AppDelegate.swift
 //  NoMyeolmang
 //
-//  Created by 김소원 on 7/25/25.
+//  Updated by Moo on 7/30/25.
 //
 
 import Cocoa
 import SwiftUI
 
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
     var statusItem: NSStatusItem?
-    var countdownTimer: Timer?
-    var remainingSeconds: Int = 30 * 60
     var popoverWindowController: PopoverWindowController?
-
+    var moduleFactory: ModuleFactory?
+    var coordinator: AppCoordinator?
+    
+    private let statusBarTimerManager = StatusBarDisplay()
+    
     func applicationDidFinishLaunching(_ notification: Notification) {
+        DispatchQueue.main.async { [weak self] in
+            self?.setupStatusItem()
+            self?.statusBarTimerManager.startObserving(statusItem: self?.statusItem)
+        }
+    }
+    
+    private func setupStatusItem() {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-
+        
         if let button = statusItem?.button {
             button.image = NSImage(named: "menuIcon")
             button.action = #selector(togglePopover(_:))
@@ -24,59 +33,28 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             button.image?.isTemplate = true
         }
     }
-
+    
     @objc func togglePopover(_ sender: AnyObject?) {
         guard let button = statusItem?.button else { return }
-
-            if let window = popoverWindowController?.window, window.isVisible {
-                window.orderOut(nil)
-            } else {
-                let rootView = PopoverRootView(
-                    onClick: {
-                        self.popoverWindowController?.window?.orderOut(nil)
-                        print("onClick")
-                    }
-                )
-
-                popoverWindowController = PopoverWindowController(rootView: rootView)
-
-                if let window = popoverWindowController?.window,
-                   let screen = button.window?.screen {
-                    
-                    let buttonRect = button.convert(button.bounds, to: nil)
-                    let buttonOrigin = button.window?.convertPoint(toScreen: buttonRect.origin) ?? .zero
-
-                    let popupX = buttonOrigin.x
-                    let popupY = buttonOrigin.y
-
-                    window.setFrameTopLeftPoint(NSPoint(x: popupX, y: popupY))
-                    window.makeKeyAndOrderFront(nil)
-                }
-            }
-    }
-    
-    func startCountdown() {
-        if countdownTimer != nil {
+        
+        guard let moduleFactory = moduleFactory,
+              let coordinator = coordinator else {
+            print("ModuleFactory or Coordinator not ready")
             return
         }
-
-        updateStatusItemTitle()
-
-        countdownTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
-            self.remainingSeconds -= 1
-            self.updateStatusItemTitle()
-
-            if self.remainingSeconds <= 0 {
-                self.countdownTimer?.invalidate()
-                self.countdownTimer = nil
-                self.statusItem?.button?.title = "Done" // 타이머 끝나면 어떻게 보여줄건지 확인하기
-            }
+        
+        if let popover = popoverWindowController, popover.isShown {
+            popover.close()
+        } else {
+            let rootView = PopoverRootView(moduleFactory: moduleFactory)
+                .environmentObject(coordinator)
+            
+            popoverWindowController = PopoverWindowController(rootView: rootView)
+            popoverWindowController?.show(relativeTo: button)
         }
     }
-
-    func updateStatusItemTitle() {
-        let minutes = remainingSeconds / 60
-        let seconds = remainingSeconds % 60
-        statusItem?.button?.title = String(format: "%02d:%02d", minutes, seconds)
+    
+    deinit {
+        statusBarTimerManager.stop()
     }
 }

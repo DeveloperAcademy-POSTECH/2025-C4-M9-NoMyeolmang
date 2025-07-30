@@ -8,15 +8,20 @@
 import SwiftUI
 
 struct ReportPopoverView: View {
+    @EnvironmentObject var coordinator: AppCoordinator
+    @ObservedObject var viewModel: ReportViewModel
     
     var body: some View {
         VStack {
-            PopoverReportTimeView()
+            PopoverReportTimeView(
+                goalTime: viewModel.maxDistance,
+                focusTime: viewModel.focusTime
+            )
                 .padding(.bottom, 42)
             
             VStack {
                 Button {
-                    print("다시 시작하기 버튼 눌림!")
+                    coordinator.push(.timer)
                 } label: {
                     Text("다시 시작하기")
                         .modifier(PopoverButtonModifier())
@@ -24,7 +29,7 @@ struct ReportPopoverView: View {
                 .buttonStyle(.plain)
                 
                 Button {
-                    print("탐사 종료하기 버튼 눌림!")
+                    coordinator.popToRoot()
                 } label: {
                     Text("탐사 종료하기")
                         .modifier(PopoverButtonModifier())
@@ -33,5 +38,8 @@ struct ReportPopoverView: View {
             }
         }
         .modifier(PopoverBgModifier())
+        .onAppear {
+            viewModel.calDistanceTime()
+        }
     }
 }

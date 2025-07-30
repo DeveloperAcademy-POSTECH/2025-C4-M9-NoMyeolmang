@@ -14,9 +14,8 @@ struct OnboardingMainContentView: View {
     var body: some View {
         VStack(spacing: 0) {
             ToggleTabView(
-                viewModel: TimerSettingViewModel(),
-                isRecommendedSelected: .constant(.recommended),
-                goalTime: .constant(30)
+                selectedTab: .constant(.recommended),
+                onTabSelected: { _ in }
             )
                 .opacity((popupStep == popupDataCount || popupStep == popupDataCount + 1) ? 0.3 : 1)
                 .zIndex(popupStep == popupDataCount ? 0.6 : 0)

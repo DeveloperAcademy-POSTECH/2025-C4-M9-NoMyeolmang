@@ -8,13 +8,16 @@
 import SwiftUI
 
 struct TimerPopoverView: View {
+    @EnvironmentObject var coordinator: AppCoordinator
+    @ObservedObject var viewModel: TimerViewModel
     
     var body: some View {
         VStack {
             Spacer()
-            PopoverTimeLeftView(remainingTime: "05 : 30")
+            PopoverTimeLeftView(remainingTime: viewModel.formattedTime)
             PopoverTimerStopButton {
-                print("버튼 눌림!")
+                viewModel.stopSession()
+                coordinator.replaceLast(with: .timerSetting)
             }
             .padding(.top, 60)
             .padding(.bottom, 20)

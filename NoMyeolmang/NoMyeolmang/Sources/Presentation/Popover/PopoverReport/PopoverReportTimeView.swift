@@ -8,10 +8,13 @@
 import SwiftUI
 
 struct PopoverReportTimeView: View {
+    let goalTime: Int
+    let focusTime: String
+    
     var body: some View {
         VStack {
             VStack {
-                Text("30분간 몰입해서")
+                Text("\(goalTime)분간 몰입해서")
                 Text("탐사한 시간만 담았어요")
             }
             .foregroundStyle(Color.white)
@@ -24,7 +27,7 @@ struct PopoverReportTimeView: View {
                     .foregroundStyle(Color.white)
                     .padding(.bottom, 4)
                 
-                Text("09 : 28")
+                Text(focusTime)
                     .foregroundStyle(Color.white)
                     .textStyle(GSFont.SemiBold24)
             }
@@ -33,5 +36,5 @@ struct PopoverReportTimeView: View {
 }
 
 #Preview {
-    PopoverReportTimeView()
+    PopoverReportTimeView(goalTime: 30, focusTime: "09:28")
 }
