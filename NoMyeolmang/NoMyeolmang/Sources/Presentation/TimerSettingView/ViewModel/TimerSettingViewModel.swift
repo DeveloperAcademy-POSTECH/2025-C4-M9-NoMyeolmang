@@ -15,7 +15,7 @@ enum TabType {
 @MainActor
 final class TimerSettingViewModel: ObservableObject {
     @Published var selectedTab: TabType = .recommended
-    @Published var goalTime: Int = 30 {
+    @Published var goalTime: Int = 1 {
         didSet {
             validateGoalTime()
         }
@@ -34,7 +34,7 @@ final class TimerSettingViewModel: ObservableObject {
         selectedTab = tab
         switch tab {
         case .recommended:
-            goalTime = 30
+            goalTime = 1
         case .personal:
             goalTime = 0
         }

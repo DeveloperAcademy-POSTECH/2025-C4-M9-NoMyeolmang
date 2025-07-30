@@ -10,6 +10,7 @@ import SwiftUI
 struct TimerView: View {
     @EnvironmentObject var coordinator: AppCoordinator
     @ObservedObject var viewModel: TimerViewModel
+    @State private var isAnimatingOut: Bool = false // 애니메이션 상태 관리
 
     var body: some View {
         GeometryReader { geo in
@@ -18,6 +19,7 @@ struct TimerView: View {
 
                 SpaceshipView()
                     .frame(maxWidth: .infinity, alignment: .center)
+                    .offset(y: isAnimatingOut ? -geo.size.height : 0)
 
                 VStack(alignment: .center, spacing: 32) {
                     TimeLeftView(remainingTimeText: viewModel.formattedTime)
@@ -38,7 +40,7 @@ struct TimerView: View {
         }
         .navigationBarBackButtonHidden(true)
         .onChange(of: viewModel.sessionState, perform: handleSessionStateChange)
-        .onAppear{
+        .onAppear {
             viewModel.sessionState = .isReady
             handleAppear()
         }
@@ -49,7 +51,11 @@ struct TimerView: View {
         guard let new else { return }
         
         if new == .isCompleted {
-            coordinator.push(.feedback)
+            withAnimation(.easeInOut(duration: 1)) { // 타이머 종료시 애니메이션 효과
+                isAnimatingOut = true
+            } completion: { // 애니메이션 종료시 화면 전환
+                coordinator.push(.feedback)
+            }
         }
     }
 
