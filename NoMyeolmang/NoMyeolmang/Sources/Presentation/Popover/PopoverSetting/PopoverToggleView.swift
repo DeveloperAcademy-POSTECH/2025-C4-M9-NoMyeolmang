@@ -31,7 +31,7 @@ struct PopoverToggleView: View {
                 } label: {
                     Text("맞춤 추천")
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .font(.custom("Pretendard-SemiBold", size: 10))
+                        .textStyle(GSFont.SemiBold12)
                         .foregroundStyle(Color.white)
                         .contentShape(Rectangle())
                 }
@@ -43,7 +43,7 @@ struct PopoverToggleView: View {
                 } label: {
                     Text("직접 설정")
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .font(.custom("Pretendard-SemiBold", size: 10))
+                        .textStyle(GSFont.SemiBold12)
                         .foregroundStyle(Color.white)
                         .contentShape(Rectangle())
                 }

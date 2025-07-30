@@ -25,7 +25,7 @@ struct PopoverTimerSettingView: View {
         VStack {
             if selectedTab == .recommended {
                 Text("반복 학습에 적합한 시간")
-                    .textStyle(GSFont.Regular12)
+                    .textStyle(GSFont.Regular14)
                     .foregroundStyle(Color.white)
                     .padding(.bottom, 4)
                 
@@ -34,7 +34,7 @@ struct PopoverTimerSettingView: View {
                     .foregroundStyle(Color.white)
             } else {
                 Text("시간을 입력해 주세요")
-                    .textStyle(GSFont.Regular12)
+                    .textStyle(GSFont.Regular14)
                     .foregroundStyle(Color.white)
                     .padding(.bottom, 4)
                 

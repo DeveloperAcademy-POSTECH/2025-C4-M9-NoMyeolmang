@@ -25,13 +25,12 @@ struct FeedbackPopoverView: View {
                     .textStyle(GSFont.SemiBold14)
                     .foregroundStyle(Color.white)
 
-                VStack {
-                    Text("입력해주신 값은 집중력을 더 정확하게")
-                    Text("파악하기 위해서 쓰여요.")
-                }
-                .foregroundStyle(Color.white)
-                .font(.custom("Pretendard-Regular", size: 10))
-                .padding(.top, 4)
+                Text("입력해주신 값은 집중력을 더 정확하게\n파악하기 위해서 쓰여요.")
+                    .fixedSize(horizontal: false, vertical: true)
+                    .textStyle(GSFont.Regular12)
+                    .multilineTextAlignment(.center)
+                    .foregroundStyle(Color.white)
+                    .padding(.top, 4)
             }
             .padding(.top, 38)
 
