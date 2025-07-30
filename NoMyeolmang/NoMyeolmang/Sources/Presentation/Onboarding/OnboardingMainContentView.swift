@@ -28,8 +28,9 @@ struct OnboardingMainContentView: View {
             GSButton(title: "집중 시작하기", width: 250) {
             }
             .padding(.top, 39)
-            .opacity(popupStep == popupDataCount + 1 ? 1 : 0.3)
             .zIndex(popupStep == popupDataCount + 1 ? 99 : 0)
+            .allowsHitTesting(!(popupStep == popupDataCount || popupStep == popupDataCount + 1))
+            .opacity(popupStep == popupDataCount + 1 ? 1 : 0.3)
         }
         .padding(.top, 95)
         .padding(.bottom, 200)

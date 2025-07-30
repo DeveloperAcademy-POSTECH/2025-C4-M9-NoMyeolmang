@@ -138,7 +138,7 @@ final class TimerViewModel: ObservableObject {
 
     private static func formatTime(_ seconds: Int) -> String {
         let remaining = max(seconds, 0)
-        return String(format: "%02d:%02d", remaining / 60, remaining % 60)
+        return String(format: "%02d : %02d", remaining / 60, remaining % 60)
     }
 
     private func updateFocusLevel(_ newLevel: FocusLevel) {
