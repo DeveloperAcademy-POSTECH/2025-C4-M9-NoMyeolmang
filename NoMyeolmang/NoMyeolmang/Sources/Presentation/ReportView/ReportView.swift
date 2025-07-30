@@ -15,9 +15,9 @@ struct ReportView: View {
         ZStack {
             Image("backgroundSpace")
                 .resizable()
-                .ignoresSafeArea()
                 .scaledToFill()
-            
+                .ignoresSafeArea()
+
             RoundedRectangle(cornerRadius: 10)
                 .fill(Color.white.opacity(0.14))
                 .frame(width: 600, height: 400)
