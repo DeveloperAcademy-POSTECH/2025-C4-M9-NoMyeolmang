@@ -46,5 +46,8 @@ struct SettingPopoverView: View {
             .padding(.bottom, 20)
         }
         .modifier(PopoverBgModifier())
+        .onAppear {
+            viewModel.clear()
+        }
     }
 }
