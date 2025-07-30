@@ -15,11 +15,11 @@ struct TimeLeftView: View {
             Text("남은 시간")
                 .textStyle(GSFont.Regular16)
                 .foregroundStyle(Color.white)
-                .padding(.bottom, 0.1)
+
             Text(remainingTimeText)
                 .foregroundStyle(Color.white)
                 .font(.custom("SpoqaHanSansNeo-Bold", size: 52))
-                .tracking(1)
+                .tracking(-2)
         }
     }
 }
