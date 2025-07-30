@@ -12,15 +12,6 @@ struct PopoverTimerSettingView: View {
     @Binding var goalTime: Int
     @State private var timeInputText: String = ""
     
-    private var numberFormatter: NumberFormatter {
-            let formatter = NumberFormatter()
-            formatter.numberStyle = .decimal
-            formatter.allowsFloats = false
-            formatter.minimum = 10
-            formatter.maximum = 30
-            return formatter
-        }
-    
     var body: some View {
         VStack {
             if selectedTab == .recommended {
@@ -42,11 +33,30 @@ struct PopoverTimerSettingView: View {
                     TextField("", text: $timeInputText)
                         .onChange(of: timeInputText) {
                             let filtered = timeInputText.filter { $0.isNumber }
-                            if filtered != timeInputText {
-                                timeInputText = filtered
+                            let limitedText = String(filtered.prefix(2))
+                            
+                            if let time = Int(limitedText) {
+                                if time > 30 {
+                                    goalTime = 30
+                                    timeInputText = "30"
+                                } else if time == 0 {
+                                    goalTime = 10
+                                    timeInputText = "10"
+                                } else {
+                                    goalTime = time
+                                    if limitedText != timeInputText {
+                                        timeInputText = limitedText
+                                    }
+                                }
+                            } else {
+                                goalTime = 0
+                                timeInputText = ""
                             }
-                            if let time = Int(filtered) {
-                                goalTime = time
+                        }
+                        .onDisappear {
+                            if goalTime < 10 && goalTime != 0 {
+                                goalTime = 10
+                                timeInputText = "10"
                             }
                         }
                         .textStyle(GSFont.SemiBold24)

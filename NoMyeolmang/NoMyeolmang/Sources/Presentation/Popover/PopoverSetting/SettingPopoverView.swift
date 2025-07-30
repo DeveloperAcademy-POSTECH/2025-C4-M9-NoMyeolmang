@@ -13,6 +13,10 @@ struct SettingPopoverView: View {
 
     @State private var selectedTab: TabType = .recommended
     @State private var goalTime: Int = 30
+    
+    var isGoalTimeValid: Bool {
+        (10...30).contains(goalTime)
+    }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -41,6 +45,7 @@ struct SettingPopoverView: View {
                 Text("다음으로")
                     .modifier(PopoverButtonModifier())
             }
+            .disabled(!isGoalTimeValid)
             .buttonStyle(.plain)
             .padding(.top, 60)
             .padding(.bottom, 20)
