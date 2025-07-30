@@ -26,7 +26,6 @@ struct ReportView: View {
                 Text("이번 여정에서 총 \(viewModel.reachedDistance)km를 탐사했어요")
                     .textStyle(GSFont.SemiBold18)
                     .foregroundColor(.white)
-                    //.offset(y: 34)
                     .padding(.top, 70)
                 Text("완전 몰입 시 도달할 수 있는 \(viewModel.maxDistance)km 중 \(viewModel.reachedRatio)%까지 도달했어요")
                     .textStyle(GSFont.Regular16)
