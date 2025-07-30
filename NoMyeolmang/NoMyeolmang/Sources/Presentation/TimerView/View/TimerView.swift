@@ -61,7 +61,9 @@ struct TimerView: View {
                 withAnimation(.easeInOut(duration: 1)) {
                     isSpaceshipOut = true
                 } completion: { // 우주선 애니메이션 끝나면 피드백 뷰로 이동
-                    coordinator.push(.feedback)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        coordinator.push(.feedback)
+                    }
                 }
             }
         }
