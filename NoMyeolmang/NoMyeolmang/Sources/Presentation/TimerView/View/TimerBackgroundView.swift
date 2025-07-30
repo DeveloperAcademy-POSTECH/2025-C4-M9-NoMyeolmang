@@ -62,10 +62,15 @@ struct TimerBackgroundView: View {
                         print("🚀 배경 속도 변경 감지: \(oldDuration) → \(newDuration)")
                         timer?.invalidate()
                         // 🆕 위치 보존하며 속도만 변경
+                        // 🆕 위치 보존하며 속도만 변경
                         startLoopingAnimationKeepingPosition()
                     }
+                    .onDisappear {
+                        print("�� View disappeared - Timer invalidated")
+                        timer?.invalidate()
+                        timer = nil
+                    }
             }
-
         }
         .ignoresSafeArea()
         .onChange(of: sessionState) {
@@ -133,6 +138,7 @@ struct TimerBackgroundView: View {
             let movePerFrame = totalDistance / (animationDuration * 60)
 
             offsetY += movePerFrame
+            print(offsetY)
 
             // 루프 처리
             if offsetY >= endY {
