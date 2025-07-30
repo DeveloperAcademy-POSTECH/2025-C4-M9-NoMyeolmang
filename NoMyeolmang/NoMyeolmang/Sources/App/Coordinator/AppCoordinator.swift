@@ -9,10 +9,16 @@ import SwiftUI
 
 @MainActor
 final class AppCoordinator: ObservableObject {
-    @Published var path = NavigationPath()
+    @Published var path: [AppRoute] = []
 
     func push(_ route: AppRoute) {
         path.append(route)
+    }
+
+    func pop(_ steps: Int = 1) {
+        guard steps > 0, !path.isEmpty else { return }
+        let c = min(steps, path.count)
+        path.removeLast(c)
     }
 
     func popToRoot() {

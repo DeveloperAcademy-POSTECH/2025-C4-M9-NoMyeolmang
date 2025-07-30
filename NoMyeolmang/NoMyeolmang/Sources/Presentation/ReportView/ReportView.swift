@@ -35,7 +35,7 @@ struct ReportView: View {
                 TimerReportBox(earthTime: viewModel.earthTime, focusTime: viewModel.focusTime)
                 
                 GSButton(title: "다시 시작하기", width: 250) {
-                    coordinator.push(.timer)
+                    coordinator.pop(2)
                 }
                 .padding(.top, 40)
                 .padding(.bottom, 1)

@@ -29,11 +29,10 @@ struct TimerView: View {
 
                     TimerStopButton {
                         viewModel.stopSession()
-                        coordinator.replaceLast(with: .timerSetting)
+                        coordinator.pop()
                     }
                     Button("Next: Feedback") {
                         viewModel.handleTimerFinished()
-                        coordinator.push(.feedback)
                     }
                     .navigationBarBackButtonHidden(true)
                 }
@@ -44,16 +43,19 @@ struct TimerView: View {
         }
         .navigationBarBackButtonHidden(true)
         .onChange(of: viewModel.sessionState, perform: handleSessionStateChange)
-        .onAppear {
-            viewModel.sessionState = .isReady
-            handleAppear()
+        .onReceive(coordinator.$path) { path in
+            // 최상단이 Timer라면 (필요한 조건으로 조정)
+            if let top = path.last, top == .timer {
+                guard viewModel.sessionState != .isReady else { return }
+                viewModel.sessionState = .isReady
+                handleAppear()
+            }
         }
         .onDisappear(perform: handleDisappear)
     }
 
     private func handleSessionStateChange(_ new: TimerViewState?) {
         guard let new else { return }
-        
         if new == .isCompleted {
             withAnimation(.easeInOut(duration: 0.5)) { // 타이머 종료시 fade out 적용 효과
                 isTimerOut = true
@@ -71,6 +73,8 @@ struct TimerView: View {
 
     private func handleAppear() {
         print("뷰모델 가동 - 세션 시작")
+        isTimerOut = false
+        isSpaceshipOut = false
         viewModel.startSession()
     }
 
