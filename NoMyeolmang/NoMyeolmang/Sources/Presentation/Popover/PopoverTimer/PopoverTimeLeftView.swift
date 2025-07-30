@@ -11,9 +11,9 @@ struct PopoverTimeLeftView: View {
     let remainingTime: String
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             Text("남은 시간")
-                .textStyle(GSFont.Light12)
+                .textStyle(GSFont.Regular14)
                 .foregroundStyle(Color.white)
                 .padding(.bottom, 4)
             

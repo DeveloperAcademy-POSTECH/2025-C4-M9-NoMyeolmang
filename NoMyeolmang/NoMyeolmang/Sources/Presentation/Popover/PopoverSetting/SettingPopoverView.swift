@@ -13,9 +13,13 @@ struct SettingPopoverView: View {
 
     @State private var selectedTab: TabType = .recommended
     @State private var goalTime: Int = 30
+    
+    var isGoalTimeValid: Bool {
+        (10...30).contains(goalTime)
+    }
 
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             PopoverToggleView(
                 selectedTab: $selectedTab,
                 onTabSelected: { tab in
@@ -24,13 +28,12 @@ struct SettingPopoverView: View {
                 }
             )
             .padding(.top, 16)
-            .padding(.bottom, 57)
 
             PopoverTimerSettingView(
                 selectedTab: selectedTab,
                 goalTime: $goalTime
             )
-            .padding(.bottom, 65)
+            .padding(.top, 58)
 
             Button {
                 // 팝오버에서 입력한 값만 viewModel에 반영
@@ -42,7 +45,9 @@ struct SettingPopoverView: View {
                 Text("다음으로")
                     .modifier(PopoverButtonModifier())
             }
+            .disabled(!isGoalTimeValid)
             .buttonStyle(.plain)
+            .padding(.top, 60)
             .padding(.bottom, 20)
         }
         .modifier(PopoverBgModifier())
