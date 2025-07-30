@@ -41,28 +41,23 @@ struct TimerBackgroundView: View {
                     .clipped()
                     .onAppear {
                         checkInitialPosition(screenSize: geo.size)
-                        startLoopingAnimation()
+                        if sessionState == .isRunning {
+                            startLoopingAnimation()
+                        }
                     }
-                    .onChange(of: geo.size) { oldSize, newSize in
-                        let (oldStartY, oldEndY) = calculateStartEndY()
-                        updateOffsetRatio(startY: oldStartY, endY: oldEndY)
-                        checkInitialPosition(screenSize: newSize)
-
-                        let (newStartY, newEndY) = calculateStartEndY()
-                        restoreOffsetYFromRatio(
-                            startY: newStartY,
-                            endY: newEndY
-                        )
-                        timer?.invalidate()
-                        startLoopingAnimationKeepingPosition()
+                    .onChange(of: sessionState) { newState in
+                        if newState == .isRunning {
+                            startLoopingAnimation()
+                        } else if newState == .isCompleted || newState == .isReady || newState == nil {
+                            timer?.invalidate()
+                            timer = nil
+                        }
                     }
                     .onChange(of: animationDuration) {
                         oldDuration,
                         newDuration in
                         print("🚀 배경 속도 변경 감지: \(oldDuration) → \(newDuration)")
                         timer?.invalidate()
-                        // 🆕 위치 보존하며 속도만 변경
-                        // 🆕 위치 보존하며 속도만 변경
                         startLoopingAnimationKeepingPosition()
                     }
                     .onDisappear {
