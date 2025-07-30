@@ -19,7 +19,7 @@ struct FeedbackPopoverView: View {
     }
 
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             VStack {
                 Text("얼마나 몰입했는지 알려주세요")
                     .textStyle(GSFont.SemiBold14)
@@ -32,7 +32,7 @@ struct FeedbackPopoverView: View {
                     .foregroundStyle(Color.white)
                     .padding(.top, 4)
             }
-            .padding(.top, 38)
+            .padding(.top, 32)
 
             PopoverRatingButton(
                 selectedIndex: $selectedIndex,

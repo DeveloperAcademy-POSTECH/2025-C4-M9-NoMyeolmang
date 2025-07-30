@@ -12,15 +12,15 @@ struct TimerPopoverView: View {
     @ObservedObject var viewModel: TimerViewModel
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             Spacer()
             PopoverTimeLeftView(remainingTime: viewModel.formattedTime)
             PopoverTimerStopButton {
                 viewModel.stopSession()
                 coordinator.replaceLast(with: .timerSetting)
             }
-            .padding(.top, 60)
-            .padding(.bottom, 20)
+            .padding(.top, 65)
+            .padding(.bottom, 30)
         }
         .modifier(PopoverBgModifier())
     }

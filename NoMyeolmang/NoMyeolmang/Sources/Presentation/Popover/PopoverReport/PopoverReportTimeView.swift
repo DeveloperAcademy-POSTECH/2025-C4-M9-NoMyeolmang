@@ -19,7 +19,7 @@ struct PopoverReportTimeView: View {
             .multilineTextAlignment(.center)
             .foregroundStyle(Color.white)
             .textStyle(GSFont.SemiBold14)
-            .padding(.bottom, 25)
+            .padding(.bottom, 28)
         
             VStack {
                 Text("탐사 시간")

@@ -12,14 +12,15 @@ struct ReportPopoverView: View {
     @ObservedObject var viewModel: ReportViewModel
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             PopoverReportTimeView(
                 goalTime: viewModel.maxDistance,
                 focusTime: viewModel.focusTime
             )
-                .padding(.bottom, 42)
+            .padding(.top, 32)
+            .padding(.bottom, 42)
             
-            VStack {
+            VStack(spacing: 0) {
                 Button {
                     coordinator.push(.timer)
                 } label: {
@@ -35,7 +36,9 @@ struct ReportPopoverView: View {
                         .modifier(PopoverButtonModifier())
                 }
                 .buttonStyle(.plain)
+                .padding(.top, 5)
             }
+            .padding(.bottom, 20)
         }
         .modifier(PopoverBgModifier())
         .onAppear {
