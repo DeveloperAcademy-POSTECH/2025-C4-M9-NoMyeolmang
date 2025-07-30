@@ -12,7 +12,16 @@ import SwiftUI
 struct NoMyeolmangApp: App {
     @State private var coordinator = AppCoordinator()
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-
+    
+    // 앱 실행 시 사용 가능한 폰트 이름 로그 출력
+    init() {
+        for name in NSFontManager.shared.availableFonts {
+            if name.lowercased().contains("pretendard") || name.lowercased().contains("spoqa") {
+                print("🌠 \(name)")
+            }
+        }
+    }
+    
     var modelContainer: ModelContainer = {
         do {
             return try ModelContainer(for: UserTrainingData.self)
