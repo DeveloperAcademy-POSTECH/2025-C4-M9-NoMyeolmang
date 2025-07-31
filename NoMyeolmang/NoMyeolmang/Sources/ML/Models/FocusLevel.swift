@@ -29,22 +29,22 @@ enum FocusLevel: Double, CaseIterable, Identifiable {
         case .lv1: return 45.0
         case .lv2: return 37.0
         case .lv3: return 33.0
-        case .lv4: return 30.0  // 기본 속도 (30초)
-        case .lv5: return 20.0
+        case .lv4: return 25.0  // 기본 속도 (30초)
+        case .lv5: return 15.0
         }
     }
     
     static func from(rawValue: Double) -> FocusLevel? {
         switch rawValue {
-        case 0.0..<1.0:
+        case 0.0..<0.5:
             return .lv1
-        case 1.0..<2.0:
+        case 0.5..<1.5:
             return .lv2
-        case 2.0..<3.0:
+        case 1.5..<2.5:
             return .lv3
-        case 3.0..<4.0:
+        case 2.5..<3.5:
             return .lv4
-        case 4.0...5.0:
+        case 3.5...4.0:
             return .lv5
         default:
             return .lv4

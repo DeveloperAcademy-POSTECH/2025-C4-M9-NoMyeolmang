@@ -49,7 +49,7 @@ final class FeedbackViewModel: ObservableObject {
         do {
             // repository.update() 실행
             let isUpdated = try await repository.update(
-                to: Double(selectedIndex),
+                to: Double(selectedIndex-1),
                 count: recordCount
             )
             if !isUpdated {
