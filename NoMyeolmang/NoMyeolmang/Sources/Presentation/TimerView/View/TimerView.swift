@@ -40,12 +40,12 @@ struct TimerView: View {
                         Text(">")
                             .foregroundColor(.white)
                             .opacity(0.4)
-                            .font(.title3)
+                            .font(.title)
+                            .padding()
                     }
                     .navigationBarBackButtonHidden(true)
                     .buttonStyle(.plain)
                     .frame(maxWidth: .infinity, alignment: .trailing)
-                    .padding()
                 }
                 .frame(maxWidth: .infinity, alignment: .center)
                 .opacity(isTimerOut ? 0 : 1)  // isTimerOut일 때 타이머 + 버튼 fade out
