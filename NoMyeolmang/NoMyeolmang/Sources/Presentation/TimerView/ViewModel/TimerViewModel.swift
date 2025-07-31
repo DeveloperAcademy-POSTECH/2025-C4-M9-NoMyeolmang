@@ -19,7 +19,7 @@ enum TimerViewState: Equatable {
 final class TimerViewModel: ObservableObject {
     @Published var formattedTime: String = "30:00"
     @Published var backgroundDuration: Double = 30.0
-    @Published var currentFocusLevel: FocusLevel = .lv4
+    @Published var currentFocusLevel: FocusLevel = .lv3
     @Published var sessionState: TimerViewState? = nil
 
     private let cameraManager: CameraManager
@@ -33,6 +33,8 @@ final class TimerViewModel: ObservableObject {
     private var analysisTimer: Timer?
     private var latestPixelBuffer: CVPixelBuffer?
     private var isProcessingFrame = false
+    private var step = 0
+    private let stepSpeed = [4.0, 3.0]
 
     init(
         predictor: Predictor,
@@ -117,10 +119,17 @@ final class TimerViewModel: ObservableObject {
     // MARK: - Analysis Timer
 
     private func startAnalysisTimer() {
-        analysisTimer = Timer.scheduledTimer(withTimeInterval: 10.0, repeats: true) { [weak self] _ in
+        analysisTimer = Timer.scheduledTimer(withTimeInterval: 6.0, repeats: true) { [weak self] _ in
             guard let self else { return }
             Task { @MainActor in
-                await self.handleAnalysisTimerTick()
+                if self.step < self.stepSpeed.count {
+                    if let newLevel = FocusLevel.from(rawValue: self.stepSpeed[self.step]) {
+                        self.updateFocusLevel(newLevel)
+                    }
+                    self.step += 1
+                } else {
+                    await self.handleAnalysisTimerTick()
+                }
             }
         }
     }
@@ -192,5 +201,6 @@ final class TimerViewModel: ObservableObject {
     
     func clear(){
         stopSession()
+        step = 0
     }
 }

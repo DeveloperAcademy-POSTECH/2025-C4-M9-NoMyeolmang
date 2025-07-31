@@ -133,7 +133,7 @@ struct TimerBackgroundView: View {
             let movePerFrame = totalDistance / (animationDuration * 60)
 
             offsetY += movePerFrame
-            print(offsetY)
+//            print(offsetY)
 
             // 루프 처리
             if offsetY >= endY {
