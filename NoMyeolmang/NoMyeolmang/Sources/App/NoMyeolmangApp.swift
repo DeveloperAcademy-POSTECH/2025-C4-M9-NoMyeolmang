@@ -10,6 +10,12 @@ import SwiftUI
 
 @main
 struct NoMyeolmangApp: App {
+    init() {
+            #if DEBUG
+            UserDefaults.standard.removeObject(forKey: "hasSeenOnboarding")
+            #endif
+        }
+    
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @State private var coordinator = AppCoordinator()
     @State private var moduleFactory: ModuleFactory?
