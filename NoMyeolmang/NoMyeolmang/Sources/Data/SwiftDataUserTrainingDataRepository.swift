@@ -1,4 +1,4 @@
-//  SwiftDataUserTrainingDataRepositoy.swift
+//  SwiftDataUserTrainingDataRepository.swift
 //  NoMyeolmang
 //
 //  Created by Moo on 7/24/25.

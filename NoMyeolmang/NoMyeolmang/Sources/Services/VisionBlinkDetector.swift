@@ -7,11 +7,6 @@
 
 import Vision
 
-protocol BlinkDetector {
-    func detect(from landmarks: VNFaceLandmarks2D?) -> Int
-    func reset()
-}
-
 final class VisionBlinkDetector: BlinkDetector {
     private let earThreshold: CGFloat = 0.18
     private let requiredFrameCount: Int = 3

@@ -7,11 +7,6 @@
 
 import Vision
 
-protocol YawnDetector {
-    func detect(from landmarks: VNFaceLandmarks2D?) -> Int
-    func reset()
-}
-
 final class VisionYawnDetector: YawnDetector {
     private let marThreshold: CGFloat = 1.6
     private let requiredFrameCount: Int = 5
