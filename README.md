@@ -1,37 +1,25 @@
-# 🚀 Timé
-
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/b432e2cb-a92b-429f-b9eb-b210deb377e4" alt="orange" width="500" style="margin: 0 10px;"/>
-</p>
-
+> Team. NoMyeolmang
+<img width="7680" height="4320" alt="소개 페이지" src="https://github.com/user-attachments/assets/7da83a14-f952-4825-b508-f408c6f62109" />
 
 <!-- 이미지 추가 및 수정 예정 -->
 
-> Team. NoMyeolmang, 멸망하지 않게 조심하세요
-
-[![Swift](https://img.shields.io/badge/Swift-5.9-orange.svg)]()
-[![Xcode](https://img.shields.io/badge/Xcode-15.0-blue.svg)]()
-[![License](https://img.shields.io/badge/license-MIT-green.svg)]()
-
 ---
 
-## 📱 소개
+## 소개
 
-> 티메(Timmé) 는 사용자의 집중력 데이터를 기반으로 상대적인 시간 흐름을 체감할 수 있도록 돕는 macOS/iOS 앱입니다.
-	•	Core ML과 Vision Framework를 활용하여 집중력 점수를 계산
-	•	점수에 따라 시간 흐름이 다르게 표현되는 시각적 경험 제공
-	•	SwiftUI와 SwiftData로 구현한 깔끔하고 직관적인 UI
+> 티메(Timé) 는 사용자의 집중력 데이터를 기반으로 상대적인 시간 흐름을 체감할 수 있도록 돕는 macOS 앱입니다. 소개 생각해보기, 무가 쓴 거 뺏기
 
 [🔗 앱스토어/웹 링크](https://example.com)
 
 
-## 📆 프로젝트 기간
-- 시즌 1 : `2025.06.23 - 2025.08.01`
-- 개발 기간: `2025.07.10 - 2025.07.29`
-- 시즌 2 : `2025.08.06 - 진행중`
+## 프로젝트 기간
+- **Phase 1** (2025.06.23 - 2025.08.01)  
+  ↳ 개발 기간: 2025.07.10 - 2025.07.29  
+
+- **Phase 2** (2025.08.06 - 진행중)
 
 
-## 🛠 기술 스택
+## 기술 스택
 
 <!-- Language & Framework -->
 [![Swift](https://img.shields.io/badge/Swift-F05138?style=for-the-badge&logo=swift&logoColor=white)]()
@@ -54,15 +42,15 @@
 [![Swift](https://img.shields.io/badge/Swift-6.0.3-F05138?style=for-the-badge&logo=swift&logoColor=white)]()
 [![Xcode](https://img.shields.io/badge/Xcode-16.4-147EFB?style=for-the-badge&logo=xcode&logoColor=white)]()
 [![Platform](https://img.shields.io/badge/Platform-macOS_13+-333333?style=for-the-badge&logo=apple&logoColor=white)]()
+[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)]()
 
-## 🌟 주요 기능
+## 주요 기능
 
 - createML, linear regression을 통해 사용자 집중력 점수 제공
 - 집중력 점수에 따라 상대적인 시간 흐름 표현
 
 
-## 🖼 화면 구성 및 시연
-<img width="7680" height="4320" alt="소개 페이지" src="https://github.com/user-attachments/assets/7da83a14-f952-4825-b508-f408c6f62109" />
+## 화면 구성 및 시연
 추후 업데이트 예정
 
 <!--| 기능 | 설명 | 이미지 |
@@ -71,30 +59,38 @@
 | 예시2 | 기능 요약 | ![gif](링크) |-->
 
 
-## 🧱 폴더 구조
+## 폴더 구조
 
 ```
-📁 NoMyeolmang Project
-├── 📁 NoMyeolmang-iOS (iOS 그룹)
-│ ├── Sources/
-│ │ ├── App/
-│ │ └── Presentations/
-│ └── Resources/
-│
-├── 📁 NoMyeolmang-watch (watchOS 그룹)
-│ ├── Sources/
-│ │ ├── App/
-│ │ └── Presentations/
-│ └── Resources/
-│
-└── 📁 Shared (공통 그룹)
-├── ML/
-├── Models/
-└── Services/
+📁 NoMyeolmang
+├── 📁 NoMyeolmang
+│   ├── NoMyeolmang.entitlements
+│   ├── 📁 Resources
+│   │   ├── Assets.xcassets
+│   │   ├── Font
+│   │   └── info.plist
+│   └── 📁 Sources
+│       ├── App
+│       ├── Data
+│       ├── DesignSystem
+│       ├── Manager
+│       ├── ML
+│       ├── Presentation
+│       │   ├── Onboarding
+│       │   ├── Timer
+│       │   ├── TimerSetting
+│       │   ├── Report
+│       │   ├── Feedback
+│       │   └── Popover
+│       ├── Protocols
+│       └── Services
+├── 📁 timé.docc
+├── timé.xcodeproj
+└── README.md
 ```
 
 
-## 🧑‍💻 팀 소개
+## 팀 소개
 
 <h3 align="center"> 멸망하지 않게 조심해. v1.0 </h3>
 <p align="center"> 이번에 멸망하면 지난 아카데미 생활이 모두 부정당하게 되는, 절대 멸망해선 안되는 팀입니다. </p>
@@ -102,134 +98,61 @@
 <div align="center">
   <table>
     <tr>
-      <td align="center" style="padding: 0 20px;">
+      <td align="center" style="padding: 10px 20px; min-width: 140px;">
+        <b>디자이너</b>
+      </td>
+      <td align="center" style="padding: 10px 20px; min-width: 140px;">
+        <b>iOS 개발</b>
+      </td>
+      <td align="center" style="padding: 10px 20px; min-width: 140px;">
+        <b>기획</b>
+      </td>
+      <td align="center" style="padding: 10px 20px; min-width: 140px;">
+        <b>Vision 엔지니어링</b>
+      </td>
+      <td align="center" style="padding: 10px 20px; min-width: 140px;">
+        <b>ML 엔지니어링</b>
+      </td>
+    </tr>
+    <tr>
+      <td align="center" style="padding: 20px 30px;">
         <a href="https://github.com/legnasy">
-          <img src="https://github.com/legnasy.png" width="60"/><br/>
+          <img src="https://github.com/legnasy.png" width="80" style="border-radius: 50%;"/><br/>
           <b>Angie</b>
         </a>
+        <p style="margin: 4px 0; font-size: 11px; color: #777;">sod084637@naver.com</p>
       </td>
-      <td align="center" style="padding: 0 20px;">
+      <td align="center" style="padding: 20px 30px;">
         <a href="https://github.com/ohdodin">
-          <img src="https://github.com/ohdodin.png" width="60"/><br/>
+          <img src="https://github.com/ohdodin.png" width="80" style="border-radius: 50%;"/><br/>
           <b>Dodin</b>
         </a>
+        <p style="margin: 4px 0; font-size: 11px; color: #777;">seojin2414@naver.com</p>
       </td>
-      <td align="center" style="padding: 0 20px;">
+      <td align="center" style="padding: 20px 30px;">
         <a href="https://github.com/romiwaves">
-          <img src="https://github.com/romiwaves.png" width="60"/><br/>
+          <img src="https://github.com/romiwaves.png" width="80" style="border-radius: 50%;"/><br/>
           <b>Gabi</b>
         </a>
+        <p style="margin: 4px 0; font-size: 11px; color: #777;">erurierurila@gmail.com</p>
       </td>
-      <td align="center" style="padding: 0 20px;">
+      <td align="center" style="padding: 20px 30px;">
         <a href="https://github.com/MuchanKim">
-          <img src="https://github.com/MuchanKim.png" width="60"/><br/>
+          <img src="https://github.com/MuchanKim.png" width="80" style="border-radius: 50%;"/><br/>
           <b>Moo</b>
         </a>
+        <p style="margin: 4px 0; font-size: 11px; color: #777;">mutopia82@gmail.com</p>
       </td>
-      <td align="center" style="padding: 0 20px;">
+      <td align="center" style="padding: 20px 30px;">
         <a href="https://github.com/wish627">
-          <img src="https://github.com/wish627.png" width="60"/><br/>
+          <img src="https://github.com/wish627.png" width="80" style="border-radius: 50%;"/><br/>
           <b>Wish</b>
         </a>
+        <p style="margin: 4px 0; font-size: 11px; color: #777;">wishful.to@gmail.com</p>
       </td>
     </tr>
   </table>
 </div>
-
-## 🔖 브랜치 전략
-```plaintext
-[레이블]/#[이슈번호]/[작업내용]
-작업 내용은 단어가 2개 이상이면 -(dash)로 구분하고 소문자로만 작성합니다.
-반드시 이슈 번호를 확인할 것!
-```
-
-| 타입 | 설명 |
-|------|-------------------------|
-| feat | 기능 개발 |
-| fix | 버그 수정 |
-| refactor | 리팩토링 |
-| docs | 문서 변경 |
-| chore | 설정, 테스트 등 잡작업 |
-
-```mermaid
-%%{ init: { 'theme': 'neutral' } }%%
-gitGraph
-    commit id: "main 시작"
-    branch develop
-    checkout develop
-
-    commit id: "기능1 시작"
-    branch feat/feature1
-    checkout feat/feature1
-    commit
-    commit id: "기능1 완료"
-    checkout develop
-    merge feat/feature1
-
-    commit id: "기능2 시작"
-    branch feat/feature2
-    checkout feat/feature2
-    commit
-    commit id: "기능2 완료"
-    checkout develop
-    merge feat/feature2
-
-    commit id: "릴리스 준비"
-    branch release/v1.0.0
-    checkout release/v1.0.0
-    commit id: "QA 및 버그 수정"
-    commit id: "릴리스 완료"
-    checkout main
-    merge release/v1.0.0
-
-    commit tag: "v1.0.0"
-
-    branch hotfix/issue-1
-    checkout hotfix/issue-1
-    commit id: "핫픽스 수정"
-    checkout main
-    merge hotfix/issue-1
-    checkout develop
-    merge hotfix/issue-1
-```
-
-## 🌀 커밋 메시지 컨벤션
-```plaintext
-[타입]: #[이슈번호] [간단한 작업 요약]
-- Description
-```
-
-## 🏷️ Issue/PR Labels
-
-| 이모지 | 기능 | 설명 |
-|--------|------|------|
-| 🛠️ | Chore | 간단한 코드수정, 파일수정, 주석 등 기능 단위라고 판단하기 애매한 작업 |
-| 🐞 | Bug | 무언가가 부러졌을 때 사용 |
-| ❌ | Delete | 파일 변경/삭제 할 때 |
-| 📝 | Docs | 문서화가 필요할 때 |
-| ✨ | Feature | 기능(UI/로직) 추가 할 때 |
-| ⚙️ | Setting | 프로젝트 설정 관련, 코드 변경 X |
-| 🪓 | Refactor | 코드 리팩토링. 구조 개선, 기능 변경은 없음 |
-| 🙌 | help wanted | 누군가의 도움이 필요할 때 |
-
-
-
-## ✅ 테스트 방법
-
-1. 이 저장소를 클론합니다.
-```bash
-git clone https://github.com/DeveloperAcademy-POSTECH/2025-C4-M9-NoMyeolmang.git
-```
-2. `Xcode`로 `.xcodeproj` 또는 `.xcworkspace` 열기
-3. 시뮬레이터 환경 설정: iPhone 15 / iOS 17
-4. `Cmd + R`로 실행 / `Cmd + U`로 테스트 실행
-
-
-## 📎 프로젝트 문서
-
-- [기획 히스토리](링크)
-- [디자인 히스토리](링크)
-- [기술 문서 (아키텍처 등)](링크)
 
 
 ## 📝 License
