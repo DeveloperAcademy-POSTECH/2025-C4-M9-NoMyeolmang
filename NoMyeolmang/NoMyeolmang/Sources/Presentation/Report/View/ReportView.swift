@@ -13,7 +13,7 @@ struct ReportView: View {
 
     var body: some View {
         ZStack {
-            Image("backgroundSpace")
+            Image("space_background")
                 .resizable()
                 .scaledToFill()
                 .ignoresSafeArea()

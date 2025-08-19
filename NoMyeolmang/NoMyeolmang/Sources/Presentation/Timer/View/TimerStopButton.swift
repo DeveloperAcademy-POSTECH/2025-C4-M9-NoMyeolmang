@@ -12,7 +12,7 @@ struct TimerStopButton: View {
 
     var body: some View {
         Button(action: onStop) {
-            Image("timerstop")
+            Image("timer_stop")
         }
         .buttonStyle(.plain)
         .navigationBarBackButtonHidden()
