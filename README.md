@@ -1,12 +1,13 @@
-# 🚀 프로젝트 이름
+# 🚀 Timé
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/b432e2cb-a92b-429f-b9eb-b210deb377e4" alt="orange" width="500" style="margin: 0 10px;"/>
 </p>
 
+
 <!-- 이미지 추가 및 수정 예정 -->
 
-> 멸망하지 않게 조심하세요
+> Team. NoMyeolmang, 멸망하지 않게 조심하세요
 
 [![Swift](https://img.shields.io/badge/Swift-5.9-orange.svg)]()
 [![Xcode](https://img.shields.io/badge/Xcode-15.0-blue.svg)]()
@@ -16,33 +17,43 @@
 
 ## 📱 소개
 
-> tabularML
+> 티메(Timmé) 는 사용자의 집중력 데이터를 기반으로 상대적인 시간 흐름을 체감할 수 있도록 돕는 macOS/iOS 앱입니다.
+	•	Core ML과 Vision Framework를 활용하여 집중력 점수를 계산
+	•	점수에 따라 시간 흐름이 다르게 표현되는 시각적 경험 제공
+	•	SwiftUI와 SwiftData로 구현한 깔끔하고 직관적인 UI
 
 [🔗 앱스토어/웹 링크](https://example.com)
 
 
 ## 📆 프로젝트 기간
-- 전체 기간: `2025.06.23 - 2025.08.01`
+- 시즌 1 : `2025.06.23 - 2025.08.01`
 - 개발 기간: `2025.07.10 - 2025.07.29`
+- 시즌 2 : `2025.08.06 - 진행중`
 
 
 ## 🛠 기술 스택
 
-<!-- iOS -->
+<!-- Language & Framework -->
 [![Swift](https://img.shields.io/badge/Swift-F05138?style=for-the-badge&logo=swift&logoColor=white)]()
+[![SwiftUI](https://img.shields.io/badge/SwiftUI-444B6E?style=for-the-badge&logo=swift&logoColor=white)]()
 [![Xcode](https://img.shields.io/badge/Xcode-147EFB?style=for-the-badge&logo=xcode&logoColor=white)]()
-[![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)]()
 
-<!-- Architecture -->
-[![MVVM](https://img.shields.io/badge/MVVM-Architecture-blue?style=for-the-badge)]()
-[![MVC](https://img.shields.io/badge/MVC-Architecture-green?style=for-the-badge)]()
-[![Clean Architecture](https://img.shields.io/badge/Clean_Architecture-🧹-lightblue?style=for-the-badge)]()
+<!-- ML & Data -->
+[![Core ML](https://img.shields.io/badge/CoreML-4ECDC4?style=for-the-badge&logo=swift&logoColor=white)]()
+[![Vision Framework](https://img.shields.io/badge/Vision_Framework-5C7AEA?style=for-the-badge&logo=apple&logoColor=white)]()
+[![SwiftData](https://img.shields.io/badge/SwiftData-CCCCCC?style=for-the-badge&logo=apple&logoColor=black)]()
 
 <!-- Tools -->
 [![Notion](https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white)]()
 [![GitHub Projects](https://img.shields.io/badge/GitHub_Projects-181717?style=for-the-badge&logo=github&logoColor=white)]()
-[![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)]()
+[![Figma](https://img.shields.io/badge/Figma-FF6F91?style=for-the-badge&logo=figma&logoColor=white)]()
 
+
+## 버전 정보
+
+[![Swift](https://img.shields.io/badge/Swift-6.0.3-F05138?style=for-the-badge&logo=swift&logoColor=white)]()
+[![Xcode](https://img.shields.io/badge/Xcode-16.4-147EFB?style=for-the-badge&logo=xcode&logoColor=white)]()
+[![Platform](https://img.shields.io/badge/Platform-macOS_13+-333333?style=for-the-badge&logo=apple&logoColor=white)]()
 
 ## 🌟 주요 기능
 
@@ -51,6 +62,7 @@
 
 
 ## 🖼 화면 구성 및 시연
+<img width="7680" height="4320" alt="소개 페이지" src="https://github.com/user-attachments/assets/7da83a14-f952-4825-b508-f408c6f62109" />
 추후 업데이트 예정
 
 <!--| 기능 | 설명 | 이미지 |
@@ -84,7 +96,7 @@
 
 ## 🧑‍💻 팀 소개
 
-<h3 align="center"> 멸망하지 않게 조심해. </h3>
+<h3 align="center"> 멸망하지 않게 조심해. v1.0 </h3>
 <p align="center"> 이번에 멸망하면 지난 아카데미 생활이 모두 부정당하게 되는, 절대 멸망해선 안되는 팀입니다. </p>
 
 <div align="center">
