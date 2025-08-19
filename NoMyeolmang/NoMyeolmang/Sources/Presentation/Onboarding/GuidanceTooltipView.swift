@@ -12,7 +12,7 @@ struct GuidanceTooltipViewStep1: View {
     let onConfirm: () -> Void
 
     var body: some View {
-        let currentImage = "tooltipBubble1"
+        let currentImage = "tooltip_bubble1"
 
         ZStack(alignment: .topLeading) {
             Image(currentImage)
@@ -55,7 +55,7 @@ struct GuidanceTooltipViewStep2: View {
     let onConfirm: () -> Void
 
     var body: some View {
-        let currentImage = "tooltipBubble2"
+        let currentImage = "tooltip_bubble2"
 
         ZStack(alignment: .topLeading) {
             Image(currentImage)

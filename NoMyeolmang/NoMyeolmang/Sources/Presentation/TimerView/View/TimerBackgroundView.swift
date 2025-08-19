@@ -33,7 +33,7 @@ struct TimerBackgroundView: View {
     var body: some View {
         GeometryReader { geo in
             ZStack(alignment: .center) {
-                Image("timerBackground")
+                Image("timer_background")
                     .resizable()
                     .scaledToFill()
                     .frame(width: geo.size.width, height: geo.size.height)

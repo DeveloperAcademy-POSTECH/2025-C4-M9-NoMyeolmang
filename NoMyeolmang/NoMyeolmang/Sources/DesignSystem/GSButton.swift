@@ -41,7 +41,7 @@ struct GSButton: View {
 
 #Preview {
     ZStack {
-        Image("backgroundSpace")
+        Image("space_background")
             .resizable()
         
         RoundedRectangle(cornerRadius: 10)

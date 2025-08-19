@@ -12,7 +12,7 @@ struct OnboardingContainerView: View {
     
     var body: some View {
         ZStack {
-            Image("SpaceshipBackground")
+            Image("spaceship_background")
                 .resizable()
                 .ignoresSafeArea()
                 .scaledToFill()

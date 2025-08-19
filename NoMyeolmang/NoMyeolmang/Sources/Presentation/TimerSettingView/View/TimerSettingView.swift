@@ -13,7 +13,7 @@ struct TimerSettingView: View {
     
     var backgroundView: some View {
         ZStack {
-            Image("SpaceshipBackground")
+            Image("spaceship_background")
                 .resizable()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .ignoresSafeArea()
