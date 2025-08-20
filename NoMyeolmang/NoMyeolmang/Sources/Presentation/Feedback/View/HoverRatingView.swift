@@ -29,7 +29,7 @@ struct HoverRatingView: View {
             ForEach(1...5, id: \.self) { number in
                 ZStack {
                     Circle()
-                        .fill(selectedIndex == number ? Color("231151") : Color("5C436D").opacity(0.4))
+                        .fill(selectedIndex == number ? Color("Indigo-700") : Color("Purple-700").opacity(0.4))
                         .overlay(
                             Circle()
                                 .stroke(Color.white, lineWidth: 1.2)
@@ -55,7 +55,7 @@ struct HoverRatingView: View {
                             .fixedSize()
                             .padding(.vertical, 8)
                             .padding(.horizontal, 12)
-                            .background(Color("1C1C1ED9").opacity(0.85))
+                            .background(Color("Gray-500").opacity(0.85))
                             .cornerRadius(6)
                             .offset(y: -50)
                     }

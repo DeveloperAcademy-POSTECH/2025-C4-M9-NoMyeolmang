@@ -22,7 +22,7 @@ struct GuidanceTooltipViewStep1: View {
             VStack(alignment: .leading, spacing: 0) {
                 Text("학습을 진행하는 해당 시간동안\n집중력이 실시간으로 측정됩니다.")
                     .textStyle(GSFont.Regular12)
-                    .foregroundColor(Color("232323"))
+                    .foregroundColor(Color("Gray-900"))
                     .padding(.top, 14)
 
                 HStack(spacing: 0) {
@@ -31,7 +31,7 @@ struct GuidanceTooltipViewStep1: View {
                     }) {
                         Text("확인")
                             .textStyle(GSFont.SemiBold12)
-                            .foregroundColor(Color("7243D4"))
+                            .foregroundColor(Color("Violet-600"))
                     }
                     .buttonStyle(.plain)
 
@@ -39,7 +39,7 @@ struct GuidanceTooltipViewStep1: View {
 
                     Text("1/\(total)")
                         .textStyle(GSFont.Regular12)
-                        .foregroundColor(Color("232323"))
+                        .foregroundColor(Color("Gray-900"))
                         .padding(.trailing, 23)
                 }
                 .padding(.top, 8)
@@ -65,7 +65,7 @@ struct GuidanceTooltipViewStep2: View {
             VStack(alignment: .leading, spacing: 0) {
                 Text("탐사 시작 시, 집중 정도에 따라서\n변하는 탐사 속도를 통해 집중력을 확인할 수 있습니다.")
                     .textStyle(GSFont.Regular12)
-                    .foregroundColor(Color("232323"))
+                    .foregroundColor(Color("Gray-900"))
                     .padding(.top, 14)
 
                 HStack(spacing: 0) {
@@ -74,13 +74,13 @@ struct GuidanceTooltipViewStep2: View {
                     }) {
                         Text("확인")
                             .textStyle(GSFont.SemiBold12)
-                            .foregroundColor(Color("7243D4"))
+                            .foregroundColor(Color("Violet-600"))
                     }
                     .buttonStyle(.plain)
                     Spacer()
                     Text("2/\(total)")
                         .textStyle(GSFont.Regular12)
-                        .foregroundColor(Color("232323"))
+                        .foregroundColor(Color("Gray-900"))
                         .padding(.trailing, 23)
                 }
                 .padding(.top, 8)

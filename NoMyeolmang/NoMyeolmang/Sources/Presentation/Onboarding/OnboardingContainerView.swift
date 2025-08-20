@@ -20,7 +20,7 @@ struct OnboardingContainerView: View {
                 .zIndex(0)
             
             if popupStep == 3 || popupStep == 4 {
-                Color("252525")
+                Color("Gray-900")
                     .opacity(0.55)
                     .ignoresSafeArea()
                     .zIndex(1)
