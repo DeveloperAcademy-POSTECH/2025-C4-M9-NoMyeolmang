@@ -19,7 +19,7 @@ struct PopoverToggleView: View {
                 .frame(width: 159, height: 32)
             
             RoundedRectangle(cornerRadius: 29)
-                .fill(Color("#9D86DB80").opacity(0.5))
+                .fill(Color("Lavender-500").opacity(0.5))
                 .frame(width: 70, height: 26)
                 .offset(x: selectedTab == .recommended ? -39 : 39)
                 .shadow(color: Color.black.opacity(0.25), radius: 7, x: 0, y: 0)

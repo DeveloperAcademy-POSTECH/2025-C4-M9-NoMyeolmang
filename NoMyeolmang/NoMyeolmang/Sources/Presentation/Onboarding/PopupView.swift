@@ -32,9 +32,9 @@ struct PopupGuideView: View {
                 .padding(.bottom, 47)
         }
         .frame(width: 268, height: 402)
-        .background(Color("191735"))
+        .background(Color("Indigo-900"))
         .cornerRadius(21.775)
-        .shadow(color: Color("1F2687").opacity(0.13), radius: 13.4, x: 0, y: 6.7)
+        .shadow(color: Color("Blue-900").opacity(0.13), radius: 13.4, x: 0, y: 6.7)
         .overlay(
             ZStack {
                 RoundedRectangle(cornerRadius: 22)

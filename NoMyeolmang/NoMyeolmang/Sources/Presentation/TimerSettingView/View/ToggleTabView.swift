@@ -19,7 +19,7 @@ struct ToggleTabView: View {
                 .frame(width: 235, height: 40)
 
             RoundedRectangle(cornerRadius: 40)
-                .fill(Color("#9D86DB80").opacity(0.55))
+                .fill(Color("Lavender-500").opacity(0.55))
                 .frame(width: 110, height: 32)
                 .offset(x: selectedTab == .recommended ? 5 : 120)
                 .shadow(color: Color.black.opacity(0.25), radius: 7, x: 0, y: 0)

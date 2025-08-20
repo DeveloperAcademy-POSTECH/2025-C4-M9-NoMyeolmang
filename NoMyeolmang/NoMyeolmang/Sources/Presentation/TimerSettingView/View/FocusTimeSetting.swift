@@ -28,8 +28,8 @@ struct FocusTimeSetting: View {
         .background(
             LinearGradient(
                 gradient: Gradient(colors: [
-                    Color("939393").opacity(0.02),
-                    Color("A471C8").opacity(0.3)
+                    Color("Gray-100").opacity(0.02),
+                    Color("Purple-300").opacity(0.3)
                 ]),
                 startPoint: .top,
                 endPoint: .bottom

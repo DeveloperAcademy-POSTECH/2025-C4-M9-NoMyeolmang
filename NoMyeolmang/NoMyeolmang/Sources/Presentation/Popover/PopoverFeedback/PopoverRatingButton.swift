@@ -44,8 +44,8 @@ struct PopoverRatingButton: View {
 }
 
 extension Color {
-    static let bPurple = Color("3E154B")
-    static let bIndigo = Color("231151")
+    static let bPurple = Color("Purple-900")
+    static let bIndigo = Color("Indigo-700")
 }
 
 struct AppGradients {

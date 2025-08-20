@@ -28,7 +28,7 @@ struct PersonalTimerSettingView: View {
         VStack(spacing: 0) {
             Text("10-30분 설정만 가능해요")
                 .textStyle(GSFont.Light12)
-                .foregroundColor(Color("CEB0FF"))
+                .foregroundColor(Color("Lavender-200"))
                 .padding(.top, 24)
             
             Text("시간을 설정해 주세요")
@@ -99,8 +99,8 @@ struct PersonalTimerSettingView: View {
         .background(
             LinearGradient(
                 gradient: Gradient(colors: [
-                    Color("939393").opacity(0.02),
-                    Color("A471C8").opacity(0.3)
+                    Color("Gray-100").opacity(0.02),
+                    Color("Purple-300").opacity(0.3)
                 ]),
                 startPoint: .top,
                 endPoint: .bottom
