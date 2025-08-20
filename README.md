@@ -46,8 +46,23 @@
 
 ## 주요 기능
 
-- createML, linear regression을 통해 사용자 집중력 점수 제공
-- 집중력 점수에 따라 상대적인 시간 흐름 표현
+- **집중력 점수 실시간 계산**  
+  Create ML + Linear Regression(Core ML)로 세션 중 온디바이스 산출
+
+- **상대적 시간 흐름 UI**  
+  점수에 따라 타이머·애니메이션 속도 가변
+
+- **시각 신호 인식 피드백**  
+  Vision 기반 눈 깜빡임·하품 감지 → 집중 저하 신호로 활용
+
+- **개인화 학습**  
+  SwiftData로 학습 데이터 저장·반영하여 점수 정밀도 개선
+
+- **빠른 조작 UX**  
+  메뉴바/팝오버에서 타이머 토글·설정, 온보딩 가이드/툴팁 제공
+
+- **개인 정보 처리**  
+  카메라·오디오 정보는 로컬에서만 처리, 외부 전송 없음
 
 
 ## 화면 구성 및 시연
@@ -89,70 +104,130 @@
 └── README.md
 ```
 
+### 팀 소개
 
-## 팀 소개
+<h3 align="center">멸망하지 않게 조심해.</h3>
+<p align="center">우리팀 '멸망하지 않게 조심해'는, 어떤 어려움이 와도 무너지지 않고 끝까지 함께 가겠다는 의지를 담은 팀명입니다.</p>
 
-<h3 align="center"> 멸망하지 않게 조심해. v1.0 </h3>
-<p align="center"> 이번에 멸망하면 지난 아카데미 생활이 모두 부정당하게 되는, 절대 멸망해선 안되는 팀입니다. </p>
+---
+
+### v1.0
+<p align="left">팀의 기초를 다지며 실험적 기능을 구현했던 단계입니다.</p>
 
 <div align="center">
   <table>
     <tr>
-      <td align="center" style="padding: 10px 20px; min-width: 140px;">
-        <b>디자이너</b>
-      </td>
-      <td align="center" style="padding: 10px 20px; min-width: 140px;">
-        <b>iOS 개발</b>
-      </td>
-      <td align="center" style="padding: 10px 20px; min-width: 140px;">
-        <b>기획</b>
-      </td>
-      <td align="center" style="padding: 10px 20px; min-width: 140px;">
-        <b>Vision 엔지니어링</b>
-      </td>
-      <td align="center" style="padding: 10px 20px; min-width: 140px;">
-        <b>ML 엔지니어링</b>
-      </td>
+      <td align="center"><b>디자이너</b></td>
+      <td align="center"><b>iOS 개발</b></td>
+      <td align="center"><b>기획</b></td>
+      <td align="center"><b>Vision 엔지니어링</b></td>
+      <td align="center"><b>ML 엔지니어링</b></td>
     </tr>
     <tr>
-      <td align="center" style="padding: 20px 30px;">
+      <td align="center">
         <a href="https://github.com/legnasy">
-          <img src="https://github.com/legnasy.png" width="80" style="border-radius: 50%;"/><br/>
-          <b>Angie</b>
-        </a>
-        <p style="margin: 4px 0; font-size: 11px; color: #777;">sod084637@naver.com</p>
+          <img src="https://github.com/legnasy.png" width="70" style="border-radius: 50%;"/><br/>
+          Angie
+        </a><br/>
+        <sub style="color: gray;">
+          <a href="mailto:sod084637@naver.com" style="color: gray; text-decoration: none;">✉️ Contact</a>
+        </sub>
       </td>
-      <td align="center" style="padding: 20px 30px;">
+      <td align="center">
         <a href="https://github.com/ohdodin">
-          <img src="https://github.com/ohdodin.png" width="80" style="border-radius: 50%;"/><br/>
-          <b>Dodin</b>
-        </a>
-        <p style="margin: 4px 0; font-size: 11px; color: #777;">seojin2414@naver.com</p>
+          <img src="https://github.com/ohdodin.png" width="70" style="border-radius: 50%;"/><br/>
+          Dodin
+        </a><br/>
+        <sub style="color: gray;">
+          <a href="mailto:seojin2414@naver.com" style="color: gray; text-decoration: none;">✉️ Contact</a>
+        </sub>
       </td>
-      <td align="center" style="padding: 20px 30px;">
+      <td align="center">
         <a href="https://github.com/romiwaves">
-          <img src="https://github.com/romiwaves.png" width="80" style="border-radius: 50%;"/><br/>
-          <b>Gabi</b>
-        </a>
-        <p style="margin: 4px 0; font-size: 11px; color: #777;">erurierurila@gmail.com</p>
+          <img src="https://github.com/romiwaves.png" width="70" style="border-radius: 50%;"/><br/>
+          Gabi
+        </a><br/>
+        <sub style="color: gray;">
+          <a href="mailto:erurierurila@gmail.com" style="color: gray; text-decoration: none;">✉️ Contact</a>
+        </sub>
       </td>
-      <td align="center" style="padding: 20px 30px;">
+      <td align="center">
         <a href="https://github.com/MuchanKim">
-          <img src="https://github.com/MuchanKim.png" width="80" style="border-radius: 50%;"/><br/>
-          <b>Moo</b>
-        </a>
-        <p style="margin: 4px 0; font-size: 11px; color: #777;">mutopia82@gmail.com</p>
+          <img src="https://github.com/MuchanKim.png" width="70" style="border-radius: 50%;"/><br/>
+          Moo
+        </a><br/>
+        <sub style="color: gray;">
+          <a href="mailto:mutopia82@gmail.com" style="color: gray; text-decoration: none;">✉️ Contact</a>
+        </sub>
       </td>
-      <td align="center" style="padding: 20px 30px;">
+      <td align="center">
         <a href="https://github.com/wish627">
-          <img src="https://github.com/wish627.png" width="80" style="border-radius: 50%;"/><br/>
-          <b>Wish</b>
-        </a>
-        <p style="margin: 4px 0; font-size: 11px; color: #777;">wishful.to@gmail.com</p>
+          <img src="https://github.com/wish627.png" width="70" style="border-radius: 50%;"/><br/>
+          Wish
+        </a><br/>
+        <sub style="color: gray;">
+          <a href="mailto:wishful.to@gmail.com" style="color: gray; text-decoration: none;">✉️ Contact</a>
+        </sub>
       </td>
     </tr>
   </table>
 </div>
+
+---
+
+### v1.0.0
+<p align="left">실험적 단계에서 벗어나, 본격적인 첫 안정화 버전으로 발전했습니다.</p>
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center"><b>디자이너</b></td>
+      <td align="center"><b>기획</b></td>
+      <td align="center"><b>Vision 엔지니어링</b></td>
+      <td align="center"><b>ML 엔지니어링</b></td>
+    </tr>
+    <tr>
+      <td align="center">
+        <a href="https://github.com/legnasy">
+          <img src="https://github.com/legnasy.png" width="70" style="border-radius: 50%;"/><br/>
+          Angie
+        </a><br/>
+        <sub style="color: gray;">
+          <a href="mailto:sod084637@naver.com" style="color: gray; text-decoration: none;">✉️ Contact</a>
+        </sub>
+      </td>
+      <td align="center">
+        <a href="https://github.com/romiwaves">
+          <img src="https://github.com/romiwaves.png" width="70" style="border-radius: 50%;"/><br/>
+          Gabi
+        </a><br/>
+        <sub style="color: gray;">
+          <a href="mailto:erurierurila@gmail.com" style="color: gray; text-decoration: none;">✉️ Contact</a>
+        </sub>
+      </td>
+      <td align="center">
+        <a href="https://github.com/MuchanKim">
+          <img src="https://github.com/MuchanKim.png" width="70" style="border-radius: 50%;"/><br/>
+          Moo
+        </a><br/>
+        <sub style="color: gray;">
+          <a href="mailto:mutopia82@gmail.com" style="color: gray; text-decoration: none;">✉️ Contact</a>
+        </sub>
+      </td>
+      <td align="center">
+        <a href="https://github.com/wish627">
+          <img src="https://github.com/wish627.png" width="70" style="border-radius: 50%;"/><br/>
+          Wish
+        </a><br/>
+        <sub style="color: gray;">
+          <a href="mailto:wishful.to@gmail.com" style="color: gray; text-decoration: none;">✉️ Contact</a>
+        </sub>
+      </td>
+    </tr>
+  </table>
+</div>
+
+
 
 
 ## 📝 License
