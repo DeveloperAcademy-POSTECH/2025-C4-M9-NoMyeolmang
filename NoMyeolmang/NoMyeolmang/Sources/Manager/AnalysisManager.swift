@@ -6,7 +6,26 @@
 //
 
 import Vision
-
+/// # ``timé/AnalysisManager``
+///
+/// Vision 기반 얼굴 분석을 통합하여 사용자 행동 특성을 추출하고 ML 입력 데이터를 생성합니다.
+///
+/// `AnalysisManager`는 ``CameraManager``에서 전달받은 비디오 프레임에 대해 `VNDetectFaceLandmarksRequest`를 수행하여
+/// 얼굴 랜드마크를 감지합니다. 감지된 랜드마크는 ``VisionBlinkDetector``, ``VisionYawnDetector``, ``FaceAbsenceTimer``에
+/// 전달되어 각각 눈 깜빡임, 하품, 얼굴 부재를 분석합니다.
+///
+/// 분석 결과는 ``generateFeatures()`` 메서드를 통해 ``Features`` 객체로 구조화되어 ``FocusScorePredictor``의
+/// 입력으로 사용됩니다. 각 세션마다 ``readyForSession()``을 통해 상태를 초기화하여 정확한 분석을 보장합니다.
+///
+/// ### Performing Analysis
+///
+/// - ``analyze(pixelBuffer:)``
+/// - ``generateFeatures()``
+///
+/// ### Managing Session State
+///
+/// - ``readyForSession()``
+/// - ``resetState()``
 final class AnalysisManager {
     let blinkDetector: BlinkDetector
     let yawnDetector: YawnDetector
@@ -26,7 +45,7 @@ final class AnalysisManager {
         self.yawnDetector = yawnDetector
         self.presenceTimer = presenceTimer
     }
-
+    
     convenience init() {
         self.init(
             blinkDetector: VisionBlinkDetector(),
@@ -72,7 +91,7 @@ final class AnalysisManager {
         elapsedTime = 0
         resetState()
     }
-
+    
     private func performFaceLandmarksDetection(on pixelBuffer: CVPixelBuffer) async -> VNFaceObservation? {
         await withCheckedContinuation { continuation in
             let request = VNDetectFaceLandmarksRequest()

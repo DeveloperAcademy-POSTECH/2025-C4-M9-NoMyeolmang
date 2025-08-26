@@ -8,6 +8,21 @@
 import Cocoa
 import SwiftUI
 
+/// # ``timé/AppDelegate``
+///
+/// macOS 상태 바 아이템과 팝오버를 관리하는 애플리케이션 델리게이트입니다.
+///
+/// ## Overview
+///
+/// `AppDelegate`는 macOS 상태 바에 타이머 아이콘을 표시하고, 클릭 시 팝오버 인터페이스를 제공합니다.
+/// ``StatusBarDisplay``를 통해 실시간 타이머 정보를 상태 바에 표시하며, ``PopoverWindowController``를
+/// 사용하여 팝오버 창을 관리합니다.
+///
+/// ## Topics
+///
+/// ### Status Bar Management
+///
+/// - ``togglePopover(_:)``
 class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
     var statusItem: NSStatusItem?
     var popoverWindowController: PopoverWindowController?
@@ -23,6 +38,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
         }
     }
     
+    /// 상태 바 아이템을 설정하고 메뉴 아이콘과 액션을 연결합니다.
     private func setupStatusItem() {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         
@@ -34,6 +50,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
         }
     }
     
+    /// 상태 바 아이템 클릭 시 팝오버를 토글합니다.
     @objc func togglePopover(_ sender: AnyObject?) {
         guard let button = statusItem?.button else { return }
         

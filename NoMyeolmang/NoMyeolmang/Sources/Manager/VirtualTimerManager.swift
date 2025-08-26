@@ -7,6 +7,24 @@
 
 import Foundation
 
+/// # ``timé/VirtualTimerManager``
+///
+/// 사용자의 집중도에 따라 속도가 조절되는 가상 타이머를 관리합니다.
+///
+/// `VirtualTimerManager`는 ``FocusLevel``에 따라 틱 간격이 동적으로 변경되는 타이머입니다.
+/// 사용자의 집중도가 높을 때는 더 빠르게, 낮을 때는 더 느리게 시간이 흐르도록 
+/// 실시간으로 속도를 조절합니다. ``ActualTimerManager``와 비교하여 집중도 효과를 시각화합니다.
+///
+/// ### Managing Virtual Timer
+///
+/// - ``start(interval:repeats:)``
+/// - ``stop()``
+/// - ``updateInterval(to:)``
+///
+/// ### Monitoring Virtual Progress
+///
+/// - ``onTick``
+/// - ``isRunning``
 final class VirtualTimerManager {
     // MARK: Singleton
     static let shared = VirtualTimerManager()

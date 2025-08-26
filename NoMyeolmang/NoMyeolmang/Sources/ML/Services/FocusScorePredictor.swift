@@ -7,6 +7,25 @@
 
 import CoreML
 
+
+/// # ``timé/FocusScorePredictor``
+///
+/// 머신러닝 모델을 사용하여 사용자의 행동 특성으로부터 집중도 점수를 예측합니다.
+///
+/// `FocusScorePredictor`는 ``Features`` 객체의 행동 특성 데이터를 받아 CoreML 모델을 통해
+/// 집중도 점수를 예측합니다. 입력 데이터는 ``MinMaxScaler``의 정적 메서드들을 사용하여
+/// 0-1 범위로 정규화됩니다. ``run(from:)`` 메서드를 호출하면 예측된 점수와 함께
+/// ``UserTrainingData`` 객체가 반환됩니다.
+///
+/// > Warning: 잘못된 ``Features`` 입력이나 모델 로딩 실패 시 예측이 실패할 수 있으며, 이 경우 기본값 0.0이 반환됩니다.
+///
+/// ### Creating a Predictor
+///
+/// - ``init(model:)``
+///
+/// ### Performing Prediction
+///
+/// - ``run(from:)``
 final class FocusScorePredictor: Predictor {
     private let model: MLModel
 
