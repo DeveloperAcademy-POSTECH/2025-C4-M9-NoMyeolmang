@@ -7,6 +7,26 @@
 import Foundation
 import SwiftData
 
+/// # ``timé/SwiftDataUserTrainingDataRepository``
+///
+/// SwiftData를 사용하여 사용자 행동 패턴 데이터의 CRUD 작업을 수행합니다.
+///
+/// ## Overview
+///
+/// `SwiftDataUserTrainingDataRepository`는 ``UserTrainingDataRepository`` 프로토콜을 구현하여
+/// ``UserTrainingData`` 객체들에 대한 생성, 조회, 업데이트, 삭제 작업을 제공합니다.
+/// 저장된 행동 패턴 데이터는 ``FocusPersonalizater``에서 모델 개인화 학습에 활용됩니다.
+///
+/// > Note: 모든 데이터베이스 작업은 비동기적으로 수행되며, 에러 발생 시 적절한 예외를 throw합니다.
+///
+/// ## Topics
+///
+/// ### Data Operations
+///
+/// - ``write(input:)``
+/// - ``fetch(count:)``
+/// - ``update(to:count:)``
+/// - ``clear()``
 final class SwiftDataUserTrainingDataRepository: UserTrainingDataRepository {
     private let context: ModelContext
 

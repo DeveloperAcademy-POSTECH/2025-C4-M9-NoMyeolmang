@@ -8,11 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		F5C0062C2E237A5B003750FB /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = F5C0062B2E237A5B003750FB /* .swiftlint.yml */; };
+		F5D750212E52AAC50005ADE5 /* timé.docc in Sources */ = {isa = PBXBuildFile; fileRef = F5D750202E52AAC50005ADE5 /* timé.docc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		F5C006142E2379E7003750FB /* timé.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "timé.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5C0062B2E237A5B003750FB /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		F5D750202E52AAC50005ADE5 /* timé.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = "timé.docc"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -40,6 +42,7 @@
 				F5C0062B2E237A5B003750FB /* .swiftlint.yml */,
 				F5C006162E2379E7003750FB /* NoMyeolmang */,
 				F5C006152E2379E7003750FB /* Products */,
+				F5D750202E52AAC50005ADE5 /* timé.docc */,
 			);
 			sourceTree = "<group>";
 		};
@@ -149,6 +152,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5D750212E52AAC50005ADE5 /* timé.docc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,7 +291,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5SF56ZM8WP;
+				DEVELOPMENT_TEAM = F7T7NU8578;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -319,7 +323,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5SF56ZM8WP;
+				DEVELOPMENT_TEAM = F7T7NU8578;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
