@@ -232,4 +232,4 @@
 
 ## 📝 License
 
-This project is licensed under the ~~[CHOOSE A LICENSE](https://choosealicense.com). and update this line~~
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
