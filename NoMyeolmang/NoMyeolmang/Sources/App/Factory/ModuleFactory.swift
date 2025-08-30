@@ -82,26 +82,28 @@ final class ModuleFactory: ModuleFactoryProtocol {
     private lazy var analysisManager = AnalysisManager()
     
     private lazy var timerSettingViewModel = TimerSettingViewModel()
-    private lazy var timerViewModel = TimerViewModel(predictor: focusScorePredictor,repository: userTrainingDataRepository)
-    private lazy var feedbackViewModel = FeedbackViewModel(repository: userTrainingDataRepository, personalizater: focusPersonalizater)
     private lazy var reportViewModel = ReportViewModel()
+    private lazy var timerViewModel = TimerViewModel(
+        predictor: focusScorePredictor,
+        repository: userTrainingDataRepository
+    )
+    private lazy var feedbackViewModel = FeedbackViewModel(
+        repository: userTrainingDataRepository,
+        personalizater: focusPersonalizater
+    )
         
-    /// 타이머 설정 화면을 생성합니다.
     func makeTimerSettingView() -> TimerSettingView {
         return TimerSettingView(viewModel: timerSettingViewModel)
     }
     
-    /// 메인 타이머 화면을 생성합니다.
     func makeTimerView() -> TimerView {
         return TimerView(viewModel: timerViewModel)
     }
     
-    /// 피드백 입력 화면을 생성합니다.
     func makeFeedbackView() -> FeedbackView {
         return FeedbackView(viewModel: feedbackViewModel)
     }
     
-    /// 세션 리포트 화면을 생성합니다.
     func makeReportView() -> ReportView {
         return ReportView(viewModel: reportViewModel)
     }
