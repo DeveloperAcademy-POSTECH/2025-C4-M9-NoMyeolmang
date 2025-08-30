@@ -2,7 +2,7 @@
 name: ✨ Feat
 about: 새로운 기능을 개발할 때 사용하세요!
 title: "[✨ Feat] "
-labels: ✨ Feat
+labels: ["✨ Feat"]
 assignees: []
 ---
 
