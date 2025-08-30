@@ -37,8 +37,8 @@ final class AppCoordinator: ObservableObject {
     /// 지정된 단계만큼 이전 화면으로 돌아갑니다.
     func pop(_ steps: Int = 1) {
         guard steps > 0, !path.isEmpty else { return }
-        let c = min(steps, path.count)
-        path.removeLast(c)
+        let stepsToRemove = min(steps, path.count)
+        path.removeLast(stepsToRemove)
     }
 
     /// 루트 화면으로 돌아갑니다.
