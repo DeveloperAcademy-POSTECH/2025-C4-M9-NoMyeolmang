@@ -42,7 +42,10 @@ struct TimerView: View {
             .frame(width: geo.size.width, height: geo.size.height)
         }
         .navigationBarBackButtonHidden(true)
-        .onChange(of: viewModel.sessionState, perform: handleSessionStateChange)
+        .onChange(of: viewModel.sessionState) {
+            handleSessionStateChange(viewModel.sessionState)
+        }
+
         .onReceive(coordinator.$path) { path in
             // 최상단이 Timer라면 (필요한 조건으로 조정)
             if let top = path.last, top == .timer {

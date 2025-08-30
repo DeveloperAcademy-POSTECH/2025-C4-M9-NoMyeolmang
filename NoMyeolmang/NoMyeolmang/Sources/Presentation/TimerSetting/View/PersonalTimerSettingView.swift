@@ -77,13 +77,14 @@ struct PersonalTimerSettingView: View {
                             viewModel.validateGoalTime()
                             isTextFieldFocused = true
                         }
-                        .onChange(of: viewModel.selectedTab) { newValue in
-                            if newValue == .personal {
+                        .onChange(of: viewModel.selectedTab) {
+                            if viewModel.selectedTab == .personal {
                                 newGoalTimeText = ""
                                 goalTime = 0
                                 viewModel.validateGoalTime()
                             }
                         }
+
                         .frame(minWidth: 20, minHeight: 32)
                         .fixedSize()
 

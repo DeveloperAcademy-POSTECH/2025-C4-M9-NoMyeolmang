@@ -43,7 +43,7 @@ struct TimerBackgroundView: View {
                         checkInitialPosition(screenSize: geo.size)
                         startLoopingAnimation()
                     }
-                    .onChange(of: geo.size) { oldSize, newSize in
+                    .onChange(of: geo.size) { _, newSize in
                         let (oldStartY, oldEndY) = calculateStartEndY()
                         updateOffsetRatio(startY: oldStartY, endY: oldEndY)
                         checkInitialPosition(screenSize: newSize)
@@ -56,14 +56,13 @@ struct TimerBackgroundView: View {
                         timer?.invalidate()
                         startLoopingAnimationKeepingPosition()
                     }
-                    .onChange(of: animationDuration) {
-                        oldDuration,
-                        newDuration in
+                    .onChange(of: animationDuration) { oldDuration, newDuration in
                         print("🚀 배경 속도 변경 감지: \(oldDuration) → \(newDuration)")
                         timer?.invalidate()
                         // 🆕 위치 보존하며 속도만 변경
                         startLoopingAnimationKeepingPosition()
                     }
+
             }
 
         }
@@ -127,8 +126,7 @@ struct TimerBackgroundView: View {
         timer?.invalidate()
         timer = nil
 
-        timer = Timer.scheduledTimer(withTimeInterval: 1 / 60, repeats: true) {
-            _ in
+        timer = Timer.scheduledTimer(withTimeInterval: 1 / 60, repeats: true) { _ in
             let totalDistance = endY - startY
             let movePerFrame = totalDistance / (animationDuration * 60)
 
