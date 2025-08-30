@@ -2,7 +2,7 @@
 name: 🛠️ Refactor
 about: 코드 정리 또는 구조 개선 시 사용합니다.
 title: "[🛠️ Refactor] "
-labels: 🛠️ Refactor
+labels: ["🛠️ Refactor"]
 assignees: []
 ---
 
