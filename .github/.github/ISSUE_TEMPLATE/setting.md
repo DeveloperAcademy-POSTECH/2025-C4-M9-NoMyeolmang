@@ -2,7 +2,7 @@
 name: ⚙️ Setting
 about: 프로젝트의 빌드/개발 환경을 설정할 때 사용합니다.
 title: "[⚙️ Setting] "
-labels: ⚙️ Setting
+labels: ["⚙️ Setting"]
 assignees: []
 ---
 
