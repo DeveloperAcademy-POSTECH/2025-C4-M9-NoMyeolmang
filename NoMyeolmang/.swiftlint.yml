@@ -1,75 +1,40 @@
 # SwiftLint 설정 파일
 #
-# Created by Moo on 7/10/25.
+# Updated by Moo on 8/30/25.
 
-# 포함할 디렉토리
 included:
   - NoMyeolmang/Sources
 
-# 제외할 디렉토리
 excluded:
   - NoMyeolmang.xcodeproj
   - NoMyeolmang/Resources
   - "*.entitlements"
   - .git
 
-# 비활성화할 룰
 disabled_rules:
-  - trailing_whitespace        # 라인 끝 공백 허용
-  - todo                      # TODO 주석 허용
-  - multiple_closures_with_trailing_closure  # 다중 후행 클로저 허용
+  - todo
+  - trailing_whitespace
+  - multiple_closures_with_trailing_closure
 
-# 활성화할 추가 룰
+
 opt_in_rules:
-  - empty_count               # .count == 0 대신 .isEmpty 사용
-  - force_unwrapping          # force unwrapping 경고
-  - implicitly_unwrapped_optional  # 암시적 옵셔널 경고
-  - redundant_nil_coalescing  # 불필요한 nil coalescing 경고
-  - sorted_imports            # import 정렬
-  
-  # Apple Developer Academy 가이드 준수를 위한 추가 룰
-  - redundant_type_annotation # 불필요한 타입 어노테이션 제거
-  - vertical_whitespace_closing_braces  # 닫는 괄호 전 공백 제거
-  - unneeded_parentheses_in_closure_argument  # 클로저 인수 괄호 제거
+  - force_unwrapping
+  - sorted_imports
 
-# 분석기 룰 (swiftlint analyze로 실행)
 analyzer_rules:
-  - unused_declaration        # 미사용 선언 검출
-  - unused_import            # 미사용 import 검출
+  - unused_declaration
+  - unused_import
 
-# 라인 길이 설정
 line_length:
   warning: 120
   error: 150
   ignores_comments: true
   ignores_urls: true
+  ignores_function_declarations: true
+  ignores_interpolated_strings: true
 
-# 함수 길이 설정
-function_body_length:
-  warning: 60    # SwiftUI View 구조를 고려하여 완화
-  error: 100
-
-# 타입 길이 설정
-type_body_length:
-  warning: 300
-  error: 500
-
-# 파일 길이 설정
-file_length:
-  warning: 400
-  error: 600
-
-# 네이밍 규칙
 identifier_name:
   min_length: 2
   max_length: 60
   excluded:
     - id
-    - x
-    - y
-    - z
-
-# 타입 네이밍 규칙
-type_name:
-  min_length: 3
-  max_length: 40

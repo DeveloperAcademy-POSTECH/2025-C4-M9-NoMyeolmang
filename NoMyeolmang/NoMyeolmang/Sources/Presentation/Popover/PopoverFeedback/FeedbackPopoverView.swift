@@ -11,8 +11,8 @@ struct FeedbackPopoverView: View {
     @EnvironmentObject var coordinator: AppCoordinator
     @ObservedObject var viewModel: FeedbackViewModel
 
-    @State private var selectedIndex: Int? = nil
-    @State private var hoveredIndex: Int? = nil
+    @State private var selectedIndex: Int?
+    @State private var hoveredIndex: Int?
 
     var isSelectionValid: Bool {
         selectedIndex != nil

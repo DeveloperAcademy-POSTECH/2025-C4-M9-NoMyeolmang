@@ -74,9 +74,9 @@ final class VisionBlinkDetector: BlinkDetector {
         let width = distance(from: points[0], to: points[pointCount/2])
         var heights: [CGFloat] = []
         
-        for i in 1..<pointCount/2 {
-            let topPoint = points[i]
-            let bottomPoint = points[pointCount - i]
+        for index in 1..<pointCount/2 {
+            let topPoint = points[index]
+            let bottomPoint = points[pointCount - index]
             heights.append(distance(from: topPoint, to: bottomPoint))
         }
         let averageHeight = heights.reduce(0, +) / CGFloat(heights.count)
