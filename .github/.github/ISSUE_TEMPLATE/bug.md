@@ -2,7 +2,7 @@
 name: 🐞 Bug
 about: 테스트 등 발생한 문제를 추적하기 위해 사용합니다.
 title: "[🐞 Bug] "
-labels: 🐞 Bug
+labels: ["🐞 Bug"]
 assignees: []
 ---
 
