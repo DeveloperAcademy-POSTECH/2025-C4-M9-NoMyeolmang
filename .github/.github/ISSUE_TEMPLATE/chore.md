@@ -2,7 +2,7 @@
 name: ✏️ Chore
 about: 반복적이거나 유지보수를 위한 작업에 사용합니다.
 title: "[✏️ Chore] "
-labels: ✏️ Chore
+labels: ["✏️ Chore"]
 assignees: []
 ---
 
