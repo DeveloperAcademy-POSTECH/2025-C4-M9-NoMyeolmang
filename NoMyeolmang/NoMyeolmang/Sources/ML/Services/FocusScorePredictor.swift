@@ -7,7 +7,6 @@
 
 import CoreML
 
-
 /// # ``timé/FocusScorePredictor``
 ///
 /// 머신러닝 모델을 사용하여 사용자의 행동 특성으로부터 집중도 점수를 예측합니다.

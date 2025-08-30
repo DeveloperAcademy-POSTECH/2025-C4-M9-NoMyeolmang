@@ -63,4 +63,3 @@ enum ModelLoader {
         return modelURL
     }
 }
-
