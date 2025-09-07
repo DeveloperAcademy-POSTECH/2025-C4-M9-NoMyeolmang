@@ -35,7 +35,8 @@ final class SwiftDataUserTrainingDataRepository: UserTrainingDataRepository {
     }
 
     func write(input data: [UserTrainingData]) async throws -> Bool {
-        data.forEach { context.insert($0) }
+        let models = data.map { $0.toModel() }
+        models.forEach { context.insert($0) }
         do {
             try context.save()
             return true
@@ -48,7 +49,8 @@ final class SwiftDataUserTrainingDataRepository: UserTrainingDataRepository {
     func fetch(count: Int) async throws -> [UserTrainingData] {
         let descriptor = makeFetchDescriptor(fetchLimit: count)
         do {
-            return try context.fetch(descriptor)
+            let models = try context.fetch(descriptor)
+            return models.map { $0.toSendable() }
         } catch {
             print("Fetch error: \(error)")
             throw error
@@ -82,11 +84,11 @@ final class SwiftDataUserTrainingDataRepository: UserTrainingDataRepository {
     }
     
     private func makeFetchDescriptor(
-        predicate: Predicate<UserTrainingData>? = nil,
-        sortBy: [SortDescriptor<UserTrainingData>] = [SortDescriptor(\.createdAt, order: .reverse)],
+        predicate: Predicate<UserTrainingDataModel>? = nil,
+        sortBy: [SortDescriptor<UserTrainingDataModel>] = [SortDescriptor(\.createdAt, order: .reverse)],
         fetchLimit: Int? = nil
-    ) -> FetchDescriptor<UserTrainingData> {
-        var descriptor = FetchDescriptor<UserTrainingData>(
+    ) -> FetchDescriptor<UserTrainingDataModel> {
+        var descriptor = FetchDescriptor<UserTrainingDataModel>(
             predicate: predicate,
             sortBy: sortBy
         )
