@@ -2,7 +2,7 @@
 //  NoMyeolmangApp.swift
 //  NoMyeolmang
 //
-//  Updated by Moo on 7/29/25.
+//  Updated by Moo on 9/07/25.
 //
 
 import SwiftData
@@ -27,7 +27,7 @@ struct NoMyeolmangApp: App {
 
     var modelContainer: ModelContainer = {
         do {
-            return try ModelContainer(for: UserTrainingData.self)
+            return try ModelContainer(for: UserTrainingDataModel.self)
         } catch {
             fatalError("Could not create ModelContainer: \(error)")
         }
