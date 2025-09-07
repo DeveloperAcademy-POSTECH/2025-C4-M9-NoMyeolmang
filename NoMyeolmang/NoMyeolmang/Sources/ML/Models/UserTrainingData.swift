@@ -2,7 +2,7 @@
 //  UserTrainingData.swift
 //  NoMyeolmang
 //
-//  Updated by Moo on 7/25/25.
+//  Updated by Moo on 9/07/25.
 //
 
 import Foundation
@@ -10,25 +10,26 @@ import SwiftData
 
 /// # ``timé/UserTrainingData``
 ///
-/// 머신러닝 모델의 개인화 학습을 위한 사용자 피드백 데이터를 저장합니다.
+/// ML 서비스용 Sendable 구조체입니다.
 ///
-/// `UserTrainingData`는 ``FocusPersonalizater/run(from:)`` 메서드의 입력으로 사용되어 
-/// 모델 개인화 학습을 수행합니다. @Model 매크로를 통해 SwiftData에 자동 저장되며, 
-/// ``features`` 속성의 ``Features`` 데이터와 함께 ``predictedScore``(모델 예측값)와 
-/// ``userScore``(실제 사용자 평가)를 비교하여 학습에 활용됩니다.
+/// ``FocusPersonalizater/run(from:)`` 메서드의 입력으로 사용되어 모델 개인화 학습을 수행합니다.
+/// Swift 6 동시성 안전성을 위해 ``UserTrainingDataModel`` (SwiftData 저장용)과 분리되었습니다.
 ///
-/// ### Creating Training Data
+/// > Note: Repository에서 자동으로 ``UserTrainingDataModel``로 변환하여 저장합니다.
+
+struct UserTrainingData: Sendable {
+    let features: Features
+    let predictedScore: Double
+    let userScore: Double
+    let createdAt: Date
+}
+
+/// SwiftData 저장용 @Model 클래스입니다.
 ///
-/// - ``init(features:predictedScore:userScore:createdAt:)``
-///
-/// ### Inspecting Training Data
-///
-/// - ``features``
-/// - ``predictedScore``
-/// - ``userScore``
-/// - ``createdAt``
+/// ``UserTrainingData``와 동일한 데이터를 포함하지만 SwiftData 요구사항에 맞춰 mutable 프로퍼티를 가집니다.
+/// Repository 내부에서만 사용합니다.
 @Model
-final class UserTrainingData: Sendable {
+final class UserTrainingDataModel {
     var features: Features
     var predictedScore: Double
     var userScore: Double
@@ -44,5 +45,31 @@ final class UserTrainingData: Sendable {
         self.predictedScore = predictedScore
         self.userScore = userScore
         self.createdAt = createdAt
+    }
+}
+
+// MARK: - Model Conversion Extensions
+
+extension UserTrainingData {
+    /// SwiftData 저장을 위해 UserTrainingDataModel로 변환합니다.
+    func toModel() -> UserTrainingDataModel {
+        UserTrainingDataModel(
+            features: features,
+            predictedScore: predictedScore,
+            userScore: userScore,
+            createdAt: createdAt
+        )
+    }
+}
+
+extension UserTrainingDataModel {
+    /// Sendable UserTrainingData 구조체로 변환합니다.
+    func toSendable() -> UserTrainingData {
+        UserTrainingData(
+            features: features,
+            predictedScore: predictedScore,
+            userScore: userScore,
+            createdAt: createdAt
+        )
     }
 }

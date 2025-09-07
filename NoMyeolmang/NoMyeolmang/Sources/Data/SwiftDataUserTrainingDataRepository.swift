@@ -17,6 +17,9 @@ import SwiftData
 /// ``UserTrainingData`` 객체들에 대한 생성, 조회, 업데이트, 삭제 작업을 제공합니다.
 /// 저장된 행동 패턴 데이터는 ``FocusPersonalizater``에서 모델 개인화 학습에 활용됩니다.
 ///
+/// Swift 6 동시성 안전성을 위해 ``UserTrainingData`` (Sendable)와 ``UserTrainingDataModel`` (@Model) 간 
+/// 자동 변환을 수행합니다. 외부에서는 Sendable 구조체만 사용하고, 내부적으로 SwiftData 클래스로 변환합니다.
+///
 /// > Note: 모든 데이터베이스 작업은 비동기적으로 수행되며, 에러 발생 시 적절한 예외를 throw합니다.
 ///
 /// ## Topics
@@ -35,7 +38,8 @@ final class SwiftDataUserTrainingDataRepository: UserTrainingDataRepository {
     }
 
     func write(input data: [UserTrainingData]) async throws -> Bool {
-        data.forEach { context.insert($0) }
+        let models = data.map { $0.toModel() }
+        models.forEach { context.insert($0) }
         do {
             try context.save()
             return true
@@ -48,7 +52,8 @@ final class SwiftDataUserTrainingDataRepository: UserTrainingDataRepository {
     func fetch(count: Int) async throws -> [UserTrainingData] {
         let descriptor = makeFetchDescriptor(fetchLimit: count)
         do {
-            return try context.fetch(descriptor)
+            let models = try context.fetch(descriptor)
+            return models.map { $0.toSendable() }
         } catch {
             print("Fetch error: \(error)")
             throw error
@@ -82,11 +87,11 @@ final class SwiftDataUserTrainingDataRepository: UserTrainingDataRepository {
     }
     
     private func makeFetchDescriptor(
-        predicate: Predicate<UserTrainingData>? = nil,
-        sortBy: [SortDescriptor<UserTrainingData>] = [SortDescriptor(\.createdAt, order: .reverse)],
+        predicate: Predicate<UserTrainingDataModel>? = nil,
+        sortBy: [SortDescriptor<UserTrainingDataModel>] = [SortDescriptor(\.createdAt, order: .reverse)],
         fetchLimit: Int? = nil
-    ) -> FetchDescriptor<UserTrainingData> {
-        var descriptor = FetchDescriptor<UserTrainingData>(
+    ) -> FetchDescriptor<UserTrainingDataModel> {
+        var descriptor = FetchDescriptor<UserTrainingDataModel>(
             predicate: predicate,
             sortBy: sortBy
         )
