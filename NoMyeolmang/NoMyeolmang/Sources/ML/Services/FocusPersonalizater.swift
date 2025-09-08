@@ -108,35 +108,16 @@ final class FocusPersonalizater: Personalizater {
         }
         return (input: inputArray, label: labelArray)
     }
-
+    
+    // TODO: FocusScorePredictor랑 네이밍 통일 필요
     private func makeInputMultiArray(data: Features) -> MLMultiArray? {
-        guard
-            let inputArray = try? MLMultiArray(
-                shape: [1, 6],
-                dataType: .float32
-            )
-        else {
+        let scaledValues = MinMaxScaler.scale(data)
+        guard let inputArray = try? MLMultiArray(shape: [1, 6], dataType: .float32) else {
             return nil
         }
-
-        inputArray[0] = NSNumber(
-            value: MinMaxScaler.scaleBlink(data.blinkCountPerMin)
-        )
-        inputArray[1] = NSNumber(
-            value: MinMaxScaler.scaleFace(data.faceBodyPresent)
-        )
-        inputArray[2] = NSNumber(
-            value: MinMaxScaler.scalePhone(data.phonePresent)
-        )
-        inputArray[3] = NSNumber(
-            value: MinMaxScaler.scaleTime(data.elapsedTime)
-        )
-        inputArray[4] = NSNumber(
-            value: MinMaxScaler.scaleYawn(data.yawnPerMin)
-        )
-        inputArray[5] = NSNumber(
-            value: MinMaxScaler.scaleLongBlink(data.longBlinkPerMin)
-        )
+        for (index, value) in scaledValues.enumerated() {
+            inputArray[index] = NSNumber(value: value)
+        }
         return inputArray
     }
 

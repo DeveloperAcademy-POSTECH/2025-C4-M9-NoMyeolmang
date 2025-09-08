@@ -38,14 +38,11 @@ final class FocusScorePredictor: Predictor {
     }
 
     private func makeModelInputArray(features: Features) -> MLMultiArray? {
+        let scaledValues = MinMaxScaler.scale(features)
         guard let inputArray = try? MLMultiArray(shape: [1, 6], dataType: .float32) else { return nil }
-
-        inputArray[0] = NSNumber(value: MinMaxScaler.scaleBlink(features.blinkCountPerMin))
-        inputArray[1] = NSNumber(value: MinMaxScaler.scaleFace(features.faceBodyPresent))
-        inputArray[2] = NSNumber(value: MinMaxScaler.scalePhone(features.phonePresent))
-        inputArray[3] = NSNumber(value: MinMaxScaler.scaleTime(features.elapsedTime))
-        inputArray[4] = NSNumber(value: MinMaxScaler.scaleYawn(features.yawnPerMin))
-        inputArray[5] = NSNumber(value: MinMaxScaler.scaleLongBlink(features.longBlinkPerMin))
+        for (index, value) in scaledValues.enumerated() {
+            inputArray[index] = NSNumber(value: value)
+        }
         return inputArray
     }
 
