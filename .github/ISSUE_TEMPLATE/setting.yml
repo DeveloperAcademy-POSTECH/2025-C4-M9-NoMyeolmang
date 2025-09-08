@@ -1,0 +1,40 @@
+name: ⚙️ Setting
+description: 프로젝트의 빌드/개발 환경을 설정할 때 사용합니다.
+title: "⚙️ Setting: "
+labels: ["⚙️ Setting"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: ⚙️ 설정 목적
+      placeholder: 예) SwiftLint 설정 추가, Xcode 빌드 설정 변경
+    validations:
+      required: true
+
+  - type: textarea
+    id: tasks
+    attributes:
+      label: 📋 To-do
+      placeholder: |
+        - [ ] `.swiftlint.yml` 파일 생성
+        - [ ] CI 설정에 적용
+      value: "- [ ] "
+    validations:
+      required: true
+      
+  - type: input
+    id: branch
+    attributes:
+      label: 🌿 작업 브랜치 (선택)
+      description: 설정 변경을 위한 브랜치명을 작성해주세요.
+      placeholder: "예) setting/#62/swiftlint-config"
+    validations:
+      required: false
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: 💥 영향 범위 (선택)
+      placeholder: 이 설정이 다른 팀원이나 빌드에 어떤 영향을 주는지 적어주세요.
+    validations:
+      required: false

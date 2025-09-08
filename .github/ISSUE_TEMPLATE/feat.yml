@@ -1,0 +1,53 @@
+name: ✨ Feat
+description: 새로운 기능을 개발할 때 사용하세요!
+title: "✨ Feat: "
+labels: ["✨ Feat"]
+body:
+  - type: textarea
+    id: content
+    attributes:
+      label: ✏️내용 설명
+      description: 기능의 목적과 핵심 내용을 설명해주세요.
+      placeholder: 예) 사용자 프로필 편집 기능 구현
+    validations:
+      required: true
+
+  - type: textarea
+    id: tasks
+    attributes:
+      label: 📋 To-do
+      description: 구현해야 할 세부 작업을 적어주세요.
+      placeholder: |
+        - [ ] UI 레이아웃 구성
+        - [ ] 프로필 이미지 업로드 기능 추가
+        - [ ] 수정 API 연동
+      value: "- [ ] "
+    validations:
+      required: true
+
+  - type: input
+    id: branch
+    attributes:
+      label: 🌿 작업 브랜치
+      description: 이 작업을 진행할 브랜치명을 작성해주세요.
+      placeholder: "예) feat/#1/tts-service"
+    validations:
+      required: false
+
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: 🖼 스크린샷 (선택)
+      description: 필요하다면 UI 캡처, 디자인, API 문서 등 시각 자료를 첨부해주세요.
+      placeholder: ex) figma, 화면 캡처 등
+    validations:
+      required: false
+
+  - type: textarea
+    id: reference
+    attributes:
+      label: 🔗 참고 자료 (선택)
+      description: 관련 링크 (디자인, 노션 문서 등)를 작성해주세요.
+      placeholder: ex) https://www.figma.com/
+    validations:
+      required: false
