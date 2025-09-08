@@ -14,9 +14,6 @@
 /// 방지하는 안전한 스케일링 로직을 포함합니다. 모든 스케일링은 ``FeatureType``에서
 /// 정의된 최솟값과 최댓값을 기준으로 수행되며, ``FocusScorePredictor``와
 /// ``FocusPersonalizater``에서 ``Features`` 데이터 전처리에 사용됩니다.
-///
-import CoreML
-
 enum MinMaxScaler {
     /// Features 객체의 모든 특성을 정규화하여 배열로 반환합니다.
     ///
