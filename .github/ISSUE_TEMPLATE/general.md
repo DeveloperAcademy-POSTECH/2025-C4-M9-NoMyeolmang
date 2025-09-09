@@ -2,7 +2,6 @@
 name: 📄 General
 about: 논의, 회의 정리, 문서 공유 등 특정 범주에 속하지 않는 일반 작업에 사용하세요.
 title: "📄 General: "
-labels: ["📄 General"]
 assignees: []
 ---
 
