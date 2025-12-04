@@ -37,17 +37,8 @@ final class FocusScorePredictor: Predictor {
         return UserTrainingData(features: features, predictedScore: predictedScore, userScore: 0.0, createdAt: Date())
     }
 
-    private func makeModelInputArray(features: Features) -> MLMultiArray? {
-        let scaledValues = MinMaxScaler.scale(features)
-        guard let inputArray = try? MLMultiArray(shape: [1, 6], dataType: .float32) else { return nil }
-        for (index, value) in scaledValues.enumerated() {
-            inputArray[index] = NSNumber(value: value)
-        }
-        return inputArray
-    }
-
     private func predict(features: Features) -> Double? {
-        guard let inputArray = makeModelInputArray(features: features) else { return nil }
+        guard let inputArray = TrainingDataConverter.makeModelInputArray(features: features) else { return nil }
         guard let inputFeatures = try? MLDictionaryFeatureProvider(dictionary: ["dense_4_input": inputArray]),
               let result = try? model.prediction(from: inputFeatures),
               let outputArray = result.featureValue(for: "Identity")?.multiArrayValue else { return nil }

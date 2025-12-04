@@ -37,120 +37,13 @@ final class FocusPersonalizater: Personalizater {
 
     func run(from userTrainingDataList: [UserTrainingData]) async throws -> Bool {
         do {
-            let batchProvider = makeBatchProvider(from: userTrainingDataList)
-            checkBatchProvider(batchProvider: batchProvider)
-
+            let batchProvider = TrainingDataConverter.makeBatchProvider(from: userTrainingDataList)
             try await makeUpdateTask(batchProvider: batchProvider)
             return true
         } catch {
             print("Error: \(error.localizedDescription)")
             return false
         }
-    }
-
-    private func makeBatchProvider(from userTrainingDataList: [UserTrainingData]) -> MLArrayBatchProvider {
-        var featureProviders: [MLFeatureProvider] = []
-
-        for data in userTrainingDataList {
-            // 1. 사용자 데이터 -> MultiArray로 만들기 (모델의 입력 형식)
-            guard let (inputMA, labelMA) = self.makeMultiArray(data: data)
-            else {
-                print("⛔️ 샘플 스킵됨 (데이터 오류)")
-                continue
-            }
-
-            // 2. MultiArray -> MLFeatureValue로 만들기
-            let (inputFV, labelFV) = self.makeFeatureValue(
-                input: inputMA,
-                label: labelMA
-            )
-
-            // 3. MLFeatureValue -> MLFeatureProvider로 만들기
-            if let featureProvider = self.makeFeatureProvider(
-                input: inputFV,
-                label: labelFV
-            ) {
-                featureProviders.append(featureProvider)
-            } else {
-                print("❌ MLFeatureProvider 생성 오류")
-            }
-        }
-
-        // 4. MLFeatureProvider -> MLBatchProvider로 만들기
-        return MLArrayBatchProvider(array: featureProviders)
-    }
-
-    private func checkBatchProvider(batchProvider: MLArrayBatchProvider) {
-        print("📦 batchProvider 전체 샘플 수: \(batchProvider.count)")
-
-        for sampleIndex in 0..<batchProvider.count {
-            let sample = batchProvider.features(at: sampleIndex)
-            print("🔹 [샘플 \(sampleIndex)]")
-
-            for feature in sample.featureNames {
-                if let value = sample.featureValue(for: feature) {
-                    print("    \(feature): \(value)")
-                } else {
-                    print("    \(feature): nil")
-                }
-            }
-        }
-    }
-
-    private func makeMultiArray(data: UserTrainingData) -> (
-        input: MLMultiArray, label: MLMultiArray
-    )? {
-        guard let inputArray = self.makeInputMultiArray(data: data.features),
-            let labelArray = self.makeLabelMultiArray(data: data.userScore)
-        else {
-            print("⛔️ MultiArray 생성 실패: 입력 또는 라벨 배열 생성에 실패했습니다.")
-            return nil
-        }
-        return (input: inputArray, label: labelArray)
-    }
-    
-    // TODO: FocusScorePredictor랑 네이밍 통일 필요
-    private func makeInputMultiArray(data: Features) -> MLMultiArray? {
-        let scaledValues = MinMaxScaler.scale(data)
-        guard let inputArray = try? MLMultiArray(shape: [1, 6], dataType: .float32) else {
-            return nil
-        }
-        for (index, value) in scaledValues.enumerated() {
-            inputArray[index] = NSNumber(value: value)
-        }
-        return inputArray
-    }
-
-    private func makeLabelMultiArray(data: Double) -> MLMultiArray? {
-        do {
-            let labelArray = try MLMultiArray(shape: [1], dataType: .float32)
-            labelArray[0] = NSNumber(
-                value: data
-            )
-            return labelArray
-        } catch {
-            print("❌ MLMultiArray 생성 오류: \(error)")
-            return nil
-        }
-    }
-
-    private func makeFeatureValue(input: MLMultiArray, label: MLMultiArray) -> (
-        input: MLFeatureValue, label: MLFeatureValue
-    ) {
-        let inputValue = MLFeatureValue(multiArray: input)
-        let labelValue = MLFeatureValue(multiArray: label)
-        return (input: inputValue, label: labelValue)
-    }
-
-    private func makeFeatureProvider(
-        input: MLFeatureValue,
-        label: MLFeatureValue
-    ) -> MLFeatureProvider? {
-        let dict: [String: MLFeatureValue] = [
-            Configuration.inputName: input,
-            Configuration.updatableOutputName: label]
-        let featureProvider = try? MLDictionaryFeatureProvider(dictionary: dict)
-        return featureProvider
     }
 
     private func makeUpdateTask(batchProvider: MLArrayBatchProvider) async throws {
