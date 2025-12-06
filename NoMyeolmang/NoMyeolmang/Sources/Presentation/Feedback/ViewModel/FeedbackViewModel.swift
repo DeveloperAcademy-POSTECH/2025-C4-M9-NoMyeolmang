@@ -11,7 +11,7 @@ import SwiftUI
 @MainActor
 final class FeedbackViewModel: ObservableObject {
     private let repository: UserTrainingDataRepository
-    private let personalizater: Personalizater
+    private let personalizer: Personalizer
 
     @Published var hoveredIndex: Int?
     @Published var selectedIndex: Int?
@@ -21,9 +21,9 @@ final class FeedbackViewModel: ObservableObject {
         selectedIndex != nil
     }
 
-    init(repository: UserTrainingDataRepository, personalizater: Personalizater) {
+    init(repository: UserTrainingDataRepository, personalizer: Personalizer) {
         self.repository = repository
-        self.personalizater = personalizater
+        self.personalizer = personalizer
     }
 
     private func fetchValidRecentData() async throws -> [UserTrainingData]? {
@@ -62,10 +62,9 @@ final class FeedbackViewModel: ObservableObject {
                 return false
             }
             
-            // 개인화 모듈에 넘겨주기
-            let isPersonalized = try await personalizater.run(from: recentDataList)
-            print("✅ 개인화 성공! \(isPersonalized)")
-            return isPersonalized
+            try await personalizer.run(from: recentDataList)
+            print("✅ 개인화 성공!")
+            return true
         } catch {
             print("❌ 에러: \(error.localizedDescription)")
             return false
