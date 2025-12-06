@@ -33,7 +33,7 @@ protocol ModuleFactoryProtocol {
 ///
 /// `ModuleFactory`는 SwiftData `ModelContext`를 받아 필요한 모든 의존성을 초기화하고 관리합니다.
 /// 
-/// ML 모델(``FocusScorePredictor``, ``FocusPersonalizater``), 데이터 저장소(``SwiftDataUserTrainingDataRepository``),
+/// ML 모델(``FocusScorePredictor``, ``FocusPersonalizer``), 데이터 저장소(``SwiftDataUserTrainingDataRepository``),
 /// 카메라 및 분석 매니저(``CameraManager``, ``AnalysisManager``)를 lazy 프로퍼티로 생성하여 
 /// 각 뷰모델에 주입합니다.
 ///
@@ -67,6 +67,10 @@ final class ModuleFactory: ModuleFactoryProtocol {
         SwiftDataUserTrainingDataRepository(context: modelContext)
     }()
     
+    private lazy var modelRepository: ModelRepository = {
+        FileSystemModelRepository()
+    }()
+    
     private lazy var focusScorePredictor: Predictor = {
         guard let model = ModelLoader.loadModel() else {
             fatalError("Failed to load ML model")
@@ -74,8 +78,11 @@ final class ModuleFactory: ModuleFactoryProtocol {
     return FocusScorePredictor(model: model)
     }()
     
-    private lazy var focusPersonalizater: Personalizater = {
-        FocusPersonalizater(modelURL: ModelLoader.loadModelURL())
+    private lazy var focusPersonalizer: Personalizer = {
+        FocusPersonalizer(
+            modelURL: ModelLoader.loadModelURL(),
+            modelRepository: modelRepository
+        )
     }()
     
     private lazy var cameraManager = CameraManager()
@@ -89,7 +96,7 @@ final class ModuleFactory: ModuleFactoryProtocol {
     )
     private lazy var feedbackViewModel = FeedbackViewModel(
         repository: userTrainingDataRepository,
-        personalizater: focusPersonalizater
+        personalizer: focusPersonalizer
     )
         
     func makeTimerSettingView() -> TimerSettingView {
