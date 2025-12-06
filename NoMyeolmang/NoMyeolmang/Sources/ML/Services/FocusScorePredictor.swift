@@ -39,9 +39,9 @@ final class FocusScorePredictor: Predictor {
 
     private func predict(features: Features) -> Double? {
         guard let inputArray = TrainingDataConverter.makeModelInputArray(features: features) else { return nil }
-        guard let inputFeatures = try? MLDictionaryFeatureProvider(dictionary: ["dense_4_input": inputArray]),
+        guard let inputFeatures = try? MLDictionaryFeatureProvider(dictionary: [Configuration.inputName: inputArray]),
               let result = try? model.prediction(from: inputFeatures),
-              let outputArray = result.featureValue(for: "Identity")?.multiArrayValue else { return nil }
+              let outputArray = result.featureValue(for: Configuration.outputName)?.multiArrayValue else { return nil }
         return outputArray[0].doubleValue
     }
 }
