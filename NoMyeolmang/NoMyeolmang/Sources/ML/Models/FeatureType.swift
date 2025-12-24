@@ -20,17 +20,17 @@ extension FeatureType {
     var range: MinMaxRange {
         switch self {
         case .shortBlink:
-            return (Constants.blinkCountPerMinValue, Constants.blinkCounterPerMaxValue)
+            (Constants.blinkCountPerMinValue, Constants.blinkCounterPerMaxValue)
         case .longBlink:
-            return (Constants.longBlinkCountPerMinValue, Constants.longBlinkCounterPerMaxValue)
+            (Constants.longBlinkCountPerMinValue, Constants.longBlinkCounterPerMaxValue)
         case .face:
-            return (Constants.faceBodyPresentMinValue, Constants.faceBodyPresentMaxValue)
+            (Constants.faceBodyPresentMinValue, Constants.faceBodyPresentMaxValue)
         case .phone:
-            return (Constants.phonePresentMinValue, Constants.phonePresentMaxValue)
+            (Constants.phonePresentMinValue, Constants.phonePresentMaxValue)
         case .yawn:
-            return (Constants.yawnCountPerMinValue, Constants.yawnCounterPerMaxValue)
+            (Constants.yawnCountPerMinValue, Constants.yawnCounterPerMaxValue)
         case .elapsedTime:
-            return (Constants.elapsedTimeMinValue, Constants.elapsedTimeMaxValue)
+            (Constants.elapsedTimeMinValue, Constants.elapsedTimeMaxValue)
         }
     }
 }
@@ -39,9 +39,9 @@ extension FeatureType {
     var isNeedClip: Bool {
         switch self {
         case .shortBlink, .longBlink, .yawn:
-            return true
+            true
         case .face, .phone, .elapsedTime:
-            return false
+            false
         }
     }
 }

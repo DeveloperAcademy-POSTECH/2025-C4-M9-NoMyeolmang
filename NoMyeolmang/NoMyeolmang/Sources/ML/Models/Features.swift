@@ -1,5 +1,5 @@
 //
-//  Featrues.swift
+//  Features.swift
 //  NoMyeolmang
 //
 //  Updated by Moo on 7/25/25.

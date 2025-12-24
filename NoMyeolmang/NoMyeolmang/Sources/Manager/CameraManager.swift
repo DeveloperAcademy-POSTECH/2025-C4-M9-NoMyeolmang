@@ -11,7 +11,7 @@ import AVFoundation
 ///
 /// 디바이스 카메라에서 실시간 비디오 프레임을 캡처하는 매니저입니다.
 ///
-/// `CameraManager`는 AVCaptureSession을 관리하여 비디오 프레임을 실시간으로 캡처합니다. 
+/// `CameraManager`는 AVCaptureSession을 관리하여 비디오 프레임을 실시간으로 캡처합니다.
 /// 캡처된 각 프레임은 `CVPixelBuffer` 형태로 ``AnalysisManager``에 전달되어 Vision 분석에 사용됩니다.
 /// 모든 프레임 처리는 전용 백그라운드 큐에서 수행되어 UI 성능에 영향을 주지 않습니다.
 ///
@@ -50,7 +50,7 @@ final class CameraManager: NSObject, ObservableObject, AVCaptureVideoDataOutputS
         session.stopRunning()
     }
 
-    func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+    func captureOutput(_: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from _: AVCaptureConnection) {
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
         onFrame?(pixelBuffer)
     }

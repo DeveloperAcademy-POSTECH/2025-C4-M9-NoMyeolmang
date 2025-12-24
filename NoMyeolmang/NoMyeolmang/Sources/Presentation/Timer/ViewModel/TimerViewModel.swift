@@ -105,7 +105,7 @@ final class TimerViewModel: ObservableObject {
     private func bindCameraFrameHandler() {
         cameraManager.onFrame = { [weak self] pixelBuffer in
             guard let self, !self.isProcessingFrame else { return }
-            self.isProcessingFrame = true
+            isProcessingFrame = true
             Task { @MainActor in
                 defer { self.isProcessingFrame = false }
                 self.latestPixelBuffer = pixelBuffer

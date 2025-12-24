@@ -35,15 +35,15 @@ struct NoMyeolmangApp: App {
         
     var body: some Scene {
         WindowGroup {
-            if let moduleFactory = moduleFactory {
+            if let moduleFactory {
                 RootView(moduleFactory: moduleFactory)
                     .environmentObject(coordinator)
             } else {
                 ProgressView()
                     .onAppear {
-                        self.moduleFactory = ModuleFactory(modelContext: modelContainer.mainContext)
+                        moduleFactory = ModuleFactory(modelContext: modelContainer.mainContext)
                         
-                        appDelegate.moduleFactory = self.moduleFactory
+                        appDelegate.moduleFactory = moduleFactory
                         appDelegate.coordinator = coordinator
                     }
             }

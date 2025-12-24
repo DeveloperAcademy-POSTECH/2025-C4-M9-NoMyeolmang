@@ -61,7 +61,7 @@ struct ToggleTabView: View {
     }
 }
 
-//#Preview(traits: .sizeThatFitsLayout) {
+// #Preview(traits: .sizeThatFitsLayout) {
 //    struct ToggleTabPreviewWrapper: View {
 //        @State private var selectedTab: TabType = .recommended
 //
@@ -78,4 +78,4 @@ struct ToggleTabView: View {
 //    }
 //
 //    return ToggleTabPreviewWrapper()
-//}
+// }

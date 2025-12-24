@@ -1,5 +1,5 @@
 //
-//  BlinkDetector.swift
+//  Detector.swift
 //  timé
 //
 //  Created by Muchan Kim on 8/15/25.

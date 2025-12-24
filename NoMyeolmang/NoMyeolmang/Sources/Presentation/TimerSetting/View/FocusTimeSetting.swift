@@ -29,7 +29,7 @@ struct FocusTimeSetting: View {
             LinearGradient(
                 gradient: Gradient(colors: [
                     Color("Gray-100").opacity(0.02),
-                    Color("Purple-300").opacity(0.3)
+                    Color("Purple-300").opacity(0.3),
                 ]),
                 startPoint: .top,
                 endPoint: .bottom
@@ -44,14 +44,14 @@ struct FocusTimeSetting: View {
     }
 }
 
-//#Preview {
+// #Preview {
 //    struct PreviewWrapper: View {
 //        @State private var goalTime = 30
-//        
+//
 //        var body: some View {
 //            FocusTimeSetting(goalTime: $goalTime)
 //        }
 //    }
-//    
+//
 //    return PreviewWrapper()
-//}
+// }

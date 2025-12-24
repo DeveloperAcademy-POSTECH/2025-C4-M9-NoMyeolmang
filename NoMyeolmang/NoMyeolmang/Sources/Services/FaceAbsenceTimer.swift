@@ -44,9 +44,9 @@ final class FaceAbsenceTimer {
 
     var totalAbsenceTime: TimeInterval {
         if let start = absenceStartTime {
-            return accumulatedAbsenceTime + Date().timeIntervalSince(start)
+            accumulatedAbsenceTime + Date().timeIntervalSince(start)
         } else {
-            return accumulatedAbsenceTime
+            accumulatedAbsenceTime
         }
     }
 

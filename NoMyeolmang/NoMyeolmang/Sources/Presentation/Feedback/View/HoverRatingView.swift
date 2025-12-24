@@ -10,12 +10,12 @@ import SwiftUI
 // 멘트 수정해야함
 private func hoverDescription(for number: Int) -> String {
     switch number {
-    case 1: return "전혀 몰입하지 않았어요"
-    case 2: return "조금 산만했어요"
-    case 3: return "보통이에요"
-    case 4: return "꽤 집중했어요"
-    case 5: return "완전히 몰입했어요"
-    default: return ""
+    case 1: "전혀 몰입하지 않았어요"
+    case 2: "조금 산만했어요"
+    case 3: "보통이에요"
+    case 4: "꽤 집중했어요"
+    case 5: "완전히 몰입했어요"
+    default: ""
     }
 }
 
@@ -26,7 +26,7 @@ struct HoverRatingView: View {
 
     var body: some View {
         HStack(spacing: 35) {
-            ForEach(1...5, id: \.self) { number in
+            ForEach(1 ... 5, id: \.self) { number in
                 ZStack {
                     Circle()
                         .fill(selectedIndex == number ? Color("Indigo-700") : Color("Purple-700").opacity(0.4))
@@ -66,6 +66,6 @@ struct HoverRatingView: View {
     }
 }
 
-//#Preview {
+// #Preview {
 //    HoverRatingView(selectedIndex: .constant(nil), hoveredIndex: .constant(nil), isSelectionValid: false)
-//}
+// }

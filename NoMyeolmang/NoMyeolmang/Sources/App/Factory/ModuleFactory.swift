@@ -32,9 +32,9 @@ protocol ModuleFactoryProtocol {
 /// ## Overview
 ///
 /// `ModuleFactory`는 SwiftData `ModelContext`를 받아 필요한 모든 의존성을 초기화하고 관리합니다.
-/// 
+///
 /// ML 모델(``FocusScorePredictor``, ``FocusPersonalizer``), 데이터 저장소(``SwiftDataUserTrainingDataRepository``),
-/// 카메라 및 분석 매니저(``CameraManager``, ``AnalysisManager``)를 lazy 프로퍼티로 생성하여 
+/// 카메라 및 분석 매니저(``CameraManager``, ``AnalysisManager``)를 lazy 프로퍼티로 생성하여
 /// 각 뷰모델에 주입합니다.
 ///
 /// > Important: 모든 의존성은 lazy 프로퍼티로 선언되어 필요할 때만 생성되며, @MainActor로 스레드 안전성을 보장합니다.
@@ -63,27 +63,21 @@ final class ModuleFactory: ModuleFactoryProtocol {
         self.modelContext = modelContext
     }
         
-    private lazy var userTrainingDataRepository: UserTrainingDataRepository = {
-        SwiftDataUserTrainingDataRepository(context: modelContext)
-    }()
+    private lazy var userTrainingDataRepository: UserTrainingDataRepository = SwiftDataUserTrainingDataRepository(context: modelContext)
     
-    private lazy var modelRepository: ModelRepository = {
-        FileSystemModelRepository()
-    }()
+    private lazy var modelRepository: ModelRepository = FileSystemModelRepository()
     
     private lazy var focusScorePredictor: Predictor = {
         guard let model = ModelLoader.loadModel() else {
             fatalError("Failed to load ML model")
         }
-    return FocusScorePredictor(model: model)
+        return FocusScorePredictor(model: model)
     }()
     
-    private lazy var focusPersonalizer: Personalizer = {
-        FocusPersonalizer(
-            modelURL: ModelLoader.loadModelURL(),
-            modelRepository: modelRepository
-        )
-    }()
+    private lazy var focusPersonalizer: Personalizer = FocusPersonalizer(
+        modelURL: ModelLoader.loadModelURL(),
+        modelRepository: modelRepository
+    )
     
     private lazy var cameraManager = CameraManager()
     private lazy var analysisManager = AnalysisManager()
@@ -100,38 +94,38 @@ final class ModuleFactory: ModuleFactoryProtocol {
     )
         
     func makeTimerSettingView() -> TimerSettingView {
-        return TimerSettingView(viewModel: timerSettingViewModel)
+        TimerSettingView(viewModel: timerSettingViewModel)
     }
     
     func makeTimerView() -> TimerView {
-        return TimerView(viewModel: timerViewModel)
+        TimerView(viewModel: timerViewModel)
     }
     
     func makeFeedbackView() -> FeedbackView {
-        return FeedbackView(viewModel: feedbackViewModel)
+        FeedbackView(viewModel: feedbackViewModel)
     }
     
     func makeReportView() -> ReportView {
-        return ReportView(viewModel: reportViewModel)
+        ReportView(viewModel: reportViewModel)
     }
     
     func makeOnboardingView(showOnboarding: Binding<Bool>) -> OnboardingView {
-        return OnboardingView(showOnboarding: showOnboarding)
+        OnboardingView(showOnboarding: showOnboarding)
     }
     
     func makeSettingPopoverView() -> SettingPopoverView {
-        return SettingPopoverView(viewModel: timerSettingViewModel)
+        SettingPopoverView(viewModel: timerSettingViewModel)
     }
     
     func makeTimerPopoverView() -> TimerPopoverView {
-        return TimerPopoverView(viewModel: timerViewModel)
+        TimerPopoverView(viewModel: timerViewModel)
     }
     
     func makeFeedbackPopoverView() -> FeedbackPopoverView {
-        return FeedbackPopoverView(viewModel: feedbackViewModel)
+        FeedbackPopoverView(viewModel: feedbackViewModel)
     }
     
     func makeReportPopoverView() -> ReportPopoverView {
-        return ReportPopoverView(viewModel: reportViewModel)
+        ReportPopoverView(viewModel: reportViewModel)
     }
 }

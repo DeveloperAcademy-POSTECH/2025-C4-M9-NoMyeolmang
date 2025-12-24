@@ -13,7 +13,7 @@ struct PopoverRatingButton: View {
 
     var body: some View {
         HStack(spacing: 12) {
-            ForEach(1...5, id: \.self) { number in
+            ForEach(1 ... 5, id: \.self) { number in
                 ZStack {
                     Circle()
                         .fill(Color.white.opacity(0.38))
@@ -48,7 +48,7 @@ extension Color {
     static let bIndigo = Color("Indigo-700")
 }
 
-struct AppGradients {
+enum AppGradients {
     static let hoverGradient = LinearGradient(
         colors: [.bPurple, .bIndigo],
         startPoint: .top,

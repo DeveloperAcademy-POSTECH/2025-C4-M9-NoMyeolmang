@@ -22,7 +22,6 @@ struct TimerSettingView: View {
     }
     
     var body: some View {
-        
         ZStack {
             backgroundView
             

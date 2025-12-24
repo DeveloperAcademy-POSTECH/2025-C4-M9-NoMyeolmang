@@ -1,5 +1,5 @@
 //
-//  Untitled.swift
+//  TimeLeftView.swift
 //  NoMyeolmang
 //
 //  Created by Moo on 7/26/25.
@@ -24,6 +24,6 @@ struct TimeLeftView: View {
     }
 }
 
-//#Preview {
+// #Preview {
 //    TimeLeftView(remainingTimeText: "05:30")
-//}
+// }

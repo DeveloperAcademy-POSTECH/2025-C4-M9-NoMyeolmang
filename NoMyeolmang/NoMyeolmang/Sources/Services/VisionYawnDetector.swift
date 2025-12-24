@@ -1,11 +1,12 @@
 //
-//  YawnDetector.swift
+//  VisionYawnDetector.swift
 //  NoMyeolmang
 //
 //  Created by Moo on 7/21/25.
 //
 
 import Vision
+
 ///
 /// VNDetectFaceLandmarksRequest를 사용하여 하품을 감지하고 횟수를 추적합니다.
 ///
@@ -53,7 +54,7 @@ final class VisionYawnDetector: YawnDetector {
                 let previousState = lastYawnState
                 lastYawnState = isYawning
                 consecutiveFrameCount = 0
-                if !previousState && isYawning {
+                if !previousState, isYawning {
                     yawnCount += 1
                 }
             }

@@ -17,7 +17,7 @@ import SwiftData
 /// ``UserTrainingData`` 객체들에 대한 생성, 조회, 업데이트, 삭제 작업을 제공합니다.
 /// 저장된 행동 패턴 데이터는 ``FocusPersonalizater``에서 모델 개인화 학습에 활용됩니다.
 ///
-/// Swift 6 동시성 안전성을 위해 ``UserTrainingData`` (Sendable)와 ``UserTrainingDataModel`` (@Model) 간 
+/// Swift 6 동시성 안전성을 위해 ``UserTrainingData`` (Sendable)와 ``UserTrainingDataModel`` (@Model) 간
 /// 자동 변환을 수행합니다. 외부에서는 Sendable 구조체만 사용하고, 내부적으로 SwiftData 클래스로 변환합니다.
 ///
 /// > Note: 모든 데이터베이스 작업은 비동기적으로 수행되며, 에러 발생 시 적절한 예외를 throw합니다.
@@ -95,7 +95,7 @@ final class SwiftDataUserTrainingDataRepository: UserTrainingDataRepository {
             predicate: predicate,
             sortBy: sortBy
         )
-        if let fetchLimit = fetchLimit {
+        if let fetchLimit {
             descriptor.fetchLimit = fetchLimit
         }
         return descriptor

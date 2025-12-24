@@ -20,6 +20,7 @@ final class TimerSettingViewModel: ObservableObject {
             validateGoalTime()
         }
     }
+
     @Published private(set) var isValid: Bool = true
 
     var isRecommendedSelected: Bool {
@@ -44,7 +45,7 @@ final class TimerSettingViewModel: ObservableObject {
         if selectedTab == .recommended {
             isValid = true
         } else {
-            isValid = (10...30).contains(goalTime)
+            isValid = (10 ... 30).contains(goalTime)
         }
     }
 

@@ -18,7 +18,7 @@ import CoreML
 /// > Note: 변환 실패한 샘플은 자동으로 스킵되며, 유효한 샘플만 배치에 포함됩니다.
 enum TrainingDataConverter {
     /// 사용자 학습 데이터 배열을 CoreML 배치 제공자로 변환합니다.
-    public static func makeBatchProvider(from userTrainingDataList: [UserTrainingData]) -> MLArrayBatchProvider {
+    static func makeBatchProvider(from userTrainingDataList: [UserTrainingData]) -> MLArrayBatchProvider {
         let featureProviders = userTrainingDataList.compactMap { data -> MLFeatureProvider? in
             guard let inputArray = makeModelInputArray(features: data.features),
                   let labelArray = makeLabelArray(score: data.userScore) else { return nil }
@@ -28,7 +28,7 @@ enum TrainingDataConverter {
             
             let dict: [String: MLFeatureValue] = [
                 Configuration.inputName: inputValue,
-                Configuration.updatableOutputName: labelValue
+                Configuration.updatableOutputName: labelValue,
             ]
             return try? MLDictionaryFeatureProvider(dictionary: dict)
         }
@@ -36,7 +36,7 @@ enum TrainingDataConverter {
     }
     
     /// Features를 정규화하여 MLMultiArray로 변환합니다.
-    public static func makeModelInputArray(features: Features) -> MLMultiArray? {
+    static func makeModelInputArray(features: Features) -> MLMultiArray? {
         let scaledValues = MinMaxScaler.scale(features)
         guard let inputArray = try? MLMultiArray(shape: [1, 6], dataType: .float32) else { return nil }
         for (index, value) in scaledValues.enumerated() {

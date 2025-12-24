@@ -13,9 +13,9 @@ import Foundation
 /// 머신러닝 모델 파일을 로드하고 우선순위에 따라 적절한 모델을 선택합니다.
 ///
 /// `ModelLoader`는 개인화된 모델과 기본 번들 모델 중에서 적절한 모델을 로드합니다.
-/// ``loadModelURL()`` 메서드를 통해 우선순위를 결정하며, ``Configuration/updatedModelURL``의 
-/// 개인화된 모델이 있으면 우선 사용하고, 없으면 앱 번들의 기본 모델을 사용합니다. 
-/// ``loadModel()`` 메서드는 해당 경로의 모델 파일을 실제로 로드하여 MLModel 인스턴스를 
+/// ``loadModelURL()`` 메서드를 통해 우선순위를 결정하며, ``Configuration/updatedModelURL``의
+/// 개인화된 모델이 있으면 우선 사용하고, 없으면 앱 번들의 기본 모델을 사용합니다.
+/// ``loadModel()`` 메서드는 해당 경로의 모델 파일을 실제로 로드하여 MLModel 인스턴스를
 /// 반환하며, ``FocusScorePredictor`` 초기화 시 사용됩니다.
 ///
 /// ### Loading Models

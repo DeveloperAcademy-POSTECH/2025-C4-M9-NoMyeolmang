@@ -34,9 +34,9 @@ final class FeedbackViewModel: ObservableObject {
         }
         
         guard data.allSatisfy({ $0.userScore != 0.0 }) else {
-                print("❌ 정답 데이터 오류")
-                return nil
-            }
+            print("❌ 정답 데이터 오류")
+            return nil
+        }
         return data
     }
 

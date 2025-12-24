@@ -14,7 +14,7 @@ class PopoverWindowController: NSObject {
     init(rootView: some View) {
         let hostingController = NSHostingController(rootView: rootView)
         
-        popover = NSPopover()
+        self.popover = NSPopover()
         popover.contentSize = NSSize(width: 230, height: 270)
         popover.behavior = .transient
         popover.contentViewController = hostingController
@@ -32,6 +32,6 @@ class PopoverWindowController: NSObject {
     }
     
     var isShown: Bool {
-        return popover.isShown
+        popover.isShown
     }
 }

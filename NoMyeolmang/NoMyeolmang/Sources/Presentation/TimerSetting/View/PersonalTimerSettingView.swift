@@ -17,7 +17,7 @@ struct PersonalTimerSettingView: View {
 
     var isValidInput: Bool {
         if let time = Int(newGoalTimeText) {
-            return (10...30).contains(time)
+            return (10 ... 30).contains(time)
         }
         return false
     }
@@ -41,14 +41,14 @@ struct PersonalTimerSettingView: View {
                 HStack(alignment: .firstTextBaseline, spacing: 0) {
                     TextField("", text: $newGoalTimeText)
                         .onChange(of: newGoalTimeText) {
-                            let digitsOnly = newGoalTimeText.filter { $0.isNumber }
+                            let digitsOnly = newGoalTimeText.filter(\.isNumber)
                             if digitsOnly.count > 2 {
                                 newGoalTimeText = String(digitsOnly.prefix(2))
                             } else if digitsOnly != newGoalTimeText {
                                 newGoalTimeText = digitsOnly
                             }
 
-                            if let time = Int(newGoalTimeText), (10...30).contains(time) {
+                            if let time = Int(newGoalTimeText), (10 ... 30).contains(time) {
                                 goalTime = time
                             } else {
                                 goalTime = 0
@@ -101,7 +101,7 @@ struct PersonalTimerSettingView: View {
             LinearGradient(
                 gradient: Gradient(colors: [
                     Color("Gray-100").opacity(0.02),
-                    Color("Purple-300").opacity(0.3)
+                    Color("Purple-300").opacity(0.3),
                 ]),
                 startPoint: .top,
                 endPoint: .bottom
@@ -116,14 +116,14 @@ struct PersonalTimerSettingView: View {
     }
 }
 
-//#Preview {
+// #Preview {
 //    struct PreviewWrapper: View {
 //        @State private var goalTime = 30
-//        
+//
 //        var body: some View {
 //            PersonalTimerSettingView(viewModel: TimerSettingViewModel(), goalTime: $goalTime)
 //        }
 //    }
-//    
+//
 //    return PreviewWrapper()
-//}
+// }

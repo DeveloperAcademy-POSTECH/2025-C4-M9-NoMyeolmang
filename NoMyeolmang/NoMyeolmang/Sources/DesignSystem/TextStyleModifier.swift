@@ -14,13 +14,13 @@ struct TextStyleModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .font(font)
-            .tracking(fontSize * -0.02)      // -2% 자간
-            .lineSpacing(fontSize * 0.4)     // 140% 행간
+            .tracking(fontSize * -0.02) // -2% 자간
+            .lineSpacing(fontSize * 0.4) // 140% 행간
     }
 }
 
 extension View {
     func textStyle(_ style: GSFontStyle) -> some View {
-        self.modifier(TextStyleModifier(font: style.font, fontSize: style.size))
+        modifier(TextStyleModifier(font: style.font, fontSize: style.size))
     }
 }

@@ -15,7 +15,7 @@ struct SettingPopoverView: View {
     @State private var goalTime: Int = 30
     
     var isGoalTimeValid: Bool {
-        (10...30).contains(goalTime)
+        (10 ... 30).contains(goalTime)
     }
 
     var body: some View {

@@ -1,5 +1,5 @@
 //
-//  Detector.swift
+//  VisionBlinkDetector.swift
 //  NoMyeolmang
 //
 //  Updated by Moo on 7/21/25.
@@ -34,7 +34,8 @@ final class VisionBlinkDetector: BlinkDetector {
 
     func detect(from landmarks: VNFaceLandmarks2D?) -> Int {
         guard let leftEye = landmarks?.leftEye,
-              let rightEye = landmarks?.rightEye else {
+              let rightEye = landmarks?.rightEye
+        else {
             return blinkCount
         }
         let leftEAR = calculateEyeAspectRatio(eye: leftEye)
@@ -60,7 +61,7 @@ final class VisionBlinkDetector: BlinkDetector {
                 let previousState = lastEyeState
                 lastEyeState = eyesClosed
                 consecutiveFrameCount = 0
-                if previousState && !eyesClosed {
+                if previousState, !eyesClosed {
                     blinkCount += 1
                 }
             }
@@ -71,10 +72,10 @@ final class VisionBlinkDetector: BlinkDetector {
         let points = eye.normalizedPoints
         guard points.count >= 6 else { return 0.0 }
         let pointCount = points.count
-        let width = distance(from: points[0], to: points[pointCount/2])
+        let width = distance(from: points[0], to: points[pointCount / 2])
         var heights: [CGFloat] = []
         
-        for index in 1..<pointCount/2 {
+        for index in 1 ..< pointCount / 2 {
             let topPoint = points[index]
             let bottomPoint = points[pointCount - index]
             heights.append(distance(from: topPoint, to: bottomPoint))

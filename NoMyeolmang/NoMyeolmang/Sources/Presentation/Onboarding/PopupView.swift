@@ -55,10 +55,10 @@ struct PopupGuideView: View {
     }
 }
 
-//#Preview {
+// #Preview {
 //    PopupGuideView(
 //        message: "끊기지 않는 학습 리듬을 위해",
 //        notice: "눈 깜빡임, 하품 같은 몸의 반응을 분석해\n몰입 상태를 실시간으로 알려드려요.\n집중력이 떨어지는 순간, 다시 몰입을 도와드릴게요.",
 //        onNext: {}
 //    ).frame(width: 800, height: 600)
-//}
+// }

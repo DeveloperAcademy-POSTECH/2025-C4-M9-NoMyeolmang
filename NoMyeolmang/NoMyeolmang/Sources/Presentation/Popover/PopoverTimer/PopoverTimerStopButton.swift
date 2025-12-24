@@ -20,8 +20,8 @@ struct PopoverTimerStopButton: View {
     }
 }
 
-//#Preview {
+// #Preview {
 //    PopoverTimerStopButton {
 //        print("타이머 중지")
 //    }
-//}
+// }

@@ -7,13 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F5C0062C2E237A5B003750FB /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = F5C0062B2E237A5B003750FB /* .swiftlint.yml */; };
 		F5D750212E52AAC50005ADE5 /* timé.docc in Sources */ = {isa = PBXBuildFile; fileRef = F5D750202E52AAC50005ADE5 /* timé.docc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		F5C006142E2379E7003750FB /* timé.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "timé.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F5C0062B2E237A5B003750FB /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		F5D750202E52AAC50005ADE5 /* timé.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = "timé.docc"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -39,7 +37,6 @@
 		F5C0060B2E2379E7003750FB = {
 			isa = PBXGroup;
 			children = (
-				F5C0062B2E237A5B003750FB /* .swiftlint.yml */,
 				F5C006162E2379E7003750FB /* NoMyeolmang */,
 				F5C006152E2379E7003750FB /* Products */,
 				F5D750202E52AAC50005ADE5 /* timé.docc */,
@@ -64,7 +61,7 @@
 				F5C006102E2379E7003750FB /* Sources */,
 				F5C006112E2379E7003750FB /* Frameworks */,
 				F5C006122E2379E7003750FB /* Resources */,
-				F5C0062A2E237A35003750FB /* SwiftLint Script */,
+				D14FCC332EFC31960083E376 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -119,14 +116,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F5C0062C2E237A5B003750FB /* .swiftlint.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		F5C0062A2E237A35003750FB /* SwiftLint Script */ = {
+		D14FCC332EFC31960083E376 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -136,14 +132,13 @@
 			);
 			inputPaths = (
 			);
-			name = "SwiftLint Script";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]\nthen\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif command -v swiftlint >/dev/null 2>&1\nthen\n    swiftlint\nelse\n    echo \"warning: `swiftlint` command not found - See https://github.com/realm/SwiftLint#installation for installation instructions.\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftformat > /dev/null; then\n  swiftformat . --swift-version 6\nelse\n  echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

@@ -6,6 +6,7 @@
 //
 
 import Vision
+
 /// # ``timé/AnalysisManager``
 ///
 /// Vision 기반 얼굴 분석을 통합하여 사용자 행동 특성을 추출하고 ML 입력 데이터를 생성합니다.

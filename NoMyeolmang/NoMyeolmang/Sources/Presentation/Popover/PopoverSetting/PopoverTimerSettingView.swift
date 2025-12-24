@@ -32,7 +32,7 @@ struct PopoverTimerSettingView: View {
                 HStack(spacing: -0.1) {
                     TextField("", text: $timeInputText)
                         .onChange(of: timeInputText) {
-                            let filtered = timeInputText.filter { $0.isNumber }
+                            let filtered = timeInputText.filter(\.isNumber)
                             let limitedText = String(filtered.prefix(2))
                             
                             if let time = Int(limitedText) {
@@ -54,7 +54,7 @@ struct PopoverTimerSettingView: View {
                             }
                         }
                         .onDisappear {
-                            if goalTime < 10 && goalTime != 0 {
+                            if goalTime < 10, goalTime != 0 {
                                 goalTime = 10
                                 timeInputText = "10"
                             }

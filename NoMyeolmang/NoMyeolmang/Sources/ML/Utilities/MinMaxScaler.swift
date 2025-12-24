@@ -23,13 +23,13 @@ enum MinMaxScaler {
     /// - Parameter features: 정규화할 특성 데이터
     /// - Returns: 정규화된 값들의 배열 (순서: blink, face, phone, time, yawn, longBlink)
     static func scale(_ features: Features) -> [Double] {
-        return [
+        [
             scaleValue(value: features.blinkCountPerMin, for: .shortBlink),
             scaleValue(value: features.faceBodyPresent, for: .face),
             scaleValue(value: features.phonePresent, for: .phone),
             scaleValue(value: features.elapsedTime, for: .elapsedTime),
             scaleValue(value: features.yawnPerMin, for: .yawn),
-            scaleValue(value: features.longBlinkPerMin, for: .longBlink)
+            scaleValue(value: features.longBlinkPerMin, for: .longBlink),
         ]
     }
     
@@ -48,7 +48,7 @@ enum MinMaxScaler {
     }
 
     private static func clip(value: Double, between min: Double, and max: Double) -> Double {
-        return Swift.max(min, Swift.min(value, max))
+        Swift.max(min, Swift.min(value, max))
     }
 
     private static func safeScale(value: Double, min: Double, max: Double) -> Double {

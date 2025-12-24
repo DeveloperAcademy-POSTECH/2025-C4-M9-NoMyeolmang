@@ -1,5 +1,5 @@
 //
-//  Button.swift
+//  GSButton.swift
 //  NoMyeolmang
 //
 //  Created by 김소원 on 7/21/25.

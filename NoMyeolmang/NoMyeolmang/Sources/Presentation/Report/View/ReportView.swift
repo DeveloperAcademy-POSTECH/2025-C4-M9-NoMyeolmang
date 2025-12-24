@@ -46,7 +46,7 @@ struct ReportView: View {
                 .padding(.bottom, 60)
             } // vstack
         } // zstack
-		.onAppear {
+        .onAppear {
             viewModel.calDistanceTime()
         }
     } // body

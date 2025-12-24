@@ -28,7 +28,7 @@ struct NextButtonView: View {
     }
 }
 
-//#Preview {
+// #Preview {
 //    ZStack {
 //        Color.black.ignoresSafeArea()
 //        NextButtonView(onTap: {
@@ -36,4 +36,4 @@ struct NextButtonView: View {
 //        })
 //    }
 //    .frame(width: 220, height: 80)
-//}
+// }

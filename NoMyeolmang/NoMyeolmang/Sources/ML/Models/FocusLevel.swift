@@ -13,9 +13,9 @@ import Foundation
 ///
 /// ## Overview
 ///
-/// `FocusLevel`은 ``FocusScorePredictor``의 예측 결과를 5개 레벨로 분류합니다. 
-/// ``from(rawValue:)`` 메서드를 사용하여 0.0-5.0 범위의 점수를 해당 레벨로 변환하며, 
-/// 각 레벨은 ``tickSpeed()``와 ``backgroundDuration()`` 메서드를 통해 고유한 
+/// `FocusLevel`은 ``FocusScorePredictor``의 예측 결과를 5개 레벨로 분류합니다.
+/// ``from(rawValue:)`` 메서드를 사용하여 0.0-5.0 범위의 점수를 해당 레벨로 변환하며,
+/// 각 레벨은 ``tickSpeed()``와 ``backgroundDuration()`` 메서드를 통해 고유한
 /// 타이머 설정을 제공합니다. 높은 집중도일수록 더 빠른 속도와 짧은 지속시간을 가집니다.
 ///
 /// ### Focus Level Cases
@@ -30,7 +30,7 @@ import Foundation
 ///   높은 집중도 레벨 (3.0-4.0 범위)
 /// - ``lv5``
 ///   최고 집중도 레벨 (4.0-5.0 범위)
-///   
+///
 /// > Experiment: lv5는 매우 높은 집중도를 나타내며, 실제 사용자 데이터에서는 드물게 나타날 수 있습니다.
 ///
 /// ### Level Configuration Methods
@@ -47,38 +47,38 @@ enum FocusLevel: Double, CaseIterable, Identifiable {
 
     func tickSpeed() -> Double {
         switch self {
-        case .lv1: return 2.0
-        case .lv2: return 1/0.7
-        case .lv3: return 1/0.8
-        case .lv4: return 1.0
-        case .lv5: return 0.5
+        case .lv1: 2.0
+        case .lv2: 1 / 0.7
+        case .lv3: 1 / 0.8
+        case .lv4: 1.0
+        case .lv5: 0.5
         }
     }
     
     func backgroundDuration() -> Double {
         switch self {
-        case .lv1: return 45.0
-        case .lv2: return 37.0
-        case .lv3: return 33.0
-        case .lv4: return 30.0  // 기본 속도 (30초)
-        case .lv5: return 20.0
+        case .lv1: 45.0
+        case .lv2: 37.0
+        case .lv3: 33.0
+        case .lv4: 30.0 // 기본 속도 (30초)
+        case .lv5: 20.0
         }
     }
     
     static func from(rawValue: Double) -> FocusLevel? {
         switch rawValue {
-        case 0.0..<1.0:
-            return .lv1
-        case 1.0..<2.0:
-            return .lv2
-        case 2.0..<3.0:
-            return .lv3
-        case 3.0..<4.0:
-            return .lv4
-        case 4.0...5.0:
-            return .lv5
+        case 0.0 ..< 1.0:
+            .lv1
+        case 1.0 ..< 2.0:
+            .lv2
+        case 2.0 ..< 3.0:
+            .lv3
+        case 3.0 ..< 4.0:
+            .lv4
+        case 4.0 ... 5.0:
+            .lv5
         default:
-            return .lv4
+            .lv4
         }
     }
     

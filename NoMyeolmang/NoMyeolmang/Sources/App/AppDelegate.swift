@@ -31,7 +31,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
     
     private let statusBarTimerManager = StatusBarDisplay()
     
-    func applicationDidFinishLaunching(_ notification: Notification) {
+    func applicationDidFinishLaunching(_: Notification) {
         DispatchQueue.main.async { [weak self] in
             self?.setupStatusItem()
             self?.statusBarTimerManager.startObserving(statusItem: self?.statusItem)
@@ -51,11 +51,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
     }
     
     /// 상태 바 아이템 클릭 시 팝오버를 토글합니다.
-    @objc func togglePopover(_ sender: AnyObject?) {
+    @objc func togglePopover(_: AnyObject?) {
         guard let button = statusItem?.button else { return }
         
-        guard let moduleFactory = moduleFactory,
-              let coordinator = coordinator else {
+        guard let moduleFactory,
+              let coordinator
+        else {
             print("ModuleFactory or Coordinator not ready")
             return
         }

@@ -14,7 +14,7 @@ import SwiftUI
 /// ## Overview
 ///
 /// `AppCoordinator`는 SwiftUI NavigationStack과 연동하여 화면 전환을 관리합니다.
-/// ``AppRoute`` 열거형 값들의 배열(`path`)을 통해 네비게이션 스택을 추적하며, 
+/// ``AppRoute`` 열거형 값들의 배열(`path`)을 통해 네비게이션 스택을 추적하며,
 /// push, pop, replace 등의 네비게이션 작업을 제공합니다.
 ///
 /// ## Topics

@@ -10,7 +10,9 @@ import SwiftUI
 struct TimerBackgroundView: View {
     let animationDuration: Double
     @Binding var sessionState: TimerViewState?
+
     // MARK: 이미지 크기 따라 값 바꿔줄것
+
     // 이미지 크기
     let imageHeight: CGFloat = 6140
     let imageWidth: CGFloat = 1512
@@ -62,9 +64,7 @@ struct TimerBackgroundView: View {
                         // 🆕 위치 보존하며 속도만 변경
                         startLoopingAnimationKeepingPosition()
                     }
-
             }
-
         }
         .ignoresSafeArea()
         .onChange(of: sessionState) {
@@ -104,7 +104,7 @@ struct TimerBackgroundView: View {
     // 🆕 기존 함수 (처음 시작용)
     func startLoopingAnimation() {
         let (startY, endY) = calculateStartEndY()
-        offsetY = startY  // 처음 위치로 초기화
+        offsetY = startY // 처음 위치로 초기화
         createAnimationTimer(startY: startY, endY: endY)
     }
 
@@ -160,9 +160,9 @@ struct TimerBackgroundView: View {
     }
 }
 
-//#Preview {
+// #Preview {
 //    TimerBackgroundView(
 //        animationDuration: 30.0,
 //        sessionState: .constant(TimerViewState.isRunning)
 //    )
-//}
+// }

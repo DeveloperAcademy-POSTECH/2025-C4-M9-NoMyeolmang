@@ -5,8 +5,8 @@
 //  Created by Moo on 12/5/25.
 //
 
-import Foundation
 import CoreML
+import Foundation
 
 /// # ``timé/FileSystemModelRepository``
 ///
@@ -52,4 +52,3 @@ final class FileSystemModelRepository: ModelRepository {
         )
     }
 }
-

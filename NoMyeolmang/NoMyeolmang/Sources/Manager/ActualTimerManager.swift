@@ -1,11 +1,12 @@
 //
-//  TimeManager.swift
+//  ActualTimerManager.swift
 //  NoMyeolmang
 //
 //  Updated by ohdodin on 7/22/25.
 //
 
 import Foundation
+
 /// # ``timé/ActualTimerManager``
 ///
 /// 실제 시간 기준으로 동작하는 타이머를 관리하여 정확한 세션 시간을 추적합니다.
@@ -28,10 +29,12 @@ import Foundation
 /// - ``isRunning``
 final class ActualTimerManager {
     // MARK: Singleton
+
     static let shared = ActualTimerManager()
     private init() {}
 
     // MARK: Properties
+
     private var timer: Timer?
     private var interval: TimeInterval = 1.0
     private var isRepeating: Bool = true
@@ -45,28 +48,29 @@ final class ActualTimerManager {
     var onFinish: (() -> Void)?
 
     // MARK: Public Methods
+
     /// 지정된 간격으로 타이머를 시작합니다.
     func start(interval: TimeInterval = 1.0, repeats: Bool = true) {
         clear()
 
         self.interval = interval
-        self.isRepeating = repeats
-        self.count = 0
+        isRepeating = repeats
+        count = 0
         
         // 🔹 타이머 시작 직전에 즉시 1회 호출
-        self.onTick?(self.count)
+        onTick?(count)
 
         timer = Timer.scheduledTimer(
             withTimeInterval: interval,
             repeats: repeats,
             block: { [weak self] _ in
                 guard let self else { return }
-                self.count += 1
-                self.onTick?(self.count)
+                count += 1
+                onTick?(count)
 
-                if self.count >= self.goalTime {
-                    self.onFinish?()
-                    self.stop()
+                if count >= goalTime {
+                    onFinish?()
+                    stop()
                 }
             }
         )
@@ -79,21 +83,22 @@ final class ActualTimerManager {
 
     /// 목표 시간을 초 단위로 설정합니다.
     func setGoalTime(newGoalTime: Int) {
-        self.goalTime = newGoalTime
-        print(self.goalTime)
+        goalTime = newGoalTime
+        print(goalTime)
     }
 
     /// 타이머 실행 상태를 나타냅니다.
     var isRunning: Bool {
-        return timer?.isValid ?? false
+        timer?.isValid ?? false
     }
 
     /// 남은 시간을 초 단위로 반환합니다.
     var lastingTime: Int {
-        return goalTime - count
+        goalTime - count
     }
 
     // MARK: Private Methods
+
     private func clear() {
         timer?.invalidate()
         timer = nil

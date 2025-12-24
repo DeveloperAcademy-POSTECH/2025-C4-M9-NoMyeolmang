@@ -21,7 +21,7 @@ struct TimerReportBox: View {
                 Text(earthTime)
                     .textStyle(GSFont.SemiBold28)
                     .foregroundColor(.white)
-                }
+            }
             Rectangle()
                 .fill(Color.white)
                 .frame(width: 1, height: 99)
@@ -35,15 +35,15 @@ struct TimerReportBox: View {
                 Text(focusTime)
                     .textStyle(GSFont.SemiBold28)
                     .foregroundColor(.white)
-                }
-            } // hstack
+            }
+        } // hstack
         
         .frame(width: boxSize.width, height: boxSize.height, alignment: .top)
         .background(
             LinearGradient(
                 gradient: Gradient(colors: [
                     Color("Gray-100").opacity(0.02),
-                    Color("Purple-300").opacity(0.3)
+                    Color("Purple-300").opacity(0.3),
                 ]),
                 startPoint: .top,
                 endPoint: .bottom
@@ -59,6 +59,6 @@ struct TimerReportBox: View {
     }
 }
 
-//#Preview {
+// #Preview {
 //    TimerReportBox(earthTime: "10:00", focusTime: "12:34")
-//}
+// }

@@ -13,7 +13,6 @@ struct GSFontStyle {
 }
 
 enum GSFont {
-    
     // Pretendard-ExtraBold
     static let ExtraBold20 = GSFontStyle(font: .custom("Pretendard-ExtraBold", size: 20), size: 20)
     
