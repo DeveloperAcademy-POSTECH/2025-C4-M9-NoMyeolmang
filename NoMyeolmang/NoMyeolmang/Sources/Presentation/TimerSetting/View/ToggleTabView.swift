@@ -61,21 +61,21 @@ struct ToggleTabView: View {
     }
 }
 
-#Preview(traits: .sizeThatFitsLayout) {
-    struct ToggleTabPreviewWrapper: View {
-        @State private var selectedTab: TabType = .recommended
-
-        var body: some View {
-            ToggleTabView(
-                selectedTab: $selectedTab,
-                onTabSelected: { tab in
-                    selectedTab = tab
-                }
-            )
-                .padding()
-                .background(Color.black)
-        }
-    }
-
-    return ToggleTabPreviewWrapper()
-}
+//#Preview(traits: .sizeThatFitsLayout) {
+//    struct ToggleTabPreviewWrapper: View {
+//        @State private var selectedTab: TabType = .recommended
+//
+//        var body: some View {
+//            ToggleTabView(
+//                selectedTab: $selectedTab,
+//                onTabSelected: { tab in
+//                    selectedTab = tab
+//                }
+//            )
+//                .padding()
+//                .background(Color.black)
+//        }
+//    }
+//
+//    return ToggleTabPreviewWrapper()
+//}

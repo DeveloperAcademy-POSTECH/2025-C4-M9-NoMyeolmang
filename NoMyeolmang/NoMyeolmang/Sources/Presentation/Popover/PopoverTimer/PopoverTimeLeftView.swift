@@ -25,6 +25,6 @@ struct PopoverTimeLeftView: View {
     }
 }
 
-#Preview {
-    PopoverTimeLeftView(remainingTime: "05 : 30")
-}
+//#Preview {
+//    PopoverTimeLeftView(remainingTime: "05 : 30")
+//}

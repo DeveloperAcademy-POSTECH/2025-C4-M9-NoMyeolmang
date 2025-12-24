@@ -28,12 +28,12 @@ struct NextButtonView: View {
     }
 }
 
-#Preview {
-    ZStack {
-        Color.black.ignoresSafeArea()
-        NextButtonView(onTap: {
-            print("Tapped")
-        })
-    }
-    .frame(width: 220, height: 80)
-}
+//#Preview {
+//    ZStack {
+//        Color.black.ignoresSafeArea()
+//        NextButtonView(onTap: {
+//            print("Tapped")
+//        })
+//    }
+//    .frame(width: 220, height: 80)
+//}

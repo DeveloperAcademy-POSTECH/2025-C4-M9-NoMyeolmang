@@ -160,9 +160,9 @@ struct TimerBackgroundView: View {
     }
 }
 
-#Preview {
-    TimerBackgroundView(
-        animationDuration: 30.0,
-        sessionState: .constant(TimerViewState.isRunning)
-    )
-}
+//#Preview {
+//    TimerBackgroundView(
+//        animationDuration: 30.0,
+//        sessionState: .constant(TimerViewState.isRunning)
+//    )
+//}

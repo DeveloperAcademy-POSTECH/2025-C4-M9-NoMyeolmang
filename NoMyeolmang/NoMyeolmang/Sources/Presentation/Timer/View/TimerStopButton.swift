@@ -19,8 +19,8 @@ struct TimerStopButton: View {
     }
 }
 
-#Preview {
-    TimerStopButton {
-        print("타이머 중지")
-    }
-}
+//#Preview {
+//    TimerStopButton {
+//        print("타이머 중지")
+//    }
+//}

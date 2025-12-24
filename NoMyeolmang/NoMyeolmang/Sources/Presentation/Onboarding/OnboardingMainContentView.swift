@@ -36,14 +36,14 @@ struct OnboardingMainContentView: View {
     }
 }
 
-#Preview("기본 상태, popupStep 0") {
-    OnboardingMainContentView(popupStep: 0, popupDataCount: 3)
-}
-
-#Preview("툴팁 1단계, FocusTimeSetting") {
-    OnboardingMainContentView(popupStep: 3, popupDataCount: 3)
-}
-
-#Preview("툴팁 2단계, 버튼 ") {
-    OnboardingMainContentView(popupStep: 4, popupDataCount: 3)
-}
+//#Preview("기본 상태, popupStep 0") {
+//    OnboardingMainContentView(popupStep: 0, popupDataCount: 3)
+//}
+//
+//#Preview("툴팁 1단계, FocusTimeSetting") {
+//    OnboardingMainContentView(popupStep: 3, popupDataCount: 3)
+//}
+//
+//#Preview("툴팁 2단계, 버튼 ") {
+//    OnboardingMainContentView(popupStep: 4, popupDataCount: 3)
+//}

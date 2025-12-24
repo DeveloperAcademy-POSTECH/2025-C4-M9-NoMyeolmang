@@ -116,14 +116,14 @@ struct PersonalTimerSettingView: View {
     }
 }
 
-#Preview {
-    struct PreviewWrapper: View {
-        @State private var goalTime = 30
-        
-        var body: some View {
-            PersonalTimerSettingView(viewModel: TimerSettingViewModel(), goalTime: $goalTime)
-        }
-    }
-    
-    return PreviewWrapper()
-}
+//#Preview {
+//    struct PreviewWrapper: View {
+//        @State private var goalTime = 30
+//        
+//        var body: some View {
+//            PersonalTimerSettingView(viewModel: TimerSettingViewModel(), goalTime: $goalTime)
+//        }
+//    }
+//    
+//    return PreviewWrapper()
+//}

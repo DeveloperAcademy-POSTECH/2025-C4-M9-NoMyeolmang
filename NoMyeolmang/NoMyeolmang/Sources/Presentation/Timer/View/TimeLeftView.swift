@@ -24,6 +24,6 @@ struct TimeLeftView: View {
     }
 }
 
-#Preview {
-    TimeLeftView(remainingTimeText: "05:30")
-}
+//#Preview {
+//    TimeLeftView(remainingTimeText: "05:30")
+//}

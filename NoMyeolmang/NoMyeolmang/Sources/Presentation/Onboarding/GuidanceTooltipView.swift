@@ -91,12 +91,12 @@ struct GuidanceTooltipViewStep2: View {
     }
 }
 
-#Preview("툴팁 1 & 2") {
-    VStack(spacing: 30) {
-        GuidanceTooltipViewStep1(total: 2, onConfirm: {})
-        GuidanceTooltipViewStep2(total: 2, onConfirm: {})
-    }
-    .padding()
-    .background(Color.black.opacity(0.7))
-    .ignoresSafeArea()
-}
+//#Preview("툴팁 1 & 2") {
+//    VStack(spacing: 30) {
+//        GuidanceTooltipViewStep1(total: 2, onConfirm: {})
+//        GuidanceTooltipViewStep2(total: 2, onConfirm: {})
+//    }
+//    .padding()
+//    .background(Color.black.opacity(0.7))
+//    .ignoresSafeArea()
+//}

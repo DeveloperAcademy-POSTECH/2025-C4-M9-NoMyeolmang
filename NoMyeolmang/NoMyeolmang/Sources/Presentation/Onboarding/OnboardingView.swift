@@ -42,7 +42,7 @@ struct OnboardingView: View {
     }
 }
 
-#Preview {
-    OnboardingView(showOnboarding: .constant(true))
-        .frame(width: 800, height: 600)
-}
+//#Preview {
+//    OnboardingView(showOnboarding: .constant(true))
+//        .frame(width: 800, height: 600)
+//}

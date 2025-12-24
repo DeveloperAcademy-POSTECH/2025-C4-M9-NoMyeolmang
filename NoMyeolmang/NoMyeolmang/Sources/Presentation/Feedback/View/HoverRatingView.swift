@@ -66,6 +66,6 @@ struct HoverRatingView: View {
     }
 }
 
-#Preview {
-    HoverRatingView(selectedIndex: .constant(nil), hoveredIndex: .constant(nil), isSelectionValid: false)
-}
+//#Preview {
+//    HoverRatingView(selectedIndex: .constant(nil), hoveredIndex: .constant(nil), isSelectionValid: false)
+//}

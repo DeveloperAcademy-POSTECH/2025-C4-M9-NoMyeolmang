@@ -56,6 +56,6 @@ struct SpaceshipView: View {
     }
 }
 
-#Preview {
-    SpaceshipView()
-}
+//#Preview {
+//    SpaceshipView()
+//}

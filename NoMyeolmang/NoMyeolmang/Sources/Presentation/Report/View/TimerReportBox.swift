@@ -59,6 +59,6 @@ struct TimerReportBox: View {
     }
 }
 
-#Preview {
-    TimerReportBox(earthTime: "10:00", focusTime: "12:34")
-}
+//#Preview {
+//    TimerReportBox(earthTime: "10:00", focusTime: "12:34")
+//}

@@ -34,6 +34,6 @@ struct PopoverReportTimeView: View {
     }
 }
 
-#Preview {
-    PopoverReportTimeView(goalTime: 30, focusTime: "09:28")
-}
+//#Preview {
+//    PopoverReportTimeView(goalTime: 30, focusTime: "09:28")
+//}

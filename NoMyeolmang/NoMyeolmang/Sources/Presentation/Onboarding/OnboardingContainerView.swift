@@ -29,10 +29,10 @@ struct OnboardingContainerView: View {
     }
 }
 
-#Preview("popupStep 2, 기본 배경") {
-    OnboardingContainerView(popupStep: 2)
-}
-
-#Preview("popupStep 3, 배경 흐림") {
-    OnboardingContainerView(popupStep: 3)
-}
+//#Preview("popupStep 2, 기본 배경") {
+//    OnboardingContainerView(popupStep: 2)
+//}
+//
+//#Preview("popupStep 3, 배경 흐림") {
+//    OnboardingContainerView(popupStep: 3)
+//}
